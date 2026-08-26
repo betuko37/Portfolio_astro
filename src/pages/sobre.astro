@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Contact from '../components/Contact.astro';
+import StackPills from '../components/StackPills.astro';
+import { profile } from '../data/profile';
+---
+
+<Layout
+  title={`Sobre mí — ${profile.name}`}
+  description={profile.summary}
+>
+  <section class="px-5 py-16 md:px-8 md:py-24">
+    <div class="mx-auto max-w-3xl">
+      <p class="text-sm font-medium uppercase tracking-[0.18em] text-accent">Perfil</p>
+      <h1 class="mt-3 text-4xl font-semibold tracking-tight md:text-5xl">{profile.name}</h1>
+      <p class="mt-4 text-xl text-muted">{profile.headline}</p>
+      <div class="mt-10 space-y-5 text-lg leading-relaxed">
+        {profile.about.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+      <p class="mt-8 text-muted">{profile.location}. {profile.availability}</p>
+      <div class="mt-10">
+        <p class="mb-4 text-sm font-medium uppercase tracking-[0.18em] text-muted">Enfoque</p>
+        <div class="flex flex-wrap gap-2">
+          {profile.focus.map((item) => (
+            <span class="rounded-full bg-sand px-3.5 py-1.5 text-sm">{item}</span>
+          ))}
+        </div>
+      </div>
+      <div class="mt-10">
+        <p class="mb-4 text-sm font-medium uppercase tracking-[0.18em] text-muted">Stack</p>
+        <StackPills items={profile.stack} />
+      </div>
+    </div>
+  </section>
+  <Contact />
+</Layout>

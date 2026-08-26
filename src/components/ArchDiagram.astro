@@ -1,0 +1,11 @@
+---
+interface Props {
+  chart: string;
+}
+
+const { chart } = Astro.props;
+---
+
+<div class="mer-wrap rounded-3xl bg-sand p-6 md:p-8">
+  <pre class="mermaid text-sm">{chart}</pre>
+</div>

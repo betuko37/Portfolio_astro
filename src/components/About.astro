@@ -1,0 +1,23 @@
+---
+import { profile } from '../data/profile';
+---
+
+<section id="sobre" class="px-5 py-6 md:px-8 md:py-8">
+  <div class="mx-auto max-w-6xl rounded-3xl bg-sand px-6 py-12 md:px-12 md:py-16">
+    <div class="grid gap-12 md:grid-cols-[1fr_1.4fr]">
+      <div>
+        <p class="text-sm font-medium uppercase tracking-[0.18em] text-accent">Sobre mí</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">{profile.name}</h2>
+        <p class="mt-3 text-muted">{profile.availability}</p>
+      </div>
+      <div class="space-y-5 text-lg leading-relaxed text-ink">
+        {profile.about.map((paragraph) => <p>{paragraph}</p>)}
+        <div class="flex flex-wrap gap-2 pt-2">
+          {profile.focus.map((item) => (
+            <span class="rounded-full bg-paper px-3.5 py-1.5 text-sm">{item}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
