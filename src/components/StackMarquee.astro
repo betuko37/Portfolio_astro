@@ -14,7 +14,7 @@ const reverseLoop = [...items].reverse().concat([...items].reverse());
   <div class="marquee">
     <div class="marquee-track">
       {loop.map((item) => (
-        <span class="inline-flex items-center gap-2 rounded-full bg-night-soft px-4 py-2 text-sm text-paper">
+        <span class="inline-flex items-center gap-2 rounded-full bg-paper px-4 py-2 text-sm text-ink">
           <BrandIcon label={item} size={15} />
           {item}
         </span>
@@ -24,7 +24,7 @@ const reverseLoop = [...items].reverse().concat([...items].reverse());
   <div class="marquee">
     <div class="marquee-track reverse">
       {reverseLoop.map((item) => (
-        <span class="inline-flex items-center gap-2 rounded-full bg-night-soft px-4 py-2 text-sm text-paper">
+        <span class="inline-flex items-center gap-2 rounded-full bg-paper px-4 py-2 text-sm text-ink">
           <BrandIcon label={item} size={15} />
           {item}
         </span>

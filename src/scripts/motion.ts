@@ -152,8 +152,8 @@ function initOrbs() {
   window.addEventListener(
     'pointermove',
     (event) => {
-      const x = (event.clientX / window.innerWidth - 0.5) * 40;
-      const y = (event.clientY / window.innerHeight - 0.5) * 40;
+      const x = (event.clientX / window.innerWidth - 0.5) * 16;
+      const y = (event.clientY / window.innerHeight - 0.5) * 16;
       gsap.to(a, { x, y, duration: 1.6, ease: 'power2.out' });
       gsap.to(b, { x: -x * 0.7, y: -y * 0.7, duration: 2, ease: 'power2.out' });
     },

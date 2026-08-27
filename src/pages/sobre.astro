@@ -4,6 +4,8 @@ import Contact from '../components/Contact.astro';
 import StackPills from '../components/StackPills.astro';
 import AppIcon from '../components/AppIcon.astro';
 import BackLink from '../components/BackLink.astro';
+import ShowcaseBreak from '../components/ShowcaseBreak.astro';
+import MexicoFlag from '../components/MexicoFlag.astro';
 import { profile } from '../data/profile';
 import { focusIcons } from '../data/icons';
 import { profilePhoto } from '../data/media';
@@ -17,87 +19,122 @@ import { profilePhoto } from '../data/media';
     <div class="mx-auto mb-5 max-w-6xl">
       <BackLink href="/" />
     </div>
-    <div class="mx-auto grid max-w-6xl items-end gap-6 md:grid-cols-[0.8fr_1.2fr] md:gap-12" data-hero>
-      <div class="relative overflow-hidden rounded-[1.5rem] bg-sand md:rounded-[2rem]" data-hero-item>
+
+    <div class="mx-auto grid max-w-6xl overflow-hidden rounded-[1.5rem] bg-sand md:grid-cols-[0.85fr_1.15fr] md:rounded-[2rem]" data-hero>
+      <div class="relative overflow-hidden bg-paper" data-hero-item>
         <img
           src={profilePhoto}
           alt={profile.name}
-          class="aspect-[4/5] max-h-64 w-full object-cover object-top md:max-h-none"
+          class="aspect-[4/5] h-full max-h-80 w-full object-cover object-top md:max-h-none"
         />
       </div>
-      <div>
+      <div class="flex flex-col justify-center px-5 py-8 md:px-10 md:py-14">
         <p class="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-accent md:text-sm" data-hero-item>
           <AppIcon name="user-round" size={14} />
-          Perfil
+          Sobre mí
         </p>
-        <h1 class="mt-3 font-display text-3xl tracking-tight md:text-6xl" data-hero-item>
+        <h1 class="mt-3 font-display text-3xl tracking-tight md:text-5xl lg:text-6xl" data-hero-item>
           {profile.fullName}
         </h1>
-        <p class="mt-3 text-sm leading-relaxed text-muted md:text-lg" data-hero-item>{profile.headline}</p>
-        <p class="mt-6 inline-flex items-center gap-2 text-sm text-muted" data-hero-item>
-          <span class="live-dot text-accent"></span>
-          {profile.location}. {profile.availability}
+        <p class="mt-3 max-w-xl text-sm leading-relaxed text-muted md:text-lg" data-hero-item>
+          {profile.headline}
         </p>
+        <div class="mt-6 flex flex-wrap gap-2" data-hero-item>
+          <span class="inline-flex items-center gap-2 rounded-full bg-paper px-3 py-1.5 text-xs text-ink md:text-sm">
+            <MexicoFlag />
+            {profile.location}
+          </span>
+          <span class="inline-flex items-center gap-2 rounded-full bg-paper px-3 py-1.5 text-xs text-ink md:text-sm">
+            <AppIcon name="briefcase" size={14} />
+            {profile.role}
+          </span>
+          <span class="inline-flex items-center gap-2 rounded-full bg-paper px-3 py-1.5 text-xs text-ink md:text-sm">
+            <span class="live-dot text-accent"></span>
+            Disponible
+          </span>
+        </div>
+        <a
+          href="/#contacto"
+          class="mt-8 inline-flex w-fit items-center gap-1.5 rounded-full bg-ink px-4 py-2.5 text-sm font-medium text-paper no-underline"
+          data-hero-item
+        >
+          Contacto
+          <AppIcon name="arrow-right" size={14} />
+        </a>
       </div>
     </div>
 
-    <div class="mx-auto mt-8 max-w-3xl space-y-4 text-sm leading-relaxed md:mt-14 md:text-base" data-reveal>
-      {profile.about.map((paragraph) => <p>{paragraph}</p>)}
+    <div class="mx-auto mt-8 max-w-6xl md:mt-12">
+      <ShowcaseBreak
+        kicker="Perfil"
+        icon="user-round"
+        title="Ingeniero de software."
+        copy={profile.about.join(' ')}
+      />
     </div>
 
-    <div class="mx-auto mt-10 grid max-w-3xl gap-3 sm:grid-cols-2" data-reveal>
-      {profile.education.map((item) => (
-        <article class="overflow-hidden rounded-[1.4rem] bg-sand">
-          <div
-            class:list={[
-              'flex h-28 items-center justify-center px-5 py-4 md:h-32',
-              item.logoTone === 'night' ? 'bg-black' : 'bg-paper',
-            ]}
-          >
-            <img
-              src={item.logo}
-              alt={item.school}
-              class="max-h-full max-w-full object-contain"
-            />
-          </div>
-          <div class="p-5">
-            <p class="text-xs font-medium uppercase tracking-[0.16em] text-accent">{item.years}</p>
-            <h2 class="mt-2 font-display text-lg tracking-tight">{item.program}</h2>
-            <p class="mt-1 text-sm text-muted">{item.school}</p>
-          </div>
-        </article>
-      ))}
-      {profile.languages.map((item) => (
-        <article class="rounded-[1.4rem] bg-sand p-5 sm:col-span-2">
-          <p class="text-xs font-medium uppercase tracking-[0.16em] text-accent">Idiomas</p>
-          <p class="mt-2 text-sm">{item.name} · {item.level}</p>
-        </article>
-      ))}
-    </div>
-
-    <div class="mx-auto mt-14 max-w-3xl" data-reveal>
-      <p class="mb-4 inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.18em] text-muted">
-        <AppIcon name="sparkles" size={14} />
-        Enfoque
+    <div class="mx-auto mt-8 max-w-6xl md:mt-12" data-reveal>
+      <p class="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-accent md:text-sm">
+        <AppIcon name="briefcase" size={14} />
+        Formación
       </p>
-      <div class="flex flex-wrap gap-2">
-        {focusIcons.map((item) => (
-          <span class="inline-flex items-center gap-2 rounded-full bg-sand px-3.5 py-1.5 text-sm">
-            <AppIcon name={item.icon} size={14} />
-            {item.label}
-          </span>
+      <h2 class="mt-2 font-display text-2xl tracking-tight md:text-4xl">Estudios e idioma.</h2>
+      <div class="mt-6 grid gap-3 md:grid-cols-3">
+        {profile.education.map((item) => (
+          <article class="overflow-hidden rounded-[1.4rem] bg-sand">
+            <div
+              class:list={[
+                'flex h-32 items-center justify-center px-5 py-4',
+                item.logoTone === 'night' ? 'bg-black' : 'bg-paper',
+              ]}
+            >
+              <img
+                src={item.logo}
+                alt={item.school}
+                class="max-h-full max-w-full object-contain"
+              />
+            </div>
+            <div class="px-4 py-3.5">
+              <p class="text-[11px] font-medium tabular-nums text-accent">{item.years}</p>
+              <h3 class="mt-1 font-display text-base tracking-tight md:text-lg">{item.program}</h3>
+              <p class="mt-0.5 text-sm text-muted">{item.school}</p>
+            </div>
+          </article>
+        ))}
+        {profile.languages.map((item) => (
+          <article class="flex flex-col justify-between rounded-[1.4rem] bg-sand p-5">
+            <p class="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.16em] text-accent">
+              <AppIcon name="globe" size={14} />
+              Idiomas
+            </p>
+            <div class="mt-8">
+              <h3 class="font-display text-lg tracking-tight">{item.name}</h3>
+              <p class="mt-1 text-sm text-muted">Nivel {item.level}</p>
+            </div>
+          </article>
         ))}
       </div>
     </div>
 
-    <div class="mx-auto mt-12 max-w-3xl" data-reveal>
-      <p class="mb-4 inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.18em] text-muted">
-        <AppIcon name="cpu" size={14} />
-        Stack
-      </p>
-      <StackPills items={profile.stack} />
-      <p class="mb-3 mt-8 text-sm font-medium uppercase tracking-[0.18em] text-muted">También</p>
-      <StackPills items={profile.alsoStack} />
+    <div class="mx-auto mt-8 max-w-6xl md:mt-12">
+      <ShowcaseBreak kicker="Enfoque" icon="sparkles" title="En qué puedo contribuir.">
+        <div class="flex flex-wrap gap-2">
+          {focusIcons.map((item) => (
+            <span class="inline-flex items-center gap-2 rounded-full bg-paper px-3.5 py-1.5 text-sm">
+              <AppIcon name={item.icon} size={14} />
+              {item.label}
+            </span>
+          ))}
+        </div>
+      </ShowcaseBreak>
+    </div>
+
+    <div class="mx-auto mt-8 max-w-6xl md:mt-12">
+      <ShowcaseBreak kicker="Stack" icon="cpu" title="Tecnologías de trabajo.">
+        <StackPills items={profile.stack} />
+        <p class="mb-3 mt-8 text-xs font-medium uppercase tracking-[0.18em] text-muted">Otras tecnologías</p>
+        <StackPills items={profile.alsoStack} />
+      </ShowcaseBreak>
     </div>
   </section>
   <Contact />

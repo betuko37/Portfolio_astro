@@ -8,7 +8,6 @@ interface Props {
 
 const { lab } = Astro.props;
 const href = labHref(lab);
-const isLight = lab.accent === 'sand';
 const Tag = href ? 'a' : 'article';
 ---
 
@@ -35,7 +34,7 @@ const Tag = href ? 'a' : 'article';
         <span
           class:list={[
             'inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide',
-            isLight ? 'bg-ink text-paper' : 'bg-paper text-ink',
+            'bg-accent text-white',
           ]}
         >
           <span class="live-dot"></span>
@@ -43,12 +42,15 @@ const Tag = href ? 'a' : 'article';
         </span>
       )}
     </div>
-    <p class="text-[11px] font-medium uppercase tracking-[0.14em] opacity-70">{lab.kicker} · {lab.year}</p>
+    <p class="flex flex-wrap items-center gap-1.5 text-[11px] opacity-70">
+      <span>{lab.kicker}</span>
+      <span class="rounded-full bg-paper/15 px-1.5 py-0.5 font-medium tabular-nums">{lab.year.replace(' — ', '–')}</span>
+    </p>
     <h3 class="mt-1.5 font-display text-lg tracking-tight">{lab.title}</h3>
     <p class="mt-1.5 text-sm leading-relaxed opacity-85">{lab.tagline}</p>
   </div>
   <p class="mt-4 inline-flex items-center gap-1.5 text-xs font-medium">
-    {lab.live ? 'Abrir' : lab.github ? 'Ver en GitHub' : 'Del CV'}
+    Ver estudio de caso
     {(lab.live || lab.github) && <AppIcon name="arrow-up-right" size={14} />}
   </p>
 </Tag>

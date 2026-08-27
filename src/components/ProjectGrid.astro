@@ -1,27 +1,89 @@
 ---
 import { getShowcase, showcaseSections } from '../data/showcase';
+import { profile } from '../data/profile';
 import ShowcaseRail from './ShowcaseRail.astro';
+import ShowcaseBreak from './ShowcaseBreak.astro';
+import StackMarquee from './StackMarquee.astro';
 import AppIcon from './AppIcon.astro';
+
+const live = showcaseSections.find((section) => section.id === 'live')!;
+const github = showcaseSections.find((section) => section.id === 'github')!;
+const practices = showcaseSections.find((section) => section.id === 'cv')!;
 ---
 
 <section id="proyectos" class="px-4 py-10 md:px-8 md:py-20">
-  <div class="mx-auto max-w-6xl">
-    <p class="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-accent md:text-sm" data-reveal>
-      <AppIcon name="folder-kanban" size={14} />
-      Proyectos
-    </p>
-    <h2 class="mt-2 max-w-2xl font-display text-2xl tracking-tight md:text-4xl lg:text-5xl" data-reveal>
-      En vivo, en GitHub y del CV.
-    </h2>
+  <div class="mx-auto flex max-w-6xl flex-col gap-10 md:gap-16">
+    <ShowcaseBreak
+      kicker="Proyectos"
+      icon="folder-kanban"
+      title="Producto en operación."
+      copy="Sistemas que se usan hoy: ERP agrícola, tienda en línea y una biblioteca Flutter publicada."
+    />
 
-    {showcaseSections.map((section) => (
-      <ShowcaseRail
-        id={section.id}
-        title={section.title}
-        kicker={section.kicker}
-        icon={section.icon}
-        items={getShowcase(section.id)}
-      />
-    ))}
+    <ShowcaseRail
+      id={live.id}
+      title={live.title}
+      kicker={live.kicker}
+      icon={live.icon}
+      items={getShowcase(live.id)}
+    />
+
+    <ShowcaseBreak
+      kicker="Stack"
+      icon="cpu"
+      title="Tecnologías utilizadas en producción."
+    >
+      <StackMarquee items={profile.stack} />
+    </ShowcaseBreak>
+
+    <ShowcaseRail
+      id={github.id}
+      title={github.title}
+      kicker={github.kicker}
+      icon={github.icon}
+      items={getShowcase(github.id)}
+    />
+
+    <ShowcaseBreak
+      kicker="Formación"
+      icon="briefcase"
+      title="Ingeniería en Software y prácticas."
+      copy="Universidad Estatal de Sonora (2021–2025) y Cecytes Hermosillo V (2017–2020). Inglés B1."
+    >
+      <a
+        slot="action"
+        href="/sobre"
+        class="inline-flex items-center gap-1.5 rounded-full bg-ink px-3.5 py-2 text-xs font-medium text-paper no-underline md:text-sm"
+      >
+        Ver formación
+        <AppIcon name="arrow-right" size={14} />
+      </a>
+      <div class="flex flex-wrap items-center gap-3">
+        {profile.education.map((item) => (
+          <article class="flex items-center gap-3 rounded-[1.2rem] bg-paper px-4 py-3 text-ink">
+            <span
+              class:list={[
+                'inline-flex h-12 w-20 items-center justify-center overflow-hidden rounded-xl px-2',
+                item.logoTone === 'night' ? 'bg-black' : 'bg-sand',
+              ]}
+            >
+              <img src={item.logo} alt={item.school} class="max-h-10 max-w-full object-contain" />
+            </span>
+            <div>
+              <p class="text-sm font-medium">{item.program}</p>
+              <p class="text-xs text-muted">{item.school}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </ShowcaseBreak>
+
+    <ShowcaseRail
+      id={practices.id}
+      title={practices.title}
+      kicker={practices.kicker}
+      icon={practices.icon}
+      items={getShowcase(practices.id)}
+    />
   </div>
 </section>

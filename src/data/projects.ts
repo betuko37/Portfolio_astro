@@ -33,13 +33,13 @@ export const projects: Project[] = [
     slug: "jornalpro",
     title: "JornalPro Cloud",
     kicker: "Producto principal",
-    tagline: "ERP multi-empresa: API, dashboard, app offline y hardware.",
+    tagline: "ERP multiempresa: API, panel web, aplicación offline e integración de hardware.",
     summary:
-      "Plataforma completa para productoras agrícolas en México. Un solo producto con backend cloud, dashboard web y app Android offline-first. Cubre jornales, asistencia NFC/biometría, empaque, compras y SAT.",
+      "Plataforma para productoras agrícolas en México. Integra backend en la nube, panel web y aplicación Android con operación sin conexión. Cubre jornales, asistencia por NFC y biometría, empaque, compras y SAT.",
     problem:
-      "El campo no espera a que haya internet. Hay que pagar jornales por semana, checar gente con tarjeta o cara, cerrar ciclos, facturar embarques y no perder un peso. JornalPro une esa operación en un sistema multi-tenant.",
-    role: "Arquitectura y desarrollo de backend, frontend y mobile",
-    year: "2024 — hoy",
+      "En operación agrícola la conectividad es intermitente. El sistema debe registrar jornales semanales, asistencia mediante tarjeta o biometría, cierre de ciclos, facturación de embarques y control de costos. JornalPro concentra esa operación en una plataforma multiempresa.",
+    role: "Arquitectura y desarrollo de backend, interfaz web y aplicación móvil",
+    year: "2024 — actualidad",
     featured: true,
     accent: "purple",
     stack: [
@@ -126,14 +126,14 @@ export const projects: Project[] = [
   {
     slug: "jornalpro-backend",
     title: "JornalPro Backend",
-    kicker: "Case study",
-    tagline: "API cloud de un ERP: ~1.150 handlers y 182 modelos.",
+    kicker: "Estudio de caso",
+    tagline: "API en la nube de un ERP: aproximadamente 1.150 controladores y 182 modelos.",
     summary:
-      "Monolito modular en Node.js y TypeScript. Express 5, Prisma 7 sobre PostgreSQL, JWT con TOTP, Socket.IO y crons. El servidor se identifica como JornalPro Cloud.",
+      "Monolito modular en Node.js y TypeScript. Express 5, Prisma 7 sobre PostgreSQL, JWT con TOTP, Socket.IO y tareas programadas. El servidor se identifica como JornalPro Cloud.",
     problem:
-      "Había que modelar nómina semanal por cuadrilla, asistencia de varias fuentes, empaque, tesorería fiscal y un bot de WhatsApp — sin partir el dominio en microservicios prematuros.",
-    role: "Backend lead / full-stack",
-    year: "2024 — hoy",
+      "Era necesario modelar nómina semanal por cuadrilla, asistencia proveniente de varias fuentes, empaque, tesorería fiscal y un bot de WhatsApp, sin fragmentar el dominio en microservicios de forma prematura.",
+    role: "Responsable de backend / desarrollo full-stack",
+    year: "2024 — actualidad",
     featured: false,
     accent: "ink",
     stack: [
@@ -228,14 +228,14 @@ export const projects: Project[] = [
   {
     slug: "jornalpro-frontend",
     title: "JornalPro Frontend",
-    kicker: "Case study",
-    tagline: "Dashboard enterprise: seis apps en una SPA React + MUI.",
+    kicker: "Estudio de caso",
+    tagline: "Panel empresarial: seis aplicaciones en una SPA con React y Material UI.",
     summary:
       "jornalpro-cloud. React 18, Vite 6, Material UI 6, Zustand, React Router 7 y Zod. Más de 100 rutas de negocio, PWA, mapas Leaflet y Socket.IO bajo demanda.",
     problem:
-      "Un capataz, un admin de empaque y un tesorero no pueden ver el mismo menú. El frontend tiene que sentirse como varias apps sin perder un solo login ni el contexto de ubicación.",
-    role: "Frontend lead / full-stack",
-    year: "2024 — hoy",
+      "Un capataz, un administrador de empaque y un tesorero no deben ver el mismo menú. La interfaz debe comportarse como varias aplicaciones sin perder una sola sesión ni el contexto de ubicación.",
+    role: "Responsable de frontend / desarrollo full-stack",
+    year: "2024 — actualidad",
     featured: false,
     accent: "sand",
     stack: [
@@ -315,14 +315,14 @@ export const projects: Project[] = [
   {
     slug: "jornalpro-mobile",
     title: "JornalPro Mobile",
-    kicker: "Case study",
-    tagline: "App Flutter offline-first: NFC, cola Hive y voz on-device.",
+    kicker: "Estudio de caso",
+    tagline: "Aplicación Flutter con operación sin conexión: NFC, cola en Hive y reconocimiento de voz en el dispositivo.",
     summary:
-      "Android para capataces. ~104k líneas Dart. Offline-first con betuko_offline_sync, cola propia de asistencias, GPS obligatorio, QR de respaldo y ASR Sherpa-ONNX para destajo por surcos. Se distribuye como APK (sin URL pública); las capturas van en esta ficha.",
+      "Aplicación Android para capataces. Aproximadamente 104 mil líneas en Dart. Operación sin conexión con betuko_offline_sync, cola propia de asistencias, GPS obligatorio, QR de respaldo y reconocimiento de voz Sherpa-ONNX para destajo por surcos. Se distribuye como APK, sin URL pública; el registro fotográfico se presenta en esta ficha.",
     problem:
-      "En el surco no hay Wi-Fi. Hay que escanear 80 gafetes, no perder un registro y, si hay red, mandarlo. Si no, seguir trabajando.",
-    role: "Mobile lead / full-stack",
-    year: "2024 — hoy",
+      "En campo no hay red Wi-Fi estable. Es necesario escanear decenas de gafetes, conservar cada registro y enviarlo cuando exista conectividad; en su ausencia, la operación debe continuar.",
+    role: "Responsable de mobile / desarrollo full-stack",
+    year: "2024 — actualidad",
     featured: false,
     accent: "purple",
     stack: [
@@ -400,13 +400,13 @@ export const projects: Project[] = [
   {
     slug: "offline-sync",
     title: "betuko_offline_sync",
-    kicker: "Librería Flutter",
-    tagline: "Offline-first en tres llamadas: get, save, syncAll.",
+    kicker: "Biblioteca Flutter",
+    tagline: "Sincronización offline-first mediante tres operaciones: get, save y syncAll.",
     summary:
-      "Paquete público en pub.dev (v3.3.2). Hive + HTTP + connectivity_plus + WorkManager. Nació para JornalPro y se publicó para que cualquier app Flutter tenga la misma semántica.",
+      "Paquete público en pub.dev (v3.3.2). Hive, HTTP, connectivity_plus y WorkManager. Se originó en JornalPro y se publicó para que otras aplicaciones Flutter reutilicen la misma semántica.",
     problem:
-      "Cada feature móvil reinventaba caché, pendientes y reconexión. Quería una API mínima que siempre lea local y sincronice cuando el usuario o la red lo permitan.",
-    role: "Autor y mantenedor",
+      "Cada funcionalidad móvil volvía a implementar caché, pendientes y reconexión. Se requirió una API mínima que lea siempre en local y sincronice cuando el usuario o la red lo permitan.",
+    role: "Autor y responsable de mantenimiento",
     year: "2024 — 2026",
     featured: true,
     accent: "ink",
@@ -420,7 +420,7 @@ export const projects: Project[] = [
       "shared_preferences",
     ],
     highlights: [
-      "get() siempre responde desde Hive. Instantáneo.",
+      "get() responde siempre desde Hive, de forma inmediata.",
       "Auto-sync cada 10 minutos y al recuperar red.",
       "Background sync Android cada 15 min vía WorkManager.",
       "Usada en producción por 9+ managers de JornalPro Mobile.",
@@ -485,9 +485,9 @@ export const projects: Project[] = [
     kicker: "Hardware + Node",
     tagline: "Lector ACR122U expuesto como API local en el puerto 47321.",
     summary:
-      "Servicio REST para leer tarjetas NFC en escritorio. Express, nfc-pcsc, CORS, consola web e instaladores Windows/macOS (exe, DMG, launchd). El dashboard de JornalPro lo consulta cada 500 ms.",
+      "Servicio REST para la lectura de tarjetas NFC en escritorio. Express, nfc-pcsc, CORS, consola web e instaladores para Windows y macOS (exe, DMG, launchd). El panel de JornalPro lo consulta cada 500 ms.",
     problem:
-      "El alta de empleado y la entrega de gafetes ocurren en una oficina con lector USB, no en el teléfono. El navegador no habla PC/SC. Hace falta un puente local estable.",
+      "El alta de empleados y la entrega de gafetes se realizan en oficina con lector USB, no en el teléfono. El navegador no comunica con PC/SC; se requiere un puente local estable.",
     role: "Autor",
     year: "2025 — 2026",
     featured: true,
@@ -551,12 +551,12 @@ export const projects: Project[] = [
     slug: "tienda-ivan",
     title: "ITZ Coleccionables",
     kicker: "Comercio headless",
-    tagline: "Storefront Shopify Hydrogen + Remix para Funko y figuras.",
+    tagline: "Tienda Shopify Hydrogen y Remix para Funko y figuras coleccionables.",
     summary:
-      "Tienda en vivo de ITZ Coleccionables (itzcoleccionables.com): headless sobre Hydrogen 2025 y Remix 2. Partió del Demo Store y se convirtió en un storefront propio: tema oscuro, cursor de temporada, roles admin, Cloudinary, motion y correo con Nodemailer.",
+      "Tienda en línea de ITZ Coleccionables (itzcoleccionables.com): arquitectura headless sobre Hydrogen 2025 y Remix 2. Partió del Demo Store y se convirtió en un storefront propio: tema oscuro, cursor de temporada, roles de administración, Cloudinary, motion y correo con Nodemailer.",
     problem:
-      "Shopify Liquid no daba el control visual ni el backoffice ligero que pedía la tienda. Había que quedarse en el checkout de Shopify y construir el resto en React.",
-    role: "Desarrollo storefront e integraciones custom",
+      "Shopify Liquid no ofrecía el control visual ni el panel interno que requería la tienda. Era necesario conservar el checkout de Shopify y construir el resto en React.",
+    role: "Desarrollo del storefront e integraciones a medida",
     year: "2025 — 2026",
     featured: true,
     accent: "night",

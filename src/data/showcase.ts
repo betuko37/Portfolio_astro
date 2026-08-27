@@ -83,7 +83,7 @@ export const showcaseSections: {
   kicker: string;
   icon: IconName;
 }[] = [
-  { id: "live", title: "En vivo", kicker: "Se pueden abrir hoy", icon: "globe" },
-  { id: "github", title: "GitHub", kicker: "Código público", icon: "github" },
-  { id: "cv", title: "Del CV", kicker: "Prácticas", icon: "briefcase" },
+  { id: "live", title: "En producción", kicker: "Disponibles en línea", icon: "globe" },
+  { id: "github", title: "GitHub", kicker: "Repositorios públicos", icon: "github" },
+  { id: "cv", title: "Prácticas", kicker: "Proyectos de formación", icon: "briefcase" },
 ];

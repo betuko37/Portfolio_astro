@@ -16,7 +16,7 @@ const { id, title, kicker, icon, items } = Astro.props;
 ---
 
 {items.length > 0 && (
-  <div id={id} class="mt-10 md:mt-14" data-reveal data-rail>
+  <div id={id} data-reveal data-rail>
     <div class="mb-4 flex items-end justify-between gap-3">
       <div>
         <p class="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-accent md:text-sm">
@@ -48,7 +48,7 @@ const { id, title, kicker, icon, items } = Astro.props;
           href={`/proyectos?grupo=${id}`}
           class="inline-flex items-center gap-1.5 rounded-full bg-sand px-3.5 py-2 text-xs font-medium text-ink no-underline hover:bg-accent-soft md:text-sm"
         >
-          Ver todas
+          Ver listado
           <AppIcon name="arrow-right" size={14} />
         </a>
       </div>

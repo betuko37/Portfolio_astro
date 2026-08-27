@@ -92,11 +92,11 @@ export const stackIcons: Record<string, IconName> = {
 };
 
 export const focusIcons: { label: string; icon: IconName }[] = [
-  { label: "Producto de extremo a extremo", icon: "layers" },
-  { label: "Offline-first", icon: "wifi-off" },
-  { label: "Sistemas multi-tenant", icon: "building-2" },
-  { label: "Hardware NFC", icon: "nfc" },
-  { label: "Dashboards y comercio", icon: "layout-dashboard" },
+  { label: "Desarrollo de extremo a extremo", icon: "layers" },
+  { label: "Arquitectura offline-first", icon: "wifi-off" },
+  { label: "Sistemas multiempresa", icon: "building-2" },
+  { label: "Integración de hardware NFC", icon: "nfc" },
+  { label: "Paneles de control y comercio electrónico", icon: "layout-dashboard" },
 ];
 
 export type IconName =

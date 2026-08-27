@@ -1,21 +1,23 @@
 ---
 import { profile } from '../data/profile';
 import AppIcon from './AppIcon.astro';
+import MexicoFlag from './MexicoFlag.astro';
 
 const words = profile.headline.split(' ');
-const punchFrom = 5;
+const punchFrom = 4;
 ---
 
 <section class="px-4 pb-8 pt-4 md:px-8 md:pb-14 md:pt-8">
   <div class="mx-auto grid max-w-6xl items-center gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12" data-hero>
     <div>
       <p
-        class="inline-flex items-center gap-2 rounded-full bg-sand px-3 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-accent sm:text-xs"
+        class="inline-flex max-w-full flex-wrap items-center gap-2 rounded-full bg-sand px-3 py-1.5 text-xs font-medium sm:text-sm"
         data-hero-item
       >
-        <span class="live-dot text-accent"></span>
-        <span class="sm:hidden">{profile.location} · Disponible</span>
-        <span class="hidden sm:inline">{profile.location} · {profile.availability}</span>
+        <MexicoFlag />
+        <span>{profile.role}</span>
+        <span class="text-muted">·</span>
+        <span class="text-muted">{profile.location}</span>
       </p>
 
       <h1 class="mt-4 max-w-4xl font-display text-[1.5rem] leading-[1.2] sm:text-3xl md:mt-6 md:text-5xl lg:text-6xl">
@@ -38,7 +40,7 @@ const punchFrom = 5;
           data-magnetic
           class="tone-ink inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-medium no-underline hover:bg-accent md:px-5"
         >
-          Ver proyectos
+          Ver portafolio
           <AppIcon name="arrow-right" size={16} />
         </a>
         <a
@@ -46,20 +48,20 @@ const punchFrom = 5;
           data-magnetic
           class="inline-flex items-center gap-2 rounded-full bg-sand px-4 py-2.5 text-sm font-medium text-ink no-underline hover:bg-accent-soft md:px-5"
         >
-          Contactar
+          Contacto
           <AppIcon name="send" size={16} />
         </a>
       </div>
     </div>
 
     <div
-      class="tone-night relative min-h-[260px] overflow-hidden rounded-[1.5rem] md:min-h-[360px] md:rounded-[2rem] lg:min-h-[440px]"
+      class="relative min-h-[260px] overflow-hidden rounded-[1.5rem] border border-white/10 bg-sand md:min-h-[360px] md:rounded-[2rem] lg:min-h-[440px]"
       data-hero-stage
       data-hero-icon
     >
       <canvas class="absolute inset-0 h-full w-full" data-hero-canvas aria-hidden="true"></canvas>
       <p class="pointer-events-none absolute inset-x-0 bottom-4 text-center text-[10px] font-medium uppercase tracking-[0.16em] text-mist/80 sm:bottom-5 sm:text-xs">
-        Backend · Web · Mobile · Hardware
+        Ingeniero de software
       </p>
     </div>
   </div>

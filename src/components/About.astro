@@ -3,6 +3,7 @@ import { profile } from '../data/profile';
 import { focusIcons } from '../data/icons';
 import { profilePhoto } from '../data/media';
 import AppIcon from './AppIcon.astro';
+import MexicoFlag from './MexicoFlag.astro';
 ---
 
 <section id="sobre" class="px-4 py-4 md:px-8 md:py-8">
@@ -22,6 +23,12 @@ import AppIcon from './AppIcon.astro';
           Sobre mí
         </p>
         <h2 class="mt-2 font-display text-2xl tracking-tight md:text-4xl">{profile.name}</h2>
+        <p class="mt-2 inline-flex flex-wrap items-center gap-2 text-xs text-muted md:text-sm">
+          <MexicoFlag />
+          <span>{profile.role}</span>
+          <span>·</span>
+          <span>{profile.location}</span>
+        </p>
         <p class="mt-2 inline-flex items-center gap-2 text-xs text-muted md:text-sm">
           <span class="live-dot text-accent"></span>
           {profile.availability}
@@ -41,9 +48,9 @@ import AppIcon from './AppIcon.astro';
         </div>
         <a
           href="/sobre"
-          class="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-ink no-underline hover:text-accent"
+          class="mt-6 inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2.5 text-sm font-medium text-paper no-underline"
         >
-          Formación y más
+          Ver perfil
           <AppIcon name="arrow-right" size={14} />
         </a>
       </div>

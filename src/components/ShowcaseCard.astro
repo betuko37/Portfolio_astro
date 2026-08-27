@@ -1,6 +1,5 @@
 ---
 import type { ShowcaseItem } from '../data/showcase';
-import { getBrandColor } from '../data/brands';
 import AppIcon from './AppIcon.astro';
 import BrandIcon from './BrandIcon.astro';
 
@@ -10,10 +9,8 @@ interface Props {
 
 const { item } = Astro.props;
 const Tag = item.href ? 'a' : 'article';
-const stack = item.stack.slice(0, 4);
+const stack = item.stack.slice(0, 5);
 const extra = item.stack.length - stack.length;
-const raw = item.stack[0] ? getBrandColor(item.stack[0]) : '#7c3aed';
-const mark = raw === 'currentColor' ? '#7c3aed' : raw;
 ---
 
 <Tag
@@ -24,15 +21,11 @@ const mark = raw === 'currentColor' ? '#7c3aed' : raw;
         rel: item.external ? 'noreferrer' : undefined,
       }
     : {})}
-  class="relative flex h-full min-h-[210px] flex-col justify-between overflow-hidden rounded-[1.4rem] bg-sand p-4 pl-5 text-ink no-underline md:min-h-[230px] md:p-5 md:pl-6"
+  class="flex h-full min-h-[210px] flex-col justify-between rounded-[1.4rem] bg-sand p-4 text-ink no-underline md:min-h-[230px] md:p-5"
 >
-  <span class="absolute inset-y-0 left-0 w-1.5" style={`background:${mark}`}></span>
   <div>
     <div class="mb-3 flex items-start justify-between gap-2">
-      <span
-        class="inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-2xl p-1.5"
-        style={`background: color-mix(in srgb, ${mark} 16%, var(--color-paper));`}
-      >
+      <span class="inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-2xl bg-paper p-1.5">
         {item.logo ? (
           <img src={item.logo} alt="" class="h-full w-full object-contain" />
         ) : (
@@ -40,37 +33,40 @@ const mark = raw === 'currentColor' ? '#7c3aed' : raw;
         )}
       </span>
       {item.live && (
-        <span class="inline-flex items-center gap-1.5 rounded-full bg-ink px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-paper">
+        <span class="inline-flex items-center gap-1.5 rounded-full bg-accent px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-white">
           <span class="live-dot"></span>
           En vivo
         </span>
       )}
     </div>
-    <p class="text-[11px] font-medium uppercase tracking-[0.14em] text-muted">
-      {item.kicker} · {item.year}
+    <p class="flex flex-wrap items-center gap-1.5 text-[11px] text-muted">
+      <span>{item.kicker}</span>
+      <span class="rounded-full bg-paper px-1.5 py-0.5 font-medium tabular-nums">{item.year.replace(' — ', '–')}</span>
     </p>
     <h3 class="mt-1.5 font-display text-lg tracking-tight">{item.title}</h3>
     <p class="mt-1.5 line-clamp-2 text-sm leading-relaxed text-muted">{item.tagline}</p>
   </div>
-  <div class="mt-4">
+  <div class="mt-4 flex items-end justify-between gap-3">
     {stack.length > 0 && (
-      <ul class="mb-3 flex flex-wrap gap-1">
+      <ul class="flex flex-wrap items-center gap-1">
         {stack.map((tech) => (
-          <li class="inline-flex items-center gap-1 rounded-full bg-paper px-1.5 py-0.5 text-[10px] text-muted">
-            <BrandIcon label={tech} size={10} />
-            <span>{tech}</span>
+          <li
+            class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-paper"
+            title={tech}
+          >
+            <BrandIcon label={tech} size={13} />
           </li>
         ))}
         {extra > 0 && (
-          <li class="inline-flex items-center rounded-full bg-paper px-1.5 py-0.5 text-[10px] text-muted">
+          <li class="inline-flex h-7 min-w-7 items-center justify-center rounded-full bg-paper px-1 text-[10px] text-muted">
             +{extra}
           </li>
         )}
       </ul>
     )}
-    <p class="inline-flex items-center gap-1.5 text-xs font-medium text-accent">
-      Ver case study
-      <AppIcon name="arrow-right" size={14} />
-    </p>
+    <span class="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-ink px-3 py-1.5 text-[11px] font-medium text-paper">
+      Estudio de caso
+      <AppIcon name="arrow-right" size={13} />
+    </span>
   </div>
 </Tag>

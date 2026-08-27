@@ -8,7 +8,7 @@ import { showcase, showcaseSections } from '../../data/showcase';
 
 <Layout
   title="Proyectos — Jesús Zavala"
-  description="Todos los proyectos en vivo, en GitHub y del CV."
+  description="Estudios de caso, demostraciones en línea, repositorios públicos y prácticas profesionales."
 >
   <section class="px-4 py-8 md:px-8 md:py-16">
     <div class="mx-auto max-w-6xl">
@@ -23,7 +23,7 @@ import { showcase, showcaseSections } from '../../data/showcase';
         Todos los proyectos
       </h1>
       <p class="mt-3 max-w-xl text-sm text-muted md:text-base" data-catalog-copy>
-        Case studies, demos en vivo, repos y piezas del CV.
+        Estudios de caso, demostraciones en línea, repositorios públicos y prácticas profesionales.
       </p>
 
       <div class="mt-6 flex flex-wrap gap-2" data-catalog-tabs>
@@ -32,7 +32,7 @@ import { showcase, showcaseSections } from '../../data/showcase';
           data-tab=""
           class="catalog-tab rounded-full px-3.5 py-2 text-sm no-underline bg-sand text-ink hover:bg-accent-soft"
         >
-          Todas
+          Todos
         </a>
         {showcaseSections.map((section) => (
           <a
@@ -73,9 +73,9 @@ import { showcase, showcaseSections } from '../../data/showcase';
 <script is:inline>
   (function () {
     const titles = {
-      live: ['En vivo', 'Se pueden abrir hoy'],
-      github: ['GitHub', 'Código público'],
-      cv: ['Del CV', 'Prácticas'],
+      live: ['En producción', 'Disponibles en línea'],
+      github: ['GitHub', 'Repositorios públicos'],
+      cv: ['Prácticas', 'Proyectos de formación'],
     };
     const group = new URLSearchParams(location.search).get('grupo');
     const valid = group === 'live' || group === 'github' || group === 'cv' ? group : '';

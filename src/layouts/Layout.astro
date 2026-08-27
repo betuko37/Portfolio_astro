@@ -59,8 +59,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
       })();
     </script>
   </head>
-  <body class="min-h-screen bg-paper text-ink antialiased">
+  <body class="space-root min-h-screen antialiased">
     <div class="progress" data-progress></div>
+    <div class="starfield" aria-hidden="true">
+      <canvas data-starfield></canvas>
+    </div>
     <div class="ambient" aria-hidden="true">
       <div class="orb orb-a" data-orb="a"></div>
       <div class="orb orb-b" data-orb="b"></div>
@@ -74,8 +77,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
     <script>
       import { initMotion } from '../scripts/motion';
       import { initTheme } from '../scripts/theme';
+      import { initStarfield } from '../scripts/starfield';
       initTheme();
       initMotion();
+      initStarfield();
     </script>
   </body>
 </html>

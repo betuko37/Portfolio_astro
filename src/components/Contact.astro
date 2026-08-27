@@ -3,7 +3,7 @@ import { profile, whatsappHref } from '../data/profile';
 import AppIcon from './AppIcon.astro';
 import type { IconName } from '../data/icons';
 
-const mailHref = `mailto:${profile.email}?subject=${encodeURIComponent('Contacto desde el portafolio')}`;
+const mailHref = `mailto:${profile.email}?subject=${encodeURIComponent('Contacto profesional — portafolio')}`;
 const whatsapp = profile.whatsapp ? whatsappHref(profile.whatsapp) : '';
 
 const channels: { href: string; label: string; icon: IconName; external?: boolean }[] = [
@@ -28,7 +28,7 @@ if (whatsapp) {
           Contacto
         </p>
         <h2 class="mt-3 font-display text-3xl tracking-tight md:text-5xl">
-          Hablemos <em class="italic text-accent-soft">cuando quieras</em>.
+          Conversemos sobre <em class="italic text-accent-soft">su vacante</em>.
         </h2>
         <p class="mt-4 max-w-md text-sm text-mist">
           {profile.availability}
@@ -57,7 +57,7 @@ if (whatsapp) {
             type="text"
             name="name"
             required
-            placeholder="Tu nombre"
+            placeholder="Nombre completo"
           />
         </label>
         <label class="text-sm text-mist">
@@ -66,7 +66,7 @@ if (whatsapp) {
             class="mt-2 min-h-28 w-full rounded-2xl bg-night-soft px-4 py-3 text-on-dark outline-none placeholder:text-mist md:min-h-36"
             name="body"
             required
-            placeholder="En qué estás trabajando y por qué me escribes"
+            placeholder="Describa la vacante o el motivo de contacto"
           ></textarea>
         </label>
         <button
@@ -75,10 +75,10 @@ if (whatsapp) {
           data-magnetic
         >
           <AppIcon name="mail" size={16} />
-          Abrir email
+          Enviar correo
         </button>
         <p class="text-xs text-mist">
-          El formulario abre tu cliente de correo. No guardo nada en un servidor.
+          El formulario abre el cliente de correo. No se almacena información en un servidor.
         </p>
       </form>
     </div>
@@ -93,7 +93,7 @@ if (whatsapp) {
     const name = String(data.get('name') ?? '').trim();
     const body = String(data.get('body') ?? '').trim();
     const email = 'betorolitos37@gmail.com';
-    const subject = encodeURIComponent(`Hola Jesús, te escribe ${name}`);
+    const subject = encodeURIComponent(`Contacto profesional — ${name}`);
     const message = encodeURIComponent(body);
     window.location.href = `mailto:${email}?subject=${subject}&body=${message}`;
   });

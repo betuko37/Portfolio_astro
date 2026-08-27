@@ -11,7 +11,6 @@ interface Props {
 
 const { project, large = false } = Astro.props;
 const live = getLiveLink(project);
-const isLight = project.accent === 'sand';
 const logo = getProjectLogo(project.slug);
 const cover = getProjectCover(project.slug);
 const phoneCover = project.slug.includes('mobile');
@@ -40,7 +39,7 @@ const phoneCover = project.slug.includes('mobile');
           <span
             class:list={[
               'inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium uppercase tracking-wide',
-              isLight ? 'bg-ink text-paper' : 'bg-paper text-ink',
+              'bg-accent text-white',
             ]}
           >
             <span class="live-dot"></span>
@@ -53,7 +52,7 @@ const phoneCover = project.slug.includes('mobile');
       <p class="mt-2 max-w-xl text-sm leading-relaxed opacity-85 md:text-base">{project.tagline}</p>
     </div>
     <p class="mt-5 inline-flex items-center gap-2 text-sm font-medium md:mt-8">
-      Ver case study
+      Ver estudio de caso
       <span class="transition-transform duration-300 group-hover:translate-x-1">
         <AppIcon name="arrow-right" size={16} />
       </span>

@@ -89,7 +89,7 @@ const description = project?.summary ?? lab!.tagline;
               ))}
             </div>
           ) : project.slug === 'jornalpro-mobile' && !gallery ? (
-            <p class="mt-8 text-sm text-mist">App Android (APK). Capturas en camino.</p>
+            <p class="mt-8 text-sm text-mist">Aplicación Android (APK). Registro fotográfico pendiente.</p>
           ) : null}
         </div>
       </div>
@@ -99,7 +99,7 @@ const description = project?.summary ?? lab!.tagline;
       <Carousel
         images={gallery.images}
         variant={gallery.variant}
-        title={gallery.variant === 'phone' ? 'La app en el teléfono' : 'Capturas'}
+        title={gallery.variant === 'phone' ? 'Aplicación móvil' : 'Capturas de pantalla'}
       />
     )}
 
@@ -108,14 +108,14 @@ const description = project?.summary ?? lab!.tagline;
         <div data-reveal>
           <p class="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.18em] text-accent">
             <AppIcon name="circle-alert" size={14} />
-            El problema
+            Contexto
           </p>
           <p class="mt-3 text-sm leading-relaxed md:text-base">{project.problem}</p>
         </div>
         <div data-reveal>
           <p class="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.18em] text-accent">
             <AppIcon name="sparkles" size={14} />
-            Qué es
+            Descripción
           </p>
           <p class="mt-3 text-sm leading-relaxed md:text-base">{project.summary}</p>
         </div>
@@ -140,7 +140,7 @@ const description = project?.summary ?? lab!.tagline;
           <AppIcon name="share-2" size={14} />
           Arquitectura
         </p>
-        <h2 class="mt-2 font-display text-2xl tracking-tight md:text-4xl">Cómo se conecta</h2>
+        <h2 class="mt-2 font-display text-2xl tracking-tight md:text-4xl">Arquitectura del sistema</h2>
         <div class="mt-8">
           <ArchDiagram chart={project.architecture} />
         </div>
@@ -153,7 +153,7 @@ const description = project?.summary ?? lab!.tagline;
           <AppIcon name="layers" size={14} />
           Módulos
         </p>
-        <h2 class="mt-2 font-display text-2xl tracking-tight md:text-4xl">Qué hay dentro</h2>
+        <h2 class="mt-2 font-display text-2xl tracking-tight md:text-4xl">Módulos del sistema</h2>
         <div class="mt-8">
           <ModuleList modules={project.modules} />
         </div>
@@ -164,7 +164,7 @@ const description = project?.summary ?? lab!.tagline;
       <div class="mx-auto max-w-6xl">
         <p class="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.18em] text-accent">
           <AppIcon name="workflow" size={14} />
-          Cómo funciona
+          Funcionamiento
         </p>
         <ol class="mt-8 grid gap-4 md:grid-cols-2">
           {project.howItWorks.map((step, index) => (
@@ -184,7 +184,7 @@ const description = project?.summary ?? lab!.tagline;
       <div class="mx-auto max-w-6xl">
         <p class="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.18em] text-accent">
           <AppIcon name="badge-check" size={14} />
-          Por qué importa
+          Resultados
         </p>
         <ul class="mt-8 grid gap-4 md:grid-cols-2">
           {project.highlights.map((item) => (
@@ -200,7 +200,7 @@ const description = project?.summary ?? lab!.tagline;
     {related.length > 0 && (
       <section class="px-5 pb-20 md:px-8">
         <div class="mx-auto max-w-6xl">
-          <p class="text-sm font-medium uppercase tracking-[0.18em] text-muted">Relacionados</p>
+          <p class="text-sm font-medium uppercase tracking-[0.18em] text-muted">Proyectos relacionados</p>
           <div class="mt-6 grid gap-4 md:grid-cols-3">
             {related.map((item) => (
               <ProjectCard project={item} />

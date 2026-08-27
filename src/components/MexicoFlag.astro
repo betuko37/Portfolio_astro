@@ -1,0 +1,17 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = 'h-3.5 w-[1.35rem]' } = Astro.props;
+---
+
+<span class:list={['relative inline-flex overflow-hidden rounded-[3px] shadow-[0_0_0_1px_rgba(0,0,0,0.08)]', className]} aria-hidden="true">
+  <svg viewBox="0 0 24 16" class="h-full w-full" xmlns="http://www.w3.org/2000/svg">
+    <rect width="8" height="16" fill="#006847"></rect>
+    <rect x="8" width="8" height="16" fill="#fff"></rect>
+    <rect x="16" width="8" height="16" fill="#CE1126"></rect>
+    <circle cx="12" cy="8.1" r="2.15" fill="#9A7B2F"></circle>
+    <circle cx="12" cy="8.1" r="1.15" fill="#1C7A3A"></circle>
+  </svg>
+</span>
