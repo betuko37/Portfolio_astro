@@ -1,11 +1,24 @@
 ---
 interface Props {
   chart: string;
+  large?: boolean;
 }
 
-const { chart } = Astro.props;
+const { chart, large = false } = Astro.props;
 ---
 
-<div class="mer-wrap rounded-3xl bg-sand p-6 md:p-8">
-  <pre class="mermaid text-sm">{chart}</pre>
+<div class:list={["mer-wrap mx-auto w-full overflow-x-auto", large ? "max-w-6xl" : "max-w-3xl"]}>
+  <pre class:list={["mermaid", large && "is-large"]}>{chart}</pre>
 </div>
+
+<style>
+  .mermaid.is-large {
+    font-size: 1.05rem;
+  }
+
+  .mer-wrap:has(.is-large) :global(svg) {
+    max-width: none !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+</style>

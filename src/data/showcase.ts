@@ -24,12 +24,12 @@ export type ShowcaseItem = {
 
 const isGithub = (href: string) => /github\.com/i.test(href);
 
-function fromProject(project: Project): ShowcaseItem {
+export function fromProject(project: Project): ShowcaseItem {
   const live = getLiveLink(project);
   const github = project.links.find((link) => isGithub(link.href));
   const groups: ShowcaseGroup[] = [];
   if (live) groups.push("live");
-  if (github) groups.push("github");
+  if (github && !live) groups.push("github");
 
   return {
     id: `case-${project.slug}`,
@@ -50,8 +50,8 @@ function fromProject(project: Project): ShowcaseItem {
 export function fromLab(lab: (typeof labs)[number]): ShowcaseItem {
   const groups: ShowcaseGroup[] = [];
   if (lab.live) groups.push("live");
-  if (lab.github) groups.push("github");
-  if (lab.fromCv) groups.push("cv");
+  if (lab.github && !lab.live) groups.push("github");
+  if (lab.fromCv && !lab.live) groups.push("cv");
 
   return {
     id: `lab-${lab.slug}`,

@@ -1,28 +1,42 @@
 ---
 import { profile } from '../data/profile';
 import { focusIcons } from '../data/icons';
-import { profilePhoto } from '../data/media';
 import AppIcon from './AppIcon.astro';
 import MexicoFlag from './MexicoFlag.astro';
+import FoldText from './FoldText.jsx';
 ---
 
 <section id="sobre" class="px-4 py-4 md:px-8 md:py-8">
   <div class="mx-auto grid max-w-6xl gap-3 md:grid-cols-12 md:gap-4">
-    <div class="overflow-hidden rounded-[1.5rem] bg-sand md:col-span-5 md:rounded-[2rem]" data-reveal>
-      <img
-        src={profilePhoto}
-        alt={profile.name}
-        class="aspect-[4/5] h-full max-h-72 w-full object-cover object-top md:max-h-none md:min-h-[440px]"
-      />
+    <div
+      class="relative min-h-[260px] overflow-hidden rounded-[1.5rem] bg-sand md:col-span-5 md:min-h-[440px] md:rounded-[2rem]"
+      data-reveal
+      data-hero-stage
+    >
+      <canvas class="absolute inset-0 h-full w-full" data-hero-canvas aria-hidden="true"></canvas>
+      <p class="pointer-events-none absolute inset-x-0 bottom-4 text-center text-[10px] font-medium uppercase tracking-[0.16em] text-muted sm:bottom-5 sm:text-xs">
+        Ingeniero de software
+      </p>
     </div>
 
-    <div class="flex flex-col justify-between rounded-[1.5rem] bg-sand px-5 py-7 md:col-span-7 md:rounded-[2rem] md:px-10 md:py-12" data-reveal>
+    <div class="flex flex-col justify-between rounded-[1.5rem] bg-sand px-5 py-7 md:col-span-7 md:rounded-[2rem] md:px-10 md:py-12">
       <div>
         <p class="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-accent md:text-sm">
           <AppIcon name="user-round" size={14} />
           Sobre mí
         </p>
-        <h2 class="mt-2 font-display text-2xl tracking-tight md:text-4xl">{profile.name}</h2>
+        <h2 class="mt-2 font-display text-2xl tracking-tight md:text-4xl">
+          <FoldText
+            client:visible
+            text={profile.name}
+            splitBy="char"
+            hinge="top"
+            trigger="scroll"
+            color="currentColor"
+            fontSize="inherit"
+            fontWeight={700}
+          />
+        </h2>
         <p class="mt-2 inline-flex flex-wrap items-center gap-2 text-xs text-muted md:text-sm">
           <MexicoFlag />
           <span>{profile.role}</span>
@@ -57,3 +71,8 @@ import MexicoFlag from './MexicoFlag.astro';
     </div>
   </div>
 </section>
+
+<script>
+  import { initHeroScene } from '../scripts/heroScene';
+  initHeroScene();
+</script>

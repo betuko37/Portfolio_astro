@@ -3,6 +3,7 @@ import type { ShowcaseGroup, ShowcaseItem } from '../data/showcase';
 import type { IconName } from '../data/icons';
 import AppIcon from './AppIcon.astro';
 import ShowcaseCard from './ShowcaseCard.astro';
+import FoldText from './FoldText.jsx';
 
 interface Props {
   id: ShowcaseGroup;
@@ -16,14 +17,25 @@ const { id, title, kicker, icon, items } = Astro.props;
 ---
 
 {items.length > 0 && (
-  <div id={id} data-reveal data-rail>
+  <div id={id} data-rail>
     <div class="mb-4 flex items-end justify-between gap-3">
       <div>
         <p class="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-accent md:text-sm">
           <AppIcon name={icon} size={14} />
           {kicker}
         </p>
-        <h3 class="mt-1 font-display text-xl tracking-tight md:text-3xl">{title}</h3>
+        <h3 class="mt-1 font-display text-xl tracking-tight md:text-3xl">
+          <FoldText
+            client:visible
+            text={title}
+            splitBy="word"
+            hinge="top"
+            trigger="scroll"
+            color="currentColor"
+            fontSize="inherit"
+            fontWeight={700}
+          />
+        </h3>
       </div>
       <div class="flex shrink-0 items-center gap-1.5">
         {items.length > 1 && (

@@ -33,7 +33,7 @@ const extra = item.stack.length - stack.length;
         )}
       </span>
       {item.live && (
-        <span class="inline-flex items-center gap-1.5 rounded-full bg-accent px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-white">
+        <span class="live-badge px-2 py-0.5 text-[10px] tracking-wide">
           <span class="live-dot"></span>
           En vivo
         </span>
@@ -64,7 +64,7 @@ const extra = item.stack.length - stack.length;
         )}
       </ul>
     )}
-    <span class="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-ink px-3 py-1.5 text-[11px] font-medium text-paper">
+    <span class="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-ink/80 px-3 py-1.5 text-[11px] font-medium text-paper">
       Estudio de caso
       <AppIcon name="arrow-right" size={13} />
     </span>

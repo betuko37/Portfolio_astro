@@ -2,6 +2,7 @@
 import { profile, whatsappHref } from '../data/profile';
 import AppIcon from './AppIcon.astro';
 import type { IconName } from '../data/icons';
+import FoldText from './FoldText.jsx';
 
 const mailHref = `mailto:${profile.email}?subject=${encodeURIComponent('Contacto profesional — portafolio')}`;
 const whatsapp = profile.whatsapp ? whatsappHref(profile.whatsapp) : '';
@@ -20,7 +21,7 @@ if (whatsapp) {
 ---
 
 <section id="contacto" class="px-4 py-4 md:px-8 md:py-8">
-  <div class="tone-night mx-auto max-w-6xl overflow-hidden rounded-[1.5rem] px-5 py-8 md:rounded-[2rem] md:px-12 md:py-16" data-reveal>
+  <div class="tone-night mx-auto max-w-6xl overflow-hidden rounded-[1.5rem] px-5 py-8 md:rounded-[2rem] md:px-12 md:py-16">
     <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-12">
       <div>
         <p class="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-accent-soft md:text-sm">
@@ -28,7 +29,16 @@ if (whatsapp) {
           Contacto
         </p>
         <h2 class="mt-3 font-display text-3xl tracking-tight md:text-5xl">
-          Conversemos sobre <em class="italic text-accent-soft">su vacante</em>.
+          <FoldText
+            client:visible
+            text="Conversemos sobre su vacante."
+            splitBy="word"
+            hinge="top"
+            trigger="scroll"
+            color="currentColor"
+            fontSize="inherit"
+            fontWeight={700}
+          />
         </h2>
         <p class="mt-4 max-w-md text-sm text-mist">
           {profile.availability}
@@ -49,52 +59,131 @@ if (whatsapp) {
         </div>
       </div>
 
-      <form class="flex flex-col gap-4" action={mailHref} method="get">
+      <form class="contact-form flex flex-col gap-4" novalidate>
+        <label class="sr-only" for="contact-company">Empresa</label>
+        <input
+          class="hidden"
+          type="text"
+          id="contact-company"
+          name="company"
+          tabindex="-1"
+          autocomplete="off"
+        />
+
         <label class="text-sm text-mist">
           Nombre
           <input
-            class="mt-2 w-full rounded-2xl bg-night-soft px-4 py-3 text-on-dark outline-none placeholder:text-mist"
+            class="mt-2 w-full rounded-2xl bg-night-soft px-4 py-3 text-on-dark outline-none placeholder:text-mist focus:ring-2 focus:ring-accent/60"
             type="text"
             name="name"
             required
+            autocomplete="name"
             placeholder="Nombre completo"
           />
         </label>
+
+        <label class="text-sm text-mist">
+          Correo
+          <input
+            class="mt-2 w-full rounded-2xl bg-night-soft px-4 py-3 text-on-dark outline-none placeholder:text-mist focus:ring-2 focus:ring-accent/60"
+            type="email"
+            name="email"
+            required
+            autocomplete="email"
+            placeholder="correo@empresa.com"
+          />
+        </label>
+
         <label class="text-sm text-mist">
           Mensaje
           <textarea
-            class="mt-2 min-h-28 w-full rounded-2xl bg-night-soft px-4 py-3 text-on-dark outline-none placeholder:text-mist md:min-h-36"
-            name="body"
+            class="mt-2 min-h-28 w-full rounded-2xl bg-night-soft px-4 py-3 text-on-dark outline-none placeholder:text-mist focus:ring-2 focus:ring-accent/60 md:min-h-36"
+            name="message"
             required
             placeholder="Describa la vacante o el motivo de contacto"
           ></textarea>
         </label>
+
         <button
-          class="inline-flex items-center justify-center gap-2 rounded-full bg-accent-soft px-5 py-2.5 text-sm font-medium text-ink hover:bg-accent hover:text-on-dark"
+          class="contact-submit inline-flex items-center justify-center gap-2 rounded-full bg-accent-soft px-5 py-2.5 text-sm font-medium text-ink hover:bg-accent hover:text-on-dark disabled:cursor-not-allowed disabled:opacity-60"
           type="submit"
           data-magnetic
         >
           <AppIcon name="mail" size={16} />
-          Enviar correo
+          <span class="contact-submit-label">Enviar correo</span>
         </button>
-        <p class="text-xs text-mist">
-          El formulario abre el cliente de correo. No se almacena información en un servidor.
+
+        <p class="contact-feedback hidden text-sm" data-contact-feedback role="status" aria-live="polite"></p>
+
+        <p class="contact-note text-xs text-mist">
+          El mensaje se envía directamente a {profile.email}.
         </p>
       </form>
     </div>
   </div>
 </section>
 
-<script>
-  const form = document.querySelector<HTMLFormElement>('#contacto form');
-  form?.addEventListener('submit', (event) => {
+<script define:vars={{ mailHref }}>
+  const form = document.querySelector('.contact-form');
+  const submitBtn = form?.querySelector('.contact-submit');
+  const submitLabel = form?.querySelector('.contact-submit-label');
+  const feedback = form?.querySelector('[data-contact-feedback]');
+  const note = form?.querySelector('.contact-note');
+
+  const setFeedback = (message, tone) => {
+    if (!feedback) return;
+    feedback.textContent = message;
+    feedback.classList.remove('hidden', 'text-accent-soft', 'text-red-300');
+    feedback.classList.add(tone === 'ok' ? 'text-accent-soft' : 'text-red-300');
+  };
+
+  form?.addEventListener('submit', async (event) => {
     event.preventDefault();
+    if (!(form instanceof HTMLFormElement) || !submitBtn || !submitLabel) return;
+
     const data = new FormData(form);
-    const name = String(data.get('name') ?? '').trim();
-    const body = String(data.get('body') ?? '').trim();
-    const email = 'betorolitos37@gmail.com';
-    const subject = encodeURIComponent(`Contacto profesional — ${name}`);
-    const message = encodeURIComponent(body);
-    window.location.href = `mailto:${email}?subject=${subject}&body=${message}`;
+    const payload = {
+      name: String(data.get('name') ?? '').trim(),
+      email: String(data.get('email') ?? '').trim(),
+      message: String(data.get('message') ?? '').trim(),
+      company: String(data.get('company') ?? '').trim(),
+    };
+
+    submitBtn.setAttribute('disabled', 'true');
+    submitLabel.textContent = 'Enviando…';
+    feedback?.classList.add('hidden');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (response.ok && result.ok) {
+        form.reset();
+        setFeedback('Mensaje enviado. Le responderé pronto.', 'ok');
+        if (note) note.textContent = 'Gracias por escribir.';
+        return;
+      }
+
+      if (response.status === 503) {
+        const subject = encodeURIComponent(`Contacto profesional — ${payload.name}`);
+        const body = encodeURIComponent(
+          `Nombre: ${payload.name}\nCorreo: ${payload.email}\n\n${payload.message}`,
+        );
+        window.location.href = `${mailHref.split('?')[0]}?subject=${subject}&body=${body}`;
+        return;
+      }
+
+      setFeedback(result.error ?? 'No se pudo enviar el mensaje.', 'error');
+    } catch {
+      setFeedback('Error de red. Verifique su conexión e intente de nuevo.', 'error');
+    } finally {
+      submitBtn.removeAttribute('disabled');
+      submitLabel.textContent = 'Enviar correo';
+    }
   });
 </script>

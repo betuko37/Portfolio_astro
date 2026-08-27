@@ -3,11 +3,15 @@ import BrandIcon from './BrandIcon.astro';
 
 interface Props {
   items: readonly string[];
+  single?: boolean;
 }
 
-const { items } = Astro.props;
+const { items, single = false } = Astro.props;
 const loop = [...items, ...items];
 const reverseLoop = [...items].reverse().concat([...items].reverse());
+const shift = Math.max(1, Math.floor(items.length / 3));
+const shifted = [...items.slice(shift), ...items.slice(0, shift)];
+const thirdLoop = [...shifted, ...shifted];
 ---
 
 <div class="space-y-3">
@@ -21,14 +25,28 @@ const reverseLoop = [...items].reverse().concat([...items].reverse());
       ))}
     </div>
   </div>
-  <div class="marquee">
-    <div class="marquee-track reverse">
-      {reverseLoop.map((item) => (
-        <span class="inline-flex items-center gap-2 rounded-full bg-paper px-4 py-2 text-sm text-ink">
-          <BrandIcon label={item} size={15} />
-          {item}
-        </span>
-      ))}
-    </div>
-  </div>
+  {!single && (
+    <>
+      <div class="marquee">
+        <div class="marquee-track reverse">
+          {reverseLoop.map((item) => (
+            <span class="inline-flex items-center gap-2 rounded-full bg-paper px-4 py-2 text-sm text-ink">
+              <BrandIcon label={item} size={15} />
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+      <div class="marquee">
+        <div class="marquee-track slow">
+          {thirdLoop.map((item) => (
+            <span class="inline-flex items-center gap-2 rounded-full bg-paper px-4 py-2 text-sm text-ink">
+              <BrandIcon label={item} size={15} />
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+    </>
+  )}
 </div>

@@ -206,7 +206,7 @@ export function initHeroScene() {
   );
   io.observe(root);
 
-  const clock = new THREE.Clock();
+  const startedAt = performance.now();
   let raf = 0;
 
   const start = () => {
@@ -219,7 +219,7 @@ export function initHeroScene() {
       return;
     }
     running = true;
-    const t = clock.getElapsedTime();
+    const t = (performance.now() - startedAt) / 1000;
 
     if (!reduce) {
       group.rotation.y += (pointer.x * 0.35 - group.rotation.y) * 0.045;

@@ -2,6 +2,8 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import WavesBg from '../components/WavesBg.jsx';
+import ClickSparkLayer from '../components/ClickSparkLayer.jsx';
 import { profile } from '../data/profile';
 
 interface Props {
@@ -61,14 +63,17 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
   </head>
   <body class="space-root min-h-screen antialiased">
     <div class="progress" data-progress></div>
-    <div class="starfield" aria-hidden="true">
-      <canvas data-starfield></canvas>
+    <div class="waves-bg" aria-hidden="true">
+      <WavesBg client:load />
     </div>
     <div class="ambient" aria-hidden="true">
       <div class="orb orb-a" data-orb="a"></div>
       <div class="orb orb-b" data-orb="b"></div>
     </div>
     <div class="grain" aria-hidden="true"></div>
+    <div class="click-spark" aria-hidden="true">
+      <ClickSparkLayer client:load />
+    </div>
     <Header />
     <main class="site-main pt-16 sm:pt-24">
       <slot />
@@ -77,10 +82,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
     <script>
       import { initMotion } from '../scripts/motion';
       import { initTheme } from '../scripts/theme';
-      import { initStarfield } from '../scripts/starfield';
       initTheme();
       initMotion();
-      initStarfield();
     </script>
   </body>
 </html>

@@ -9,9 +9,22 @@ import vercel from '@astrojs/vercel';
 // https://astro.build/config
 export default defineConfig({
   integrations: [react()],
+  devToolbar: { enabled: false },
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    optimizeDeps: {
+      include: [
+        'react',
+        'react-dom',
+        'react-dom/client',
+        'three',
+        'ogl',
+        'motion/react',
+        'gsap',
+        'gsap/ScrollTrigger',
+      ],
+    },
   },
 
   adapter: vercel()

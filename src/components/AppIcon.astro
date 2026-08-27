@@ -77,6 +77,11 @@ import Workflow from '@lucide/astro/icons/workflow';
 import Zap from '@lucide/astro/icons/zap';
 import Sun from '@lucide/astro/icons/sun';
 import Moon from '@lucide/astro/icons/moon';
+import Maximize2 from '@lucide/astro/icons/maximize-2';
+import Minus from '@lucide/astro/icons/minus';
+import Plus from '@lucide/astro/icons/plus';
+import RotateCcw from '@lucide/astro/icons/rotate-ccw';
+import X from '@lucide/astro/icons/x';
 
 interface Props {
   name: IconName;
@@ -165,6 +170,11 @@ const icons = {
   terminal: Terminal,
   sun: Sun,
   moon: Moon,
+  'maximize-2': Maximize2,
+  minus: Minus,
+  plus: Plus,
+  'rotate-ccw': RotateCcw,
+  x: X,
 } as const;
 
 const Icon = icons[name as keyof typeof icons] ?? Cpu;

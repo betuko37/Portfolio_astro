@@ -31,12 +31,7 @@ const Tag = href ? 'a' : 'article';
         <AppIcon name={lab.icon} size={20} />
       </span>
       {lab.live && (
-        <span
-          class:list={[
-            'inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide',
-            'bg-accent text-white',
-          ]}
-        >
+        <span class="live-badge px-2 py-0.5 text-[10px] tracking-wide">
           <span class="live-dot"></span>
           En vivo
         </span>
@@ -49,7 +44,7 @@ const Tag = href ? 'a' : 'article';
     <h3 class="mt-1.5 font-display text-lg tracking-tight">{lab.title}</h3>
     <p class="mt-1.5 text-sm leading-relaxed opacity-85">{lab.tagline}</p>
   </div>
-  <p class="mt-4 inline-flex items-center gap-1.5 text-xs font-medium">
+  <p class="mt-4 inline-flex items-center gap-1.5 text-xs font-medium opacity-75">
     Ver estudio de caso
     {(lab.live || lab.github) && <AppIcon name="arrow-up-right" size={14} />}
   </p>

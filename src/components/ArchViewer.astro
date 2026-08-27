@@ -1,0 +1,587 @@
+---
+import type { ArchLayer } from './ArchLayers.astro';
+import AppIcon from './AppIcon.astro';
+import ArchDiagram from './ArchDiagram.astro';
+import ArchLayers from './ArchLayers.astro';
+
+interface Props {
+  layers?: ArchLayer[];
+  chart?: string;
+}
+
+const { layers, chart } = Astro.props;
+const hasChart = Boolean(chart);
+const hasLayers = Boolean(layers?.length);
+---
+
+<section class="arch-view text-center" data-arch-view>
+  <div class="arch-view-head">
+    <p class="inline-flex items-center justify-center gap-2 text-[11px] font-medium uppercase tracking-[0.16em] text-accent">
+      <AppIcon name="share-2" size={14} />
+      Arquitectura
+    </p>
+    <button
+      type="button"
+      class="arch-view-expand inline-flex items-center gap-1.5 rounded-full bg-sand px-3.5 py-2 text-xs font-medium text-ink hover:bg-accent-soft md:text-sm"
+      data-arch-expand
+    >
+      <AppIcon name="maximize-2" size={14} />
+      Pantalla completa
+    </button>
+  </div>
+
+  <div class="arch-view-stage" data-arch-stage>
+    {hasChart ? (
+      <ArchDiagram chart={chart!} />
+    ) : hasLayers ? (
+      <ArchLayers layers={layers!} />
+    ) : null}
+  </div>
+
+  <dialog class="arch-dialog" data-arch-dialog aria-label="Arquitectura en pantalla completa">
+    <div class="arch-dialog-panel">
+      <div class="arch-dialog-toolbar">
+        <p class="arch-dialog-title">Arquitectura</p>
+        <div class="arch-zoom-controls" data-arch-controls>
+          <button type="button" class="arch-zoom-btn" data-arch-zoom-out aria-label="Alejar">
+            <AppIcon name="minus" size={16} />
+          </button>
+          <span class="arch-zoom-value" data-arch-zoom-value>100%</span>
+          <button type="button" class="arch-zoom-btn" data-arch-zoom-in aria-label="Acercar">
+            <AppIcon name="plus" size={16} />
+          </button>
+          <button type="button" class="arch-zoom-btn" data-arch-zoom-reset aria-label="Restablecer vista">
+            <AppIcon name="rotate-ccw" size={16} />
+          </button>
+        </div>
+        <button type="button" class="arch-dialog-close" data-arch-close aria-label="Cerrar pantalla completa">
+          <AppIcon name="x" size={18} />
+        </button>
+      </div>
+      <div class="arch-dialog-body" data-arch-dialog-body>
+        <div class="arch-dialog-shell" data-arch-shell>
+          <div class="arch-viewport" data-arch-viewport>
+            <div class="arch-canvas" data-arch-canvas></div>
+          </div>
+          <p class="arch-viewport-hint">Arrastra para mover · Usa la rueda o los controles para zoom</p>
+        </div>
+      </div>
+    </div>
+  </dialog>
+</section>
+
+<style>
+  .arch-view-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .arch-view-stage {
+    display: flex;
+    justify-content: center;
+  }
+
+  .arch-dialog {
+    width: min(100vw, 100%);
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    overflow: hidden;
+    z-index: 100;
+  }
+
+  .arch-dialog::backdrop {
+    background: color-mix(in oklab, var(--color-night) 72%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    transition:
+      opacity 0.38s ease,
+      overlay 0.38s ease allow-discrete,
+      display 0.38s ease allow-discrete;
+  }
+
+  .arch-dialog[open]::backdrop {
+    opacity: 1;
+  }
+
+  @starting-style {
+    .arch-dialog[open]::backdrop {
+      opacity: 0;
+    }
+  }
+
+  .arch-dialog-panel {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100dvh;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    opacity: 0;
+    transform: scale(0.94) translateY(1rem);
+    transition:
+      opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .arch-dialog[open] .arch-dialog-panel {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  @starting-style {
+    .arch-dialog[open] .arch-dialog-panel {
+      opacity: 0;
+      transform: scale(0.94) translateY(1rem);
+    }
+  }
+
+  .arch-dialog.is-closing::backdrop {
+    opacity: 0;
+  }
+
+  .arch-dialog.is-closing .arch-dialog-panel {
+    opacity: 0;
+    transform: scale(0.97) translateY(0.5rem);
+    transition-duration: 0.24s;
+    transition-timing-function: ease-in;
+  }
+
+  .arch-dialog-shell {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+    width: 100%;
+  }
+
+  .arch-zoom-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.2rem;
+    border-radius: 999px;
+    background: var(--color-sand);
+  }
+
+  .arch-zoom-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-ink);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .arch-zoom-btn:hover {
+    background: var(--color-accent-soft);
+  }
+
+  .arch-zoom-value {
+    min-width: 3rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+    color: var(--color-muted);
+  }
+
+  .arch-viewport {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 12rem;
+    overflow: hidden;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+  }
+
+  .arch-viewport.is-dragging {
+    cursor: grabbing;
+  }
+
+  .arch-canvas {
+    display: block;
+    width: max-content;
+    max-width: none;
+    transform-origin: 0 0;
+    will-change: transform;
+  }
+
+  .arch-canvas :global(.mer-wrap) {
+    width: max-content !important;
+    max-width: none !important;
+    overflow: visible;
+  }
+
+  .arch-canvas :global(svg) {
+    display: block;
+    max-width: none !important;
+  }
+
+  .arch-canvas :global(.arch.is-large),
+  .arch-canvas :global(.arch) {
+    width: max-content;
+    max-width: none;
+  }
+
+  .arch-viewport-hint {
+    margin: 0;
+    padding: 0.65rem 1rem 0.85rem;
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--color-muted);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .arch-dialog::backdrop,
+    .arch-dialog-panel {
+      transition: none !important;
+      animation: none !important;
+    }
+
+    .arch-dialog-panel {
+      transform: none !important;
+    }
+
+    .arch-dialog[open]::backdrop,
+    .arch-dialog[open] .arch-dialog-panel {
+      opacity: 1;
+    }
+  }
+
+  .arch-dialog-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem 0.85rem 1.25rem;
+    border-bottom: 1px solid color-mix(in oklab, var(--color-mist) 45%, transparent);
+  }
+
+  .arch-dialog-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .arch-dialog-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 0;
+    border-radius: 999px;
+    background: var(--color-sand);
+    color: var(--color-ink);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .arch-dialog-close:hover {
+    background: var(--color-accent-soft);
+  }
+
+  .arch-dialog-body {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 0.75rem 0;
+  }
+
+  @media (max-width: 639px) {
+    .arch-dialog-toolbar {
+      flex-wrap: wrap;
+    }
+
+    .arch-zoom-controls {
+      order: 3;
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
+
+<script>
+  function initArchViewer(root: HTMLElement) {
+    const dialog = root.querySelector<HTMLDialogElement>('[data-arch-dialog]');
+    const openBtn = root.querySelector<HTMLButtonElement>('[data-arch-expand]');
+    const closeBtn = root.querySelector<HTMLButtonElement>('[data-arch-close]');
+    const viewport = root.querySelector<HTMLElement>('[data-arch-viewport]');
+    const canvas = root.querySelector<HTMLElement>('[data-arch-canvas]');
+    const zoomInBtn = root.querySelector<HTMLButtonElement>('[data-arch-zoom-in]');
+    const zoomOutBtn = root.querySelector<HTMLButtonElement>('[data-arch-zoom-out]');
+    const zoomResetBtn = root.querySelector<HTMLButtonElement>('[data-arch-zoom-reset]');
+    const zoomValue = root.querySelector<HTMLElement>('[data-arch-zoom-value]');
+    const stage = root.querySelector<HTMLElement>('[data-arch-stage]');
+    if (!dialog || !openBtn || !closeBtn || !viewport || !canvas || !zoomInBtn || !zoomOutBtn || !zoomResetBtn || !zoomValue) {
+      return;
+    }
+
+    let scrollY = 0;
+    let scale = 1;
+    let panX = 0;
+    let panY = 0;
+    let dragging = false;
+    let dragStartX = 0;
+    let dragStartY = 0;
+    let dragPanX = 0;
+    let dragPanY = 0;
+    let movedNode: Element | null = null;
+
+    const MIN_SCALE = 0.35;
+    const MAX_SCALE = 3.5;
+    const SCALE_STEP = 0.15;
+
+    const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+
+    const applyTransform = () => {
+      canvas.style.transform = `translate(${panX}px, ${panY}px) scale(${scale})`;
+      zoomValue.textContent = `${Math.round(scale * 100)}%`;
+    };
+
+    const centerView = () => {
+      const width = viewport.clientWidth;
+      const height = viewport.clientHeight;
+      const contentWidth = canvas.scrollWidth || canvas.offsetWidth;
+      const contentHeight = canvas.scrollHeight || canvas.offsetHeight;
+      panX = (width - contentWidth * scale) / 2;
+      panY = (height - contentHeight * scale) / 2;
+    };
+
+    const resetView = () => {
+      scale = 1;
+      centerView();
+      applyTransform();
+    };
+
+    const zoomAt = (clientX: number, clientY: number, nextScale: number) => {
+      const rect = viewport.getBoundingClientRect();
+      const px = clientX - rect.left;
+      const py = clientY - rect.top;
+      const contentX = (px - panX) / scale;
+      const contentY = (py - panY) / scale;
+      scale = clamp(nextScale, MIN_SCALE, MAX_SCALE);
+      panX = px - contentX * scale;
+      panY = py - contentY * scale;
+      applyTransform();
+    };
+
+    const zoomBy = (delta: number) => {
+      const rect = viewport.getBoundingClientRect();
+      zoomAt(rect.left + rect.width / 2, rect.top + rect.height / 2, scale + delta);
+    };
+
+    const waitForLayout = () =>
+      new Promise<void>((resolve) => {
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+      });
+
+    const waitForMermaid = async () => {
+      for (let attempt = 0; attempt < 30; attempt += 1) {
+        const mermaid = (window as Window & { mermaid?: { run: (opts?: { nodes?: Element[] }) => Promise<void> } }).mermaid;
+        if (mermaid) return mermaid;
+        await new Promise((resolve) => window.setTimeout(resolve, 50));
+      }
+      return null;
+    };
+
+    const ensureStageRendered = async () => {
+      if (!stage) return;
+      const mermaid = await waitForMermaid();
+      if (!mermaid) return;
+
+      const pending = Array.from(stage.querySelectorAll<HTMLElement>('.mermaid:not([data-processed])'));
+      if (pending.length) {
+        await mermaid.run({ nodes: pending });
+      }
+    };
+
+    const mountStageContent = () => {
+      if (!stage) return;
+      const content = stage.firstElementChild;
+      if (!content || canvas.contains(content)) return;
+      movedNode = content;
+      canvas.replaceChildren(content);
+    };
+
+    const fixCanvasDimensions = () => {
+      const svg = canvas.querySelector('svg');
+      const wrap = canvas.querySelector('.mer-wrap');
+      if (!(svg instanceof SVGSVGElement)) return;
+
+      const viewBox = svg.viewBox.baseVal;
+      const bbox = svg.getBBox();
+      const width = viewBox.width || bbox.width;
+      const height = viewBox.height || bbox.height;
+      if (width <= 0 || height <= 0) return;
+
+      if (wrap instanceof HTMLElement) {
+        wrap.classList.remove('w-full', 'max-w-3xl', 'max-w-6xl');
+        wrap.style.setProperty('width', `${width}px`, 'important');
+        wrap.style.setProperty('height', `${height}px`, 'important');
+        wrap.style.setProperty('max-width', 'none', 'important');
+        wrap.style.setProperty('overflow', 'visible', 'important');
+      }
+
+      svg.setAttribute('width', String(width));
+      svg.setAttribute('height', String(height));
+      svg.style.setProperty('width', `${width}px`, 'important');
+      svg.style.setProperty('height', `${height}px`, 'important');
+      svg.style.setProperty('max-width', 'none', 'important');
+
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+    };
+
+    const restoreStageContent = () => {
+      if (!stage || !movedNode) return;
+      const wrap = movedNode.querySelector('.mer-wrap');
+      const svg = movedNode.querySelector('svg');
+      if (wrap instanceof HTMLElement) {
+        wrap.classList.add('w-full', 'max-w-3xl');
+        wrap.style.removeProperty('width');
+        wrap.style.removeProperty('height');
+        wrap.style.removeProperty('max-width');
+        wrap.style.removeProperty('overflow');
+      }
+      if (svg instanceof SVGSVGElement) {
+        svg.removeAttribute('width');
+        svg.removeAttribute('height');
+        svg.style.removeProperty('width');
+        svg.style.removeProperty('height');
+        svg.style.removeProperty('max-width');
+      }
+      canvas.style.removeProperty('width');
+      canvas.style.removeProperty('height');
+      stage.appendChild(movedNode);
+      movedNode = null;
+    };
+
+    const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const CLOSE_MS = 240;
+
+    const unlockScroll = () => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      window.scrollTo(0, scrollY);
+    };
+
+    const open = async () => {
+      scrollY = window.scrollY;
+      dialog.classList.remove('is-closing');
+      await ensureStageRendered();
+      dialog.showModal();
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      mountStageContent();
+      await waitForLayout();
+      fixCanvasDimensions();
+      resetView();
+    };
+
+    const finishClose = () => {
+      dialog.classList.remove('is-closing');
+      restoreStageContent();
+      if (!dialog.open) {
+        unlockScroll();
+        return;
+      }
+      dialog.close();
+      resetView();
+      unlockScroll();
+    };
+
+    const close = () => {
+      if (!dialog.open || dialog.classList.contains('is-closing')) return;
+      if (reduceMotion()) {
+        finishClose();
+        return;
+      }
+      dialog.classList.add('is-closing');
+      window.setTimeout(finishClose, CLOSE_MS);
+    };
+
+    openBtn.addEventListener('click', () => {
+      void open();
+    });
+
+    closeBtn.addEventListener('click', close);
+
+    zoomInBtn.addEventListener('click', () => zoomBy(SCALE_STEP));
+    zoomOutBtn.addEventListener('click', () => zoomBy(-SCALE_STEP));
+    zoomResetBtn.addEventListener('click', resetView);
+
+    viewport.addEventListener(
+      'wheel',
+      (event) => {
+        event.preventDefault();
+        const delta = event.deltaY > 0 ? -SCALE_STEP : SCALE_STEP;
+        zoomAt(event.clientX, event.clientY, scale + delta);
+      },
+      { passive: false },
+    );
+
+    viewport.addEventListener('pointerdown', (event) => {
+      if (event.button !== 0) return;
+      dragging = true;
+      dragStartX = event.clientX;
+      dragStartY = event.clientY;
+      dragPanX = panX;
+      dragPanY = panY;
+      viewport.setPointerCapture(event.pointerId);
+      viewport.classList.add('is-dragging');
+    });
+
+    viewport.addEventListener('pointermove', (event) => {
+      if (!dragging) return;
+      panX = dragPanX + (event.clientX - dragStartX);
+      panY = dragPanY + (event.clientY - dragStartY);
+      applyTransform();
+    });
+
+    const stopDrag = (event: PointerEvent) => {
+      if (!dragging) return;
+      dragging = false;
+      viewport.classList.remove('is-dragging');
+      if (viewport.hasPointerCapture(event.pointerId)) {
+        viewport.releasePointerCapture(event.pointerId);
+      }
+    };
+
+    viewport.addEventListener('pointerup', stopDrag);
+    viewport.addEventListener('pointercancel', stopDrag);
+
+    dialog.addEventListener('cancel', (event) => {
+      event.preventDefault();
+      close();
+    });
+
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) close();
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-arch-view]').forEach(initArchViewer);
+</script>

@@ -10,9 +10,9 @@ interface Props {
 const { modules } = Astro.props;
 ---
 
-<div class="grid gap-4 md:grid-cols-2">
+<div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
   {modules.map((module) => (
-    <article class="rounded-[1.6rem] bg-sand p-6" data-reveal>
+    <article class="rounded-[1.5rem] bg-sand p-5 md:p-6" data-reveal>
       <span class="mb-3 inline-flex rounded-2xl bg-paper p-2.5 text-accent">
         <AppIcon name={iconForModule(module.name)} size={20} />
       </span>

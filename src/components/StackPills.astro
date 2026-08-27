@@ -14,7 +14,7 @@ const { items, tone = 'light' } = Astro.props;
     <li
       class:list={[
         'inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-sm',
-        tone === 'dark' ? 'bg-night-soft text-paper' : 'bg-sand text-ink',
+        tone === 'dark' ? 'bg-night-soft text-paper' : 'bg-paper text-ink',
       ]}
     >
       <BrandIcon label={item} size={15} />

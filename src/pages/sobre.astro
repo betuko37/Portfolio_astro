@@ -8,7 +8,8 @@ import ShowcaseBreak from '../components/ShowcaseBreak.astro';
 import MexicoFlag from '../components/MexicoFlag.astro';
 import { profile } from '../data/profile';
 import { focusIcons } from '../data/icons';
-import { profilePhoto } from '../data/media';
+import ProfilePhoto from '../components/ProfilePhoto.astro';
+import FoldText from '../components/FoldText.jsx';
 ---
 
 <Layout
@@ -21,23 +22,29 @@ import { profilePhoto } from '../data/media';
     </div>
 
     <div class="mx-auto grid max-w-6xl overflow-hidden rounded-[1.5rem] bg-sand md:grid-cols-[0.85fr_1.15fr] md:rounded-[2rem]" data-hero>
-      <div class="relative overflow-hidden bg-paper" data-hero-item>
-        <img
-          src={profilePhoto}
-          alt={profile.name}
-          class="aspect-[4/5] h-full max-h-80 w-full object-cover object-top md:max-h-none"
-        />
+      <div class="flex items-center justify-center bg-sand px-8 py-10 md:px-10 md:py-14" data-hero-item>
+        <ProfilePhoto class="w-full max-w-[18rem] md:max-w-[23rem]" />
       </div>
       <div class="flex flex-col justify-center px-5 py-8 md:px-10 md:py-14">
         <p class="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-accent md:text-sm" data-hero-item>
           <AppIcon name="user-round" size={14} />
           Sobre mí
         </p>
-        <h1 class="mt-3 font-display text-3xl tracking-tight md:text-5xl lg:text-6xl" data-hero-item>
-          {profile.fullName}
+        <h1 class="mt-3 font-display text-3xl tracking-tight md:text-5xl lg:text-6xl">
+          <FoldText
+            client:load
+            text={profile.fullName}
+            splitBy="word"
+            hinge="top"
+            trigger="mount"
+            color="currentColor"
+            fontSize="inherit"
+            fontWeight={700}
+          />
         </h1>
         <p class="mt-3 max-w-xl text-sm leading-relaxed text-muted md:text-lg" data-hero-item>
-          {profile.headline}
+          {profile.headlineLead}{' '}
+          <em class="italic text-accent">{profile.headlineAccent}</em>
         </p>
         <div class="mt-6 flex flex-wrap gap-2" data-hero-item>
           <span class="inline-flex items-center gap-2 rounded-full bg-paper px-3 py-1.5 text-xs text-ink md:text-sm">
@@ -68,7 +75,7 @@ import { profilePhoto } from '../data/media';
       <ShowcaseBreak
         kicker="Perfil"
         icon="user-round"
-        title="Ingeniero de software."
+        title="Productos complejos, no solo CRUDs."
         copy={profile.about.join(' ')}
       />
     </div>
@@ -78,7 +85,18 @@ import { profilePhoto } from '../data/media';
         <AppIcon name="briefcase" size={14} />
         Formación
       </p>
-      <h2 class="mt-2 font-display text-2xl tracking-tight md:text-4xl">Estudios e idioma.</h2>
+      <h2 class="mt-2 font-display text-2xl tracking-tight md:text-4xl">
+        <FoldText
+          client:visible
+          text="Estudios e idioma."
+          splitBy="word"
+          hinge="top"
+          trigger="scroll"
+          color="currentColor"
+          fontSize="inherit"
+          fontWeight={700}
+        />
+      </h2>
       <div class="mt-6 grid gap-3 md:grid-cols-3">
         {profile.education.map((item) => (
           <article class="overflow-hidden rounded-[1.4rem] bg-sand">

@@ -3,6 +3,12 @@ export type ProjectModule = {
   description: string;
 };
 
+export type ArchLayer = {
+  name: string;
+  items: string[];
+  lane?: "left" | "right";
+};
+
 export type ProjectLink = {
   label: string;
   href: string;
@@ -24,6 +30,7 @@ export type Project = {
   modules: ProjectModule[];
   howItWorks: string[];
   architecture: string;
+  architectureLayers?: ArchLayer[];
   related: string[];
   links: ProjectLink[];
 };
@@ -33,11 +40,11 @@ export const projects: Project[] = [
     slug: "jornalpro",
     title: "JornalPro Cloud",
     kicker: "Producto principal",
-    tagline: "ERP multiempresa: API, panel web, aplicación offline e integración de hardware.",
+    tagline: "ERP agrícola en producción: web, móvil, hardware NFC e IA operativa.",
     summary:
-      "Plataforma para productoras agrícolas en México. Integra backend en la nube, panel web y aplicación Android con operación sin conexión. Cubre jornales, asistencia por NFC y biometría, empaque, compras y SAT.",
+      "Producto privado de JornalPro. Tres superficies en paralelo: API en la nube, panel web PWA y aplicación Android offline-first. Cubre nómina semanal, asistencias y cuadrillas, tesorería, empaque, buzón SAT/CFDI y el asistente Joni por WhatsApp y chat web.",
     problem:
-      "En operación agrícola la conectividad es intermitente. El sistema debe registrar jornales semanales, asistencia mediante tarjeta o biometría, cierre de ciclos, facturación de embarques y control de costos. JornalPro concentra esa operación en una plataforma multiempresa.",
+      "No es un CRUD. El dominio exige jornales semanales, biometría y NFC, fiscal México, tesorería, empaque y un asistente operativo. La conectividad en campo es intermitente. JornalPro concentra esa operación en una plataforma multiempresa.",
     role: "Arquitectura y desarrollo de backend, interfaz web y aplicación móvil",
     year: "2024 — actualidad",
     featured: true,
@@ -55,63 +62,123 @@ export const projects: Project[] = [
       "NFC",
     ],
     highlights: [
-      "Tres superficies: API cloud, dashboard PWA y app de campo.",
-      "Multi-empresa y multi-ubicación, con roles por módulo.",
-      "NFC, biométricos HikCentral y cola offline en el mismo flujo de nómina.",
-      "Tesorería con buzón SAT, empaque/embarque y bot operativo por WhatsApp.",
+      "Tres productos en producción: ERP web, app de campo y tienda Shopify en paralelo.",
+      "Nómina semanal, asistencias, cuadrillas y cierre de semana.",
+      "Biometría HikCentral en caseta y persistencias NFC en campo.",
+      "Buzón SAT, descarga masiva CFDI y conciliación con tesorería.",
+      "Empaque, pallets, embarques, compras y almacén.",
+      "Joni: enrutador de IA en WhatsApp y chat web.",
+      "Tiempo real con Socket.IO: buzón SAT, notificaciones y persistencias.",
+      "JWT, 2FA y control de acceso por módulo en un entorno multiempresa.",
     ],
     modules: [
       {
-        name: "Backend cloud",
+        name: "Nómina semanal",
         description:
-          "API Express + Prisma. Autoregistro de rutas, JWT con 2FA, cron jobs, S3, WhatsApp y SAT.",
+          "Captura diaria, cuadrillas, temporadas, cierre de semana, TXT bancario, préstamos y conciliación.",
       },
       {
-        name: "Dashboard web",
+        name: "Asistencias y biometría",
         description:
-          "SPA React/MUI con seis apps lógicas: nómina, empaque, almacenes, tesorería, config y resultados.",
+          "HikCentral (facial) en caseta y NFC/QR en surco. Ambas fuentes alimentan el mismo ciclo de nómina.",
       },
       {
-        name: "App de campo",
+        name: "Tesorería y SAT",
         description:
-          "Flutter Android. Asistencias NFC/QR, captura de surcos con voz offline y alta de empleados.",
+          "Cajas, transferencias, plan de cuentas, buzón SAT y conciliación de CFDI.",
       },
       {
-        name: "NFC Service",
+        name: "Empaque y compras",
         description:
-          "Servicio local Node para lector ACR122U. El dashboard hace polling a localhost:47321.",
+          "Pallets, embarques, acarreos, requisiciones, órdenes y almacén.",
       },
       {
-        name: "betuko_offline_sync",
+        name: "Joni e IA operativa",
         description:
-          "Paquete Flutter publicado. Catálogos Hive + sync. Lo usa la app de JornalPro en producción.",
+          "Asistente multi-canal: WhatsApp y chat web sobre el mismo motor. Extracción de listas con visión.",
+      },
+      {
+        name: "Tiempo real y offline",
+        description:
+          "Socket.IO por ubicación. La app Flutter opera sin red y sincroniza con betuko_offline_sync.",
       },
     ],
     howItWorks: [
       "Cada empresa es un tenant. La ubicación (campo) viaja en X-Location-Id.",
-      "El dashboard administra catálogos, cierra semanas y reporta. La app registra en campo aunque no haya red.",
-      "Las persistencias NFC/GPS llegan al backend como captura diaria. Al reconectar, la cola Hive se envía en bulk.",
+      "El panel web administra catálogos, cierra semanas y reporta. La app registra en campo aunque no haya red.",
+      "Las persistencias NFC/GPS llegan al backend como captura diaria. Al reconectar, la cola Hive se envía en bloque.",
       "HikCentral cubre biométricos en caseta. NFC cubre el surco. Ambos alimentan el mismo ciclo de nómina.",
+      "Joni atiende WhatsApp y el chat del panel con el mismo enrutador.",
+      "Socket.IO emite persistencias, notificaciones y eventos del buzón SAT.",
     ],
-    architecture: `flowchart LR
-  subgraph cloud [JornalPro Cloud]
-    API[Backend Express Prisma]
-    Web[Dashboard React MUI]
-    App[App Flutter]
+    architecture: `flowchart TB
+  subgraph surfaces [Superficies]
+    Web[ERP Web PWA]
+    App[App de campo Flutter]
   end
-  NFC[nfc-service ACR122U]
-  Sync[betuko_offline_sync]
-  Hik[HikCentral]
-  SAT[Buzon SAT]
-  WA[WhatsApp Joni]
-  Web --> API
-  App --> API
+  subgraph api [JornalPro Cloud]
+    Express[Express Prisma PostgreSQL]
+    IO[Socket.IO]
+    Joni[Joni IA router]
+    Auth[JWT 2FA RBAC]
+  end
+  subgraph domain [Dominio]
+    Nomina[Nomina y cuadrillas]
+    Tes[Tesoreria y cajas]
+    Pack[Empaque y embarques]
+    SAT[Buzon SAT CFDI]
+  end
+  subgraph field [Campo y oficina]
+    Hik[HikCentral facial]
+    NFC[nfc-service ACR122U]
+    Sync[betuko_offline_sync]
+    WA[WhatsApp]
+  end
+  Web --> Auth
+  App --> Auth
+  Auth --> Express
+  Express --> Nomina
+  Express --> Tes
+  Express --> Pack
+  Express --> SAT
+  Express --> IO
+  Joni --> WA
+  Joni --> Web
+  Joni --> Express
+  Hik --> Express
   NFC --> Web
   NFC --> App
   Sync --> App
-  Hik --> API
-  SAT --> API
-  WA --> API`,
+  IO --> Web
+  IO --> SAT`,
+    architectureLayers: [
+      {
+        name: "Superficies",
+        items: ["ERP web PWA", "App Flutter de campo"],
+      },
+      {
+        name: "Panel web",
+        lane: "left",
+        items: ["Nómina", "Tesorería", "Empaque", "Almacenes", "Configuración", "Resultados"],
+      },
+      {
+        name: "App de campo",
+        lane: "right",
+        items: ["Asistencias NFC/QR", "Alta de empleados", "Captura de surcos", "Cajas"],
+      },
+      {
+        name: "Adaptadores",
+        items: ["nfc-service :47321", "nfc_manager", "betuko_offline_sync", "WorkManager"],
+      },
+      {
+        name: "API",
+        items: ["JWT / 2FA / RBAC", "processes/payroll", "treasury/sat-mailbox", "packing", "warehouses", "whatsapp", "mobile"],
+      },
+      {
+        name: "Servicios",
+        items: ["socket-gateway", "chatbot Joni", "hikcentral", "SAT CFDI"],
+      },
+    ],
     related: [
       "jornalpro-backend",
       "jornalpro-frontend",
@@ -154,10 +221,11 @@ export const projects: Project[] = [
       "xlsx",
     ],
     highlights: [
-      "126 controladores REST registrados por convención de carpetas.",
-      "182 modelos Prisma en schema modular (~136 archivos).",
-      "Auth: bcrypt, TOTP, OTP email, dispositivos de confianza y sesiones en BD.",
-      "Integraciones: HikCentral, WhatsApp Meta, SAT CFDI, S3, Puppeteer.",
+      "126 controladores REST y 182 modelos Prisma en un monolito modular.",
+      "Autenticación empresarial: JWT, 2FA, OTP y dispositivos de confianza.",
+      "Dominio: nómina, asistencias, tesorería, empaque, compras y SAT.",
+      "HikCentral, WhatsApp Meta, buzón SAT/CFDI y Socket.IO en vivo.",
+      "Joni: enrutador de IA para WhatsApp y el chat del panel.",
     ],
     modules: [
       {
@@ -210,16 +278,55 @@ export const projects: Project[] = [
       "Tras un cierre de semana, servicios de sync actualizan préstamos, tesorería y ledgers.",
     ],
     architecture: `flowchart TB
-  Client[Dashboard / App / WhatsApp] --> Express
-  Express --> Guards[JWT Role Module]
-  Guards --> Ctrl[Controllers por convencion]
+  subgraph clients [Clientes]
+    Web[Dashboard PWA]
+    App[App Flutter]
+    WA[WhatsApp]
+  end
+  Web --> Express
+  App --> Express
+  WA --> Joni[Joni IA router]
+  Joni --> Express
+  Express --> Auth[JWT 2FA Role Module]
+  Auth --> Ctrl[Controllers por convencion]
   Ctrl --> Prisma
   Prisma --> PG[(PostgreSQL)]
-  Express --> S3[AWS S3]
-  Express --> Cron[node-cron]
   Express --> IO[Socket.IO]
-  Cron --> SAT[SAT CFDI]
-  Cron --> WA[WhatsApp jobs]`,
+  Express --> Cron[node-cron]
+  Express --> S3[AWS S3]
+  Cron --> SAT[Buzon SAT CFDI]
+  Cron --> JobsWA[WhatsApp jobs]
+  Hik[HikCentral] --> Express
+  IO --> Web
+  IO --> SAT
+  Ctrl --> Nomina[Nomina]
+  Ctrl --> Tes[Tesoreria]
+  Ctrl --> Pack[Empaque]
+  Ctrl --> Buy[Compras]`,
+    architectureLayers: [
+      {
+        name: "Entrada",
+        items: ["Dashboard PWA", "App Flutter", "WhatsApp"],
+      },
+      {
+        name: "Auth",
+        items: ["JWT", "TOTP / 2FA", "RoleGuard", "ModuleGuard"],
+      },
+      {
+        name: "Rutas",
+        lane: "left",
+        items: ["admin", "processes/payroll", "treasury", "packing", "warehouses", "mobile", "whatsapp-*", "ai"],
+      },
+      {
+        name: "Servicios",
+        lane: "right",
+        items: ["payroll", "socket-gateway", "chatbot Joni", "hikcentral", "whatsapp", "sat-mailbox"],
+      },
+      {
+        name: "Datos",
+        items: ["Prisma", "PostgreSQL", "AWS S3", "node-cron"],
+      },
+    ],
     related: ["jornalpro", "jornalpro-frontend", "jornalpro-mobile"],
     links: [
       { label: "App en vivo", href: "https://app.ultechzone.online/login" },
@@ -229,9 +336,9 @@ export const projects: Project[] = [
     slug: "jornalpro-frontend",
     title: "JornalPro Frontend",
     kicker: "Estudio de caso",
-    tagline: "Panel empresarial: seis aplicaciones en una SPA con React y Material UI.",
+    tagline: "ERP web en producción: nómina, tesorería, empaque, SAT y Joni.",
     summary:
-      "jornalpro-cloud. React 18, Vite 6, Material UI 6, Zustand, React Router 7 y Zod. Más de 100 rutas de negocio, PWA, mapas Leaflet y Socket.IO bajo demanda.",
+      "Panel privado de JornalPro. React 18, Vite 6, Material UI 6, Zustand, React Router 7 y Zod. Más de 100 rutas de negocio, PWA, mapas Leaflet y Socket.IO. Cubre nómina semanal, asistencias, tesorería con buzón SAT, empaque y el chat de Joni.",
     problem:
       "Un capataz, un administrador de empaque y un tesorero no deben ver el mismo menú. La interfaz debe comportarse como varias aplicaciones sin perder una sola sesión ni el contexto de ubicación.",
     role: "Responsable de frontend / desarrollo full-stack",
@@ -254,10 +361,12 @@ export const projects: Project[] = [
       "Workbox PWA",
     ],
     highlights: [
-      "Shell multi-app: nómina, empaque, almacenes, tesorería, config, results.",
-      "Login multifactor: password, OTP email, TOTP y aprobación de dispositivo.",
-      "NFC de escritorio vía servicio local + Web NFC en Android.",
-      "Wizards pesados: alta de empleado, cuadrícula semanal v3 y cierre de semana.",
+      "Seis aplicaciones en una SPA: nómina, empaque, almacenes, tesorería, configuración y resultados.",
+      "Login multifactor: contraseña, OTP por correo, TOTP y aprobación de dispositivo.",
+      "NFC de escritorio (ACR122U) y Web NFC en Android, en el mismo flujo de alta.",
+      "Buzón SAT y conciliación fiscal en tesorería.",
+      "Joni en el panel: el mismo motor de IA que WhatsApp.",
+      "PWA para assets. Socket.IO en monitor, notificaciones y cobrowse.",
     ],
     modules: [
       {
@@ -299,14 +408,40 @@ export const projects: Project[] = [
       "Socket.IO se conecta solo en Monitor, cobrowse o Dev Panel.",
     ],
     architecture: `flowchart TB
-  Shell[Multi-app shell] --> Nomina[Nomina]
+  Shell[Shell multi-app PWA] --> Nomina[Nomina]
   Shell --> Empaque[Empaque]
   Shell --> Wh[Almacenes]
-  Shell --> Tes[Tesoreria]
-  Shell --> API[Axios + JWT + Location]
+  Shell --> Tes[Tesoreria y SAT]
+  Shell --> Joni[Chat Joni]
+  Shell --> Mon[Monitor Socket.IO]
+  Shell --> API[Axios JWT Location]
   API --> Cloud[Backend Cloud]
-  Shell --> NFC[localhost 47321]
-  Shell --> Maps[Leaflet MapDrawer]`,
+  Shell --> NFC[nfc-service 47321]
+  Shell --> WebNFC[Web NFC Android]
+  Shell --> Maps[Leaflet]
+  IO[Socket.IO] --> Mon
+  IO --> Tes
+  Joni --> Cloud`,
+    architectureLayers: [
+      {
+        name: "Shell",
+        items: ["Nómina", "Tesorería", "Empaque", "Almacenes", "Configuración", "Resultados"],
+      },
+      {
+        name: "Módulos",
+        items: ["Asistencias", "Alta de empleado", "Buzón SAT", "Chat Joni", "Monitor", "HikCentral"],
+      },
+      {
+        name: "Cliente",
+        lane: "left",
+        items: ["Axios + JWT", "X-Location-Id", "Zustand", "PWA Workbox"],
+      },
+      {
+        name: "Local",
+        lane: "right",
+        items: ["nfc-service :47321", "Web NFC", "Leaflet", "Socket.IO"],
+      },
+    ],
     related: ["jornalpro", "jornalpro-backend", "nfc-service"],
     links: [
       { label: "En vivo", href: "https://app.ultechzone.online/login" },
@@ -316,9 +451,9 @@ export const projects: Project[] = [
     slug: "jornalpro-mobile",
     title: "JornalPro Mobile",
     kicker: "Estudio de caso",
-    tagline: "Aplicación Flutter con operación sin conexión: NFC, cola en Hive y reconocimiento de voz en el dispositivo.",
+    tagline: "App de campo offline-first: NFC, QR, GPS y sincronización en segundo plano.",
     summary:
-      "Aplicación Android para capataces. Aproximadamente 104 mil líneas en Dart. Operación sin conexión con betuko_offline_sync, cola propia de asistencias, GPS obligatorio, QR de respaldo y reconocimiento de voz Sherpa-ONNX para destajo por surcos. Se distribuye como APK, sin URL pública; el registro fotográfico se presenta en esta ficha.",
+      "Aplicación privada de JornalPro para capataces. Flutter, Riverpod y WorkManager. Opera sin red con betuko_offline_sync y cola Hive. NFC, QR, geolocalización, alta de empleados y destajo por surcos con voz en el dispositivo. Se distribuye como APK.",
     problem:
       "En campo no hay red Wi-Fi estable. Es necesario escanear decenas de gafetes, conservar cada registro y enviarlo cuando exista conectividad; en su ausencia, la operación debe continuar.",
     role: "Responsable de mobile / desarrollo full-stack",
@@ -339,10 +474,12 @@ export const projects: Project[] = [
       "sherpa_onnx",
     ],
     highlights: [
-      "Asistencias NFC/QR con GPS y TTS de confirmación.",
-      "Cola Hive independiente + POST bulk a daily-capture.",
-      "Captura de surcos con dictado offline y speaker ID.",
-      "Alta de empleado en campo: foto, firma y entrega de tarjeta NFC.",
+      "Operación offline-first: se trabaja sin red y se sincroniza al recuperar conexión.",
+      "Asistencias NFC y QR con geolocalización y confirmación por voz.",
+      "Sincronización en segundo plano con WorkManager y cola Hive.",
+      "Alta de empleados en campo: foto, firma y entrega de tarjeta NFC.",
+      "Operaciones de campo: cuadrillas, destajo por surcos y captura diaria.",
+      "Paquete betuko_offline_sync en producción para catálogos.",
     ],
     modules: [
       {
@@ -384,16 +521,40 @@ export const projects: Project[] = [
       "Logout hace resetAll() y limpia config de background sync.",
     ],
     architecture: `flowchart TB
-  UI[Screens Riverpod] --> Managers[OnlineOfflineManager]
-  UI --> Queue[AttendanceManager Hive]
-  Managers --> Hive[(Hive catalogs)]
+  UI[Pantallas Riverpod] --> Sync[betuko_offline_sync]
+  UI --> Queue[Cola Hive asistencias]
+  UI --> Alta[Alta de empleados]
+  NFC[NFC y QR] --> UI
+  GPS[Geolocalizacion] --> UI
+  Voice[Sherpa-ONNX] --> Surcos[Destajo surcos]
+  Surcos --> UI
+  Sync --> Hive[(Catalogos Hive)]
   Queue --> HiveQ[(attendance_queue)]
-  Managers --> API[Backend /api]
+  WM[WorkManager] --> Sync
+  WM --> Queue
+  Sync --> API[Backend /api]
   Queue --> Bulk[daily-capture/bulk]
-  NFC[nfc_manager / QR] --> UI
-  Voice[Sherpa-ONNX] --> Surcos[Captura surcos]
-  WM[WorkManager] --> Managers
-  WM --> Queue`,
+  Alta --> API`,
+    architectureLayers: [
+      {
+        name: "Pantallas",
+        items: ["Asistencias", "Alta de empleado", "Captura de surcos", "Cajas"],
+      },
+      {
+        name: "Campo",
+        lane: "left",
+        items: ["NFC", "QR", "GPS", "Sherpa-ONNX"],
+      },
+      {
+        name: "Offline",
+        lane: "right",
+        items: ["betuko_offline_sync", "Cola Hive", "WorkManager", "connectivity_plus"],
+      },
+      {
+        name: "Nube",
+        items: ["Backend /api", "daily-capture/bulk"],
+      },
+    ],
     related: ["jornalpro", "jornalpro-backend", "offline-sync", "nfc-service"],
     links: [],
   },
@@ -473,6 +634,20 @@ export const projects: Project[] = [
   OOM --> Auto[Timer 10min + reconexion]
   BGS[BackgroundSyncService] --> WM[WorkManager]
   WM --> OOM`,
+    architectureLayers: [
+      {
+        name: "API pública",
+        items: ["get", "save", "syncAll"],
+      },
+      {
+        name: "Núcleo",
+        items: ["OnlineOfflineManager", "LocalStorage Hive", "SyncService", "ApiClient"],
+      },
+      {
+        name: "Red",
+        items: ["ConnectivityService", "Timer 10 min", "WorkManager 15 min"],
+      },
+    ],
     related: ["jornalpro-mobile", "jornalpro"],
     links: [
       { label: "pub.dev", href: "https://pub.dev/packages/betuko_offline_sync" },
@@ -503,10 +678,11 @@ export const projects: Project[] = [
       "ACR122U",
     ],
     highlights: [
-      "UID formateado 83:BF:6E:BE. Se limpia al leer o a los 5 segundos.",
-      "Reconexión con cooldown, detección de suspensión y restart manual.",
-      "Instalador macOS con Node LTS embebido y autoinicio launchd.",
-      "Integrado en NfcCardScanModal, entrega de tarjetas y lookup de empleado.",
+      "Puente REST entre el lector ACR122U y el panel web, en tiempo real.",
+      "UID formateado. Se limpia al leer o a los cinco segundos.",
+      "Reconexión con espera, detección de suspensión y reinicio manual.",
+      "Instalador para macOS con Node LTS embebido y autoinicio launchd.",
+      "Integrado en el alta de empleados, entrega de gafetes y búsqueda por tarjeta.",
     ],
     modules: [
       {
@@ -537,11 +713,33 @@ export const projects: Project[] = [
       "El front de JornalPro no empaqueta el binario en src/: el DMG vive en public/.",
     ],
     architecture: `flowchart LR
-  Reader[ACR122U] --> PCSC[nfc-pcsc]
-  PCSC --> Svc[Express :47321]
-  Svc --> Web[Dashboard React]
-  Svc --> Console[console.html]
-  Installer[DMG / EXE] --> Svc`,
+  Reader[ACR122U USB] --> PCSC[nfc-pcsc]
+  PCSC --> Svc[REST :47321]
+  Svc --> Web[Alta y gafetes]
+  Svc --> Lookup[Lookup empleado]
+  Svc --> Console[Consola web]
+  Installer[DMG EXE launchd] --> Svc
+  Web --> Cloud[JornalPro Cloud]`,
+    architectureLayers: [
+      {
+        name: "Hardware",
+        items: ["ACR122U", "PC/SC", "nfc-pcsc"],
+      },
+      {
+        name: "Servicio local",
+        items: ["REST :47321", "/last-card", "/status", "Consola web"],
+      },
+      {
+        name: "Clientes",
+        lane: "left",
+        items: ["Alta de empleado", "Entrega de gafetes", "Lookup"],
+      },
+      {
+        name: "Distribución",
+        lane: "right",
+        items: ["DMG macOS", "EXE Windows", "launchd"],
+      },
+    ],
     related: ["jornalpro-frontend", "jornalpro-mobile", "jornalpro"],
     links: [
       { label: "GitHub", href: "https://github.com/betuko37/nfc-service" },
@@ -574,10 +772,12 @@ export const projects: Project[] = [
       "Nodemailer",
     ],
     highlights: [
-      "Loader raíz con defer: layout crítico vs carrito/admin diferidos.",
-      "Cursor de tienda configurable (single o temporadas) vía metafield JSON.",
-      "isAdmin por ADMIN_EMAILS, avatar desde Customer Account API.",
-      "SEO JSON-LD (Organization, Product, Collection, Article) y Analytics Hydrogen.",
+      "Storefront Hydrogen en producción, publicado en Oxygen.",
+      "Storefront API, Admin API y Customer Account API.",
+      "Comercio headless: el checkout permanece en Shopify.",
+      "Loader raíz con defer: layout crítico frente a carrito y administración.",
+      "Cursor de temporada configurable mediante metafield JSON.",
+      "SEO JSON-LD y analítica de Hydrogen.",
     ],
     modules: [
       {
@@ -618,14 +818,30 @@ export const projects: Project[] = [
       "Oxygen sirve el storefront; el checkout sigue en el dominio Shopify.",
     ],
     architecture: `flowchart TB
-  Browser --> Remix[Remix + Hydrogen]
+  Browser --> Ox[Oxygen]
+  Ox --> Remix[Remix + Hydrogen]
   Remix --> SF[Storefront API]
   Remix --> CA[Customer Account API]
-  Remix --> Admin[Admin API cursor]
+  Remix --> Admin[Admin API]
   SF --> Shopify[(Shopify)]
+  Admin --> Shopify
   Remix --> Cloudinary
   Remix --> Mail[Nodemailer]
   Remix --> Checkout[Checkout Shopify]`,
+    architectureLayers: [
+      {
+        name: "Runtime",
+        items: ["Oxygen", "Remix", "Hydrogen"],
+      },
+      {
+        name: "Shopify",
+        items: ["Storefront API", "Admin API", "Customer Account API", "Checkout"],
+      },
+      {
+        name: "Media y correo",
+        items: ["Cloudinary", "Nodemailer"],
+      },
+    ],
     related: [],
     links: [
       { label: "En vivo", href: "https://itzcoleccionables.com/" },

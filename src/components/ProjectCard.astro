@@ -36,12 +36,7 @@ const phoneCover = project.slug.includes('mobile');
           )}
         </span>
         {live && (
-          <span
-            class:list={[
-              'inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium uppercase tracking-wide',
-              'bg-accent text-white',
-            ]}
-          >
+          <span class="live-badge px-2.5 py-1 text-[11px] tracking-wide">
             <span class="live-dot"></span>
             En vivo
           </span>
@@ -51,7 +46,7 @@ const phoneCover = project.slug.includes('mobile');
       <h3 class="mt-2 font-display text-xl tracking-tight md:text-3xl">{project.title}</h3>
       <p class="mt-2 max-w-xl text-sm leading-relaxed opacity-85 md:text-base">{project.tagline}</p>
     </div>
-    <p class="mt-5 inline-flex items-center gap-2 text-sm font-medium md:mt-8">
+    <p class="mt-5 inline-flex items-center gap-2 text-sm font-medium opacity-75 md:mt-8">
       Ver estudio de caso
       <span class="transition-transform duration-300 group-hover:translate-x-1">
         <AppIcon name="arrow-right" size={16} />

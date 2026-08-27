@@ -1,0 +1,345 @@
+---
+export type ArchLayer = {
+  name: string;
+  items: string[];
+  lane?: "left" | "right";
+};
+
+interface Props {
+  layers: ArchLayer[];
+  large?: boolean;
+}
+
+const { layers, large = false } = Astro.props;
+
+type Row = { layers: ArchLayer[] };
+
+const rows: Row[] = [];
+for (const layer of layers) {
+  const last = rows.at(-1);
+  if (
+    layer.lane &&
+    last?.layers.every((item) => item.lane) &&
+    last.layers.length < 2
+  ) {
+    last.layers.push(layer);
+  } else {
+    rows.push({ layers: [layer] });
+  }
+}
+
+function edgeAfter(index: number) {
+  if (index >= rows.length - 1) return null;
+  const current = rows[index].layers.length > 1;
+  const next = rows[index + 1].layers.length > 1;
+  if (!current && next) return "fork";
+  if (current && !next) return "merge";
+  return "down";
+}
+---
+
+<figure class:list={["arch", large && "is-large"]} aria-label="Diagrama de arquitectura">
+  {rows.map((row, index) => {
+    const edge = edgeAfter(index);
+    const isFirst = index === 0;
+    const isLast = index === rows.length - 1;
+    return (
+      <>
+        <div
+          class:list={[
+            "arch-row",
+            row.layers.length > 1 && "is-split",
+            isFirst && "is-first",
+            isLast && "is-last",
+          ]}
+        >
+          {row.layers.map((layer) => (
+            <div class="arch-box">
+              <h3 class="arch-title">{layer.name}</h3>
+              <div class="arch-nodes">
+                {layer.items.map((item) => (
+                  <span class="arch-node">{item}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+        {edge && (
+          <div class:list={["arch-edge", `is-${edge}`]} aria-hidden="true">
+            {edge === "down" && (
+              <>
+                <span class="arch-stem"></span>
+                <span class="arch-caret"></span>
+              </>
+            )}
+            {edge === "fork" && (
+              <>
+                <span class="arch-stem"></span>
+                <span class="arch-rail"></span>
+                <span class="arch-leg is-left"></span>
+                <span class="arch-leg is-right"></span>
+                <span class="arch-caret is-left"></span>
+                <span class="arch-caret is-right"></span>
+              </>
+            )}
+            {edge === "merge" && (
+              <>
+                <span class="arch-leg is-left is-up"></span>
+                <span class="arch-leg is-right is-up"></span>
+                <span class="arch-rail is-low"></span>
+                <span class="arch-stem is-low"></span>
+                <span class="arch-caret"></span>
+              </>
+            )}
+          </div>
+        )}
+      </>
+    );
+  })}
+</figure>
+
+<style>
+  .arch {
+    --line: color-mix(in oklab, var(--color-accent) 70%, transparent);
+    --box: color-mix(in oklab, var(--color-accent) 38%, var(--color-mist));
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: min(40rem, 100%);
+    margin-inline: auto;
+  }
+
+  .arch.is-large {
+    width: min(56rem, 100%);
+  }
+
+  .arch.is-large .arch-box {
+    max-width: 28rem;
+    padding: 1.75rem 1.15rem 1.25rem;
+    border-radius: 1.15rem;
+  }
+
+  .arch.is-large .arch-title {
+    font-size: 1.15rem;
+  }
+
+  .arch.is-large .arch-node {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  .arch.is-large .arch-edge {
+    height: 3rem;
+  }
+
+  .arch-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .arch-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 22rem;
+    padding: 1.35rem 0.9rem 0.95rem;
+    border: 1.5px solid var(--box);
+    border-radius: 1rem;
+    background: transparent;
+    text-align: center;
+  }
+
+  .arch-box::before,
+  .arch-box::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    border: 1.5px solid var(--line);
+    border-radius: 50%;
+    background: var(--color-paper);
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+
+  .arch-box::before {
+    top: -5px;
+  }
+
+  .arch-box::after {
+    bottom: -5px;
+  }
+
+  .is-first .arch-box::before,
+  .is-last .arch-box::after {
+    display: none;
+  }
+
+  .arch-title {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin: 0;
+    padding: 0 0.55rem;
+    background: var(--color-paper);
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    color: var(--color-ink);
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+  }
+
+  .arch-nodes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.35rem;
+  }
+
+  .arch-node {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    background: var(--color-sand);
+    padding: 0.3rem 0.7rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--color-ink);
+  }
+
+  .arch-edge {
+    position: relative;
+    height: 2.4rem;
+  }
+
+  .arch-stem,
+  .arch-rail,
+  .arch-leg {
+    position: absolute;
+    background: var(--line);
+  }
+
+  .arch-stem {
+    left: 50%;
+    top: 0;
+    width: 1.5px;
+    height: calc(100% - 7px);
+    transform: translateX(-50%);
+  }
+
+  .arch-stem.is-low {
+    top: auto;
+    bottom: 7px;
+    height: 0.7rem;
+  }
+
+  .arch-rail {
+    top: 0.55rem;
+    left: 25%;
+    width: 50%;
+    height: 1.5px;
+  }
+
+  .arch-rail.is-low {
+    top: auto;
+    bottom: 0.85rem;
+  }
+
+  .arch-leg {
+    top: 0.55rem;
+    width: 1.5px;
+    height: calc(100% - 0.95rem);
+  }
+
+  .arch-leg.is-left {
+    left: 25%;
+  }
+
+  .arch-leg.is-right {
+    left: 75%;
+    right: auto;
+  }
+
+  .arch-leg.is-up {
+    top: 0;
+    height: calc(100% - 0.85rem);
+  }
+
+  .arch-caret {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 7px solid var(--line);
+    transform: translateX(-50%);
+  }
+
+  .arch-caret.is-left {
+    left: 25%;
+  }
+
+  .arch-caret.is-right {
+    left: 75%;
+    right: auto;
+  }
+
+  .is-fork .arch-stem {
+    height: 0.55rem;
+  }
+
+  @media (min-width: 640px) {
+    .arch-row.is-split {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      align-items: stretch;
+    }
+
+    .arch-row.is-split .arch-box {
+      max-width: none;
+      height: 100%;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .arch-edge.is-fork,
+    .arch-edge.is-merge {
+      height: 1.6rem;
+    }
+
+    .arch-edge.is-fork .arch-rail,
+    .arch-edge.is-fork .arch-leg,
+    .arch-edge.is-fork .arch-caret.is-left,
+    .arch-edge.is-fork .arch-caret.is-right,
+    .arch-edge.is-merge .arch-rail,
+    .arch-edge.is-merge .arch-leg {
+      display: none;
+    }
+
+    .arch-edge.is-fork .arch-stem,
+    .arch-edge.is-merge .arch-stem {
+      left: 50%;
+      top: 0;
+      height: calc(100% - 7px);
+      transform: translateX(-50%);
+    }
+
+    .arch-edge.is-fork .arch-caret,
+    .arch-edge.is-merge .arch-caret {
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+      display: block;
+    }
+  }
+</style>

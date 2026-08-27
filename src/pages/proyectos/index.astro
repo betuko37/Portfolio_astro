@@ -4,6 +4,7 @@ import ShowcaseCard from '../../components/ShowcaseCard.astro';
 import BackLink from '../../components/BackLink.astro';
 import AppIcon from '../../components/AppIcon.astro';
 import { showcase, showcaseSections } from '../../data/showcase';
+import FoldText from '../../components/FoldText.jsx';
 ---
 
 <Layout
@@ -20,7 +21,16 @@ import { showcase, showcaseSections } from '../../data/showcase';
         Proyectos
       </p>
       <h1 class="mt-2 font-display text-3xl tracking-tight md:text-5xl" data-catalog-title>
-        Todos los proyectos
+        <FoldText
+          client:load
+          text="Todos los proyectos"
+          splitBy="word"
+          hinge="top"
+          trigger="mount"
+          color="currentColor"
+          fontSize="inherit"
+          fontWeight={700}
+        />
       </h1>
       <p class="mt-3 max-w-xl text-sm text-muted md:text-base" data-catalog-copy>
         Estudios de caso, demostraciones en línea, repositorios públicos y prácticas profesionales.

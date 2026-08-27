@@ -92,11 +92,11 @@ export const stackIcons: Record<string, IconName> = {
 };
 
 export const focusIcons: { label: string; icon: IconName }[] = [
-  { label: "Desarrollo de extremo a extremo", icon: "layers" },
-  { label: "Arquitectura offline-first", icon: "wifi-off" },
-  { label: "Sistemas multiempresa", icon: "building-2" },
-  { label: "Integración de hardware NFC", icon: "nfc" },
-  { label: "Paneles de control y comercio electrónico", icon: "layout-dashboard" },
+  { label: "Productos de dominio complejo", icon: "layers" },
+  { label: "Tres productos en producción", icon: "building-2" },
+  { label: "Offline-first y tiempo real", icon: "wifi-off" },
+  { label: "NFC y biometría", icon: "nfc" },
+  { label: "Fiscal México y tesorería", icon: "wallet" },
 ];
 
 export type IconName =
@@ -180,7 +180,12 @@ export type IconName =
   | "waypoints"
   | "terminal"
   | "sun"
-  | "moon";
+  | "moon"
+  | "maximize-2"
+  | "minus"
+  | "plus"
+  | "rotate-ccw"
+  | "x";
 
 export function iconForStack(label: string): IconName {
   return stackIcons[label] ?? "cpu";
@@ -211,5 +216,14 @@ export function iconForModule(name: string): IconName {
   if (value.includes("motion") || value.includes("tema")) return "sparkles";
   if (value.includes("trabajo") || value.includes("cola")) return "workflow";
   if (value.includes("alta") || value.includes("credencial")) return "fingerprint";
+  if (value.includes("superficie") || value.includes("módulo") || value.includes("modulo")) return "layers";
+  if (value.includes("panel") || value.includes("shell") || value.includes("pantalla")) return "layout-dashboard";
+  if (value.includes("adaptador") || value.includes("cliente") || value.includes("red")) return "unplug";
+  if (value.includes("servicio") || value.includes("núcleo") || value.includes("nucleo") || value.includes("runtime")) return "cpu";
+  if (value.includes("entrada") || value.includes("ruta")) return "route";
+  if (value.includes("dato") || value.includes("local")) return "database";
+  if (value.includes("campo") || value.includes("hardware")) return "nfc";
+  if (value.includes("nube") || value.includes("shopify")) return "cloud";
+  if (value.includes("media") || value.includes("correo")) return "image";
   return "layers";
 }

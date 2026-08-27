@@ -1,0 +1,18 @@
+---
+import { profile } from '../data/profile';
+import { profilePhoto } from '../data/media';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class:list={['photo-disk', className]}>
+  <img
+    src={profilePhoto}
+    alt={profile.name}
+    class="h-full w-full object-cover object-[center_18%]"
+  />
+</div>

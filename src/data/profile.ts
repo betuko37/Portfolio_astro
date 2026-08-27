@@ -2,13 +2,15 @@ export const profile = {
   name: "Jesús Zavala",
   fullName: "Jesús Alberto Zavala",
   handle: "betuko37",
-  role: "Desarrollador full-stack, mobile",
-  headline: "Desarrollo sistemas de software: backend, web, móviles y hardware.",
+  role: "Desarrollador full-stack",
+  headline: "Productos complejos en producción: ERP, móviles y comercio electrónico.",
+  headlineLead: "Productos complejos en producción:",
+  headlineAccent: "ERP, móviles y comercio electrónico.",
   summary:
-    "Ingeniero de software. Diseño y desarrollo aplicaciones de extremo a extremo: API, interfaz web y aplicación móvil. Integro hardware cuando el producto lo requiere.",
+    "Desarrollador full-stack enfocado en productos complejos, no solo CRUDs. Diseño y desarrollo API, interfaz web, aplicación móvil e integración de hardware.",
   about: [
-    "Egresado de Ingeniería en Software. Me formé en desarrollo web, aplicaciones móviles, backends e integración de hardware. Trabajo principalmente con TypeScript, React y Flutter, y me adapto al stack que el proyecto requiera.",
-    "Me interesa el software que opera en entornos reales. Busco un equipo donde pueda contribuir en más de una capa del producto.",
+    "Resuelvo problemas de dominio difícil: nómina agrícola, biometría, fiscal México, tesorería, empaque, comercio electrónico e IA operativa.",
+    "Mantengo tres productos en producción en paralelo: el ERP web JornalPro (privado), la aplicación de campo y una tienda Shopify headless. El código del ERP vive en repositorios privados de JornalPro; NFC Service y betuko_offline_sync son públicos.",
   ],
   education: [
     {
@@ -49,11 +51,11 @@ export const profile = {
   pubdev: "https://pub.dev/packages/betuko_offline_sync",
   availability: "Disponible para oportunidades en desarrollo full-stack, backend o aplicaciones móviles.",
   focus: [
-    "Desarrollo de extremo a extremo",
-    "Arquitectura offline-first",
-    "Sistemas multiempresa",
-    "Integración de hardware NFC",
-    "Paneles de control y comercio electrónico",
+    "Productos de dominio complejo",
+    "Tres productos en producción",
+    "Offline-first y tiempo real",
+    "NFC y biometría",
+    "Fiscal México y tesorería",
   ],
   stack: [
     "TypeScript",

@@ -1,5 +1,7 @@
 ---
 import { getShowcase, showcaseSections } from '../data/showcase';
+import { getProject } from '../data/projects';
+import { getProjectLogo } from '../data/media';
 import { profile } from '../data/profile';
 import ShowcaseRail from './ShowcaseRail.astro';
 import ShowcaseBreak from './ShowcaseBreak.astro';
@@ -9,6 +11,24 @@ import AppIcon from './AppIcon.astro';
 const live = showcaseSections.find((section) => section.id === 'live')!;
 const github = showcaseSections.find((section) => section.id === 'github')!;
 const practices = showcaseSections.find((section) => section.id === 'cv')!;
+
+const operating = [
+  { slug: 'jornalpro', label: 'ERP web' },
+  { slug: 'jornalpro-mobile', label: 'App de campo' },
+  { slug: 'tienda-ivan', label: 'Shopify' },
+].flatMap((item) => {
+  const project = getProject(item.slug);
+  if (!project) return [];
+  return [
+    {
+      slug: item.slug,
+      label: item.label,
+      title: project.title,
+      href: `/proyectos/${item.slug}`,
+      logo: getProjectLogo(item.slug),
+    },
+  ];
+});
 ---
 
 <section id="proyectos" class="px-4 py-10 md:px-8 md:py-20">
@@ -17,8 +37,37 @@ const practices = showcaseSections.find((section) => section.id === 'cv')!;
       kicker="Proyectos"
       icon="folder-kanban"
       title="Producto en operación."
-      copy="Sistemas que se usan hoy: ERP agrícola, tienda en línea y una biblioteca Flutter publicada."
-    />
+      copy="Tres productos en producción: ERP web JornalPro, aplicación de campo y tienda Shopify. NFC Service y betuko_offline_sync son públicos."
+    >
+      <a
+        slot="action"
+        href="#live"
+        class="inline-flex items-center gap-1.5 rounded-full bg-ink px-3.5 py-2 text-xs font-medium text-paper no-underline md:text-sm"
+      >
+        Ver productos
+        <AppIcon name="arrow-right" size={14} />
+      </a>
+      <div class="flex flex-wrap items-center gap-3">
+        {operating.map((item) => (
+          <a
+            href={item.href}
+            class="flex items-center gap-3 rounded-[1.2rem] bg-paper px-4 py-3 text-ink no-underline"
+          >
+            <span class="inline-flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl bg-sand p-1.5">
+              {item.logo ? (
+                <img src={item.logo} alt="" class="h-full w-full object-contain" />
+              ) : (
+                <AppIcon name="layers" size={20} />
+              )}
+            </span>
+            <div>
+              <p class="text-sm font-medium">{item.title}</p>
+              <p class="text-xs text-muted">{item.label}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </ShowcaseBreak>
 
     <ShowcaseRail
       id={live.id}

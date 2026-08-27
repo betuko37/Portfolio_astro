@@ -2,13 +2,13 @@
 import { profile } from '../data/profile';
 import AppIcon from './AppIcon.astro';
 import MexicoFlag from './MexicoFlag.astro';
-
-const words = profile.headline.split(' ');
-const punchFrom = 4;
+import ProfilePhoto from './ProfilePhoto.astro';
+import TrueFocus from './TrueFocus.jsx';
+import FoldText from './FoldText.jsx';
 ---
 
-<section class="px-4 pb-8 pt-4 md:px-8 md:pb-14 md:pt-8">
-  <div class="mx-auto grid max-w-6xl items-center gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12" data-hero>
+<section class="overflow-visible px-4 pb-8 pt-4 md:px-8 md:pb-14 md:pt-8">
+  <div class="mx-auto grid max-w-6xl items-center gap-8 overflow-visible lg:grid-cols-[1.15fr_0.85fr] lg:gap-12" data-hero>
     <div>
       <p
         class="inline-flex max-w-full flex-wrap items-center gap-2 rounded-full bg-sand px-3 py-1.5 text-xs font-medium sm:text-sm"
@@ -21,14 +21,47 @@ const punchFrom = 4;
       </p>
 
       <h1 class="mt-4 max-w-4xl font-display text-[1.5rem] leading-[1.2] sm:text-3xl md:mt-6 md:text-5xl lg:text-6xl">
-        {words.map((word, index) => (
-          <span class="split-word">
-            <span class:list={['split-inner', index >= punchFrom && 'italic text-accent']}>
-              {word}
-            </span>
-          </span>
-        ))}
+        <FoldText
+          client:load
+          text={profile.headlineLead}
+          splitBy="word"
+          hinge="top"
+          trigger="mount"
+          duration={0.65}
+          stagger={0.045}
+          color="currentColor"
+          fontSize="inherit"
+          fontWeight={700}
+        />
+        {' '}
+        <em class="italic text-accent" data-headline-accent>
+          <FoldText
+            client:load
+            text={profile.headlineAccent}
+            splitBy="word"
+            hinge="top"
+            trigger="mount"
+            duration={0.65}
+            stagger={0.045}
+            color="var(--color-accent)"
+            fontSize="inherit"
+            fontWeight={700}
+          />
+        </em>
       </h1>
+
+      <div class="mt-4 md:mt-6">
+        <TrueFocus
+          client:visible
+          sentence="Frontend Backend Mobile"
+          blurAmount={4}
+          borderColor="var(--color-accent)"
+          glowColor="color-mix(in oklab, var(--color-accent) 55%, transparent)"
+          animationDuration={0.55}
+          pauseBetweenAnimations={1.15}
+          className="hero-focus"
+        />
+      </div>
 
       <p class="mt-4 max-w-xl text-sm leading-relaxed text-muted md:mt-6 md:text-base lg:text-lg" data-hero-item>
         {profile.summary}
@@ -54,20 +87,13 @@ const punchFrom = 4;
       </div>
     </div>
 
-    <div
-      class="relative min-h-[260px] overflow-hidden rounded-[1.5rem] border border-white/10 bg-sand md:min-h-[360px] md:rounded-[2rem] lg:min-h-[440px]"
-      data-hero-stage
-      data-hero-icon
-    >
-      <canvas class="absolute inset-0 h-full w-full" data-hero-canvas aria-hidden="true"></canvas>
-      <p class="pointer-events-none absolute inset-x-0 bottom-4 text-center text-[10px] font-medium uppercase tracking-[0.16em] text-mist/80 sm:bottom-5 sm:text-xs">
-        Ingeniero de software
-      </p>
+    <div class="relative z-20 flex items-center justify-center overflow-visible py-3 lg:justify-end" data-hero-item>
+      <div class="relative z-20 aspect-square w-[min(100%,23rem)] shrink-0 overflow-visible md:w-[28rem]" data-photo-orbit>
+        <div class="photo-ring" aria-hidden="true">
+          <div class="photo-ring__spin"></div>
+        </div>
+        <ProfilePhoto class="relative z-[1] w-full" />
+      </div>
     </div>
   </div>
 </section>
-
-<script>
-  import { initHeroScene } from '../scripts/heroScene';
-  initHeroScene();
-</script>
