@@ -1,6 +1,5 @@
 import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 
 export type GalleryImage = {
   src: string;
@@ -14,7 +13,7 @@ export type ProjectGallery = {
   images: GalleryImage[];
 };
 
-const publicDir = fileURLToPath(new URL("../../public", import.meta.url));
+const publicDir = path.join(process.cwd(), "public");
 
 const IMAGE_EXT = new Set([".png", ".jpg", ".jpeg", ".webp", ".gif", ".avif"]);
 
