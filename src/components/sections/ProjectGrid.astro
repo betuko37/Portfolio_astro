@@ -47,7 +47,7 @@ const operating = [
         Ver productos
         <AppIcon name="arrow-right" size={14} />
       </a>
-      <div class="flex flex-wrap items-center gap-3">
+      <div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
         {operating.map((item) => (
           <a
             href={item.href}
@@ -107,7 +107,7 @@ const operating = [
         Ver formación
         <AppIcon name="arrow-right" size={14} />
       </a>
-      <div class="flex flex-wrap items-center gap-3">
+      <div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
         {profile.education.map((item) => (
           <article class="flex items-center gap-3 rounded-[1.2rem] bg-paper px-4 py-3 text-ink">
             <span

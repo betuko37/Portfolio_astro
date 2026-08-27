@@ -7,20 +7,36 @@ import TrueFocus from '@components/effects/true-focus/TrueFocus.jsx';
 import FoldText from '@components/effects/fold-text/FoldText.jsx';
 ---
 
-<section class="overflow-visible px-4 pb-8 pt-4 md:px-8 md:pb-14 md:pt-8">
-  <div class="mx-auto grid max-w-6xl items-center gap-8 overflow-visible lg:grid-cols-[1.15fr_0.85fr] lg:gap-12" data-hero>
-    <div>
-      <p
-        class="inline-flex max-w-full flex-wrap items-center gap-2 rounded-full bg-sand px-3 py-1.5 text-xs font-medium sm:text-sm"
-        data-hero-item
-      >
-        <MexicoFlag />
-        <span>{profile.role}</span>
-        <span class="text-muted">·</span>
-        <span class="text-muted">{profile.location}</span>
-      </p>
+<section class="overflow-x-clip px-4 pb-6 pt-3 md:px-8 md:pb-14 md:pt-8">
+  <div
+    class="mx-auto grid max-w-6xl items-center gap-4 md:gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12"
+    data-hero
+  >
+    <div class="contents lg:order-1 lg:flex lg:flex-col lg:items-start">
+    <p
+      class="order-1 mx-auto inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full bg-sand px-3 py-1.5 text-xs font-medium sm:text-sm lg:mx-0"
+      data-hero-item
+    >
+      <MexicoFlag />
+      <span>{profile.role}</span>
+      <span class="text-muted">·</span>
+      <span class="text-muted">{profile.location}</span>
+    </p>
 
-      <h1 class="mt-4 max-w-4xl font-display text-[1.5rem] leading-[1.2] sm:text-3xl md:mt-6 md:text-5xl lg:text-6xl">
+    <div class="order-2 flex justify-center lg:hidden" data-hero-item>
+      <div
+        class="photo-orbit relative aspect-square w-[9.5rem] shrink-0 sm:w-[13rem] md:w-[20rem]"
+        data-photo-orbit
+      >
+        <div class="photo-ring" aria-hidden="true">
+          <div class="photo-ring__spin"></div>
+        </div>
+        <ProfilePhoto class="relative z-[1] w-full" />
+      </div>
+    </div>
+
+    <div class="order-3 text-center lg:mt-4 lg:text-left">
+      <h1 class="mx-auto max-w-4xl font-display text-[1.55rem] leading-[1.2] sm:text-3xl md:text-5xl lg:mx-0 lg:text-6xl">
         <FoldText
           client:load
           text={profile.headlineLead}
@@ -50,7 +66,7 @@ import FoldText from '@components/effects/fold-text/FoldText.jsx';
         </em>
       </h1>
 
-      <div class="mt-4 md:mt-6">
+      <div class="mt-4 flex justify-center md:mt-6 lg:justify-start">
         <TrueFocus
           client:visible
           sentence="Frontend Backend Mobile"
@@ -63,11 +79,11 @@ import FoldText from '@components/effects/fold-text/FoldText.jsx';
         />
       </div>
 
-      <p class="mt-4 max-w-xl text-sm leading-relaxed text-muted md:mt-6 md:text-base lg:text-lg" data-hero-item>
+      <p class="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-muted md:mt-6 md:text-base lg:mx-0 lg:text-lg" data-hero-item>
         {profile.summary}
       </p>
 
-      <div class="mt-6 flex flex-wrap gap-2.5 md:mt-8" data-hero-item>
+      <div class="mt-6 flex flex-wrap justify-center gap-2.5 md:mt-8 lg:justify-start" data-hero-item>
         <a
           href="#proyectos"
           data-magnetic
@@ -86,9 +102,13 @@ import FoldText from '@components/effects/fold-text/FoldText.jsx';
         </a>
       </div>
     </div>
+    </div>
 
-    <div class="relative z-20 flex items-center justify-center overflow-visible py-3 lg:justify-end" data-hero-item>
-      <div class="relative z-20 aspect-square w-[min(100%,23rem)] shrink-0 overflow-visible md:w-[28rem]" data-photo-orbit>
+    <div class="hidden justify-end lg:order-2 lg:flex" data-hero-item>
+      <div
+        class="photo-orbit relative aspect-square w-[28rem] shrink-0"
+        data-photo-orbit
+      >
         <div class="photo-ring" aria-hidden="true">
           <div class="photo-ring__spin"></div>
         </div>

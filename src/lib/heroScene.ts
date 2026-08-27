@@ -131,6 +131,9 @@ export function initHeroScene() {
   if (!root || !canvas || canvas.dataset.ready === '1') return;
   if (!window.WebGLRenderingContext) return;
 
+  const desktop = window.matchMedia('(min-width: 768px)');
+  if (!desktop.matches) return;
+
   canvas.dataset.ready = '1';
 
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

@@ -136,11 +136,11 @@ import FoldText from '@components/effects/fold-text/FoldText.jsx';
 
     <div class="mx-auto mt-8 max-w-6xl md:mt-12">
       <ShowcaseBreak kicker="Enfoque" icon="sparkles" title="En qué puedo contribuir.">
-        <div class="flex flex-wrap gap-2">
+        <div class="grid grid-cols-2 gap-2">
           {focusIcons.map((item) => (
-            <span class="inline-flex items-center gap-2 rounded-full bg-paper px-3.5 py-1.5 text-sm">
+            <span class="inline-flex items-center gap-2 rounded-2xl bg-paper px-3 py-2 text-left text-sm leading-snug">
               <AppIcon name={item.icon} size={14} />
-              {item.label}
+              <span>{item.label}</span>
             </span>
           ))}
         </div>

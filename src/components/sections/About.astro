@@ -9,7 +9,7 @@ import FoldText from '@components/effects/fold-text/FoldText.jsx';
 <section id="sobre" class="px-4 py-4 md:px-8 md:py-8">
   <div class="mx-auto grid max-w-6xl gap-3 md:grid-cols-12 md:gap-4">
     <div
-      class="relative min-h-[260px] overflow-hidden rounded-[1.5rem] bg-sand md:col-span-5 md:min-h-[440px] md:rounded-[2rem]"
+      class="relative hidden min-h-[260px] overflow-hidden rounded-[1.5rem] bg-sand md:col-span-5 md:block md:min-h-[440px] md:rounded-[2rem]"
       data-reveal
       data-hero-stage
     >
@@ -19,7 +19,7 @@ import FoldText from '@components/effects/fold-text/FoldText.jsx';
       </p>
     </div>
 
-    <div class="flex flex-col justify-between rounded-[1.5rem] bg-sand px-5 py-7 md:col-span-7 md:rounded-[2rem] md:px-10 md:py-12">
+    <div class="flex flex-col justify-between rounded-[1.5rem] bg-sand px-5 py-7 text-left md:col-span-7 md:rounded-[2rem] md:px-10 md:py-12">
       <div>
         <p class="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-accent md:text-sm">
           <AppIcon name="user-round" size={14} />
@@ -37,13 +37,13 @@ import FoldText from '@components/effects/fold-text/FoldText.jsx';
             fontWeight={700}
           />
         </h2>
-        <p class="mt-2 inline-flex flex-wrap items-center gap-2 text-xs text-muted md:text-sm">
+        <p class="mt-2 inline-flex flex-wrap items-center justify-start gap-2 text-xs text-muted md:text-sm">
           <MexicoFlag />
           <span>{profile.role}</span>
           <span>·</span>
           <span>{profile.location}</span>
         </p>
-        <p class="mt-2 inline-flex items-center gap-2 text-xs text-muted md:text-sm">
+        <p class="mt-2 inline-flex items-center justify-start gap-2 text-xs text-muted md:text-sm">
           <span class="live-dot text-accent"></span>
           {profile.availability}
         </p>
@@ -52,21 +52,21 @@ import FoldText from '@components/effects/fold-text/FoldText.jsx';
         </div>
       </div>
       <div>
-        <div class="mt-8 flex flex-wrap gap-2">
+        <div class="mt-8 grid grid-cols-2 gap-2">
           {focusIcons.map((item) => (
-            <span class="inline-flex items-center gap-2 rounded-full bg-paper px-3.5 py-1.5 text-sm">
+            <span class="inline-flex items-center justify-center gap-2 rounded-2xl bg-paper px-3 py-2 text-left text-xs leading-snug sm:text-sm md:justify-start">
               <AppIcon name={item.icon} size={14} />
-              {item.label}
+              <span>{item.label}</span>
             </span>
           ))}
+          <a
+            href="/sobre"
+            class="inline-flex items-center justify-center gap-2 rounded-2xl bg-ink px-3 py-2 text-left text-xs font-medium leading-snug text-paper no-underline sm:text-sm md:justify-start"
+          >
+            <AppIcon name="arrow-right" size={14} />
+            <span>Ver perfil</span>
+          </a>
         </div>
-        <a
-          href="/sobre"
-          class="mt-6 inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2.5 text-sm font-medium text-paper no-underline"
-        >
-          Ver perfil
-          <AppIcon name="arrow-right" size={14} />
-        </a>
       </div>
     </div>
   </div>

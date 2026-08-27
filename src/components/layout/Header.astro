@@ -28,11 +28,10 @@ const isActive = (href: string) => {
     <a
       href="/"
       data-magnetic
-      class="inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-sm font-semibold tracking-tight no-underline"
+      class="inline-flex min-w-0 items-center gap-2 rounded-full px-3 py-2 text-xs font-semibold tracking-tight no-underline sm:px-3.5 sm:text-sm"
     >
       <AppIcon name="zap" size={16} />
-      <span class="sm:hidden">JZ</span>
-      <span class="hidden sm:inline">{profile.name}</span>
+      <span class="truncate">{profile.fullName}</span>
     </a>
     <div class="flex items-center gap-1">
       <ThemeToggle />
@@ -56,7 +55,7 @@ const isActive = (href: string) => {
 </header>
 
 <nav
-  class="fixed inset-x-4 bottom-4 z-40 flex items-center rounded-full bg-sand px-1.5 py-1.5 sm:hidden"
+  class="fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-40 flex items-center rounded-full bg-sand px-1.5 py-1.5 shadow-lg shadow-ink/10 sm:hidden"
   aria-label="Navegación móvil"
 >
   {links.map((link) => (

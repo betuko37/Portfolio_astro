@@ -73,17 +73,29 @@
 }
 
 .focus-container.hero-focus {
-  justify-content: flex-start;
-  gap: 0.5em;
+  justify-content: center;
+  gap: 0.35em;
+}
+
+@media (min-width: 1024px) {
+  .focus-container.hero-focus {
+    justify-content: flex-start;
+  }
 }
 
 .hero-focus .focus-word {
   font-family: var(--font-display);
-  font-size: clamp(1.35rem, 3.6vw, 2.35rem);
+  font-size: clamp(1.05rem, 6.2vw, 2.35rem);
   font-weight: 700;
   letter-spacing: -0.04em;
   color: var(--color-ink);
   cursor: default;
+}
+
+@media (min-width: 640px) {
+  .focus-container.hero-focus {
+    gap: 0.5em;
+  }
 }
 
 .hero-focus .corner {

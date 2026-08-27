@@ -23,7 +23,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 <html lang="es">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
@@ -75,7 +75,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
       <ClickSparkLayer client:load />
     </div>
     <Header />
-    <main class="site-main pt-16 sm:pt-24">
+    <main class="site-main pt-16 sm:pt-24 pb-2 sm:pb-0">
       <slot />
     </main>
     <Footer />

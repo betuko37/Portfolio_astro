@@ -18,7 +18,7 @@ const { id, title, kicker, icon, items } = Astro.props;
 
 {items.length > 0 && (
   <div id={id} data-rail>
-    <div class="mb-4 flex items-end justify-between gap-3">
+    <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
       <div>
         <p class="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-accent md:text-sm">
           <AppIcon name={icon} size={14} />

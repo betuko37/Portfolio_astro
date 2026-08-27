@@ -53,6 +53,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 html,
@@ -68,6 +69,7 @@ body {
 
 body {
   overflow-x: clip;
+  max-width: 100%;
 }
 
 ::selection {
@@ -146,10 +148,24 @@ a {
   position: fixed;
   inset: 0;
   z-index: 0;
-  width: 100vw;
+  width: 100%;
   height: 100dvh;
   pointer-events: none;
   contain: strict;
+}
+
+@media (max-width: 767px) {
+  .orb-a,
+  .orb-b {
+    width: min(70vw, 260px);
+    height: min(70vw, 260px);
+    filter: blur(56px);
+    opacity: 0.28;
+  }
+
+  .photo-ring {
+    border-width: 3px;
+  }
 }
 
 .waves-bg astro-island,
@@ -229,7 +245,7 @@ a {
   position: fixed;
   inset: 0;
   z-index: 80;
-  width: 100vw;
+  width: 100%;
   height: 100dvh;
   pointer-events: none;
 }
@@ -253,6 +269,11 @@ a {
   -webkit-backdrop-filter: blur(10px);
 }
 
+.photo-orbit {
+  overflow: hidden;
+  border-radius: 999px;
+}
+
 .photo-disk {
   aspect-ratio: 1;
   overflow: hidden;
@@ -271,7 +292,7 @@ a {
 
 .photo-ring__spin {
   position: absolute;
-  inset: -6px;
+  inset: -4px;
   border-radius: 999px;
   background: conic-gradient(
     from 0deg,
@@ -441,7 +462,7 @@ a {
 }
 
 .rail-item {
-  flex: 0 0 min(82vw, 300px);
+  flex: 0 0 min(calc(100vw - 2.5rem), 300px);
   scroll-snap-align: start;
 }
 
@@ -455,11 +476,6 @@ a {
 
 .carousel-slide {
   backface-visibility: hidden;
-}
-
-.rail-item {
-  flex: 0 0 min(82vw, 300px);
-  scroll-snap-align: start;
 }
 
 .mer-wrap .mermaid {

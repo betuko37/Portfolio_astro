@@ -1,34 +1,23 @@
 ---
-import { profile, whatsappHref } from '@data/profile';
+import { profile } from '@data/profile';
 import AppIcon from '@components/ui/AppIcon.astro';
-import type { IconName } from '@data/icons';
 import FoldText from '@components/effects/fold-text/FoldText.jsx';
 
 const mailHref = `mailto:${profile.email}?subject=${encodeURIComponent('Contacto profesional — portafolio')}`;
-const whatsapp = profile.whatsapp ? whatsappHref(profile.whatsapp) : '';
-
-const channels: { href: string; label: string; icon: IconName; external?: boolean }[] = [
-  { href: mailHref, label: profile.email, icon: 'mail' },
-  { href: profile.github, label: `github.com/${profile.githubUser}`, icon: 'github', external: true },
-];
-
-if (profile.linkedin) {
-  channels.push({ href: profile.linkedin, label: 'LinkedIn', icon: 'linkedin', external: true });
-}
-if (whatsapp) {
-  channels.push({ href: whatsapp, label: 'WhatsApp', icon: 'whatsapp', external: true });
-}
 ---
 
 <section id="contacto" class="px-4 py-4 md:px-8 md:py-8">
-  <div class="tone-night mx-auto max-w-6xl overflow-hidden rounded-[1.5rem] px-5 py-8 md:rounded-[2rem] md:px-12 md:py-16">
-    <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-12">
+  <div class="tone-night relative mx-auto max-w-6xl overflow-hidden rounded-[1.5rem] px-5 py-7 md:rounded-[2rem] md:px-12 md:py-16">
+    <span class="pointer-events-none absolute -right-16 -top-20 h-44 w-44 rounded-full bg-accent/30 blur-3xl"></span>
+    <span class="pointer-events-none absolute -bottom-24 -left-12 h-40 w-40 rounded-full bg-accent/15 blur-3xl"></span>
+
+    <div class="relative grid gap-6 lg:grid-cols-[1fr_1.05fr] lg:items-end lg:gap-12">
       <div>
         <p class="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-accent-soft md:text-sm">
           <AppIcon name="send" size={14} />
           Contacto
         </p>
-        <h2 class="mt-3 font-display text-3xl tracking-tight md:text-5xl">
+        <h2 class="mt-3 font-display text-[1.65rem] leading-tight tracking-tight sm:text-3xl md:text-5xl">
           <FoldText
             client:visible
             text="Conversemos sobre su vacante."
@@ -40,26 +29,13 @@ if (whatsapp) {
             fontWeight={700}
           />
         </h2>
-        <p class="mt-4 max-w-md text-sm text-mist">
-          {profile.availability}
+        <p class="mt-3 inline-flex max-w-md items-start gap-2 text-xs leading-relaxed text-mist md:mt-5 md:text-sm">
+          <span class="live-dot mt-1 shrink-0 text-accent-soft"></span>
+          <span>{profile.availability}</span>
         </p>
-        <div class="mt-10 flex flex-col gap-2">
-          {channels.map((channel) => (
-            <a
-              class="inline-flex w-fit items-center gap-3 rounded-full bg-night-soft px-4 py-2.5 no-underline transition-colors hover:bg-accent"
-              href={channel.href}
-              target={channel.external ? '_blank' : undefined}
-              rel={channel.external ? 'noreferrer' : undefined}
-              data-magnetic
-            >
-              <AppIcon name={channel.icon} size={16} />
-              {channel.label}
-            </a>
-          ))}
-        </div>
       </div>
 
-      <form class="contact-form flex flex-col gap-4" novalidate>
+      <form class="contact-form flex flex-col gap-3.5 md:gap-4" novalidate>
         <label class="sr-only" for="contact-company">Empresa</label>
         <input
           class="hidden"
@@ -70,29 +46,31 @@ if (whatsapp) {
           autocomplete="off"
         />
 
-        <label class="text-sm text-mist">
-          Nombre
-          <input
-            class="mt-2 w-full rounded-2xl bg-night-soft px-4 py-3 text-on-dark outline-none placeholder:text-mist focus:ring-2 focus:ring-accent/60"
-            type="text"
-            name="name"
-            required
-            autocomplete="name"
-            placeholder="Nombre completo"
-          />
-        </label>
+        <div class="grid gap-3.5 sm:grid-cols-2 md:gap-4">
+          <label class="text-sm text-mist">
+            Nombre
+            <input
+              class="mt-2 w-full rounded-2xl bg-night-soft px-4 py-3 text-on-dark outline-none placeholder:text-mist focus:ring-2 focus:ring-accent/60"
+              type="text"
+              name="name"
+              required
+              autocomplete="name"
+              placeholder="Nombre completo"
+            />
+          </label>
 
-        <label class="text-sm text-mist">
-          Correo
-          <input
-            class="mt-2 w-full rounded-2xl bg-night-soft px-4 py-3 text-on-dark outline-none placeholder:text-mist focus:ring-2 focus:ring-accent/60"
-            type="email"
-            name="email"
-            required
-            autocomplete="email"
-            placeholder="correo@empresa.com"
-          />
-        </label>
+          <label class="text-sm text-mist">
+            Correo
+            <input
+              class="mt-2 w-full rounded-2xl bg-night-soft px-4 py-3 text-on-dark outline-none placeholder:text-mist focus:ring-2 focus:ring-accent/60"
+              type="email"
+              name="email"
+              required
+              autocomplete="email"
+              placeholder="correo@empresa.com"
+            />
+          </label>
+        </div>
 
         <label class="text-sm text-mist">
           Mensaje
@@ -105,7 +83,7 @@ if (whatsapp) {
         </label>
 
         <button
-          class="contact-submit inline-flex items-center justify-center gap-2 rounded-full bg-accent-soft px-5 py-2.5 text-sm font-medium text-ink hover:bg-accent hover:text-on-dark disabled:cursor-not-allowed disabled:opacity-60"
+          class="contact-submit inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent-soft px-5 py-3 text-sm font-medium text-ink hover:bg-accent hover:text-on-dark disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
           type="submit"
           data-magnetic
         >
