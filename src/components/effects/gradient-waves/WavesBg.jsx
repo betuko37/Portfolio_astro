@@ -35,7 +35,7 @@ export default function WavesBg() {
       mouseInteraction
       parallaxStrength={0.5}
       grain
-      grainIntensity={dark ? 0.12 : 0.25}
+      grainIntensity={0.2}
     />
   );
 }
