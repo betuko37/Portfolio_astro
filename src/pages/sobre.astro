@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Contact from '../components/Contact.astro';
 import StackPills from '../components/StackPills.astro';
 import AppIcon from '../components/AppIcon.astro';
+import BackLink from '../components/BackLink.astro';
 import { profile } from '../data/profile';
 import { focusIcons } from '../data/icons';
 import { profilePhoto } from '../data/media';
@@ -13,6 +14,9 @@ import { profilePhoto } from '../data/media';
   description={profile.summary}
 >
   <section class="px-4 py-6 md:px-8 md:py-16">
+    <div class="mx-auto mb-5 max-w-6xl">
+      <BackLink href="/" />
+    </div>
     <div class="mx-auto grid max-w-6xl items-end gap-6 md:grid-cols-[0.8fr_1.2fr] md:gap-12" data-hero>
       <div class="relative overflow-hidden rounded-[1.5rem] bg-sand md:rounded-[2rem]" data-hero-item>
         <img
@@ -27,7 +31,7 @@ import { profilePhoto } from '../data/media';
           Perfil
         </p>
         <h1 class="mt-3 font-display text-3xl tracking-tight md:text-6xl" data-hero-item>
-          {profile.name}
+          {profile.fullName}
         </h1>
         <p class="mt-3 text-sm leading-relaxed text-muted md:text-lg" data-hero-item>{profile.headline}</p>
         <p class="mt-6 inline-flex items-center gap-2 text-sm text-muted" data-hero-item>
@@ -39,6 +43,36 @@ import { profilePhoto } from '../data/media';
 
     <div class="mx-auto mt-8 max-w-3xl space-y-4 text-sm leading-relaxed md:mt-14 md:text-base" data-reveal>
       {profile.about.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+
+    <div class="mx-auto mt-10 grid max-w-3xl gap-3 sm:grid-cols-2" data-reveal>
+      {profile.education.map((item) => (
+        <article class="overflow-hidden rounded-[1.4rem] bg-sand">
+          <div
+            class:list={[
+              'flex h-28 items-center justify-center px-5 py-4 md:h-32',
+              item.logoTone === 'night' ? 'bg-black' : 'bg-paper',
+            ]}
+          >
+            <img
+              src={item.logo}
+              alt={item.school}
+              class="max-h-full max-w-full object-contain"
+            />
+          </div>
+          <div class="p-5">
+            <p class="text-xs font-medium uppercase tracking-[0.16em] text-accent">{item.years}</p>
+            <h2 class="mt-2 font-display text-lg tracking-tight">{item.program}</h2>
+            <p class="mt-1 text-sm text-muted">{item.school}</p>
+          </div>
+        </article>
+      ))}
+      {profile.languages.map((item) => (
+        <article class="rounded-[1.4rem] bg-sand p-5 sm:col-span-2">
+          <p class="text-xs font-medium uppercase tracking-[0.16em] text-accent">Idiomas</p>
+          <p class="mt-2 text-sm">{item.name} · {item.level}</p>
+        </article>
+      ))}
     </div>
 
     <div class="mx-auto mt-14 max-w-3xl" data-reveal>
@@ -62,6 +96,8 @@ import { profilePhoto } from '../data/media';
         Stack
       </p>
       <StackPills items={profile.stack} />
+      <p class="mb-3 mt-8 text-sm font-medium uppercase tracking-[0.18em] text-muted">También</p>
+      <StackPills items={profile.alsoStack} />
     </div>
   </section>
   <Contact />

@@ -1,6 +1,5 @@
 ---
-import { iconForStack } from '../data/icons';
-import AppIcon from './AppIcon.astro';
+import BrandIcon from './BrandIcon.astro';
 
 interface Props {
   items: readonly string[];
@@ -18,7 +17,7 @@ const { items, tone = 'light' } = Astro.props;
         tone === 'dark' ? 'bg-night-soft text-paper' : 'bg-sand text-ink',
       ]}
     >
-      <AppIcon name={iconForStack(item)} size={14} />
+      <BrandIcon label={item} size={15} />
       {item}
     </li>
   ))}

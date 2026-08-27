@@ -1,6 +1,5 @@
 ---
-import { iconForStack } from '../data/icons';
-import AppIcon from './AppIcon.astro';
+import BrandIcon from './BrandIcon.astro';
 
 interface Props {
   items: readonly string[];
@@ -16,7 +15,7 @@ const reverseLoop = [...items].reverse().concat([...items].reverse());
     <div class="marquee-track">
       {loop.map((item) => (
         <span class="inline-flex items-center gap-2 rounded-full bg-night-soft px-4 py-2 text-sm text-paper">
-          <AppIcon name={iconForStack(item)} size={14} />
+          <BrandIcon label={item} size={15} />
           {item}
         </span>
       ))}
@@ -26,7 +25,7 @@ const reverseLoop = [...items].reverse().concat([...items].reverse());
     <div class="marquee-track reverse">
       {reverseLoop.map((item) => (
         <span class="inline-flex items-center gap-2 rounded-full bg-night-soft px-4 py-2 text-sm text-paper">
-          <AppIcon name={iconForStack(item)} size={14} />
+          <BrandIcon label={item} size={15} />
           {item}
         </span>
       ))}

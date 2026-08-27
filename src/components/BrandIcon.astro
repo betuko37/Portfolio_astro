@@ -1,0 +1,30 @@
+---
+import { getBrandColor, getBrandMark, getStackLucide } from '../data/brands';
+import AppIcon from './AppIcon.astro';
+
+interface Props {
+  label: string;
+  size?: number;
+}
+
+const { label, size = 16 } = Astro.props;
+const mark = getBrandMark(label);
+const color = getBrandColor(label);
+---
+
+{mark ? (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill={mark.color}
+    aria-hidden="true"
+    class="shrink-0"
+  >
+    <path d={mark.path} />
+  </svg>
+) : (
+  <span class="inline-flex shrink-0" style={`color:${color}`}>
+    <AppIcon name={getStackLucide(label)} size={size} />
+  </span>
+)}

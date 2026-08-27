@@ -1,0 +1,54 @@
+---
+import { labHref, type Lab } from '../data/labs';
+import AppIcon from './AppIcon.astro';
+
+interface Props {
+  lab: Lab;
+}
+
+const { lab } = Astro.props;
+const href = labHref(lab);
+const isLight = lab.accent === 'sand';
+const Tag = href ? 'a' : 'article';
+---
+
+<Tag
+  {...(href
+    ? {
+        href,
+        target: '_blank',
+        rel: 'noreferrer',
+      }
+    : {})}
+  data-reveal
+  class:list={[
+    'flex h-full min-h-[180px] flex-col justify-between rounded-[1.4rem] p-4 no-underline md:min-h-[200px] md:p-5',
+    `tone-${lab.accent}`,
+  ]}
+>
+  <div>
+    <div class="mb-3 flex items-start justify-between gap-2">
+      <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-paper/15">
+        <AppIcon name={lab.icon} size={20} />
+      </span>
+      {lab.live && (
+        <span
+          class:list={[
+            'inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide',
+            isLight ? 'bg-ink text-paper' : 'bg-paper text-ink',
+          ]}
+        >
+          <span class="live-dot"></span>
+          En vivo
+        </span>
+      )}
+    </div>
+    <p class="text-[11px] font-medium uppercase tracking-[0.14em] opacity-70">{lab.kicker} · {lab.year}</p>
+    <h3 class="mt-1.5 font-display text-lg tracking-tight">{lab.title}</h3>
+    <p class="mt-1.5 text-sm leading-relaxed opacity-85">{lab.tagline}</p>
+  </div>
+  <p class="mt-4 inline-flex items-center gap-1.5 text-xs font-medium">
+    {lab.live ? 'Abrir' : lab.github ? 'Ver en GitHub' : 'Del CV'}
+    {(lab.live || lab.github) && <AppIcon name="arrow-up-right" size={14} />}
+  </p>
+</Tag>

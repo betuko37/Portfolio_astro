@@ -1,0 +1,96 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ShowcaseCard from '../../components/ShowcaseCard.astro';
+import BackLink from '../../components/BackLink.astro';
+import AppIcon from '../../components/AppIcon.astro';
+import { showcase, showcaseSections } from '../../data/showcase';
+---
+
+<Layout
+  title="Proyectos — Jesús Zavala"
+  description="Todos los proyectos en vivo, en GitHub y del CV."
+>
+  <section class="px-4 py-8 md:px-8 md:py-16">
+    <div class="mx-auto max-w-6xl">
+      <div class="mb-5">
+        <BackLink href="/#proyectos" />
+      </div>
+      <p class="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-accent md:text-sm">
+        <AppIcon name="folder-kanban" size={14} />
+        Proyectos
+      </p>
+      <h1 class="mt-2 font-display text-3xl tracking-tight md:text-5xl" data-catalog-title>
+        Todos los proyectos
+      </h1>
+      <p class="mt-3 max-w-xl text-sm text-muted md:text-base" data-catalog-copy>
+        Case studies, demos en vivo, repos y piezas del CV.
+      </p>
+
+      <div class="mt-6 flex flex-wrap gap-2" data-catalog-tabs>
+        <a
+          href="/proyectos"
+          data-tab=""
+          class="catalog-tab rounded-full px-3.5 py-2 text-sm no-underline bg-sand text-ink hover:bg-accent-soft"
+        >
+          Todas
+        </a>
+        {showcaseSections.map((section) => (
+          <a
+            href={`/proyectos?grupo=${section.id}`}
+            data-tab={section.id}
+            class="catalog-tab inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm no-underline bg-sand text-ink hover:bg-accent-soft"
+          >
+            <AppIcon name={section.icon} size={14} />
+            {section.title}
+          </a>
+        ))}
+      </div>
+
+      <div class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3" id="catalogo" data-catalog>
+        {showcase.map((item) => (
+          <div class="showcase-item" data-groups={item.groups.join(' ')}>
+            <ShowcaseCard item={item} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  [data-catalog][data-group='live'] .showcase-item:not([data-groups~='live']),
+  [data-catalog][data-group='github'] .showcase-item:not([data-groups~='github']),
+  [data-catalog][data-group='cv'] .showcase-item:not([data-groups~='cv']) {
+    display: none;
+  }
+
+  .catalog-tab.is-active {
+    background: var(--strong);
+    color: var(--on-strong);
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    const titles = {
+      live: ['En vivo', 'Se pueden abrir hoy'],
+      github: ['GitHub', 'Código público'],
+      cv: ['Del CV', 'Prácticas'],
+    };
+    const group = new URLSearchParams(location.search).get('grupo');
+    const valid = group === 'live' || group === 'github' || group === 'cv' ? group : '';
+    const catalog = document.getElementById('catalogo');
+    if (catalog && valid) catalog.dataset.group = valid;
+
+    document.querySelectorAll('[data-tab]').forEach((tab) => {
+      tab.classList.toggle('is-active', tab.getAttribute('data-tab') === valid);
+    });
+
+    const title = document.querySelector('[data-catalog-title]');
+    const copy = document.querySelector('[data-catalog-copy]');
+    if (valid && titles[valid]) {
+      if (title) title.textContent = titles[valid][0];
+      if (copy) copy.textContent = titles[valid][1];
+    }
+  })();
+</script>

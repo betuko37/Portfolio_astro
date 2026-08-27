@@ -1,10 +1,7 @@
 ---
-import { getFeaturedProjects, projects } from '../data/projects';
-import ProjectCard from './ProjectCard.astro';
+import { getShowcase, showcaseSections } from '../data/showcase';
+import ShowcaseRail from './ShowcaseRail.astro';
 import AppIcon from './AppIcon.astro';
-
-const featured = getFeaturedProjects();
-const rest = projects.filter((project) => !project.featured);
 ---
 
 <section id="proyectos" class="px-4 py-10 md:px-8 md:py-20">
@@ -14,28 +11,17 @@ const rest = projects.filter((project) => !project.featured);
       Proyectos
     </p>
     <h2 class="mt-2 max-w-2xl font-display text-2xl tracking-tight md:text-4xl lg:text-5xl" data-reveal>
-      Web, móvil, cloud y hardware. <em class="italic text-accent">Lo que haga falta.</em>
+      En vivo, en GitHub y del CV.
     </h2>
 
-    <div class="mt-8 grid gap-3 md:mt-12 md:grid-cols-2 md:gap-4">
-      {featured.map((project, index) => (
-        <div class:list={[index === 0 && 'md:col-span-2']}>
-          <ProjectCard project={project} large={index === 0} />
-        </div>
-      ))}
-    </div>
-
-    {rest.length > 0 && (
-      <div class="mt-10 md:mt-16">
-        <p class="text-sm font-medium uppercase tracking-[0.18em] text-muted">
-          Más case studies
-        </p>
-        <div class="mt-6 grid gap-4 md:grid-cols-3">
-          {rest.map((project) => (
-            <ProjectCard project={project} />
-          ))}
-        </div>
-      </div>
-    )}
+    {showcaseSections.map((section) => (
+      <ShowcaseRail
+        id={section.id}
+        title={section.title}
+        kicker={section.kicker}
+        icon={section.icon}
+        items={getShowcase(section.id)}
+      />
+    ))}
   </div>
 </section>

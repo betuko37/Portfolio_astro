@@ -1,11 +1,7 @@
 ---
 import { profile } from '../data/profile';
-import { getFeaturedProjects } from '../data/projects';
-import { projectIcons } from '../data/icons';
-import { profilePhoto, getProjectLogo } from '../data/media';
 import AppIcon from './AppIcon.astro';
 
-const featured = getFeaturedProjects();
 const words = profile.headline.split(' ');
 const punchFrom = 5;
 ---
@@ -56,38 +52,20 @@ const punchFrom = 5;
       </div>
     </div>
 
-    <div class="grid grid-cols-2 grid-rows-3 gap-2 sm:gap-3 sm:grid-rows-[minmax(0,1fr)_120px_120px] lg:min-h-[440px]">
-      <div class="relative row-span-2 min-h-[150px] overflow-hidden rounded-[1.4rem] bg-sand md:min-h-[200px] md:rounded-[2rem]" data-hero-icon>
-        <span class="photo-pulse pointer-events-none absolute inset-2 rounded-[1.1rem] bg-accent/20 md:inset-3 md:rounded-[1.6rem]"></span>
-        <img
-          src={profilePhoto}
-          alt={profile.name}
-          class="relative z-[1] h-full w-full object-cover object-top"
-        />
-        <span
-          class="photo-ring pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full"
-          style="background: conic-gradient(from 90deg, transparent 0 70%, #7c3aed 70% 100%)"
-        ></span>
-      </div>
-
-      {featured.map((project) => (
-        <a
-          href={`/proyectos/${project.slug}`}
-          data-hero-icon
-          data-float
-          class:list={[
-            'flex min-h-[4.5rem] flex-col justify-between rounded-[1.2rem] p-3 no-underline sm:min-h-24 sm:rounded-[1.6rem] sm:p-4',
-            `tone-${project.accent}`,
-          ]}
-        >
-          {getProjectLogo(project.slug) ? (
-            <img src={getProjectLogo(project.slug)} alt="" class="h-6 w-6 object-contain sm:h-8 sm:w-8" />
-          ) : (
-            <AppIcon name={projectIcons[project.slug]} size={20} />
-          )}
-          <span class="text-[11px] font-medium leading-tight sm:text-sm">{project.title}</span>
-        </a>
-      ))}
+    <div
+      class="tone-night relative min-h-[260px] overflow-hidden rounded-[1.5rem] md:min-h-[360px] md:rounded-[2rem] lg:min-h-[440px]"
+      data-hero-stage
+      data-hero-icon
+    >
+      <canvas class="absolute inset-0 h-full w-full" data-hero-canvas aria-hidden="true"></canvas>
+      <p class="pointer-events-none absolute inset-x-0 bottom-4 text-center text-[10px] font-medium uppercase tracking-[0.16em] text-mist/80 sm:bottom-5 sm:text-xs">
+        Backend · Web · Mobile · Hardware
+      </p>
     </div>
   </div>
 </section>
+
+<script>
+  import { initHeroScene } from '../scripts/heroScene';
+  initHeroScene();
+</script>

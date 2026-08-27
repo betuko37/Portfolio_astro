@@ -1,0 +1,31 @@
+---
+import AppIcon from './AppIcon.astro';
+
+interface Props {
+  href: string;
+  label?: string;
+}
+
+const { href, label = 'Volver' } = Astro.props;
+---
+
+<a
+  href={href}
+  data-back
+  class="inline-flex items-center gap-1.5 rounded-full bg-sand px-3.5 py-2 text-xs font-medium text-ink no-underline hover:bg-accent-soft md:text-sm"
+>
+  <AppIcon name="arrow-right" size={14} class="rotate-180" />
+  {label}
+</a>
+
+<script>
+  document.querySelectorAll<HTMLAnchorElement>('a[data-back]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const fromHere = document.referrer.startsWith(location.origin);
+      if (fromHere && window.history.length > 1) {
+        event.preventDefault();
+        window.history.back();
+      }
+    });
+  });
+</script>

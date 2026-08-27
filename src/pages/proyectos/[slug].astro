@@ -4,38 +4,50 @@ import StackPills from '../../components/StackPills.astro';
 import ModuleList from '../../components/ModuleList.astro';
 import ArchDiagram from '../../components/ArchDiagram.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
+import LabCase from '../../components/LabCase.astro';
 import {
   getProject,
   getRelatedProjects,
   projects,
 } from '../../data/projects';
+import { getLab, labs } from '../../data/labs';
 import { projectIcons } from '../../data/icons';
 import { getProjectCover, getProjectGallery, getProjectLogo } from '../../data/media';
 import AppIcon from '../../components/AppIcon.astro';
+import BackLink from '../../components/BackLink.astro';
 import Carousel from '../../components/Carousel.astro';
 
 export function getStaticPaths() {
-  return projects.map((project) => ({
-    params: { slug: project.slug },
-  }));
+  return [
+    ...projects.map((project) => ({ params: { slug: project.slug } })),
+    ...labs.map((lab) => ({ params: { slug: lab.slug } })),
+  ];
 }
 
 const { slug } = Astro.params;
 const project = getProject(slug!);
+const lab = getLab(slug!);
 
-if (!project) {
+if (!project && !lab) {
   throw new Error(`Proyecto no encontrado: ${slug}`);
 }
 
-const related = getRelatedProjects(project.slug);
-const gallery = getProjectGallery(project.slug);
-const logo = getProjectLogo(project.slug);
-const cover = getProjectCover(project.slug);
+const related = project ? getRelatedProjects(project.slug) : [];
+const gallery = project ? getProjectGallery(project.slug) : undefined;
+const logo = project ? getProjectLogo(project.slug) : undefined;
+const cover = project ? getProjectCover(project.slug) : undefined;
+const title = project?.title ?? lab!.title;
+const description = project?.summary ?? lab!.tagline;
 ---
 
-<Layout title={`${project.title} — Jesús Zavala`} description={project.summary}>
+<Layout title={`${title} — Jesús Zavala`} description={description}>
+  {lab && <LabCase lab={lab} />}
+  {project && (
   <article>
     <header class="px-4 pt-3 md:px-8">
+      <div class="mx-auto mb-3 max-w-6xl">
+        <BackLink href="/#proyectos" />
+      </div>
       <div class="tone-night relative mx-auto max-w-6xl overflow-hidden rounded-[1.5rem] px-5 py-8 md:rounded-[2rem] md:px-12 md:py-20" data-hero>
         {cover && (
           <img
@@ -198,8 +210,10 @@ const cover = getProjectCover(project.slug);
       </section>
     )}
   </article>
+  )}
 </Layout>
 
+{project && (
 <script is:inline type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
   mermaid.initialize({
@@ -209,3 +223,4 @@ const cover = getProjectCover(project.slug);
     fontFamily: 'Poppins, sans-serif',
   });
 </script>
+)}

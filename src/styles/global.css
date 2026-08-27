@@ -345,6 +345,26 @@ a {
   touch-action: pan-y;
 }
 
+.rail {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 0.25rem;
+  padding-bottom: 0.35rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.rail::-webkit-scrollbar {
+  display: none;
+}
+
+.rail-item {
+  flex: 0 0 min(82vw, 300px);
+  scroll-snap-align: start;
+}
+
 .coverflow {
   perspective: 1400px;
 }

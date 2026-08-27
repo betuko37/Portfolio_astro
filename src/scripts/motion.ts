@@ -8,6 +8,7 @@ export function initMotion() {
   const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   initCarousels(reduce);
+  initRails();
   initProgress();
   if (reduce) return;
 
@@ -287,5 +288,28 @@ function initCarousels(reduce: boolean) {
     root.addEventListener('pointerleave', resume);
     root.addEventListener('pointerdown', pause);
     root.addEventListener('pointerup', resume);
+  });
+}
+
+function initRails() {
+  document.querySelectorAll<HTMLElement>('[data-rail]').forEach((root) => {
+    const scroller = root.querySelector<HTMLElement>('.rail');
+    if (!scroller) return;
+
+    const step = () => {
+      const item = scroller.querySelector<HTMLElement>('.rail-item');
+      return (item?.offsetWidth ?? 280) + 12;
+    };
+
+    root.querySelectorAll('.rail-next').forEach((button) => {
+      button.addEventListener('click', () => {
+        scroller.scrollBy({ left: step(), behavior: 'smooth' });
+      });
+    });
+    root.querySelectorAll('.rail-prev').forEach((button) => {
+      button.addEventListener('click', () => {
+        scroller.scrollBy({ left: -step(), behavior: 'smooth' });
+      });
+    });
   });
 }
