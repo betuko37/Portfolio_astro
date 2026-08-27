@@ -331,11 +331,12 @@ type ApiPayload = {
 export default function RecruiterInsights({ stats: initial }: { stats: RecruiterStats }) {
   const [stats, setStats] = useState(initial);
   const [live, setLive] = useState(false);
-  const [refreshing, setRefreshing] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [fetchedAt, setFetchedAt] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
+    setRefreshing(true);
 
     fetch("/api/github-stats", { cache: "no-store" })
       .then((r) => r.json())

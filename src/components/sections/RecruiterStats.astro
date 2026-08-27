@@ -1,10 +1,10 @@
 ---
 import RecruiterInsights from '@components/sections/RecruiterInsights.tsx';
 import AppIcon from '@components/ui/AppIcon.astro';
-import { getRecruiterStats } from '@data/recruiter-stats';
+import { getLiveRecruiterStats } from '@lib/recruiter-stats-live';
 import FoldText from '@components/effects/fold-text/FoldText.jsx';
 
-const stats = getRecruiterStats();
+const stats = await getLiveRecruiterStats();
 ---
 
 <section id="metricas" class="px-4 py-6 md:px-8 md:py-10">
@@ -31,7 +31,7 @@ const stats = getRecruiterStats();
       </p>
     </div>
     <div class="mt-4">
-      <RecruiterInsights client:visible stats={stats} />
+      <RecruiterInsights client:load stats={stats} />
     </div>
   </div>
 </section>
