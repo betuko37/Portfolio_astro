@@ -119,7 +119,9 @@ export const projects: Project[] = [
       "offline-sync",
       "nfc-service",
     ],
-    links: [],
+    links: [
+      { label: "En vivo", href: "https://app.ultechzone.online/login" },
+    ],
   },
   {
     slug: "jornalpro-backend",
@@ -219,7 +221,9 @@ export const projects: Project[] = [
   Cron --> SAT[SAT CFDI]
   Cron --> WA[WhatsApp jobs]`,
     related: ["jornalpro", "jornalpro-frontend", "jornalpro-mobile"],
-    links: [],
+    links: [
+      { label: "App en vivo", href: "https://app.ultechzone.online/login" },
+    ],
   },
   {
     slug: "jornalpro-frontend",
@@ -304,7 +308,9 @@ export const projects: Project[] = [
   Shell --> NFC[localhost 47321]
   Shell --> Maps[Leaflet MapDrawer]`,
     related: ["jornalpro", "jornalpro-backend", "nfc-service"],
-    links: [],
+    links: [
+      { label: "En vivo", href: "https://app.ultechzone.online/login" },
+    ],
   },
   {
     slug: "jornalpro-mobile",
@@ -312,7 +318,7 @@ export const projects: Project[] = [
     kicker: "Case study",
     tagline: "App Flutter de campo: NFC, cola Hive y voz offline.",
     summary:
-      "Android para capataces. ~104k líneas Dart. Offline-first con betuko_offline_sync, cola propia de asistencias, GPS obligatorio, QR de respaldo y ASR Sherpa-ONNX para destajo por surcos.",
+      "Android para capataces. ~104k líneas Dart. Offline-first con betuko_offline_sync, cola propia de asistencias, GPS obligatorio, QR de respaldo y ASR Sherpa-ONNX para destajo por surcos. Se distribuye como APK (sin URL pública); las capturas van en esta ficha.",
     problem:
       "En el surco no hay Wi-Fi. Hay que escanear 80 gafetes, no perder un registro y, si hay red, mandarlo. Si no, seguir trabajando.",
     role: "Mobile lead / full-stack",
@@ -469,8 +475,8 @@ export const projects: Project[] = [
   WM --> OOM`,
     related: ["jornalpro-mobile", "jornalpro"],
     links: [
-      { label: "GitHub", href: "https://github.com/betuko37/online_offline" },
       { label: "pub.dev", href: "https://pub.dev/packages/betuko_offline_sync" },
+      { label: "GitHub", href: "https://github.com/betuko37/online_offline" },
     ],
   },
   {
@@ -543,11 +549,11 @@ export const projects: Project[] = [
   },
   {
     slug: "tienda-ivan",
-    title: "Tienda Hydrogen",
+    title: "ITZ Coleccionables",
     kicker: "Comercio headless",
-    tagline: "Storefront Shopify Hydrogen + Remix, lejos del template.",
+    tagline: "Storefront Shopify Hydrogen + Remix para Funko y figuras.",
     summary:
-      "Tienda headless sobre Hydrogen 2025 y Remix 2. Partió del Demo Store y se convirtió en un storefront propio: tema oscuro, cursor de temporada desde metafields, roles admin, Cloudinary, motion (GSAP, Three, Framer) y correo con Nodemailer.",
+      "Tienda en vivo de ITZ Coleccionables (itzcoleccionables.com): headless sobre Hydrogen 2025 y Remix 2. Partió del Demo Store y se convirtió en un storefront propio: tema oscuro, cursor de temporada, roles admin, Cloudinary, motion y correo con Nodemailer.",
     problem:
       "Shopify Liquid no daba el control visual ni el backoffice ligero que pedía la tienda. Había que quedarse en el checkout de Shopify y construir el resto en React.",
     role: "Desarrollo storefront e integraciones custom",
@@ -622,6 +628,7 @@ export const projects: Project[] = [
   Remix --> Checkout[Checkout Shopify]`,
     related: [],
     links: [
+      { label: "En vivo", href: "https://itzcoleccionables.com/" },
       { label: "GitHub", href: "https://github.com/betuko37/tienda-react-ivan" },
     ],
   },
@@ -641,4 +648,10 @@ export function getRelatedProjects(slug: string): Project[] {
   return project.related
     .map((relatedSlug) => getProject(relatedSlug))
     .filter((item): item is Project => Boolean(item));
+}
+
+export function getLiveLink(project: Project): ProjectLink | undefined {
+  return project.links.find((link) =>
+    /en vivo|app en vivo|pub\.dev/i.test(link.label),
+  );
 }

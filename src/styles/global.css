@@ -16,6 +16,7 @@
 
 html {
   scroll-behavior: smooth;
+  color-scheme: only light;
 }
 
 html,
@@ -38,9 +39,28 @@ body {
 }
 
 a {
-  color: inherit;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.18em;
+}
+
+.tone-green {
+  background: var(--color-accent);
+  color: var(--color-paper);
+}
+
+.tone-ink {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.tone-night {
+  background: var(--color-night);
+  color: var(--color-paper);
+}
+
+.tone-sand {
+  background: var(--color-sand);
+  color: var(--color-ink);
 }
 
 :focus-visible {

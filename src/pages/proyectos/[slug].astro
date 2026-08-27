@@ -29,7 +29,7 @@ const related = getRelatedProjects(project.slug);
 <Layout title={`${project.title} — Jesús Zavala`} description={project.summary}>
   <article>
     <header class="px-5 pt-8 md:px-8">
-      <div class="mx-auto max-w-6xl rounded-3xl bg-ink px-6 py-12 text-paper md:px-12 md:py-20">
+      <div class="tone-ink mx-auto max-w-6xl rounded-3xl px-6 py-12 md:px-12 md:py-20">
         <p class="text-sm font-medium uppercase tracking-[0.18em] text-accent-soft">
           {project.kicker} · {project.year}
         </p>
@@ -38,7 +38,7 @@ const related = getRelatedProjects(project.slug);
         </h1>
         <p class="mt-5 max-w-2xl text-xl leading-relaxed text-sand">{project.tagline}</p>
         <p class="mt-6 text-sm text-sand">{project.role}</p>
-        {project.links.length > 0 && (
+        {project.links.length > 0 ? (
           <div class="mt-8 flex flex-wrap gap-3">
             {project.links.map((link) => (
               <a
@@ -51,7 +51,9 @@ const related = getRelatedProjects(project.slug);
               </a>
             ))}
           </div>
-        )}
+        ) : project.slug === 'jornalpro-mobile' ? (
+          <p class="mt-8 text-sm text-sand">App Android (APK). Capturas en camino.</p>
+        ) : null}
       </div>
     </header>
 
