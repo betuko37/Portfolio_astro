@@ -1,34 +1,20 @@
 ---
 import { getShowcase, showcaseSections } from '@data/showcase';
-import { getProject } from '@data/projects';
-import { getProjectLogo } from '@data/media';
 import { profile } from '@data/profile';
+import { projectSpotlights, getSpotlightProjectSlugs } from '@data/spotlights';
 import ShowcaseRail from '@components/showcase/ShowcaseRail.astro';
 import ShowcaseBreak from '@components/showcase/ShowcaseBreak.astro';
+import SpotlightCard from '@components/showcase/SpotlightCard.astro';
 import StackMarquee from '@components/ui/StackMarquee.astro';
 import AppIcon from '@components/ui/AppIcon.astro';
 
 const live = showcaseSections.find((section) => section.id === 'live')!;
 const github = showcaseSections.find((section) => section.id === 'github')!;
 const practices = showcaseSections.find((section) => section.id === 'cv')!;
-
-const operating = [
-  { slug: 'jornalpro', label: 'ERP web' },
-  { slug: 'jornalpro-mobile', label: 'App de campo' },
-  { slug: 'tienda-ivan', label: 'Shopify' },
-].flatMap((item) => {
-  const project = getProject(item.slug);
-  if (!project) return [];
-  return [
-    {
-      slug: item.slug,
-      label: item.label,
-      title: project.title,
-      href: `/proyectos/${item.slug}`,
-      logo: getProjectLogo(item.slug),
-    },
-  ];
-});
+const spotlightSlugs = getSpotlightProjectSlugs();
+const liveItems = getShowcase(live.id).filter(
+  (item) => !spotlightSlugs.has(item.id.replace(/^(case|lab)-/, '')),
+);
 ---
 
 <section id="proyectos" class="px-4 py-10 md:px-8 md:py-20">
@@ -36,35 +22,20 @@ const operating = [
     <ShowcaseBreak
       kicker="Proyectos"
       icon="folder-kanban"
-      title="Producto en operación."
-      copy="Tres productos en producción: ERP web JornalPro, aplicación de campo y tienda Shopify. NFC Service y betuko_offline_sync son públicos."
+      title="Casos reales, no solo demos."
+      copy="ERP agrícola, empaque, fiscal México e integraciones de hardware en producción. JornalPro, Agroeasy, HikCentral, cotizaciones CFDI y campo offline-first."
     >
       <a
         slot="action"
         href="#live"
-        class="inline-flex items-center gap-1.5 rounded-full bg-ink px-3.5 py-2 text-xs font-medium text-paper no-underline md:text-sm"
+        class="btn-accent inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-xs font-medium no-underline md:text-sm"
       >
-        Ver productos
+        Ver todos
         <AppIcon name="arrow-right" size={14} />
       </a>
-      <div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
-        {operating.map((item) => (
-          <a
-            href={item.href}
-            class="flex items-center gap-3 rounded-[1.2rem] bg-paper px-4 py-3 text-ink no-underline"
-          >
-            <span class="inline-flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl bg-sand p-1.5">
-              {item.logo ? (
-                <img src={item.logo} alt="" class="h-full w-full object-contain" />
-              ) : (
-                <AppIcon name="layers" size={20} />
-              )}
-            </span>
-            <div>
-              <p class="text-sm font-medium">{item.title}</p>
-              <p class="text-xs text-muted">{item.label}</p>
-            </div>
-          </a>
+      <div class="grid grid-cols-2 gap-2.5 md:grid-cols-3 md:gap-3">
+        {projectSpotlights.map((item) => (
+          <SpotlightCard item={item} />
         ))}
       </div>
     </ShowcaseBreak>
@@ -74,7 +45,7 @@ const operating = [
       title={live.title}
       kicker={live.kicker}
       icon={live.icon}
-      items={getShowcase(live.id)}
+      items={liveItems}
     />
 
     <ShowcaseBreak

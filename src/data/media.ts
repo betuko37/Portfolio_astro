@@ -1,81 +1,33 @@
-export type GalleryImage = {
-  src: string;
-  alt: string;
-};
+import {
+  buildProjectGalleriesFromPublic,
+  type GalleryImage,
+  type GalleryVariant,
+  type ProjectGallery,
+} from "@lib/project-galleries";
 
-export type GalleryVariant = "phone" | "desktop";
-
-export type ProjectGallery = {
-  variant: GalleryVariant;
-  images: GalleryImage[];
-};
-
-const shopifyShot = (file: string) =>
-  encodeURI(`/tiendashopify/capturas/${file}`);
-
-const mobileShot = (file: string) => `/mobile/capturas/${file}`;
-
-const nbsp = "\u202f";
+export type { GalleryImage, GalleryVariant, ProjectGallery };
 
 export const profilePhoto = encodeURI(
   "/profile/WhatsApp Image 2026-08-26 at 17.14.02.jpeg",
 );
 
+/** Logo oficial HikCentral (extraído del producto JornalPro). */
+export const HIKCENTRAL_LOGO = "/hikcentral/logo/icon.webp";
+
 export const projectLogos: Record<string, string> = {
   jornalpro: "/jornalpro/logo/favicon.png",
+  "jornalpro-hikcentral": HIKCENTRAL_LOGO,
   "jornalpro-backend": "/jornalpro/logo/favicon.png",
   "jornalpro-frontend": "/jornalpro/logo/favicon.png",
   "jornalpro-mobile": "/mobile/logo/favicon.png",
+  agroeasy: "/agroeasy/logo/logo.png",
+  "cotizaciones-facturaciones": "/cotizaciones/logo/logo.png",
   "tienda-ivan": "/tiendashopify/logo/Logo.png",
 };
 
-export const projectGalleries: Record<string, ProjectGallery> = {
-  jornalpro: {
-    variant: "desktop",
-    images: [],
-  },
-  "jornalpro-frontend": {
-    variant: "desktop",
-    images: [],
-  },
-  "jornalpro-backend": {
-    variant: "desktop",
-    images: [],
-  },
-  "jornalpro-mobile": {
-    variant: "phone",
-    images: [
-      "Screenshot_2026-08-26-16-26-47-247_com.example.app_asistencia_nomina_1.jpg",
-      "Screenshot_2026-08-26-16-27-09-767_com.example.app_asistencia_nomina_1.jpg",
-      "Screenshot_2026-08-26-16-27-15-313_com.example.app_asistencia_nomina_1.jpg",
-      "Screenshot_2026-08-26-16-27-25-077_com.example.app_asistencia_nomina_1.jpg",
-      "Screenshot_2026-08-26-16-27-54-309_com.example.app_asistencia_nomina_1.jpg",
-      "Screenshot_2026-08-26-16-29-58-850_com.example.app_asistencia_nomina_1.jpg",
-      "Screenshot_2026-08-26-16-30-07-279_com.example.app_asistencia_nomina_1.jpg",
-      "Screenshot_2026-08-26-16-30-22-004_com.example.app_asistencia_nomina_1.jpg",
-      "Screenshot_2026-08-26-16-31-14-054_com.example.app_asistencia_nomina_1.jpg",
-    ].map((file, index) => ({
-      src: mobileShot(file),
-      alt: `JornalPro Mobile — captura ${index + 1}`,
-    })),
-  },
-  "tienda-ivan": {
-    variant: "desktop",
-    images: [
-      `Screenshot 2026-08-26 at 5.06.14${nbsp}p.m..png`,
-      `Screenshot 2026-08-26 at 5.06.31${nbsp}p.m..png`,
-      `Screenshot 2026-08-26 at 5.06.39${nbsp}p.m..png`,
-      `Screenshot 2026-08-26 at 5.06.49${nbsp}p.m..png`,
-      `Screenshot 2026-08-26 at 5.06.55${nbsp}p.m..png`,
-      `Screenshot 2026-08-26 at 5.07.14${nbsp}p.m..png`,
-      `Screenshot 2026-08-26 at 5.07.32${nbsp}p.m..png`,
-      `Screenshot 2026-08-26 at 5.07.49${nbsp}p.m..png`,
-    ].map((file, index) => ({
-      src: shopifyShot(file),
-      alt: `ITZ Coleccionables — captura ${index + 1}`,
-    })),
-  },
-};
+/** Galerías generadas al build leyendo carpetas en public (screenshots o capturas). */
+export const projectGalleries: Record<string, ProjectGallery> =
+  buildProjectGalleriesFromPublic();
 
 export function getProjectGallery(slug: string): ProjectGallery | undefined {
   const gallery = projectGalleries[slug];
@@ -85,6 +37,11 @@ export function getProjectGallery(slug: string): ProjectGallery | undefined {
 
 export function getProjectLogo(slug: string): string | undefined {
   return projectLogos[slug];
+}
+
+/** Logos raster que necesitan fondo claro sobre hero/card oscura. */
+export function projectLogoUsesLightBg(slug: string): boolean {
+  return slug === "jornalpro-hikcentral";
 }
 
 export function getProjectCover(slug: string): string | undefined {

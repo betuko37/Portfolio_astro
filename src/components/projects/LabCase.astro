@@ -17,7 +17,7 @@ const links = labLinks(lab);
 const related = getRelatedLabs(lab.slug);
 const facts = [
   lab.live ? 'Demostración en línea' : null,
-  lab.github ? 'Repositorio público' : null,
+  lab.githubRepos?.length ? 'Repositorios en GitHub' : lab.github ? 'Repositorio en GitHub' : null,
   lab.fromCv ? 'Práctica profesional' : null,
 ].filter((item): item is string => Boolean(item));
 ---
@@ -84,7 +84,17 @@ const facts = [
           <AppIcon name="sparkles" size={14} />
           Descripción
         </p>
-        <p class="mt-3 text-sm leading-relaxed">{lab.tagline}</p>
+        <p class="mt-3 text-sm leading-relaxed">{lab.summary ?? lab.tagline}</p>
+        {lab.highlights && lab.highlights.length > 0 && (
+          <ul class="mt-4 space-y-2 text-sm leading-relaxed text-muted">
+            {lab.highlights.map((item) => (
+              <li class="flex gap-2">
+                <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        )}
       </article>
       <article class="rounded-[1.4rem] bg-sand p-5 md:col-span-2 lg:col-span-5">
         <p class="inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.16em] text-accent">
@@ -94,6 +104,19 @@ const facts = [
         <div class="mt-3">
           <StackPills items={lab.stack} />
         </div>
+        {lab.modules && lab.modules.length > 0 && (
+          <div class="mt-6">
+            <p class="inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.16em] text-accent">
+              <AppIcon name="layers" size={14} />
+              Módulos
+            </p>
+            <ul class="mt-3 space-y-1.5 text-sm text-muted">
+              {lab.modules.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        )}
       </article>
       {related.map((item) => (
         <div class="md:col-span-3 lg:col-span-4">

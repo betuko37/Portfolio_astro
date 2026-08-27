@@ -1,5 +1,6 @@
 ---
 import Layout from '@layouts/Layout.astro';
+import RecruiterStats from '@components/sections/RecruiterStats.astro';
 import Contact from '@components/sections/Contact.astro';
 import StackPills from '@components/ui/StackPills.astro';
 import AppIcon from '@components/ui/AppIcon.astro';
@@ -146,8 +147,12 @@ import FoldText from '@components/effects/fold-text/FoldText.jsx';
         </div>
       </ShowcaseBreak>
     </div>
+  </section>
 
-    <div class="mx-auto mt-8 max-w-6xl md:mt-12">
+  <RecruiterStats />
+
+  <section class="px-4 pb-10 md:px-8 md:pb-16">
+    <div class="mx-auto max-w-6xl">
       <ShowcaseBreak kicker="Stack" icon="cpu" title="Tecnologías de trabajo.">
         <StackPills items={profile.stack} />
         <p class="mb-3 mt-8 text-xs font-medium uppercase tracking-[0.18em] text-muted">Otras tecnologías</p>

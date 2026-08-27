@@ -1,0 +1,37 @@
+---
+import RecruiterInsights from '@components/sections/RecruiterInsights.tsx';
+import AppIcon from '@components/ui/AppIcon.astro';
+import { getRecruiterStats } from '@data/recruiter-stats';
+import FoldText from '@components/effects/fold-text/FoldText.jsx';
+
+const stats = getRecruiterStats();
+---
+
+<section id="metricas" class="px-4 py-6 md:px-8 md:py-10">
+  <div class="mx-auto max-w-6xl">
+    <div class="w-full md:flex md:flex-col md:items-center md:text-center">
+      <p class="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-accent">
+        <AppIcon name="chart-column" size={14} />
+        Métricas
+      </p>
+      <h2 class="mt-0.5 font-display text-xl tracking-tight md:text-2xl">
+        <FoldText
+          client:visible
+          text="Actividad y stack en cifras."
+          splitBy="word"
+          hinge="top"
+          trigger="scroll"
+          color="currentColor"
+          fontSize="inherit"
+          fontWeight={700}
+        />
+      </h2>
+      <p class="mt-2 w-full text-sm leading-relaxed text-muted">
+        Commits, lenguajes y tecnologías inferidas de repos en GitHub. Datos verificables, no estimaciones a mano.
+      </p>
+    </div>
+    <div class="mt-4">
+      <RecruiterInsights client:visible stats={stats} />
+    </div>
+  </div>
+</section>

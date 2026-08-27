@@ -30,6 +30,7 @@ export function fromProject(project: Project): ShowcaseItem {
   const groups: ShowcaseGroup[] = [];
   if (live) groups.push("live");
   if (github && !live) groups.push("github");
+  if (project.fromCv && !live) groups.push("cv");
 
   return {
     id: `case-${project.slug}`,
@@ -50,7 +51,7 @@ export function fromProject(project: Project): ShowcaseItem {
 export function fromLab(lab: (typeof labs)[number]): ShowcaseItem {
   const groups: ShowcaseGroup[] = [];
   if (lab.live) groups.push("live");
-  if (lab.github && !lab.live) groups.push("github");
+  if ((lab.github || lab.githubRepos?.length) && !lab.live) groups.push("github");
   if (lab.fromCv && !lab.live) groups.push("cv");
 
   return {
@@ -64,17 +65,35 @@ export function fromLab(lab: (typeof labs)[number]): ShowcaseItem {
     live: Boolean(lab.live),
     groups,
     icon: lab.icon,
+    logo: getProjectLogo(lab.slug),
     stack: lab.stack,
   };
 }
 
 export const showcase: ShowcaseItem[] = [
-  ...projects.map(fromProject),
+  ...projects.filter((project) => !project.hideFromCatalog).map(fromProject),
   ...labs.map(fromLab),
 ];
 
 export function getShowcase(group: ShowcaseGroup): ShowcaseItem[] {
-  return showcase.filter((item) => item.groups.includes(group));
+  const items = showcase.filter((item) => item.groups.includes(group));
+
+  if (group !== "live") return items;
+
+  const priority = [
+    "case-jornalpro",
+    "case-cotizaciones-facturaciones",
+    "case-agroeasy",
+    "case-jornalpro-mobile",
+    "case-jornalpro-frontend",
+    "case-tienda-ivan",
+  ];
+
+  return [...items].sort((a, b) => {
+    const ai = priority.indexOf(a.id);
+    const bi = priority.indexOf(b.id);
+    return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+  });
 }
 
 export const showcaseSections: {

@@ -1,6 +1,7 @@
 ---
 import type { Project } from '@data/projects';
 import { iconForModule } from '@data/icons';
+import { moduleSlug } from '@lib/module-slug';
 import AppIcon from '@components/ui/AppIcon.astro';
 import StackMarquee from '@components/ui/StackMarquee.astro';
 import ArchViewer from '@components/projects/ArchViewer.astro';
@@ -45,10 +46,10 @@ function splitLine(text: string, fallback: string) {
         </p>
         {project.modules.length > 1 && (
           <div class="flex gap-1.5">
-            <button class="rail-prev inline-flex h-9 w-9 items-center justify-center rounded-full bg-sand text-ink hover:bg-accent-soft" type="button" aria-label="Anterior">
+            <button class="btn-accent rail-prev inline-flex h-9 w-9 items-center justify-center rounded-full" type="button" aria-label="Anterior">
               <AppIcon name="arrow-right" size={14} class="rotate-180" />
             </button>
-            <button class="rail-next inline-flex h-9 w-9 items-center justify-center rounded-full bg-sand text-ink hover:bg-accent-soft" type="button" aria-label="Siguiente">
+            <button class="btn-accent rail-next inline-flex h-9 w-9 items-center justify-center rounded-full" type="button" aria-label="Siguiente">
               <AppIcon name="arrow-right" size={14} />
             </button>
           </div>
@@ -56,7 +57,7 @@ function splitLine(text: string, fallback: string) {
       </div>
       <div class="rail">
         {project.modules.map((module) => (
-          <article class="rail-item rounded-[1.4rem] bg-sand p-5">
+          <article id={module.id ?? moduleSlug(module.name)} class="rail-item scroll-mt-28 rounded-[1.4rem] bg-sand p-5">
             <span class="mb-3 inline-flex w-fit rounded-2xl bg-paper p-2 text-accent">
               <AppIcon name={iconForModule(module.name)} size={18} />
             </span>
@@ -94,10 +95,10 @@ function splitLine(text: string, fallback: string) {
         </p>
         {project.howItWorks.length > 1 && (
           <div class="flex gap-1.5">
-            <button class="rail-prev inline-flex h-9 w-9 items-center justify-center rounded-full bg-sand text-ink hover:bg-accent-soft" type="button" aria-label="Anterior">
+            <button class="btn-accent rail-prev inline-flex h-9 w-9 items-center justify-center rounded-full" type="button" aria-label="Anterior">
               <AppIcon name="arrow-right" size={14} class="rotate-180" />
             </button>
-            <button class="rail-next inline-flex h-9 w-9 items-center justify-center rounded-full bg-sand text-ink hover:bg-accent-soft" type="button" aria-label="Siguiente">
+            <button class="btn-accent rail-next inline-flex h-9 w-9 items-center justify-center rounded-full" type="button" aria-label="Siguiente">
               <AppIcon name="arrow-right" size={14} />
             </button>
           </div>
@@ -130,10 +131,10 @@ function splitLine(text: string, fallback: string) {
         </p>
         {project.highlights.length > 1 && (
           <div class="flex gap-1.5">
-            <button class="rail-prev inline-flex h-9 w-9 items-center justify-center rounded-full bg-sand text-ink hover:bg-accent-soft" type="button" aria-label="Anterior">
+            <button class="btn-accent rail-prev inline-flex h-9 w-9 items-center justify-center rounded-full" type="button" aria-label="Anterior">
               <AppIcon name="arrow-right" size={14} class="rotate-180" />
             </button>
-            <button class="rail-next inline-flex h-9 w-9 items-center justify-center rounded-full bg-sand text-ink hover:bg-accent-soft" type="button" aria-label="Siguiente">
+            <button class="btn-accent rail-next inline-flex h-9 w-9 items-center justify-center rounded-full" type="button" aria-label="Siguiente">
               <AppIcon name="arrow-right" size={14} />
             </button>
           </div>

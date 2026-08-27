@@ -1,5 +1,5 @@
 ---
-import { getBrandColor, getBrandMark, getStackLucide } from '@data/brands';
+import { getBrandColor, getBrandImage, getBrandMark, getStackLucide } from '@data/brands';
 import AppIcon from '@components/ui/AppIcon.astro';
 
 interface Props {
@@ -8,11 +8,14 @@ interface Props {
 }
 
 const { label, size = 16 } = Astro.props;
+const image = getBrandImage(label);
 const mark = getBrandMark(label);
 const color = getBrandColor(label);
 ---
 
-{mark ? (
+{image ? (
+  <img src={image} alt="" width={size} height={size} class="shrink-0 object-contain" />
+) : mark ? (
   <svg
     width={size}
     height={size}

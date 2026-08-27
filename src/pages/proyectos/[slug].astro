@@ -8,7 +8,7 @@ import {
 } from '@data/projects';
 import { getLab, labs } from '@data/labs';
 import { projectIcons } from '@data/icons';
-import { getProjectCover, getProjectGallery, getProjectLogo } from '@data/media';
+import { getProjectCover, getProjectGallery, getProjectLogo, projectLogoUsesLightBg } from '@data/media';
 import AppIcon from '@components/ui/AppIcon.astro';
 import BackLink from '@components/layout/BackLink.astro';
 import Carousel from '@components/ui/Carousel.astro';
@@ -32,6 +32,7 @@ if (!project && !lab) {
 
 const gallery = project ? getProjectGallery(project.slug) : undefined;
 const logo = project ? getProjectLogo(project.slug) : undefined;
+const logoLightBg = project ? projectLogoUsesLightBg(project.slug) : false;
 const cover = project ? getProjectCover(project.slug) : undefined;
 const live = project ? getLiveLink(project) : undefined;
 const title = project?.title ?? lab!.title;
@@ -59,7 +60,7 @@ const description = project?.summary ?? lab!.tagline;
         <div class="relative grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:gap-12">
           <div>
             <div class="mb-1 flex lg:hidden" data-hero-item>
-              <span class="inline-flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl bg-paper/10 p-2">
+              <span class:list={['inline-flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl p-2', logoLightBg ? 'bg-white' : 'bg-paper/10']}>
                 {logo ? (
                   <img src={logo} alt="" class="h-full w-full object-contain" />
                 ) : (
@@ -114,7 +115,7 @@ const description = project?.summary ?? lab!.tagline;
             ) : null}
           </div>
           <div class="hidden lg:flex lg:justify-end" data-hero-icon>
-            <div class="relative flex h-56 w-56 items-center justify-center overflow-hidden rounded-[2rem] border border-white/10 bg-paper/10 p-8 backdrop-blur-md">
+            <div class:list={['relative flex h-56 w-56 items-center justify-center overflow-hidden rounded-[2rem] border border-white/10 p-8 backdrop-blur-md', logoLightBg ? 'bg-white' : 'bg-paper/10']}>
               {logo ? (
                 <img src={logo} alt="" class="max-h-full max-w-full object-contain" />
               ) : (

@@ -1,11 +1,31 @@
 export const projectIcons: Record<string, IconName> = {
   jornalpro: "layers",
+  "jornalpro-hikcentral": "fingerprint",
   "jornalpro-backend": "server",
   "jornalpro-frontend": "layout-dashboard",
   "jornalpro-mobile": "smartphone-nfc",
   "offline-sync": "refresh-cw",
   "nfc-service": "nfc",
   "tienda-ivan": "shopping-bag",
+  agroeasy: "package-open",
+  "cotizaciones-facturaciones": "file-text",
+  "weather-api": "cloud",
+  "casa-domotica": "home",
+  "juego-2d": "sparkles",
+  "rest-api-node": "server",
+  "flutter-kotlin": "smartphone",
+  gifxplore: "image",
+  "lista-precios": "sheet",
+  "heroes-app": "bookmark",
+  "api-cocktail": "sparkles",
+  "image-api": "image",
+  "veterinary-php": "store",
+  "form-pets": "file-text",
+  "chat-socket": "message-circle",
+  "js-quiz": "file-code",
+  "journal-app": "file-text",
+  "task-app": "folder-kanban",
+  nexgard: "shopping-bag",
 };
 
 export const stackIcons: Record<string, IconName> = {
@@ -17,8 +37,14 @@ export const stackIcons: Record<string, IconName> = {
   "Prisma 7": "triangle",
   PostgreSQL: "database",
   "PostgreSQL 17": "database",
+  SQL: "database",
   React: "atom",
   "React 18": "atom",
+  Vue: "leaf",
+  "Vue 3": "leaf",
+  Quasar: "layout-dashboard",
+  Pinia: "boxes",
+  "Vue Query": "refresh-cw",
   Vite: "zap",
   "Vite 6": "zap",
   "Material UI": "panels-top-left",
@@ -34,6 +60,7 @@ export const stackIcons: Record<string, IconName> = {
   Remix: "shuffle",
   "Socket.IO": "radio",
   "AWS S3": "hard-drive",
+  PWA: "package",
   NFC: "nfc",
   Zod: "shield-check",
   JWT: "key-round",
@@ -82,13 +109,26 @@ export const stackIcons: Record<string, IconName> = {
   Arduino: "cpu",
   Unity: "box",
   Unity3D: "box",
+  Docker: "box",
+  Postman: "send",
+  Resend: "mail",
+  Swift: "code",
   Alexa: "audio-lines",
   Android: "smartphone",
   HTML: "file-code",
   CSS: "panels-top-left",
   JavaScript: "file-code",
+  Astro: "sparkles",
+  Shell: "terminal",
   "React Router": "route",
+  "React Router 7": "route",
+  "Workbox PWA": "package",
+  betuko_offline_sync: "refresh-cw",
+  mobile_scanner: "scan-line",
   Tailwind: "layers",
+  HikCentral: "fingerprint",
+  CFDI: "file-text",
+  Webhook: "radio",
 };
 
 export const focusIcons: { label: string; icon: IconName }[] = [
@@ -193,7 +233,8 @@ export function iconForStack(label: string): IconName {
 
 export function iconForModule(name: string): IconName {
   const value = name.toLowerCase();
-  if (value.includes("nómina") || value.includes("nomina") || value.includes("payroll") || value.includes("préstamo")) return "wallet";
+  if (value.includes("biometr") || value.includes("hikcentral") || value.includes("facial")) return "fingerprint";
+  if (value.includes("cotiz") || value.includes("factur") || value.includes("cfdi")) return "file-text";
   if (value.includes("tesorer")) return "wallet";
   if (value.includes("backend") || value.includes("api") || value.includes("auth")) return "server";
   if (value.includes("dashboard") || value.includes("front") || value.includes("monitor")) return "layout-dashboard";

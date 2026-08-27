@@ -8,8 +8,11 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "astro": "astro",
     "preview": "astro preview",
-    "astro": "astro"
+    "stats:github": "node --experimental-strip-types scripts/update-github-stats.ts",
+    "stats:codebase": "pnpm stats:github",
+    "stats:languages": "pnpm stats:github"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.4",

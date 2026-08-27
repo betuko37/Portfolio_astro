@@ -167,127 +167,308 @@ function initOrbs() {
   );
 }
 
+function placeCoverflowSlides(
+  slides: HTMLElement[],
+  active: number,
+  immediate: boolean,
+  spread: number,
+) {
+  slides.forEach((slide, i) => {
+    let diff = i - active;
+    const half = Math.floor(slides.length / 2);
+    if (diff > half) diff -= slides.length;
+    if (diff < -half) diff += slides.length;
+
+    const abs = Math.abs(diff);
+    const far = abs > 1;
+    const isActive = diff === 0;
+
+    slide.classList.toggle('is-active', isActive);
+    slide.classList.toggle('is-adjacent', abs === 1);
+    slide.toggleAttribute('data-active', isActive);
+
+    const vars = {
+      autoAlpha: far ? 0 : 1,
+      left: '50%',
+      xPercent: -50 + diff * spread,
+      scale: isActive ? 1 : 0.72,
+      rotateY: 0,
+      z: 0,
+      zIndex: isActive ? 30 : Math.max(1, 20 - abs * 6),
+      filter: isActive ? 'none' : 'brightness(0.92)',
+      transformOrigin: '50% 50%',
+      duration: immediate ? 0 : 0.65,
+      ease: 'power3.out',
+    };
+
+    if (immediate) gsap.set(slide, vars);
+    else gsap.to(slide, vars);
+  });
+}
+
+type CarouselBindOptions = {
+  reduce: boolean;
+  spread: number;
+  dots?: HTMLElement[];
+  prevBtn?: Element | null;
+  nextBtn?: Element | null;
+  onChange?: (index: number) => void;
+  autoplay?: boolean;
+};
+
+function bindCoverflowCarousel(
+  slides: HTMLElement[],
+  options: CarouselBindOptions,
+): { go: (next: number, immediate?: boolean) => void; getIndex: () => number } {
+  let index = 0;
+  let busy = false;
+
+  const paintDots = (active: number) => {
+    options.dots?.forEach((dot, i) => {
+      dot.classList.toggle('is-active', i === active);
+      gsap.to(dot, {
+        scale: i === active ? 1.12 : 1,
+        opacity: i === active ? 1 : 0.55,
+        duration: 0.25,
+      });
+    });
+  };
+
+  const go = (next: number, immediate = false) => {
+    if (slides.length <= 1) {
+      index = 0;
+      placeCoverflowSlides(slides, 0, true, options.spread);
+      options.onChange?.(0);
+      return;
+    }
+
+    const target = (next + slides.length) % slides.length;
+    if (!immediate && (busy || target === index)) return;
+
+    if (immediate || options.reduce) {
+      placeCoverflowSlides(slides, target, true, options.spread);
+      busy = false;
+    } else {
+      busy = true;
+      placeCoverflowSlides(slides, target, false, options.spread);
+      window.setTimeout(() => {
+        busy = false;
+      }, 420);
+    }
+
+    index = target;
+    paintDots(index);
+    options.onChange?.(index);
+  };
+
+  placeCoverflowSlides(slides, 0, true, options.spread);
+  paintDots(0);
+
+  options.prevBtn?.addEventListener('click', () => go(index - 1));
+  options.nextBtn?.addEventListener('click', () => go(index + 1));
+  options.dots?.forEach((dot, i) => dot.addEventListener('click', () => go(i, true)));
+
+  return { go, getIndex: () => index };
+}
+
+function bindFadeCarousel(
+  slides: HTMLElement[],
+  options: CarouselBindOptions,
+): { go: (next: number, immediate?: boolean) => void; getIndex: () => number } {
+  let index = 0;
+  let busy = false;
+
+  const paintDots = (active: number) => {
+    options.dots?.forEach((dot, i) => {
+      dot.classList.toggle('is-active', i === active);
+      gsap.to(dot, {
+        scale: i === active ? 1.12 : 1,
+        opacity: i === active ? 1 : 0.55,
+        duration: 0.25,
+      });
+    });
+  };
+
+  const go = (next: number, immediate = false) => {
+    if (slides.length <= 1) return;
+
+    const target = (next + slides.length) % slides.length;
+    if (busy || target === index) return;
+    busy = true;
+
+    if (options.reduce || immediate) {
+      gsap.set(slides, { autoAlpha: 0, xPercent: 0, scale: 1 });
+      gsap.set(slides[target], { autoAlpha: 1, xPercent: 0, scale: 1 });
+      index = target;
+      paintDots(index);
+      options.onChange?.(index);
+      busy = false;
+      return;
+    }
+
+    const outgoing = slides[index];
+    const incoming = slides[target];
+    const dir = target > index || (index === slides.length - 1 && target === 0) ? 1 : -1;
+
+    gsap
+      .timeline({
+        defaults: { ease: 'power3.inOut' },
+        onComplete: () => {
+          index = target;
+          paintDots(index);
+          options.onChange?.(index);
+          busy = false;
+        },
+      })
+      .to(outgoing, { autoAlpha: 0, xPercent: -16 * dir, scale: 0.94, duration: 0.42 }, 0)
+      .fromTo(
+        incoming,
+        { autoAlpha: 0, xPercent: 16 * dir, scale: 0.94 },
+        { autoAlpha: 1, xPercent: 0, scale: 1, duration: 0.55, ease: 'power3.out' },
+        0.06,
+      );
+  };
+
+  gsap.set(slides, { autoAlpha: 0, xPercent: 12, scale: 0.96 });
+  gsap.set(slides[0], { autoAlpha: 1, xPercent: 0, scale: 1 });
+  paintDots(0);
+
+  options.prevBtn?.addEventListener('click', () => go(index - 1));
+  options.nextBtn?.addEventListener('click', () => go(index + 1));
+  options.dots?.forEach((dot, i) => dot.addEventListener('click', () => go(i, true)));
+
+  return { go, getIndex: () => index };
+}
+
 function initCarousels(reduce: boolean) {
   document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
     const slides = Array.from(root.querySelectorAll<HTMLElement>('[data-slide]'));
+    if (!slides.length) return;
+
     const dots = Array.from(root.querySelectorAll<HTMLElement>('[data-dot]'));
-    if (slides.length < 2) return;
-
     const variant = root.dataset.variant ?? 'desktop';
-    const coverflow =
-      variant === 'desktop' && window.matchMedia('(min-width: 768px)').matches;
-    let index = 0;
-    let busy = false;
-    let startX = 0;
+    const desktop = window.matchMedia('(min-width: 768px)').matches;
+    const useCoverflow = variant === 'desktop' && desktop;
+    const dialog = root.querySelector<HTMLDialogElement>('[data-carousel-lightbox]');
+    const lightboxSlides = dialog
+      ? Array.from(dialog.querySelectorAll<HTMLElement>('[data-lightbox-slide]'))
+      : [];
+    const lightboxCounter = dialog?.querySelector<HTMLElement>('[data-lightbox-counter]');
+    const lightboxCaption = dialog?.querySelector<HTMLElement>('[data-lightbox-caption]');
+    const total = slides.length;
 
-    const paintDots = (active: number) => {
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('is-active', i === active);
-        gsap.to(dot, {
-          scale: i === active ? 1.12 : 1,
-          opacity: i === active ? 1 : 0.55,
-          duration: 0.25,
+    const updateLightboxMeta = (active: number) => {
+      if (lightboxCounter) lightboxCounter.textContent = `${active + 1} / ${total}`;
+      const alt = lightboxSlides[active]?.dataset.slideAlt ?? '';
+      if (lightboxCaption) lightboxCaption.textContent = alt;
+    };
+
+    const mainController = useCoverflow
+      ? bindCoverflowCarousel(slides, {
+          reduce,
+          spread: 100,
+          dots,
+          prevBtn: root.querySelector('.carousel-prev'),
+          nextBtn: root.querySelector('.carousel-next'),
+        })
+      : bindFadeCarousel(slides, {
+          reduce,
+          spread: 0,
+          dots,
+          prevBtn: root.querySelector('.carousel-prev'),
+          nextBtn: root.querySelector('.carousel-next'),
+        });
+
+    let lightboxController: ReturnType<typeof bindCoverflowCarousel> | null = null;
+
+    if (dialog && lightboxSlides.length) {
+      const lightboxDesktop = desktop && lightboxSlides.length > 1;
+
+      lightboxController = lightboxDesktop
+        ? bindCoverflowCarousel(lightboxSlides, {
+            reduce,
+            spread: 112,
+            prevBtn: dialog.querySelector('.carousel-lightbox-prev'),
+            nextBtn: dialog.querySelector('.carousel-lightbox-next'),
+            onChange: updateLightboxMeta,
+          })
+        : bindFadeCarousel(lightboxSlides, {
+            reduce,
+            spread: 0,
+            prevBtn: dialog.querySelector('.carousel-lightbox-prev'),
+            nextBtn: dialog.querySelector('.carousel-lightbox-next'),
+            onChange: updateLightboxMeta,
+          });
+
+      const openLightbox = (index: number) => {
+        lightboxController?.go(index, true);
+        updateLightboxMeta(index);
+        dialog.showModal();
+        document.body.classList.add('carousel-lightbox-open');
+      };
+
+      slides.forEach((slide) => {
+        slide.addEventListener('click', () => {
+          const slideIndex = Number(slide.dataset.slideIndex ?? mainController.getIndex());
+          openLightbox(Number.isFinite(slideIndex) ? slideIndex : mainController.getIndex());
         });
       });
-    };
 
-    const placeCoverflow = (active: number, immediate = false) => {
-      slides.forEach((slide, i) => {
-        let diff = i - active;
-        const half = Math.floor(slides.length / 2);
-        if (diff > half) diff -= slides.length;
-        if (diff < -half) diff += slides.length;
-
-        const far = Math.abs(diff) > 2;
-        const vars = {
-          autoAlpha: far ? 0 : diff === 0 ? 1 : 0.42,
-          xPercent: diff * 42,
-          scale: diff === 0 ? 1 : 0.78,
-          rotateY: diff * -18,
-          zIndex: 20 - Math.abs(diff),
-          duration: immediate ? 0 : 0.7,
-          ease: 'power3.out',
-        };
-
-        if (immediate) gsap.set(slide, vars);
-        else gsap.to(slide, vars);
+      lightboxSlides.forEach((slide) => {
+        slide.addEventListener('click', () => {
+          const slideIndex = Number(slide.dataset.slideIndex);
+          if (!slide.classList.contains('is-active') && Number.isFinite(slideIndex)) {
+            lightboxController?.go(slideIndex, false);
+          }
+        });
       });
-    };
 
-    if (coverflow) {
-      placeCoverflow(0, true);
-    } else {
-      gsap.set(slides, { autoAlpha: 0, xPercent: 12, scale: 0.96 });
-      gsap.set(slides[0], { autoAlpha: 1, xPercent: 0, scale: 1 });
+      dialog.querySelector('[data-carousel-lightbox-close]')?.addEventListener('click', () => {
+        dialog.close();
+      });
+
+      dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+
+      dialog.addEventListener('close', () => {
+        document.body.classList.remove('carousel-lightbox-open');
+      });
+
+      dialog.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') lightboxController?.go(lightboxController.getIndex() - 1);
+        if (event.key === 'ArrowRight') lightboxController?.go(lightboxController.getIndex() + 1);
+      });
     }
 
-    const go = (next: number) => {
-      const target = (next + slides.length) % slides.length;
-      if (busy || target === index) return;
-      busy = true;
+    if (slides.length < 2) return;
 
-      if (reduce) {
-        if (coverflow) placeCoverflow(target, true);
-        else {
-          gsap.set(slides[index], { autoAlpha: 0 });
-          gsap.set(slides[target], { autoAlpha: 1, xPercent: 0, scale: 1 });
-        }
-        index = target;
-        paintDots(index);
-        busy = false;
-        return;
-      }
-
-      if (coverflow) {
-        placeCoverflow(target);
-        index = target;
-        paintDots(index);
-        window.setTimeout(() => {
-          busy = false;
-        }, 420);
-        return;
-      }
-
-      const outgoing = slides[index];
-      const incoming = slides[target];
-      const dir = target > index || (index === slides.length - 1 && target === 0) ? 1 : -1;
-
-      gsap
-        .timeline({
-          defaults: { ease: 'power3.inOut' },
-          onComplete: () => {
-            index = target;
-            paintDots(index);
-            busy = false;
-          },
-        })
-        .to(outgoing, { autoAlpha: 0, xPercent: -16 * dir, scale: 0.94, duration: 0.42 }, 0)
-        .fromTo(
-          incoming,
-          { autoAlpha: 0, xPercent: 16 * dir, scale: 0.94 },
-          { autoAlpha: 1, xPercent: 0, scale: 1, duration: 0.55, ease: 'power3.out' },
-          0.06,
-        );
-    };
-
-    root.querySelector('.carousel-next')?.addEventListener('click', () => go(index + 1));
-    root.querySelector('.carousel-prev')?.addEventListener('click', () => go(index - 1));
-    dots.forEach((dot, i) => dot.addEventListener('click', () => go(i)));
+    let startX = 0;
+    let startY = 0;
 
     root.addEventListener('pointerdown', (event) => {
       startX = event.clientX;
-    });
-    root.addEventListener('pointerup', (event) => {
-      const dx = event.clientX - startX;
-      if (dx > 48) go(index - 1);
-      if (dx < -48) go(index + 1);
+      startY = event.clientY;
     });
 
-    let timer = window.setInterval(() => go(index + 1), 4200);
+    root.addEventListener('pointerup', (event) => {
+      const dx = event.clientX - startX;
+      const dy = event.clientY - startY;
+      if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy)) return;
+      if (dx > 48) mainController.go(mainController.getIndex() - 1);
+      if (dx < -48) mainController.go(mainController.getIndex() + 1);
+    });
+
+    let timer = window.setInterval(() => {
+      mainController.go(mainController.getIndex() + 1);
+    }, 4200);
+
     const pause = () => window.clearInterval(timer);
     const resume = () => {
       pause();
-      timer = window.setInterval(() => go(index + 1), 4200);
+      timer = window.setInterval(() => {
+        mainController.go(mainController.getIndex() + 1);
+      }, 4200);
     };
 
     root.addEventListener('pointerenter', pause);

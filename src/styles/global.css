@@ -13,6 +13,12 @@
   --on-strong: #f3f0fa;
   --mist: #c9c2d8;
   --on-dark: #f3f0fa;
+  --gh-contrib-0: #d5cee6;
+  --gh-contrib-1: #9be9a8;
+  --gh-contrib-2: #40c463;
+  --gh-contrib-3: #30a14e;
+  --gh-contrib-4: #216e39;
+  --gh-contrib-ring: rgba(92, 86, 104, 0.55);
   color-scheme: light;
 }
 
@@ -27,8 +33,14 @@
   --night-soft: #221c32;
   --strong: #f3f0fa;
   --on-strong: #0c0b12;
-  --mist: #c9c2d8;
+  --mist: #4a4258;
   --on-dark: #f3f0fa;
+  --gh-contrib-0: #2a2438;
+  --gh-contrib-1: #0e4429;
+  --gh-contrib-2: #006d32;
+  --gh-contrib-3: #26a641;
+  --gh-contrib-4: #39d353;
+  --gh-contrib-ring: rgba(167, 139, 250, 0.28);
   color-scheme: dark;
 }
 
@@ -93,6 +105,17 @@ a {
   color: var(--on-strong);
 }
 
+.btn-accent {
+  background: color-mix(in srgb, var(--color-accent) 65%, transparent);
+  color: #fff;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-accent:hover {
+  background: color-mix(in srgb, var(--color-accent) 80%, transparent);
+  color: #fff;
+}
+
 .tone-night {
   background: #0a0a0a;
   color: #f3f0fa;
@@ -101,6 +124,43 @@ a {
 [data-theme="dark"] .tone-night {
   background: #14111c;
   color: #f3f0fa;
+}
+
+.tone-night .contact-kicker {
+  color: var(--color-accent);
+}
+
+.tone-night .contact-muted {
+  color: rgba(243, 240, 250, 0.72);
+}
+
+.tone-night .contact-note {
+  color: rgba(243, 240, 250, 0.52);
+}
+
+.tone-night .contact-input {
+  background: rgba(255, 255, 255, 0.07);
+  color: #f3f0fa;
+}
+
+.tone-night .contact-input::placeholder {
+  color: rgba(243, 240, 250, 0.38);
+}
+
+.tone-night .contact-input:focus {
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.45);
+}
+
+.tone-night .contact-submit {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.tone-night .contact-submit:hover:not(:disabled) {
+  background: #8b5cf6;
+  color: #fff;
 }
 
 .tone-sand {
@@ -468,10 +528,105 @@ a {
 
 .coverflow-stage {
   transform-style: preserve-3d;
+  isolation: isolate;
 }
 
 .carousel-slide {
   backface-visibility: hidden;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.carousel-slide-cover {
+  width: min(68%, 48rem);
+}
+
+.coverflow .carousel-slide.is-active,
+.coverflow .carousel-slide.is-adjacent {
+  pointer-events: auto;
+}
+
+.carousel-lightbox-stage .carousel-slide-cover {
+  width: min(64%, 52rem);
+}
+
+.coverflow .carousel-slide.is-active {
+  box-shadow:
+    0 28px 70px rgba(10, 10, 10, 0.22),
+    0 0 0 1px rgba(10, 10, 10, 0.06);
+}
+
+.carousel-lightbox {
+  margin: 0;
+  max-width: none;
+  max-height: none;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  overflow: hidden;
+}
+
+.carousel-lightbox::backdrop {
+  background: color-mix(in srgb, var(--color-ink) 72%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.carousel-lightbox-panel {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem 1rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .carousel-lightbox-panel {
+    padding: 1.5rem 2rem 2rem;
+  }
+}
+
+.carousel-lightbox-toolbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 auto 1rem;
+  width: min(100%, 64rem);
+}
+
+.carousel-lightbox-meta {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--color-on-dark);
+}
+
+.carousel-lightbox-caption {
+  color: color-mix(in srgb, var(--color-on-dark) 72%, transparent);
+}
+
+.carousel-lightbox-body {
+  margin-inline: auto;
+  width: min(100%, 64rem);
+}
+
+.carousel-lightbox-stage {
+  min-height: min(70vh, 720px);
+}
+
+.carousel-lightbox .carousel-slide.is-active {
+  box-shadow:
+    0 32px 80px rgba(10, 10, 10, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+body.carousel-lightbox-open {
+  overflow: hidden;
 }
 
 .mer-wrap .mermaid {

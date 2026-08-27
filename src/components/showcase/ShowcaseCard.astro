@@ -2,6 +2,7 @@
 import type { ShowcaseItem } from '@data/showcase';
 import AppIcon from '@components/ui/AppIcon.astro';
 import BrandIcon from '@components/ui/BrandIcon.astro';
+import { isBrandImage } from '@data/brands';
 
 interface Props {
   item: ShowcaseItem;
@@ -51,10 +52,13 @@ const extra = item.stack.length - stack.length;
       <ul class="flex flex-wrap items-center gap-1">
         {stack.map((tech) => (
           <li
-            class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-paper"
+            class:list={[
+              'inline-flex items-center justify-center rounded-full bg-paper',
+              isBrandImage(tech) ? 'h-8 w-8' : 'h-7 w-7',
+            ]}
             title={tech}
           >
-            <BrandIcon label={tech} size={13} />
+            <BrandIcon label={tech} size={isBrandImage(tech) ? 16 : 13} />
           </li>
         ))}
         {extra > 0 && (

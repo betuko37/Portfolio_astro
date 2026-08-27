@@ -4,15 +4,18 @@ import {
   siAngular,
   siArduino,
   siAxios,
+  siAstro,
   siCloudinary,
   siCss,
   siDart,
+  siDocker,
   siDotnet,
   siExpress,
   siFirebase,
   siFlutter,
   siFramer,
   siGraphql,
+  siGnubash,
   siGsap,
   siHtml5,
   siJavascript,
@@ -27,20 +30,27 @@ import {
   siNodedotjs,
   siOpenjdk,
   siPhp,
+  siPostman,
   siPostgresql,
   siPrisma,
+  siPinia,
   siPwa,
+  siQuasar,
   siReact,
   siReactrouter,
   siRemix,
+  siResend,
   siShopify,
   siSocketdotio,
   siSwr,
+  siSwift,
   siTailwindcss,
+  siTanstack,
   siThreedotjs,
   siTypescript,
   siUnity,
   siVite,
+  siVuedotjs,
   siZod,
 } from "simple-icons";
 import { iconForStack, type IconName } from "./icons";
@@ -59,8 +69,15 @@ const brands: Record<string, SimpleIcon> = {
   "Prisma 7": siPrisma,
   PostgreSQL: siPostgresql,
   "PostgreSQL 17": siPostgresql,
+  SQL: siPostgresql,
   React: siReact,
   "React 18": siReact,
+  Vue: siVuedotjs,
+  "Vue 3": siVuedotjs,
+  Quasar: siQuasar,
+  Pinia: siPinia,
+  "Vue Query": siTanstack,
+  TanStack: siTanstack,
   Vite: siVite,
   "Vite 6": siVite,
   "Material UI": siMui,
@@ -87,10 +104,16 @@ const brands: Record<string, SimpleIcon> = {
   Arduino: siArduino,
   Unity: siUnity,
   Unity3D: siUnity,
+  Docker: siDocker,
+  Postman: siPostman,
+  Resend: siResend,
+  Swift: siSwift,
   Android: siAndroid,
   HTML: siHtml5,
   CSS: siCss,
   JavaScript: siJavascript,
+  Astro: siAstro,
+  Shell: siGnubash,
   "React Router": siReactrouter,
   "React Router 7": siReactrouter,
   Tailwind: siTailwindcss,
@@ -102,7 +125,14 @@ const brands: Record<string, SimpleIcon> = {
   Axios: siAxios,
   SWR: siSwr,
   "Workbox PWA": siPwa,
+  PWA: siPwa,
   NFC: siNfc,
+};
+
+/** Marcas sin entrada en simple-icons — logo raster del producto. */
+const brandImages: Record<string, string> = {
+  HikCentral: "/hikcentral/logo/icon.webp",
+  "HikCentral Professional": "/hikcentral/logo/icon.webp",
 };
 
 const fallbackColor: Record<string, string> = {
@@ -115,6 +145,8 @@ const fallbackColor: Record<string, string> = {
   pdfmake: "#1A73E8",
   xlsx: "#217346",
   Postmark: "#FFDE00",
+  HikCentral: "#FA3139",
+  CFDI: "#0A0A0A",
   "node-cron": "#68A063",
   otplib: "#F97316",
   Recharts: "#22C55E",
@@ -155,6 +187,14 @@ export function getBrandMark(label: string): BrandMark | undefined {
     path: icon.path,
     color: isMono(icon.hex) ? "currentColor" : `#${icon.hex}`,
   };
+}
+
+export function getBrandImage(label: string): string | undefined {
+  return brandImages[label];
+}
+
+export function isBrandImage(label: string): boolean {
+  return Boolean(getBrandImage(label));
 }
 
 export function getBrandColor(label: string): string {

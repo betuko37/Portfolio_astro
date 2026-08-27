@@ -1,7 +1,7 @@
 // @ts-check
 import { fileURLToPath } from 'node:url';
 
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 
 import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
@@ -14,6 +14,16 @@ const src = fileURLToPath(new URL('./src', import.meta.url));
 export default defineConfig({
   integrations: [react()],
   devToolbar: { enabled: false },
+
+  env: {
+    schema: {
+      GITHUB_TOKEN: envField.string({ context: 'server', access: 'secret', optional: true }),
+      GITHUB_LOGIN: envField.string({ context: 'server', access: 'secret', optional: true }),
+      RESEND_API_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),
+      CONTACT_TO_EMAIL: envField.string({ context: 'server', access: 'secret', optional: true }),
+      CONTACT_FROM_EMAIL: envField.string({ context: 'server', access: 'secret', optional: true }),
+    },
+  },
 
   vite: {
     resolve: {

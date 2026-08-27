@@ -41,14 +41,14 @@ const { id, title, kicker, icon, items } = Astro.props;
         {items.length > 1 && (
           <>
             <button
-              class="rail-prev inline-flex h-9 w-9 items-center justify-center rounded-full bg-sand text-ink hover:bg-accent-soft"
+              class="btn-accent rail-prev inline-flex h-9 w-9 items-center justify-center rounded-full"
               type="button"
               aria-label="Anterior"
             >
               <AppIcon name="arrow-right" size={14} class="rotate-180" />
             </button>
             <button
-              class="rail-next inline-flex h-9 w-9 items-center justify-center rounded-full bg-sand text-ink hover:bg-accent-soft"
+              class="btn-accent rail-next inline-flex h-9 w-9 items-center justify-center rounded-full"
               type="button"
               aria-label="Siguiente"
             >
@@ -58,7 +58,7 @@ const { id, title, kicker, icon, items } = Astro.props;
         )}
         <a
           href={`/proyectos?grupo=${id}`}
-          class="inline-flex items-center gap-1.5 rounded-full bg-sand px-3.5 py-2 text-xs font-medium text-ink no-underline hover:bg-accent-soft md:text-sm"
+          class="btn-accent inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-xs font-medium no-underline md:text-sm"
         >
           Ver listado
           <AppIcon name="arrow-right" size={14} />

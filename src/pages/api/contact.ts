@@ -1,4 +1,9 @@
 import type { APIRoute } from 'astro';
+import {
+  CONTACT_FROM_EMAIL,
+  CONTACT_TO_EMAIL,
+  RESEND_API_KEY,
+} from 'astro:env/server';
 import { profile } from '@data/profile';
 
 export const prerender = false;
@@ -26,10 +31,9 @@ function isValidEmail(value: string) {
 }
 
 export const POST: APIRoute = async ({ request }) => {
-  const apiKey = import.meta.env.RESEND_API_KEY;
-  const toEmail = import.meta.env.CONTACT_TO_EMAIL ?? profile.email;
-  const fromEmail =
-    import.meta.env.CONTACT_FROM_EMAIL ?? `Portfolio <onboarding@resend.dev>`;
+  const apiKey = RESEND_API_KEY;
+  const toEmail = CONTACT_TO_EMAIL ?? profile.email;
+  const fromEmail = CONTACT_FROM_EMAIL ?? `Portfolio <onboarding@resend.dev>`;
 
   if (!apiKey) {
     return json(

@@ -1,5 +1,6 @@
 ---
 import BrandIcon from '@components/ui/BrandIcon.astro';
+import { isBrandImage } from '@data/brands';
 
 interface Props {
   items: readonly string[];
@@ -7,46 +8,35 @@ interface Props {
 }
 
 const { items, single = false } = Astro.props;
-const loop = [...items, ...items];
-const reverseLoop = [...items].reverse().concat([...items].reverse());
-const shift = Math.max(1, Math.floor(items.length / 3));
-const shifted = [...items.slice(shift), ...items.slice(0, shift)];
-const thirdLoop = [...shifted, ...shifted];
+
+function splitRows(list: readonly string[], rows = 3) {
+  const size = Math.ceil(list.length / rows);
+  return Array.from({ length: rows }, (_, index) =>
+    list.slice(index * size, (index + 1) * size),
+  ).filter((row) => row.length > 0);
+}
+
+const loop = (row: readonly string[]) => [...row, ...row];
+const marqueeRows = single ? [items] : splitRows(items);
 ---
 
 <div class="space-y-3">
-  <div class="marquee">
-    <div class="marquee-track">
-      {loop.map((item) => (
-        <span class="inline-flex items-center gap-2 rounded-full bg-paper px-4 py-2 text-sm text-ink">
-          <BrandIcon label={item} size={15} />
-          {item}
-        </span>
-      ))}
+  {marqueeRows.map((row, index) => (
+    <div class="marquee">
+      <div
+        class:list={[
+          'marquee-track',
+          index === 1 && 'reverse',
+          index === 2 && 'slow',
+        ]}
+      >
+        {loop(row).map((item) => (
+          <span class="inline-flex items-center gap-2 rounded-full bg-paper px-4 py-2 text-sm text-ink">
+            <BrandIcon label={item} size={isBrandImage(item) ? 18 : 15} />
+            {item}
+          </span>
+        ))}
+      </div>
     </div>
-  </div>
-  {!single && (
-    <>
-      <div class="marquee">
-        <div class="marquee-track reverse">
-          {reverseLoop.map((item) => (
-            <span class="inline-flex items-center gap-2 rounded-full bg-paper px-4 py-2 text-sm text-ink">
-              <BrandIcon label={item} size={15} />
-              {item}
-            </span>
-          ))}
-        </div>
-      </div>
-      <div class="marquee">
-        <div class="marquee-track slow">
-          {thirdLoop.map((item) => (
-            <span class="inline-flex items-center gap-2 rounded-full bg-paper px-4 py-2 text-sm text-ink">
-              <BrandIcon label={item} size={15} />
-              {item}
-            </span>
-          ))}
-        </div>
-      </div>
-    </>
-  )}
+  ))}
 </div>
