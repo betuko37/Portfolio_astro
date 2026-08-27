@@ -1,9 +1,9 @@
 ---
-import { profile } from '../data/profile';
-import { focusIcons } from '../data/icons';
-import AppIcon from './AppIcon.astro';
-import MexicoFlag from './MexicoFlag.astro';
-import FoldText from './FoldText.jsx';
+import { profile } from '@data/profile';
+import { focusIcons } from '@data/icons';
+import AppIcon from '@components/ui/AppIcon.astro';
+import MexicoFlag from '@components/ui/MexicoFlag.astro';
+import FoldText from '@components/effects/fold-text/FoldText.jsx';
 ---
 
 <section id="sobre" class="px-4 py-4 md:px-8 md:py-8">
@@ -73,6 +73,6 @@ import FoldText from './FoldText.jsx';
 </section>
 
 <script>
-  import { initHeroScene } from '../scripts/heroScene';
+  import { initHeroScene } from '@lib/heroScene';
   initHeroScene();
 </script>

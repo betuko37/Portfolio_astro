@@ -1,8 +1,8 @@
 ---
-import { profile, whatsappHref } from '../data/profile';
-import AppIcon from './AppIcon.astro';
-import type { IconName } from '../data/icons';
-import FoldText from './FoldText.jsx';
+import { profile, whatsappHref } from '@data/profile';
+import AppIcon from '@components/ui/AppIcon.astro';
+import type { IconName } from '@data/icons';
+import FoldText from '@components/effects/fold-text/FoldText.jsx';
 
 const mailHref = `mailto:${profile.email}?subject=${encodeURIComponent('Contacto profesional — portafolio')}`;
 const whatsapp = profile.whatsapp ? whatsappHref(profile.whatsapp) : '';

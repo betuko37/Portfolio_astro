@@ -1,10 +1,10 @@
 ---
-import '../styles/global.css';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import WavesBg from '../components/WavesBg.jsx';
-import ClickSparkLayer from '../components/ClickSparkLayer.jsx';
-import { profile } from '../data/profile';
+import '@styles/global.css';
+import Header from '@components/layout/Header.astro';
+import Footer from '@components/layout/Footer.astro';
+import WavesBg from '@components/effects/gradient-waves/WavesBg.jsx';
+import ClickSparkLayer from '@components/effects/click-spark/ClickSparkLayer.jsx';
+import { profile } from '@data/profile';
 
 interface Props {
   title?: string;
@@ -80,8 +80,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
     </main>
     <Footer />
     <script>
-      import { initMotion } from '../scripts/motion';
-      import { initTheme } from '../scripts/theme';
+      import { initMotion } from '@lib/motion';
+      import { initTheme } from '@lib/theme';
       initTheme();
       initMotion();
     </script>

@@ -1,8 +1,8 @@
 ---
-import { profile } from '../data/profile';
-import AppIcon from './AppIcon.astro';
-import ThemeToggle from './ThemeToggle.astro';
-import type { IconName } from '../data/icons';
+import { profile } from '@data/profile';
+import AppIcon from '@components/ui/AppIcon.astro';
+import ThemeToggle from '@components/ui/ThemeToggle.astro';
+import type { IconName } from '@data/icons';
 
 const path = Astro.url.pathname;
 const links: { href: string; label: string; icon: IconName }[] = [

@@ -1,19 +1,19 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import LabCase from '../../components/LabCase.astro';
+import Layout from '@layouts/Layout.astro';
+import LabCase from '@components/projects/LabCase.astro';
 import {
   getLiveLink,
   getProject,
   projects,
-} from '../../data/projects';
-import { getLab, labs } from '../../data/labs';
-import { projectIcons } from '../../data/icons';
-import { getProjectCover, getProjectGallery, getProjectLogo } from '../../data/media';
-import AppIcon from '../../components/AppIcon.astro';
-import BackLink from '../../components/BackLink.astro';
-import Carousel from '../../components/Carousel.astro';
-import CaseStudyDeck from '../../components/CaseStudyDeck.astro';
-import FoldText from '../../components/FoldText.jsx';
+} from '@data/projects';
+import { getLab, labs } from '@data/labs';
+import { projectIcons } from '@data/icons';
+import { getProjectCover, getProjectGallery, getProjectLogo } from '@data/media';
+import AppIcon from '@components/ui/AppIcon.astro';
+import BackLink from '@components/layout/BackLink.astro';
+import Carousel from '@components/ui/Carousel.astro';
+import CaseStudyDeck from '@components/projects/CaseStudyDeck.astro';
+import FoldText from '@components/effects/fold-text/FoldText.jsx';
 
 export function getStaticPaths() {
   return [

@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { profile } from '../../data/profile';
+import { profile } from '@data/profile';
 
 export const prerender = false;
 

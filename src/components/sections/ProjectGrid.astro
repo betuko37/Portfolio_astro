@@ -1,12 +1,12 @@
 ---
-import { getShowcase, showcaseSections } from '../data/showcase';
-import { getProject } from '../data/projects';
-import { getProjectLogo } from '../data/media';
-import { profile } from '../data/profile';
-import ShowcaseRail from './ShowcaseRail.astro';
-import ShowcaseBreak from './ShowcaseBreak.astro';
-import StackMarquee from './StackMarquee.astro';
-import AppIcon from './AppIcon.astro';
+import { getShowcase, showcaseSections } from '@data/showcase';
+import { getProject } from '@data/projects';
+import { getProjectLogo } from '@data/media';
+import { profile } from '@data/profile';
+import ShowcaseRail from '@components/showcase/ShowcaseRail.astro';
+import ShowcaseBreak from '@components/showcase/ShowcaseBreak.astro';
+import StackMarquee from '@components/ui/StackMarquee.astro';
+import AppIcon from '@components/ui/AppIcon.astro';
 
 const live = showcaseSections.find((section) => section.id === 'live')!;
 const github = showcaseSections.find((section) => section.id === 'github')!;

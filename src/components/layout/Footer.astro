@@ -1,8 +1,8 @@
 ---
-import { profile, whatsappHref } from '../data/profile';
-import AppIcon from './AppIcon.astro';
-import ProfilePhoto from './ProfilePhoto.astro';
-import type { IconName } from '../data/icons';
+import { profile, whatsappHref } from '@data/profile';
+import AppIcon from '@components/ui/AppIcon.astro';
+import ProfilePhoto from '@components/ui/ProfilePhoto.astro';
+import type { IconName } from '@data/icons';
 
 const year = new Date().getFullYear();
 const whatsapp = profile.whatsapp ? whatsappHref(profile.whatsapp) : '';

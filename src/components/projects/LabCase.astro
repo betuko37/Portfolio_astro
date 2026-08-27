@@ -1,12 +1,12 @@
 ---
-import type { Lab } from '../data/labs';
-import { getRelatedLabs, labLinks } from '../data/labs';
-import { fromLab } from '../data/showcase';
-import AppIcon from './AppIcon.astro';
-import BackLink from './BackLink.astro';
-import StackPills from './StackPills.astro';
-import ShowcaseCard from './ShowcaseCard.astro';
-import FoldText from './FoldText.jsx';
+import type { Lab } from '@data/labs';
+import { getRelatedLabs, labLinks } from '@data/labs';
+import { fromLab } from '@data/showcase';
+import AppIcon from '@components/ui/AppIcon.astro';
+import BackLink from '@components/layout/BackLink.astro';
+import StackPills from '@components/ui/StackPills.astro';
+import ShowcaseCard from '@components/showcase/ShowcaseCard.astro';
+import FoldText from '@components/effects/fold-text/FoldText.jsx';
 
 interface Props {
   lab: Lab;
