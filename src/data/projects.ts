@@ -18,7 +18,7 @@ export type Project = {
   role: string;
   year: string;
   featured: boolean;
-  accent: "green" | "ink" | "sand" | "night";
+  accent: "purple" | "ink" | "sand" | "night";
   stack: string[];
   highlights: string[];
   modules: ProjectModule[];
@@ -33,7 +33,7 @@ export const projects: Project[] = [
     slug: "jornalpro",
     title: "JornalPro Cloud",
     kicker: "Producto principal",
-    tagline: "ERP agrícola multi-empresa: campo, nómina, empaque y tesorería.",
+    tagline: "ERP multi-empresa: API, dashboard, app offline y hardware.",
     summary:
       "Plataforma completa para productoras agrícolas en México. Un solo producto con backend cloud, dashboard web y app Android offline-first. Cubre jornales, asistencia NFC/biometría, empaque, compras y SAT.",
     problem:
@@ -41,7 +41,7 @@ export const projects: Project[] = [
     role: "Arquitectura y desarrollo de backend, frontend y mobile",
     year: "2024 — hoy",
     featured: true,
-    accent: "green",
+    accent: "purple",
     stack: [
       "TypeScript",
       "Express 5",
@@ -127,7 +127,7 @@ export const projects: Project[] = [
     slug: "jornalpro-backend",
     title: "JornalPro Backend",
     kicker: "Case study",
-    tagline: "API cloud de un ERP agrícola: ~1.150 handlers y 182 modelos.",
+    tagline: "API cloud de un ERP: ~1.150 handlers y 182 modelos.",
     summary:
       "Monolito modular en Node.js y TypeScript. Express 5, Prisma 7 sobre PostgreSQL, JWT con TOTP, Socket.IO y crons. El servidor se identifica como JornalPro Cloud.",
     problem:
@@ -316,7 +316,7 @@ export const projects: Project[] = [
     slug: "jornalpro-mobile",
     title: "JornalPro Mobile",
     kicker: "Case study",
-    tagline: "App Flutter de campo: NFC, cola Hive y voz offline.",
+    tagline: "App Flutter offline-first: NFC, cola Hive y voz on-device.",
     summary:
       "Android para capataces. ~104k líneas Dart. Offline-first con betuko_offline_sync, cola propia de asistencias, GPS obligatorio, QR de respaldo y ASR Sherpa-ONNX para destajo por surcos. Se distribuye como APK (sin URL pública); las capturas van en esta ficha.",
     problem:
@@ -324,7 +324,7 @@ export const projects: Project[] = [
     role: "Mobile lead / full-stack",
     year: "2024 — hoy",
     featured: false,
-    accent: "green",
+    accent: "purple",
     stack: [
       "Flutter 3.8",
       "Dart",

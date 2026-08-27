@@ -1,35 +1,74 @@
 ---
 import { profile } from '../data/profile';
+import AppIcon from './AppIcon.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import type { IconName } from '../data/icons';
 
 const path = Astro.url.pathname;
-const links = [
-  { href: '/', label: 'Inicio' },
-  { href: '/#proyectos', label: 'Proyectos' },
-  { href: '/sobre', label: 'Sobre mí' },
-  { href: '/#contacto', label: 'Contacto' },
+const links: { href: string; label: string; icon: IconName }[] = [
+  { href: '/', label: 'Inicio', icon: 'home' },
+  { href: '/#proyectos', label: 'Proyectos', icon: 'folder-kanban' },
+  { href: '/sobre', label: 'Sobre mí', icon: 'user-round' },
+  { href: '/#contacto', label: 'Contacto', icon: 'mail' },
 ];
+
+const isActive = (href: string) => {
+  if (href === '/') return path === '/';
+  if (href === '/#proyectos') return path.startsWith('/proyectos');
+  if (href === '/sobre') return path.startsWith('/sobre');
+  return false;
+};
 ---
 
-<header class="sticky top-0 z-40 bg-paper">
-  <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 md:px-8">
-    <a href="/" class="rounded-full px-3 py-1.5 text-sm font-semibold tracking-tight no-underline">
-      {profile.name}
+<header class="pointer-events-none fixed inset-x-0 top-0 z-40 flex justify-center px-4 pt-4">
+  <div
+    class="nav-shell pointer-events-auto flex w-full max-w-5xl items-center justify-between rounded-full px-2 py-2"
+    data-nav
+  >
+    <a
+      href="/"
+      data-magnetic
+      class="inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-sm font-semibold tracking-tight no-underline"
+    >
+      <AppIcon name="zap" size={16} />
+      <span class="sm:hidden">JZ</span>
+      <span class="hidden sm:inline">{profile.name}</span>
     </a>
-    <nav class="flex flex-wrap items-center justify-end gap-1 text-xs sm:text-sm">
-      {links.map((link) => {
-        const active = link.href === path || (link.href !== '/' && path.startsWith(link.href));
-        return (
-          <a
-            href={link.href}
-            class:list={[
-              'rounded-full px-3 py-1.5 no-underline transition-colors',
-              active ? 'tone-ink' : 'text-muted hover:bg-sand hover:text-ink',
-            ]}
-          >
-            {link.label}
-          </a>
-        );
-      })}
+    <div class="flex items-center gap-1">
+      <ThemeToggle />
+    <nav class="hidden items-center gap-0.5 text-sm sm:flex">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          data-magnetic
+          class:list={[
+            'inline-flex items-center gap-1.5 rounded-full px-3 py-2 no-underline transition-colors',
+            isActive(link.href) ? 'tone-ink' : 'text-muted hover:bg-sand hover:text-ink',
+          ]}
+        >
+          <AppIcon name={link.icon} size={14} />
+          {link.label}
+        </a>
+      ))}
     </nav>
+    </div>
   </div>
 </header>
+
+<nav
+  class="fixed inset-x-4 bottom-4 z-40 flex items-center rounded-full bg-sand px-1.5 py-1.5 sm:hidden"
+  aria-label="Navegación móvil"
+>
+  {links.map((link) => (
+    <a
+      href={link.href}
+      class:list={[
+        'flex flex-1 flex-col items-center gap-0.5 rounded-full py-1.5 text-[10px] font-medium no-underline',
+        isActive(link.href) ? 'tone-ink' : 'text-muted',
+      ]}
+    >
+      <AppIcon name={link.icon} size={16} />
+      {link.label}
+    </a>
+  ))}
+</nav>

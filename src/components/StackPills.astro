@@ -1,4 +1,7 @@
 ---
+import { iconForStack } from '../data/icons';
+import AppIcon from './AppIcon.astro';
+
 interface Props {
   items: readonly string[];
   tone?: 'light' | 'dark';
@@ -11,10 +14,11 @@ const { items, tone = 'light' } = Astro.props;
   {items.map((item) => (
     <li
       class:list={[
-        'rounded-full px-3.5 py-1.5 text-sm',
-        tone === 'dark' ? 'bg-[#222222] text-[#f6f3ec]' : 'bg-sand text-ink',
+        'inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-sm',
+        tone === 'dark' ? 'bg-night-soft text-paper' : 'bg-sand text-ink',
       ]}
     >
+      <AppIcon name={iconForStack(item)} size={14} />
       {item}
     </li>
   ))}

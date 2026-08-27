@@ -2,34 +2,66 @@
 import Layout from '../layouts/Layout.astro';
 import Contact from '../components/Contact.astro';
 import StackPills from '../components/StackPills.astro';
+import AppIcon from '../components/AppIcon.astro';
 import { profile } from '../data/profile';
+import { focusIcons } from '../data/icons';
+import { profilePhoto } from '../data/media';
 ---
 
 <Layout
   title={`Sobre mí — ${profile.name}`}
   description={profile.summary}
 >
-  <section class="px-5 py-16 md:px-8 md:py-24">
-    <div class="mx-auto max-w-3xl">
-      <p class="text-sm font-medium uppercase tracking-[0.18em] text-accent">Perfil</p>
-      <h1 class="mt-3 text-4xl font-semibold tracking-tight md:text-5xl">{profile.name}</h1>
-      <p class="mt-4 text-xl text-muted">{profile.headline}</p>
-      <div class="mt-10 space-y-5 text-lg leading-relaxed">
-        {profile.about.map((paragraph) => <p>{paragraph}</p>)}
+  <section class="px-4 py-6 md:px-8 md:py-16">
+    <div class="mx-auto grid max-w-6xl items-end gap-6 md:grid-cols-[0.8fr_1.2fr] md:gap-12" data-hero>
+      <div class="relative overflow-hidden rounded-[1.5rem] bg-sand md:rounded-[2rem]" data-hero-item>
+        <img
+          src={profilePhoto}
+          alt={profile.name}
+          class="aspect-[4/5] max-h-64 w-full object-cover object-top md:max-h-none"
+        />
       </div>
-      <p class="mt-8 text-muted">{profile.location}. {profile.availability}</p>
-      <div class="mt-10">
-        <p class="mb-4 text-sm font-medium uppercase tracking-[0.18em] text-muted">Enfoque</p>
-        <div class="flex flex-wrap gap-2">
-          {profile.focus.map((item) => (
-            <span class="rounded-full bg-sand px-3.5 py-1.5 text-sm">{item}</span>
-          ))}
-        </div>
+      <div>
+        <p class="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-accent md:text-sm" data-hero-item>
+          <AppIcon name="user-round" size={14} />
+          Perfil
+        </p>
+        <h1 class="mt-3 font-display text-3xl tracking-tight md:text-6xl" data-hero-item>
+          {profile.name}
+        </h1>
+        <p class="mt-3 text-sm leading-relaxed text-muted md:text-lg" data-hero-item>{profile.headline}</p>
+        <p class="mt-6 inline-flex items-center gap-2 text-sm text-muted" data-hero-item>
+          <span class="live-dot text-accent"></span>
+          {profile.location}. {profile.availability}
+        </p>
       </div>
-      <div class="mt-10">
-        <p class="mb-4 text-sm font-medium uppercase tracking-[0.18em] text-muted">Stack</p>
-        <StackPills items={profile.stack} />
+    </div>
+
+    <div class="mx-auto mt-8 max-w-3xl space-y-4 text-sm leading-relaxed md:mt-14 md:text-base" data-reveal>
+      {profile.about.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+
+    <div class="mx-auto mt-14 max-w-3xl" data-reveal>
+      <p class="mb-4 inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.18em] text-muted">
+        <AppIcon name="sparkles" size={14} />
+        Enfoque
+      </p>
+      <div class="flex flex-wrap gap-2">
+        {focusIcons.map((item) => (
+          <span class="inline-flex items-center gap-2 rounded-full bg-sand px-3.5 py-1.5 text-sm">
+            <AppIcon name={item.icon} size={14} />
+            {item.label}
+          </span>
+        ))}
       </div>
+    </div>
+
+    <div class="mx-auto mt-12 max-w-3xl" data-reveal>
+      <p class="mb-4 inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.18em] text-muted">
+        <AppIcon name="cpu" size={14} />
+        Stack
+      </p>
+      <StackPills items={profile.stack} />
     </div>
   </section>
   <Contact />

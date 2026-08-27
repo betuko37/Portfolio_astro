@@ -22,8 +22,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/jornalpro/logo/favicon.png" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -36,15 +35,47 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&display=swap"
       rel="stylesheet"
     />
+    <script is:inline>
+      (function () {
+        try {
+          const params = new URLSearchParams(location.search).get('theme');
+          const stored = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const theme =
+            params === 'light' || params === 'dark'
+              ? params
+              : stored === 'light' || stored === 'dark'
+                ? stored
+                : prefersDark
+                  ? 'dark'
+                  : 'light';
+          document.documentElement.dataset.theme = theme;
+        } catch {
+          document.documentElement.dataset.theme = 'light';
+        }
+      })();
+    </script>
   </head>
   <body class="min-h-screen bg-paper text-ink antialiased">
+    <div class="progress" data-progress></div>
+    <div class="ambient" aria-hidden="true">
+      <div class="orb orb-a" data-orb="a"></div>
+      <div class="orb orb-b" data-orb="b"></div>
+    </div>
+    <div class="grain" aria-hidden="true"></div>
     <Header />
-    <main>
+    <main class="site-main pt-16 sm:pt-24">
       <slot />
     </main>
     <Footer />
+    <script>
+      import { initMotion } from '../scripts/motion';
+      import { initTheme } from '../scripts/theme';
+      initTheme();
+      initMotion();
+    </script>
   </body>
 </html>

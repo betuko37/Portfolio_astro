@@ -1,5 +1,7 @@
 ---
 import type { ProjectModule } from '../data/projects';
+import { iconForModule } from '../data/icons';
+import AppIcon from './AppIcon.astro';
 
 interface Props {
   modules: ProjectModule[];
@@ -10,7 +12,10 @@ const { modules } = Astro.props;
 
 <div class="grid gap-4 md:grid-cols-2">
   {modules.map((module) => (
-    <article class="rounded-2xl bg-sand p-6">
+    <article class="rounded-[1.6rem] bg-sand p-6" data-reveal>
+      <span class="mb-3 inline-flex rounded-2xl bg-paper p-2.5 text-accent">
+        <AppIcon name={iconForModule(module.name)} size={20} />
+      </span>
       <h3 class="text-lg font-semibold tracking-tight">{module.name}</h3>
       <p class="mt-2 text-sm leading-relaxed text-muted">{module.description}</p>
     </article>

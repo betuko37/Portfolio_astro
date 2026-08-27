@@ -2,13 +2,13 @@ export const profile = {
   name: "Jesús Zavala",
   handle: "betuko37",
   role: "Ingeniero de software",
-  headline: "Construyo sistemas que aguantan el campo, la nómina y el comercio real.",
+  headline: "Construyo cualquier capa del producto: backend, web, mobile y hardware.",
   summary:
-    "Diseño y programo productos de punta a punta: backend, dashboard y apps móviles offline-first. Mi trabajo más fuerte es JornalPro Cloud, un ERP agrícola con nómina por jornales, NFC, biométricos y tesorería. También publico librerías Flutter y servicios de hardware que se usan en producción.",
+    "Full-stack de punta a punta. APIs, dashboards, apps offline, e-commerce y el puente con hardware cuando hace falta. JornalPro, una tienda Shopify headless, una librería Flutter y un servicio NFC salieron a producción. Si el problema es nuevo, lo resuelvo.",
   about: [
-    "No hago demos sueltas. El código que muestro aquí corre en operaciones diarias: capataces sin señal, cierres de semana, lectores USB, instaladores de macOS y tiendas Shopify.",
-    "Me muevo entre TypeScript, Flutter y hardware. Me importa que el sistema sea entendible: módulos claros, sync predecible, auth real y reportes que cuadran con el dinero.",
-    "Busco un equipo donde pueda aportar esa misma profundidad: producto difícil, dominio concreto y responsabilidad de extremo a extremo.",
+    "No me encasillo en un stack ni en un dominio. He construido cloud, PWAs, apps sin red, comercio headless y lectores USB. El hilo común es producto real, no demos.",
+    "Me muevo entre TypeScript, Flutter y hardware. Me importa que el sistema se entienda: módulos claros, sync predecible, auth de verdad y reportes que cuadran.",
+    "Busco un equipo donde pueda atacar lo que salga: backend, frontend, mobile o la pieza rara que nadie quiere tocar.",
   ],
   location: "México",
   email: "betorolitos37@gmail.com",
@@ -19,11 +19,11 @@ export const profile = {
   pubdev: "https://pub.dev/packages/betuko_offline_sync",
   availability: "Abierto a oportunidades full-stack, backend o mobile.",
   focus: [
-    "Sistemas multi-tenant",
+    "Producto de extremo a extremo",
     "Offline-first",
-    "Nómina y operaciones",
+    "Sistemas multi-tenant",
     "Hardware NFC",
-    "Dashboards enterprise",
+    "Dashboards y comercio",
   ],
   stack: [
     "TypeScript",

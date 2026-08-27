@@ -4,7 +4,8 @@ import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
 import ProjectGrid from '../components/ProjectGrid.astro';
 import Contact from '../components/Contact.astro';
-import StackPills from '../components/StackPills.astro';
+import StackMarquee from '../components/StackMarquee.astro';
+import AppIcon from '../components/AppIcon.astro';
 import { profile } from '../data/profile';
 ---
 
@@ -13,13 +14,16 @@ import { profile } from '../data/profile';
   <About />
   <ProjectGrid />
   <section class="px-5 py-6 md:px-8 md:py-8">
-    <div class="tone-ink mx-auto max-w-6xl rounded-3xl px-6 py-12 md:px-12 md:py-16">
-      <p class="text-sm font-medium uppercase tracking-[0.18em] text-accent-soft">Stack</p>
-      <h2 class="mt-3 max-w-xl text-3xl font-semibold tracking-tight md:text-4xl">
-        Herramientas que uso cuando el producto tiene que vivir en producción.
+    <div class="tone-ink mx-auto max-w-6xl overflow-hidden rounded-[1.5rem] px-5 py-8 md:rounded-[2rem] md:px-12 md:py-14" data-reveal>
+      <p class="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-accent-soft md:text-sm">
+        <AppIcon name="cpu" size={14} />
+        Stack
+      </p>
+      <h2 class="mt-2 max-w-xl font-display text-2xl tracking-tight md:text-4xl">
+        Herramientas que viven <em class="italic text-accent-soft">en producción</em>.
       </h2>
-      <div class="mt-8">
-        <StackPills items={profile.stack} tone="dark" />
+      <div class="mt-6 md:mt-10">
+        <StackMarquee items={profile.stack} />
       </div>
     </div>
   </section>

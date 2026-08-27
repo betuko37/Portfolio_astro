@@ -1,0 +1,35 @@
+---
+import { iconForStack } from '../data/icons';
+import AppIcon from './AppIcon.astro';
+
+interface Props {
+  items: readonly string[];
+}
+
+const { items } = Astro.props;
+const loop = [...items, ...items];
+const reverseLoop = [...items].reverse().concat([...items].reverse());
+---
+
+<div class="space-y-3">
+  <div class="marquee">
+    <div class="marquee-track">
+      {loop.map((item) => (
+        <span class="inline-flex items-center gap-2 rounded-full bg-night-soft px-4 py-2 text-sm text-paper">
+          <AppIcon name={iconForStack(item)} size={14} />
+          {item}
+        </span>
+      ))}
+    </div>
+  </div>
+  <div class="marquee">
+    <div class="marquee-track reverse">
+      {reverseLoop.map((item) => (
+        <span class="inline-flex items-center gap-2 rounded-full bg-night-soft px-4 py-2 text-sm text-paper">
+          <AppIcon name={iconForStack(item)} size={14} />
+          {item}
+        </span>
+      ))}
+    </div>
+  </div>
+</div>

@@ -1,25 +1,42 @@
 ---
 import { profile, whatsappHref } from '../data/profile';
+import AppIcon from './AppIcon.astro';
+import type { IconName } from '../data/icons';
 
 const year = new Date().getFullYear();
 const whatsapp = profile.whatsapp ? whatsappHref(profile.whatsapp) : '';
+
+const socials: { href: string; label: string; icon: IconName }[] = [
+  { href: profile.github, label: 'GitHub', icon: 'github' },
+];
+if (profile.linkedin) socials.push({ href: profile.linkedin, label: 'LinkedIn', icon: 'linkedin' });
+if (whatsapp) socials.push({ href: whatsapp, label: 'WhatsApp', icon: 'whatsapp' });
+socials.push({ href: `mailto:${profile.email}`, label: 'Email', icon: 'mail' });
 ---
 
-<footer class="px-5 py-10 md:px-8">
+<footer class="relative z-[1] px-4 pb-24 pt-8 sm:pb-12 md:px-8">
   <div class="mx-auto flex max-w-6xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
-    <div>
-      <p class="text-sm font-semibold">{profile.name}</p>
-      <p class="mt-1 text-sm text-muted">{profile.role}</p>
+    <div class="inline-flex items-center gap-3">
+      <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sand">
+        <AppIcon name="zap" size={16} />
+      </span>
+      <div>
+        <p class="text-sm font-semibold">{profile.name}</p>
+        <p class="text-sm text-muted">{profile.role}</p>
+      </div>
     </div>
     <div class="flex flex-wrap gap-2 text-sm">
-      <a class="rounded-full bg-sand px-3.5 py-1.5 no-underline hover:bg-accent-soft" href={profile.github}>GitHub</a>
-      {profile.linkedin && (
-        <a class="rounded-full bg-sand px-3.5 py-1.5 no-underline hover:bg-accent-soft" href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
-      )}
-      {whatsapp && (
-        <a class="rounded-full bg-sand px-3.5 py-1.5 no-underline hover:bg-accent-soft" href={whatsapp} target="_blank" rel="noreferrer">WhatsApp</a>
-      )}
-      <a class="rounded-full bg-sand px-3.5 py-1.5 no-underline hover:bg-accent-soft" href={`mailto:${profile.email}`}>Email</a>
+      {socials.map((item) => (
+        <a
+          class="inline-flex items-center gap-1.5 rounded-full bg-sand px-3.5 py-1.5 no-underline hover:bg-accent-soft"
+          href={item.href}
+          target={item.href.startsWith('http') ? '_blank' : undefined}
+          rel={item.href.startsWith('http') ? 'noreferrer' : undefined}
+        >
+          <AppIcon name={item.icon} size={14} />
+          {item.label}
+        </a>
+      ))}
     </div>
     <p class="text-xs text-muted">© {year} {profile.name}</p>
   </div>

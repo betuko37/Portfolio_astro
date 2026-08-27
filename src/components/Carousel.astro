@@ -1,0 +1,109 @@
+---
+import type { GalleryImage, GalleryVariant } from '../data/media';
+import AppIcon from './AppIcon.astro';
+
+interface Props {
+  images: GalleryImage[];
+  variant?: GalleryVariant;
+  title?: string;
+}
+
+const { images, variant = 'desktop', title = 'Capturas' } = Astro.props;
+const phone = variant === 'phone';
+---
+
+{images.length > 0 && (
+  <section class="px-4 pb-10 pt-4 md:px-8 md:pb-16" data-reveal>
+    <div class="mx-auto max-w-6xl">
+      <p class="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.18em] text-accent">
+        <AppIcon name="image" size={14} />
+        {title}
+      </p>
+
+      <div
+        class:list={['carousel mt-8 overflow-x-clip', !phone && 'coverflow']}
+        data-carousel
+        data-variant={variant}
+        data-count={images.length}
+      >
+        <div class:list={['relative', phone ? 'mx-auto max-w-sm' : 'w-full']}>
+          {phone ? (
+            <div class="device">
+              <span class="device-notch"></span>
+              <div class="device-screen relative aspect-[9/19]">
+                {images.map((image, index) => (
+                  <figure class="carousel-slide absolute inset-0" data-slide data-active={index === 0}>
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      class="h-full w-full object-cover"
+                      loading={index === 0 ? 'eager' : 'lazy'}
+                    />
+                  </figure>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div class="coverflow-stage relative mx-auto aspect-[16/10] max-w-4xl overflow-visible">
+              {images.map((image, index) => (
+                <figure
+                  class="carousel-slide absolute inset-0 overflow-hidden rounded-[1.6rem] bg-sand"
+                  data-slide
+                  data-active={index === 0}
+                >
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    class="h-full w-full object-cover object-top"
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                  />
+                </figure>
+              ))}
+            </div>
+          )}
+
+          {images.length > 1 && (
+            <div class="mt-5 flex items-center justify-center gap-3">
+              <button
+                class="carousel-prev inline-flex h-12 w-12 items-center justify-center rounded-full bg-ink text-paper"
+                type="button"
+                aria-label="Anterior"
+                data-magnetic
+              >
+                <AppIcon name="arrow-right" size={18} class="rotate-180" />
+              </button>
+              <button
+                class="carousel-next inline-flex h-12 w-12 items-center justify-center rounded-full bg-ink text-paper"
+                type="button"
+                aria-label="Siguiente"
+                data-magnetic
+              >
+                <AppIcon name="arrow-right" size={18} />
+              </button>
+            </div>
+          )}
+        </div>
+
+        {images.length > 1 && (
+          <div class="mt-5 flex flex-wrap items-center justify-center gap-2">
+            {images.map((image, index) => (
+              <button
+                class:list={[
+                  'carousel-dot overflow-hidden rounded-full opacity-55 transition-opacity',
+                  phone ? 'h-12 w-7' : 'h-11 w-[4.25rem]',
+                  index === 0 && 'is-active opacity-100',
+                ]}
+                type="button"
+                data-dot
+                data-index={index}
+                aria-label={`Ir a captura ${index + 1}`}
+              >
+                <img src={image.src} alt="" class="h-full w-full object-cover" />
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+)}

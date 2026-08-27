@@ -9,6 +9,10 @@ import {
   getRelatedProjects,
   projects,
 } from '../../data/projects';
+import { projectIcons } from '../../data/icons';
+import { getProjectCover, getProjectGallery, getProjectLogo } from '../../data/media';
+import AppIcon from '../../components/AppIcon.astro';
+import Carousel from '../../components/Carousel.astro';
 
 export function getStaticPaths() {
   return projects.map((project) => ({
@@ -24,55 +28,94 @@ if (!project) {
 }
 
 const related = getRelatedProjects(project.slug);
+const gallery = getProjectGallery(project.slug);
+const logo = getProjectLogo(project.slug);
+const cover = getProjectCover(project.slug);
 ---
 
 <Layout title={`${project.title} — Jesús Zavala`} description={project.summary}>
   <article>
-    <header class="px-5 pt-8 md:px-8">
-      <div class="tone-ink mx-auto max-w-6xl rounded-3xl px-6 py-12 md:px-12 md:py-20">
-        <p class="text-sm font-medium uppercase tracking-[0.18em] text-accent-soft">
-          {project.kicker} · {project.year}
-        </p>
-        <h1 class="mt-4 max-w-4xl text-4xl font-semibold tracking-tight md:text-6xl">
-          {project.title}
-        </h1>
-        <p class="mt-5 max-w-2xl text-xl leading-relaxed text-sand">{project.tagline}</p>
-        <p class="mt-6 text-sm text-sand">{project.role}</p>
-        {project.links.length > 0 ? (
-          <div class="mt-8 flex flex-wrap gap-3">
-            {project.links.map((link) => (
-              <a
-                class="rounded-full bg-paper px-4 py-2 text-sm font-medium text-ink no-underline hover:bg-accent-soft"
-                href={link.href}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {link.label}
-              </a>
-            ))}
+    <header class="px-4 pt-3 md:px-8">
+      <div class="tone-night relative mx-auto max-w-6xl overflow-hidden rounded-[1.5rem] px-5 py-8 md:rounded-[2rem] md:px-12 md:py-20" data-hero>
+        {cover && (
+          <img
+            src={cover}
+            alt=""
+            class="pointer-events-none absolute inset-0 h-full w-full object-cover object-top opacity-25"
+          />
+        )}
+        <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/55"></div>
+        <div class="relative">
+          <div class="mb-4 inline-flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl bg-paper/10 p-2 md:mb-6 md:h-16 md:w-16" data-hero-item>
+            {logo ? (
+              <img src={logo} alt="" class="h-full w-full object-contain" />
+            ) : (
+              <AppIcon name={projectIcons[project.slug]} size={36} />
+            )}
           </div>
-        ) : project.slug === 'jornalpro-mobile' ? (
-          <p class="mt-8 text-sm text-sand">App Android (APK). Capturas en camino.</p>
-        ) : null}
+          <p class="text-xs font-medium uppercase tracking-[0.18em] text-accent-soft md:text-sm" data-hero-item>
+            {project.kicker} · {project.year}
+          </p>
+          <h1 class="mt-3 max-w-4xl font-display text-3xl tracking-tight md:text-6xl">
+            {project.title}
+          </h1>
+          <p class="mt-3 max-w-2xl text-base leading-relaxed text-mist md:mt-5 md:text-xl" data-hero-item>{project.tagline}</p>
+          <p class="mt-4 text-sm text-mist" data-hero-item>{project.role}</p>
+          {project.links.length > 0 ? (
+            <div class="mt-8 flex flex-wrap gap-3" data-hero-item>
+              {project.links.map((link) => (
+                <a
+                  class="inline-flex items-center gap-2 rounded-full bg-paper px-4 py-2.5 text-sm font-medium text-ink no-underline hover:bg-accent-soft"
+                  href={link.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  data-magnetic
+                >
+                  {link.label}
+                  <AppIcon name="arrow-up-right" size={14} />
+                </a>
+              ))}
+            </div>
+          ) : project.slug === 'jornalpro-mobile' && !gallery ? (
+            <p class="mt-8 text-sm text-mist">App Android (APK). Capturas en camino.</p>
+          ) : null}
+        </div>
       </div>
     </header>
 
-    <section class="px-5 py-16 md:px-8 md:py-20">
+    {gallery && (
+      <Carousel
+        images={gallery.images}
+        variant={gallery.variant}
+        title={gallery.variant === 'phone' ? 'La app en el teléfono' : 'Capturas'}
+      />
+    )}
+
+    <section class="px-4 py-10 md:px-8 md:py-16">
       <div class="mx-auto grid max-w-6xl gap-12 md:grid-cols-[1fr_1fr]">
-        <div>
-          <p class="text-sm font-medium uppercase tracking-[0.18em] text-accent">El problema</p>
-          <p class="mt-4 text-lg leading-relaxed">{project.problem}</p>
+        <div data-reveal>
+          <p class="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.18em] text-accent">
+            <AppIcon name="circle-alert" size={14} />
+            El problema
+          </p>
+          <p class="mt-3 text-sm leading-relaxed md:text-base">{project.problem}</p>
         </div>
-        <div>
-          <p class="text-sm font-medium uppercase tracking-[0.18em] text-accent">Qué es</p>
-          <p class="mt-4 text-lg leading-relaxed">{project.summary}</p>
+        <div data-reveal>
+          <p class="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.18em] text-accent">
+            <AppIcon name="sparkles" size={14} />
+            Qué es
+          </p>
+          <p class="mt-3 text-sm leading-relaxed md:text-base">{project.summary}</p>
         </div>
       </div>
     </section>
 
     <section class="px-5 pb-16 md:px-8">
       <div class="mx-auto max-w-6xl">
-        <p class="text-sm font-medium uppercase tracking-[0.18em] text-accent">Stack</p>
+        <p class="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.18em] text-accent">
+          <AppIcon name="cpu" size={14} />
+          Stack
+        </p>
         <div class="mt-5">
           <StackPills items={project.stack} />
         </div>
@@ -81,8 +124,11 @@ const related = getRelatedProjects(project.slug);
 
     <section class="px-5 pb-16 md:px-8">
       <div class="mx-auto max-w-6xl">
-        <p class="text-sm font-medium uppercase tracking-[0.18em] text-accent">Arquitectura</p>
-        <h2 class="mt-3 text-3xl font-semibold tracking-tight">Cómo se conecta</h2>
+        <p class="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.18em] text-accent">
+          <AppIcon name="share-2" size={14} />
+          Arquitectura
+        </p>
+        <h2 class="mt-2 font-display text-2xl tracking-tight md:text-4xl">Cómo se conecta</h2>
         <div class="mt-8">
           <ArchDiagram chart={project.architecture} />
         </div>
@@ -91,8 +137,11 @@ const related = getRelatedProjects(project.slug);
 
     <section class="px-5 pb-16 md:px-8">
       <div class="mx-auto max-w-6xl">
-        <p class="text-sm font-medium uppercase tracking-[0.18em] text-accent">Módulos</p>
-        <h2 class="mt-3 text-3xl font-semibold tracking-tight">Qué hay dentro</h2>
+        <p class="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.18em] text-accent">
+          <AppIcon name="layers" size={14} />
+          Módulos
+        </p>
+        <h2 class="mt-2 font-display text-2xl tracking-tight md:text-4xl">Qué hay dentro</h2>
         <div class="mt-8">
           <ModuleList modules={project.modules} />
         </div>
@@ -101,11 +150,17 @@ const related = getRelatedProjects(project.slug);
 
     <section class="px-5 pb-16 md:px-8">
       <div class="mx-auto max-w-6xl">
-        <p class="text-sm font-medium uppercase tracking-[0.18em] text-accent">Cómo funciona</p>
+        <p class="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.18em] text-accent">
+          <AppIcon name="workflow" size={14} />
+          Cómo funciona
+        </p>
         <ol class="mt-8 grid gap-4 md:grid-cols-2">
           {project.howItWorks.map((step, index) => (
-            <li class="rounded-2xl bg-sand p-6">
-              <span class="text-sm font-medium text-accent">{String(index + 1).padStart(2, '0')}</span>
+            <li class="rounded-[1.6rem] bg-sand p-6" data-reveal>
+              <span class="inline-flex items-center gap-2 text-sm font-medium text-accent">
+                <AppIcon name="waypoints" size={14} />
+                {String(index + 1).padStart(2, '0')}
+              </span>
               <p class="mt-2 leading-relaxed">{step}</p>
             </li>
           ))}
@@ -115,10 +170,16 @@ const related = getRelatedProjects(project.slug);
 
     <section class="px-5 py-8 md:px-8 md:py-12">
       <div class="mx-auto max-w-6xl">
-        <p class="text-sm font-medium uppercase tracking-[0.18em] text-accent">Por qué importa</p>
+        <p class="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.18em] text-accent">
+          <AppIcon name="badge-check" size={14} />
+          Por qué importa
+        </p>
         <ul class="mt-8 grid gap-4 md:grid-cols-2">
           {project.highlights.map((item) => (
-            <li class="rounded-2xl bg-accent-soft p-6 leading-relaxed">{item}</li>
+            <li class="flex gap-3 rounded-[1.6rem] bg-accent-soft p-6 leading-relaxed" data-reveal>
+              <span class="mt-0.5 text-accent"><AppIcon name="sparkles" size={18} /></span>
+              {item}
+            </li>
           ))}
         </ul>
       </div>
@@ -145,6 +206,6 @@ const related = getRelatedProjects(project.slug);
     startOnLoad: true,
     theme: 'neutral',
     securityLevel: 'loose',
-    fontFamily: 'DM Sans, sans-serif',
+    fontFamily: 'Poppins, sans-serif',
   });
 </script>

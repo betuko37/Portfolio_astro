@@ -1,0 +1,190 @@
+---
+import type { IconName } from '../data/icons';
+import Archive from '@lucide/astro/icons/archive';
+import ArrowRight from '@lucide/astro/icons/arrow-right';
+import ArrowUpRight from '@lucide/astro/icons/arrow-up-right';
+import Atom from '@lucide/astro/icons/atom';
+import AudioLines from '@lucide/astro/icons/audio-lines';
+import BadgeCheck from '@lucide/astro/icons/badge-check';
+import Bookmark from '@lucide/astro/icons/bookmark';
+import Box from '@lucide/astro/icons/box';
+import Boxes from '@lucide/astro/icons/boxes';
+import Brain from '@lucide/astro/icons/brain';
+import Briefcase from '@lucide/astro/icons/briefcase';
+import Building2 from '@lucide/astro/icons/building-2';
+import ChartColumn from '@lucide/astro/icons/chart-column';
+import CircleAlert from '@lucide/astro/icons/circle-alert';
+import Clock from '@lucide/astro/icons/clock';
+import Cloud from '@lucide/astro/icons/cloud';
+import Code from '@lucide/astro/icons/code';
+import Cpu from '@lucide/astro/icons/cpu';
+import CreditCard from '@lucide/astro/icons/credit-card';
+import Database from '@lucide/astro/icons/database';
+import FileCode from '@lucide/astro/icons/file-code';
+import FileText from '@lucide/astro/icons/file-text';
+import Fingerprint from '@lucide/astro/icons/fingerprint-pattern';
+import FolderKanban from '@lucide/astro/icons/folder-kanban';
+import GitBranch from '@lucide/astro/icons/git-branch';
+import Globe from '@lucide/astro/icons/globe';
+import HardDrive from '@lucide/astro/icons/hard-drive';
+import Hexagon from '@lucide/astro/icons/hexagon';
+import Home from '@lucide/astro/icons/house';
+import Image from '@lucide/astro/icons/image';
+import KeyRound from '@lucide/astro/icons/key-round';
+import Layers from '@lucide/astro/icons/layers';
+import LayoutDashboard from '@lucide/astro/icons/layout-dashboard';
+import Leaf from '@lucide/astro/icons/leaf';
+import Mail from '@lucide/astro/icons/mail';
+import Map from '@lucide/astro/icons/map';
+import MapPin from '@lucide/astro/icons/map-pin';
+import MessageCircle from '@lucide/astro/icons/message-circle';
+import Monitor from '@lucide/astro/icons/monitor';
+import Move from '@lucide/astro/icons/move';
+import Network from '@lucide/astro/icons/network';
+import Nfc from '@lucide/astro/icons/nfc';
+import Package from '@lucide/astro/icons/package';
+import PackageOpen from '@lucide/astro/icons/package-open';
+import PanelsTopLeft from '@lucide/astro/icons/panels-top-left';
+import Power from '@lucide/astro/icons/power';
+import Radio from '@lucide/astro/icons/radio';
+import RefreshCw from '@lucide/astro/icons/refresh-cw';
+import Route from '@lucide/astro/icons/route';
+import ScanLine from '@lucide/astro/icons/scan-line';
+import Send from '@lucide/astro/icons/send';
+import Server from '@lucide/astro/icons/server';
+import Share2 from '@lucide/astro/icons/share-2';
+import Sheet from '@lucide/astro/icons/sheet';
+import Shield from '@lucide/astro/icons/shield';
+import ShieldCheck from '@lucide/astro/icons/shield-check';
+import ShoppingBag from '@lucide/astro/icons/shopping-bag';
+import Shuffle from '@lucide/astro/icons/shuffle';
+import Smartphone from '@lucide/astro/icons/smartphone';
+import SmartphoneNfc from '@lucide/astro/icons/smartphone-nfc';
+import Sparkles from '@lucide/astro/icons/sparkles';
+import Sprout from '@lucide/astro/icons/sprout';
+import Store from '@lucide/astro/icons/store';
+import Terminal from '@lucide/astro/icons/terminal';
+import Timer from '@lucide/astro/icons/timer';
+import Tractor from '@lucide/astro/icons/tractor';
+import Triangle from '@lucide/astro/icons/triangle';
+import Unplug from '@lucide/astro/icons/unplug';
+import Usb from '@lucide/astro/icons/usb';
+import UserRound from '@lucide/astro/icons/user-round';
+import Wallet from '@lucide/astro/icons/wallet';
+import Wifi from '@lucide/astro/icons/wifi';
+import WifiOff from '@lucide/astro/icons/wifi-off';
+import Workflow from '@lucide/astro/icons/workflow';
+import Zap from '@lucide/astro/icons/zap';
+import Sun from '@lucide/astro/icons/sun';
+import Moon from '@lucide/astro/icons/moon';
+
+interface Props {
+  name: IconName;
+  size?: number;
+  class?: string;
+}
+
+const { name, size = 20, class: className = '' } = Astro.props;
+
+const icons = {
+  sprout: Sprout,
+  server: Server,
+  'layout-dashboard': LayoutDashboard,
+  smartphone: Smartphone,
+  'smartphone-nfc': SmartphoneNfc,
+  'refresh-cw': RefreshCw,
+  nfc: Nfc,
+  'shopping-bag': ShoppingBag,
+  'file-code': FileCode,
+  hexagon: Hexagon,
+  network: Network,
+  triangle: Triangle,
+  database: Database,
+  atom: Atom,
+  zap: Zap,
+  'panels-top-left': PanelsTopLeft,
+  boxes: Boxes,
+  code: Code,
+  'git-branch': GitBranch,
+  archive: Archive,
+  shuffle: Shuffle,
+  radio: Radio,
+  'hard-drive': HardDrive,
+  'shield-check': ShieldCheck,
+  'key-round': KeyRound,
+  map: Map,
+  package: Package,
+  route: Route,
+  timer: Timer,
+  'map-pin': MapPin,
+  'audio-lines': AudioLines,
+  globe: Globe,
+  wifi: Wifi,
+  'wifi-off': WifiOff,
+  bookmark: Bookmark,
+  'credit-card': CreditCard,
+  shield: Shield,
+  box: Box,
+  power: Power,
+  usb: Usb,
+  'scan-line': ScanLine,
+  cloud: Cloud,
+  'share-2': Share2,
+  sparkles: Sparkles,
+  move: Move,
+  image: Image,
+  mail: Mail,
+  unplug: Unplug,
+  'chart-column': ChartColumn,
+  clock: Clock,
+  send: Send,
+  brain: Brain,
+  'file-text': FileText,
+  sheet: Sheet,
+  'building-2': Building2,
+  wallet: Wallet,
+  'message-circle': MessageCircle,
+  'arrow-up-right': ArrowUpRight,
+  'arrow-right': ArrowRight,
+  home: Home,
+  'folder-kanban': FolderKanban,
+  'user-round': UserRound,
+  layers: Layers,
+  cpu: Cpu,
+  fingerprint: Fingerprint,
+  'package-open': PackageOpen,
+  tractor: Tractor,
+  store: Store,
+  monitor: Monitor,
+  briefcase: Briefcase,
+  leaf: Leaf,
+  'badge-check': BadgeCheck,
+  'circle-alert': CircleAlert,
+  workflow: Workflow,
+  waypoints: Workflow,
+  terminal: Terminal,
+  sun: Sun,
+  moon: Moon,
+} as const;
+
+const Icon = icons[name as keyof typeof icons] ?? Cpu;
+const isGithub = name === 'github';
+const isLinkedin = name === 'linkedin';
+const isWhatsapp = name === 'whatsapp';
+---
+
+{isGithub ? (
+  <svg class={className} width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2 0-.3-.5-1.5.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3Z" />
+  </svg>
+) : isLinkedin ? (
+  <svg class={className} width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2ZM8 19H5v-9h3zM6.5 8.4A1.7 1.7 0 1 1 6.5 5a1.7 1.7 0 0 1 0 3.4ZM19 19h-3v-4.8c0-1.4-.5-2.3-1.8-2.3-1 0-1.5.7-1.8 1.3-.1.2-.1.6-.1.9V19h-3s.1-8.4 0-9h3v1.4c.4-.7 1.2-1.6 2.9-1.6 2.1 0 3.6 1.4 3.6 4.3Z" />
+  </svg>
+) : isWhatsapp ? (
+  <svg class={className} width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M20.5 3.5A11 11 0 0 0 2.1 17.2L1 23l5.9-1.1A11 11 0 0 0 20.5 3.5Zm-8.5 17a9 9 0 0 1-4.6-1.3l-.3-.2-3.5.7.7-3.4-.2-.3A9 9 0 1 1 12 20.5Zm5-6.7c-.3-.1-1.6-.8-1.9-.9s-.4-.1-.6.1-.7.9-.8 1-.3.2-.6.1a7.4 7.4 0 0 1-2.2-1.4 8.2 8.2 0 0 1-1.5-1.9c-.2-.3 0-.4.1-.6l.5-.6.2-.3a.5.5 0 0 0 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1.1 2.6 6 6 0 0 0 1.2 3.1 13.6 13.6 0 0 0 5.2 4.7 17.6 17.6 0 0 0 1.7.6 4.1 4.1 0 0 0 1.9.1 3.1 3.1 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.1-.3-.2-.6-.3Z" />
+  </svg>
+) : (
+  <Icon size={size} stroke-width={1.75} class={className} />
+)}
