@@ -50,20 +50,11 @@ const multi = images.length > 1;
               </div>
             </div>
           ) : (
-            <div class="coverflow-stage relative mx-auto w-full max-w-4xl overflow-visible px-[4%]" data-coverflow-stage>
-              <div class="carousel-stage-sizer" aria-hidden="true">
-                <img
-                  data-carousel-sizer
-                  src={images[0]?.src}
-                  alt=""
-                  class="block h-auto w-full"
-                  loading="eager"
-                />
-              </div>
+            <div class="coverflow-stage relative mx-auto aspect-[16/10] w-full max-w-4xl overflow-visible px-[4%]">
               {images.map((image, index) => (
                 <figure
                   class:list={[
-                    'carousel-slide carousel-slide-cover absolute top-0 cursor-zoom-in overflow-hidden rounded-[1.25rem] bg-sand ring-1 ring-black/5',
+                    'carousel-slide carousel-slide-cover absolute top-0 flex h-full cursor-zoom-in items-center justify-center overflow-hidden rounded-[1.25rem]',
                     index === 0 && 'is-active',
                   ]}
                   data-slide
@@ -73,7 +64,7 @@ const multi = images.length > 1;
                   <img
                     src={image.src}
                     alt={image.alt}
-                    class="pointer-events-none block h-auto w-full"
+                    class="pointer-events-none h-full w-full object-contain object-center"
                     loading={index === 0 ? 'eager' : 'lazy'}
                   />
                 </figure>
@@ -121,7 +112,7 @@ const multi = images.length > 1;
                 data-index={index}
                 aria-label={`Ir a captura ${index + 1}`}
               >
-                <img src={image.src} alt="" class="h-full w-full bg-sand object-contain object-center" />
+                <img src={image.src} alt="" class="h-full w-full object-contain object-center" />
               </button>
             ))}
           </div>
@@ -150,7 +141,7 @@ const multi = images.length > 1;
                   data-lightbox-hero
                   src={images[0]?.src}
                   alt={images[0]?.alt ?? ''}
-                  class="block max-h-[82vh] w-auto max-w-[min(96vw,88rem)] rounded-[1rem] bg-sand object-contain shadow-2xl ring-1 ring-white/10"
+                  class="block max-h-[82vh] w-auto max-w-[min(96vw,88rem)] rounded-[1rem] object-contain ring-1 ring-white/10"
                   loading="eager"
                 />
               </figure>

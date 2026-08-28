@@ -167,21 +167,6 @@ function initOrbs() {
   );
 }
 
-function syncStageSizer(root: HTMLElement, slides: HTMLElement[], active: number) {
-  const stage = root.querySelector<HTMLElement>('[data-coverflow-stage]');
-  const sizer = stage?.querySelector<HTMLImageElement>('[data-carousel-sizer]');
-  const activeImg = slides[active]?.querySelector<HTMLImageElement>('img');
-  if (!sizer || !activeImg) return;
-
-  const apply = () => {
-    const src = activeImg.currentSrc || activeImg.src;
-    if (sizer.src !== src) sizer.src = src;
-  };
-
-  if (activeImg.complete && activeImg.naturalWidth > 0) apply();
-  else activeImg.addEventListener('load', apply, { once: true });
-}
-
 function placeCoverflowSlides(
   slides: HTMLElement[],
   active: number,
@@ -390,7 +375,6 @@ function initCarousels(reduce: boolean) {
           dots,
           prevBtn: root.querySelector('.carousel-prev'),
           nextBtn: root.querySelector('.carousel-next'),
-          onChange: (index) => syncStageSizer(root, slides, index),
         })
       : bindFadeCarousel(slides, {
           reduce,
@@ -399,8 +383,6 @@ function initCarousels(reduce: boolean) {
           prevBtn: root.querySelector('.carousel-prev'),
           nextBtn: root.querySelector('.carousel-next'),
         });
-
-    if (useCoverflow) syncStageSizer(root, slides, 0);
 
     if (dialog && lightboxHero) {
       const openLightbox = (index: number) => {

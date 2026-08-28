@@ -26,11 +26,14 @@ export const projectLogos: Record<string, string> = {
 };
 
 /** Galerías generadas al build leyendo carpetas en public (screenshots o capturas). */
-export const projectGalleries: Record<string, ProjectGallery> =
-  buildProjectGalleriesFromPublic();
+const productionGalleries = buildProjectGalleriesFromPublic();
+
+function resolveProjectGalleries() {
+  return import.meta.env.DEV ? buildProjectGalleriesFromPublic() : productionGalleries;
+}
 
 export function getProjectGallery(slug: string): ProjectGallery | undefined {
-  const gallery = projectGalleries[slug];
+  const gallery = resolveProjectGalleries()[slug];
   if (!gallery || gallery.images.length === 0) return undefined;
   return gallery;
 }
