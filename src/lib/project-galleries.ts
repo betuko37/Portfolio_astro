@@ -55,6 +55,11 @@ export const gallerySources: Record<string, GallerySource> = {
     variant: "desktop",
     altLabel: "ITZ Coleccionables",
   },
+  "nfc-service": {
+    dir: "nfc/screnshoots",
+    variant: "desktop",
+    altLabel: "NFC Service",
+  },
 };
 
 function listImageFiles(relativeDir: string): string[] {
