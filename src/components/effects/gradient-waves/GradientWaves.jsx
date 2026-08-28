@@ -158,6 +158,9 @@ const GradientWaves = ({
     const container = containerRef.current;
     if (!container) return;
 
+    const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    const staticFrame = reduceMotion;
+
     const renderer = new Renderer({
       webgl: 2,
       alpha: true,
@@ -239,7 +242,9 @@ const GradientWaves = ({
     const t0 = performance.now();
 
     const loop = (t) => {
-      program.uniforms.iTime.value = (t - t0) * 0.001;
+      if (!staticFrame) {
+        program.uniforms.iTime.value = (t - t0) * 0.001;
+      }
       const tx = enableMouseRef.current ? targetMouse[0] : 0.5;
       const ty = enableMouseRef.current ? targetMouse[1] : 0.5;
       currentMouse[0] += 0.05 * (tx - currentMouse[0]);
@@ -247,10 +252,14 @@ const GradientWaves = ({
       program.uniforms.uMouse.value[0] = currentMouse[0];
       program.uniforms.uMouse.value[1] = currentMouse[1];
       renderer.render({ scene: mesh });
-      raf = requestAnimationFrame(loop);
+      if (!staticFrame) raf = requestAnimationFrame(loop);
     };
 
     const tryStart = () => {
+      if (staticFrame) {
+        loop(performance.now());
+        return;
+      }
       if (isVisible && isPageVisible && raf === 0) raf = requestAnimationFrame(loop);
     };
     const tryStop = () => {

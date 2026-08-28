@@ -104,13 +104,26 @@ const FoldText = ({
     if (!pieces.length) return undefined;
 
     const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    const activeDuration = reduceMotion ? Math.min(duration, 0.22) : duration;
-    const activeStagger = reduceMotion ? Math.min(stagger, 0.02) : stagger;
+
+    if (reduceMotion) {
+      gsap.set(pieces, {
+        opacity: 1,
+        rotateX: 0,
+        rotateY: 0,
+        '--fold-crease': 0,
+        transformOrigin: hingeConfig.origin,
+        clearProps: 'willChange',
+      });
+      return undefined;
+    }
+
+    const activeDuration = duration;
+    const activeStagger = stagger;
     const fromVars = {
       opacity: 0,
-      rotateX: reduceMotion ? 0 : hingeConfig.rotateX,
-      rotateY: reduceMotion ? 0 : hingeConfig.rotateY,
-      '--fold-crease': reduceMotion ? 0 : safeCrease,
+      rotateX: hingeConfig.rotateX,
+      rotateY: hingeConfig.rotateY,
+      '--fold-crease': safeCrease,
       transformOrigin: hingeConfig.origin,
       force3D: true,
     };
@@ -120,7 +133,7 @@ const FoldText = ({
       rotateY: 0,
       '--fold-crease': 0,
       duration: activeDuration,
-      ease: reduceMotion ? 'power1.out' : ease,
+      ease,
       stagger: activeStagger,
       clearProps: 'willChange',
     };

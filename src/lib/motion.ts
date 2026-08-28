@@ -1,16 +1,38 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { prefersReducedMotion } from '@lib/reduced-motion';
 
 gsap.registerPlugin(ScrollTrigger);
 
+function settleMotionTargets() {
+  gsap.set('.split-inner', { autoAlpha: 1, y: 0, x: 0, scale: 1, clearProps: 'transform' });
+  gsap.set('[data-hero] [data-hero-item], [data-hero-icon]', {
+    autoAlpha: 1,
+    y: 0,
+    x: 0,
+    rotate: 0,
+    clearProps: 'transform',
+  });
+  gsap.set('[data-reveal], [data-card], [data-float]', {
+    autoAlpha: 1,
+    y: 0,
+    scale: 1,
+    clearProps: 'transform',
+  });
+  ScrollTrigger.refresh();
+}
+
 export function initMotion() {
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduce = prefersReducedMotion();
   const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   initCarousels(reduce);
-  initRails();
+  initRails(reduce);
   initProgress();
-  if (reduce) return;
+  if (reduce) {
+    settleMotionTargets();
+    return;
+  }
 
   const words = gsap.utils.toArray<HTMLElement>('.split-inner');
   if (words.length) {
@@ -461,7 +483,7 @@ function initCarousels(reduce: boolean) {
   });
 }
 
-function initRails() {
+function initRails(reduce: boolean) {
   document.querySelectorAll<HTMLElement>('[data-rail]').forEach((root) => {
     const scroller = root.querySelector<HTMLElement>('.rail');
     if (!scroller) return;
@@ -471,15 +493,15 @@ function initRails() {
       return (item?.offsetWidth ?? 280) + 12;
     };
 
+    const scrollStep = (delta: number) => {
+      scroller.scrollBy({ left: delta, behavior: reduce ? 'auto' : 'smooth' });
+    };
+
     root.querySelectorAll('.rail-next').forEach((button) => {
-      button.addEventListener('click', () => {
-        scroller.scrollBy({ left: step(), behavior: 'smooth' });
-      });
+      button.addEventListener('click', () => scrollStep(step()));
     });
     root.querySelectorAll('.rail-prev').forEach((button) => {
-      button.addEventListener('click', () => {
-        scroller.scrollBy({ left: -step(), behavior: 'smooth' });
-      });
+      button.addEventListener('click', () => scrollStep(-step()));
     });
   });
 }

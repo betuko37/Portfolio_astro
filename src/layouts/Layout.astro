@@ -43,6 +43,17 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
     <script is:inline>
       (function () {
         try {
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('reduce-motion');
+          }
+        } catch {
+          /* ignore */
+        }
+      })();
+    </script>
+    <script is:inline>
+      (function () {
+        try {
           const params = new URLSearchParams(location.search).get('theme');
           const stored = localStorage.getItem('theme');
           const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;

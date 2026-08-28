@@ -695,6 +695,13 @@ body.carousel-lightbox-open {
   [data-card],
   .split-inner {
     visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
+
+  .fold-text-piece {
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   .live-dot::before,
@@ -702,4 +709,27 @@ body.carousel-lightbox-open {
   .marquee-track {
     animation: none;
   }
+}
+
+html.reduce-motion [data-hero] [data-hero-item],
+html.reduce-motion [data-hero-icon],
+html.reduce-motion [data-reveal],
+html.reduce-motion [data-card],
+html.reduce-motion [data-float],
+html.reduce-motion .split-inner {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+}
+
+html.reduce-motion .fold-text-piece {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+html.reduce-motion .live-dot::before,
+html.reduce-motion .live-badge,
+html.reduce-motion .marquee-track,
+html.reduce-motion .photo-ring__spin {
+  animation: none;
 }
