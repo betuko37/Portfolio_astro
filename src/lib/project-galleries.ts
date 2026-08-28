@@ -25,6 +25,11 @@ type GallerySource = {
 
 /** Slug del proyecto → carpeta en public/ (sin barra inicial). */
 export const gallerySources: Record<string, GallerySource> = {
+  jornalpro: {
+    dir: "jornalpro/screenshots",
+    variant: "desktop",
+    altLabel: "JornalPro Cloud",
+  },
   "jornalpro-hikcentral": {
     dir: "hikcentral/screenshots",
     variant: "desktop",

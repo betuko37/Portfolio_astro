@@ -167,6 +167,21 @@ function initOrbs() {
   );
 }
 
+function syncStageSizer(root: HTMLElement, slides: HTMLElement[], active: number) {
+  const stage = root.querySelector<HTMLElement>('[data-coverflow-stage]');
+  const sizer = stage?.querySelector<HTMLImageElement>('[data-carousel-sizer]');
+  const activeImg = slides[active]?.querySelector<HTMLImageElement>('img');
+  if (!sizer || !activeImg) return;
+
+  const apply = () => {
+    const src = activeImg.currentSrc || activeImg.src;
+    if (sizer.src !== src) sizer.src = src;
+  };
+
+  if (activeImg.complete && activeImg.naturalWidth > 0) apply();
+  else activeImg.addEventListener('load', apply, { once: true });
+}
+
 function placeCoverflowSlides(
   slides: HTMLElement[],
   active: number,
@@ -350,17 +365,22 @@ function initCarousels(reduce: boolean) {
     const desktop = window.matchMedia('(min-width: 768px)').matches;
     const useCoverflow = variant === 'desktop' && desktop;
     const dialog = root.querySelector<HTMLDialogElement>('[data-carousel-lightbox]');
-    const lightboxSlides = dialog
-      ? Array.from(dialog.querySelectorAll<HTMLElement>('[data-lightbox-slide]'))
-      : [];
+    const lightboxHero = dialog?.querySelector<HTMLImageElement>('[data-lightbox-hero]');
     const lightboxCounter = dialog?.querySelector<HTMLElement>('[data-lightbox-counter]');
     const lightboxCaption = dialog?.querySelector<HTMLElement>('[data-lightbox-caption]');
     const total = slides.length;
 
-    const updateLightboxMeta = (active: number) => {
-      if (lightboxCounter) lightboxCounter.textContent = `${active + 1} / ${total}`;
-      const alt = lightboxSlides[active]?.dataset.slideAlt ?? '';
-      if (lightboxCaption) lightboxCaption.textContent = alt;
+    let lightboxIndex = 0;
+
+    const showLightboxSlide = (index: number) => {
+      lightboxIndex = (index + total) % total;
+      const img = slides[lightboxIndex]?.querySelector<HTMLImageElement>('img');
+      if (lightboxCounter) lightboxCounter.textContent = `${lightboxIndex + 1} / ${total}`;
+      if (lightboxCaption) lightboxCaption.textContent = img?.alt ?? '';
+      if (lightboxHero && img) {
+        lightboxHero.src = img.currentSrc || img.src;
+        lightboxHero.alt = img.alt;
+      }
     };
 
     const mainController = useCoverflow
@@ -370,6 +390,7 @@ function initCarousels(reduce: boolean) {
           dots,
           prevBtn: root.querySelector('.carousel-prev'),
           nextBtn: root.querySelector('.carousel-next'),
+          onChange: (index) => syncStageSizer(root, slides, index),
         })
       : bindFadeCarousel(slides, {
           reduce,
@@ -379,30 +400,11 @@ function initCarousels(reduce: boolean) {
           nextBtn: root.querySelector('.carousel-next'),
         });
 
-    let lightboxController: ReturnType<typeof bindCoverflowCarousel> | null = null;
+    if (useCoverflow) syncStageSizer(root, slides, 0);
 
-    if (dialog && lightboxSlides.length) {
-      const lightboxDesktop = desktop && lightboxSlides.length > 1;
-
-      lightboxController = lightboxDesktop
-        ? bindCoverflowCarousel(lightboxSlides, {
-            reduce,
-            spread: 112,
-            prevBtn: dialog.querySelector('.carousel-lightbox-prev'),
-            nextBtn: dialog.querySelector('.carousel-lightbox-next'),
-            onChange: updateLightboxMeta,
-          })
-        : bindFadeCarousel(lightboxSlides, {
-            reduce,
-            spread: 0,
-            prevBtn: dialog.querySelector('.carousel-lightbox-prev'),
-            nextBtn: dialog.querySelector('.carousel-lightbox-next'),
-            onChange: updateLightboxMeta,
-          });
-
+    if (dialog && lightboxHero) {
       const openLightbox = (index: number) => {
-        lightboxController?.go(index, true);
-        updateLightboxMeta(index);
+        showLightboxSlide(index);
         dialog.showModal();
         document.body.classList.add('carousel-lightbox-open');
       };
@@ -414,13 +416,12 @@ function initCarousels(reduce: boolean) {
         });
       });
 
-      lightboxSlides.forEach((slide) => {
-        slide.addEventListener('click', () => {
-          const slideIndex = Number(slide.dataset.slideIndex);
-          if (!slide.classList.contains('is-active') && Number.isFinite(slideIndex)) {
-            lightboxController?.go(slideIndex, false);
-          }
-        });
+      dialog.querySelector('.carousel-lightbox-prev')?.addEventListener('click', () => {
+        showLightboxSlide(lightboxIndex - 1);
+      });
+
+      dialog.querySelector('.carousel-lightbox-next')?.addEventListener('click', () => {
+        showLightboxSlide(lightboxIndex + 1);
       });
 
       dialog.querySelector('[data-carousel-lightbox-close]')?.addEventListener('click', () => {
@@ -436,8 +437,8 @@ function initCarousels(reduce: boolean) {
       });
 
       dialog.addEventListener('keydown', (event) => {
-        if (event.key === 'ArrowLeft') lightboxController?.go(lightboxController.getIndex() - 1);
-        if (event.key === 'ArrowRight') lightboxController?.go(lightboxController.getIndex() + 1);
+        if (event.key === 'ArrowLeft') showLightboxSlide(lightboxIndex - 1);
+        if (event.key === 'ArrowRight') showLightboxSlide(lightboxIndex + 1);
       });
     }
 

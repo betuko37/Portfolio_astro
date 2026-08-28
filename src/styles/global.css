@@ -531,6 +531,20 @@ a {
   isolation: isolate;
 }
 
+.carousel-stage-sizer {
+  width: min(62%, 32rem);
+  margin-inline: auto;
+  pointer-events: none;
+}
+
+.carousel-stage-sizer img {
+  visibility: hidden;
+}
+
+.carousel-stage-sizer-lightbox {
+  width: min(66%, 38rem);
+}
+
 .carousel-slide {
   backface-visibility: hidden;
   transform-style: preserve-3d;
@@ -538,7 +552,11 @@ a {
 }
 
 .carousel-slide-cover {
-  width: min(68%, 48rem);
+  width: min(62%, 32rem);
+}
+
+.carousel-slide-cover-lightbox {
+  width: min(66%, 38rem);
 }
 
 .coverflow .carousel-slide.is-active,
@@ -546,8 +564,8 @@ a {
   pointer-events: auto;
 }
 
-.carousel-lightbox-stage .carousel-slide-cover {
-  width: min(64%, 52rem);
+.carousel-lightbox-stage .carousel-slide-cover-lightbox {
+  width: min(66%, 38rem);
 }
 
 .coverflow .carousel-slide.is-active {
@@ -611,18 +629,23 @@ a {
 }
 
 .carousel-lightbox-body {
+  display: flex;
+  justify-content: center;
   margin-inline: auto;
-  width: min(100%, 64rem);
+  width: min(100%, 88rem);
 }
 
-.carousel-lightbox-stage {
-  min-height: min(70vh, 720px);
+.carousel-lightbox-hero {
+  display: flex;
+  justify-content: center;
+  margin: 0;
 }
 
-.carousel-lightbox .carousel-slide.is-active {
-  box-shadow:
-    0 32px 80px rgba(10, 10, 10, 0.35),
-    0 0 0 1px rgba(255, 255, 255, 0.08);
+.carousel-lightbox-hero img {
+  width: auto;
+  height: auto;
+  max-height: 82vh;
+  max-width: min(96vw, 88rem);
 }
 
 body.carousel-lightbox-open {
