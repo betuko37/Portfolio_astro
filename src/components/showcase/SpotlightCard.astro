@@ -20,86 +20,100 @@ const logoOnLightBg = item.id === 'hikcentral';
 <a
   href={item.href}
   class:list={[
-    'group flex h-full min-h-[11.5rem] flex-col rounded-[1.1rem] p-3 no-underline sm:min-h-[12.5rem] sm:rounded-[1.4rem] md:min-h-[14rem] md:p-5',
+    'group flex no-underline',
+    'flex-row items-center gap-3 rounded-[1.1rem] p-3',
+    'md:h-full md:min-h-[14rem] md:flex-col md:items-stretch md:gap-0 md:rounded-[1.4rem] md:p-5',
     isDarkFeatured && 'tone-ink md:min-h-[15rem]',
-    isLightFeatured && 'bg-paper text-ink ring-1 ring-black/5',
-    !item.featured && 'bg-paper text-ink ring-1 ring-black/5',
+    isLightFeatured && 'bg-paper text-ink',
+    !item.featured && 'bg-paper text-ink',
   ]}
 >
-  <div class="min-h-0 flex-1">
-    <div class="mb-2 flex items-start justify-between gap-1.5 md:mb-3 md:gap-2">
-      <span
-        class:list={[
-          'inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl p-1 md:h-11 md:w-11 md:rounded-2xl md:p-1.5',
-          logoOnLightBg ? 'bg-white' : isDarkFeatured ? 'bg-paper/10' : 'bg-sand',
-        ]}
-      >
-        {headerLogo ? (
-          <img src={headerLogo} alt="" class="h-full w-full object-contain" />
-        ) : (
-          <AppIcon name={item.icon} size={22} />
-        )}
-      </span>
+  {/* Logo: always visible; on md sits in header row with live badge */}
+  <div class="flex shrink-0 items-center md:mb-3 md:w-full md:justify-between">
+    <span
+      class:list={[
+        'inline-flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl p-1.5 md:rounded-2xl',
+        logoOnLightBg ? 'bg-white' : isDarkFeatured ? 'bg-paper/10' : 'bg-sand',
+      ]}
+    >
+      {headerLogo ? (
+        <img src={headerLogo} alt="" class="h-full w-full object-contain" />
+      ) : (
+        <AppIcon name={item.icon} size={22} />
+      )}
+    </span>
+  </div>
+
+  <div class="min-w-0 flex-1 md:flex md:min-h-0 md:flex-1 md:flex-col">
+    <div class="flex items-start justify-between gap-2">
+      <div class="min-w-0">
+        <h3 class="truncate font-display text-sm leading-snug tracking-tight md:line-clamp-1 md:text-xl">{item.title}</h3>
+      </div>
       {item.live && (
-        <span class="live-badge px-1.5 py-0.5 text-[9px] tracking-wide md:px-2 md:text-[10px]">
+        <span class="live-badge shrink-0 px-1.5 py-0.5 text-[9px] tracking-wide md:px-2 md:text-[10px]">
           <span class="live-dot"></span>
           En vivo
         </span>
       )}
     </div>
-    {item.parent && (
-      <p class:list={['text-[11px] font-medium', isDarkFeatured ? 'text-mist' : 'text-muted']}>
-        Dentro de {item.parent}
-      </p>
-    )}
-    <h3 class="mt-1 font-display text-sm leading-snug tracking-tight sm:text-base md:text-xl">{item.title}</h3>
+
     <p
       class:list={[
-        'mt-1.5 line-clamp-2 text-xs leading-relaxed sm:line-clamp-3 sm:text-sm',
+        'mt-0.5 line-clamp-2 min-h-[2.5em] text-[11px] leading-snug md:mt-1.5 md:min-h-[3.25em] md:text-sm md:leading-relaxed',
         isDarkFeatured ? 'text-mist' : 'text-muted',
       ]}
     >
       {item.tagline}
     </p>
+
+    <div class="mt-auto hidden shrink-0 items-end justify-between gap-3 pt-4 md:flex">
+      {stack.length > 0 && (
+        <ul class="flex flex-wrap items-center gap-1">
+          {stack.map((tech) => (
+            <li
+              class:list={[
+                'inline-flex items-center justify-center rounded-full',
+                isBrandImage(tech) ? 'h-8 w-8' : 'h-7 w-7',
+                isDarkFeatured ? 'bg-paper/10' : 'bg-sand',
+              ]}
+              title={tech}
+            >
+              <BrandIcon label={tech} size={isBrandImage(tech) ? 16 : 13} />
+            </li>
+          ))}
+          {extra > 0 && (
+            <li
+              class:list={[
+                'inline-flex h-7 min-w-7 items-center justify-center rounded-full px-1 text-[10px]',
+                isDarkFeatured ? 'bg-paper/10 text-mist' : 'bg-sand text-muted',
+              ]}
+            >
+              +{extra}
+            </li>
+          )}
+        </ul>
+      )}
+      <span
+        class:list={[
+          'inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors',
+          isDarkFeatured
+            ? 'bg-paper text-ink group-hover:bg-accent-soft'
+            : 'bg-ink/80 text-paper group-hover:bg-ink',
+        ]}
+      >
+        Ver caso
+        <AppIcon name="arrow-right" size={13} />
+      </span>
+    </div>
   </div>
-  <div class="mt-auto flex shrink-0 flex-col gap-2 pt-3 sm:flex-row sm:items-end sm:justify-between sm:gap-3 sm:pt-4">
-    {stack.length > 0 && (
-      <ul class="hidden flex-wrap items-center gap-1 sm:flex">
-        {stack.map((tech) => (
-          <li
-            class:list={[
-              'inline-flex items-center justify-center rounded-full',
-              isBrandImage(tech) ? 'h-8 w-8' : 'h-7 w-7',
-              isDarkFeatured ? 'bg-paper/10' : 'bg-sand',
-            ]}
-            title={tech}
-          >
-            <BrandIcon label={tech} size={isBrandImage(tech) ? 16 : 13} />
-          </li>
-        ))}
-        {extra > 0 && (
-          <li
-            class:list={[
-              'inline-flex h-7 min-w-7 items-center justify-center rounded-full px-1 text-[10px]',
-              isDarkFeatured ? 'bg-paper/10 text-mist' : 'bg-sand text-muted',
-            ]}
-          >
-            +{extra}
-          </li>
-        )}
-      </ul>
-    )}
-    <span
-      class:list={[
-        'inline-flex w-full shrink-0 items-center justify-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-medium transition-colors sm:w-auto sm:justify-start sm:gap-1.5 sm:px-3 sm:py-1.5 sm:text-[11px]',
-        isDarkFeatured
-          ? 'bg-paper text-ink group-hover:bg-accent-soft'
-          : 'bg-ink/80 text-paper group-hover:bg-ink',
-      ]}
-    >
-      Ver caso
-      <AppIcon name="arrow-right" size={12} class="sm:hidden" />
-      <AppIcon name="arrow-right" size={13} class="hidden sm:inline" />
-    </span>
-  </div>
+
+  <span
+    class:list={[
+      'inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full md:hidden',
+      isDarkFeatured ? 'bg-paper text-ink' : 'bg-ink/80 text-paper',
+    ]}
+    aria-hidden="true"
+  >
+    <AppIcon name="arrow-right" size={13} />
+  </span>
 </a>

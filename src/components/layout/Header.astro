@@ -5,70 +5,466 @@ import ThemeToggle from '@components/ui/ThemeToggle.astro';
 import type { IconName } from '@data/icons';
 
 const path = Astro.url.pathname;
-const links: { href: string; label: string; icon: IconName }[] = [
-  { href: '/', label: 'Inicio', icon: 'home' },
-  { href: '/#proyectos', label: 'Proyectos', icon: 'folder-kanban' },
-  { href: '/#metricas', label: 'Métricas', icon: 'chart-column' },
-  { href: '/sobre', label: 'Sobre mí', icon: 'user-round' },
-  { href: '/#contacto', label: 'Contacto', icon: 'mail' },
+
+type NavLink = {
+  href: string;
+  label: string;
+  shortLabel: string;
+  icon: IconName;
+  section: string;
+};
+
+/** Orden de la página (arriba → abajo) para navbar desktop */
+const pageLinks: NavLink[] = [
+  { href: '/#inicio', label: 'Inicio', shortLabel: 'Inicio', icon: 'home', section: 'inicio' },
+  { href: '/#sobre', label: 'Sobre mí', shortLabel: 'Sobre', icon: 'user-round', section: 'sobre' },
+  { href: '/#proyectos', label: 'Proyectos', shortLabel: 'Proyectos', icon: 'folder-kanban', section: 'proyectos' },
+  { href: '/#tecnologias', label: 'Tecnologías', shortLabel: 'Stack', icon: 'cpu', section: 'tecnologias' },
+  { href: '/#formacion', label: 'Formación', shortLabel: 'Formación', icon: 'briefcase', section: 'formacion' },
+  { href: '/#metricas', label: 'Métricas', shortLabel: 'Métricas', icon: 'chart-column', section: 'metricas' },
+  { href: '/#contacto', label: 'Contacto', shortLabel: 'Contacto', icon: 'mail', section: 'contacto' },
 ];
 
-const isActive = (href: string) => {
-  if (href === '/') return path === '/';
-  if (href === '/#proyectos') return path.startsWith('/proyectos');
-  if (href === '/sobre') return path.startsWith('/sobre');
-  return false;
-};
+/** Dock móvil (sin Sobre/Contacto; esos van arriba) */
+const dockLinks: NavLink[] = pageLinks.filter(
+  (link) => link.section !== 'sobre' && link.section !== 'contacto',
+);
+
+/** Acciones móviles arriba, junto al tema */
+const utilityLinks: NavLink[] = pageLinks.filter(
+  (link) => link.section === 'sobre' || link.section === 'contacto',
+);
+
+const initialActive = (() => {
+  if (path.startsWith('/proyectos')) return 'proyectos';
+  if (path.startsWith('/sobre')) return 'sobre';
+  if (path === '/' || path === '') return 'inicio';
+  return '';
+})();
+
+const dockSections = new Set(dockLinks.map((l) => l.section));
 ---
 
 <header class="pointer-events-none fixed inset-x-0 top-0 z-40 flex justify-center px-4 pt-4">
   <div
-    class="nav-shell pointer-events-auto flex w-full max-w-5xl items-center justify-between rounded-full px-2 py-2"
+    class="nav-shell pointer-events-auto flex w-full max-w-6xl items-center justify-between gap-2 rounded-full px-2 py-2"
     data-nav
   >
     <a
-      href="/"
+      href="/#inicio"
       data-magnetic
-      class="inline-flex min-w-0 items-center gap-2 rounded-full px-3 py-2 text-xs font-semibold tracking-tight no-underline sm:px-3.5 sm:text-sm"
+      class="inline-flex min-w-0 shrink items-center gap-2 rounded-full px-3 py-2 text-xs font-semibold tracking-tight no-underline sm:px-3.5 sm:text-sm"
     >
       <AppIcon name="zap" size={16} />
       <span class="truncate">{profile.fullName}</span>
     </a>
-    <div class="flex items-center gap-1">
-      <ThemeToggle />
-    <nav class="hidden items-center gap-0.5 text-sm sm:flex">
-      {links.map((link) => (
-        <a
-          href={link.href}
-          data-magnetic
-          class:list={[
-            'inline-flex items-center gap-1.5 rounded-full px-3 py-2 no-underline transition-colors',
-            isActive(link.href) ? 'tone-ink' : 'text-muted hover:bg-sand hover:text-ink',
-          ]}
-        >
-          <AppIcon name={link.icon} size={14} />
-          {link.label}
-        </a>
-      ))}
-    </nav>
+
+    <div class="flex min-w-0 items-center gap-0.5 sm:gap-1">
+      <nav
+        class="desktop-nav hidden max-w-[min(100%,52rem)] items-center gap-0.5 overflow-x-auto text-sm md:flex"
+        data-desktop-nav
+        data-active={initialActive}
+      >
+        {pageLinks.map((link) => (
+          <a
+            href={link.href}
+            data-magnetic
+            data-nav-section={link.section}
+            data-nav-kind="dock"
+            class="desktop-nav__link inline-flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-2 no-underline lg:px-3"
+            aria-current={initialActive === link.section ? 'page' : undefined}
+            aria-label={link.label}
+            title={link.label}
+          >
+            <AppIcon name={link.icon} size={14} />
+            <span>{link.shortLabel}</span>
+          </a>
+        ))}
+      </nav>
+
+      <div class="flex items-center gap-0.5" data-utility-nav data-active={initialActive}>
+        {utilityLinks.map((link) => (
+          <a
+            href={link.href}
+            data-magnetic
+            data-nav-section={link.section}
+            data-nav-kind="utility"
+            class="utility-nav__link inline-flex h-9 w-9 items-center justify-center rounded-full no-underline md:hidden"
+            aria-current={initialActive === link.section ? 'page' : undefined}
+            aria-label={link.label}
+            title={link.label}
+          >
+            <AppIcon name={link.icon} size={15} />
+          </a>
+        ))}
+        <ThemeToggle />
+      </div>
     </div>
   </div>
 </header>
 
 <nav
-  class="fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-40 flex items-center rounded-full bg-sand px-1.5 py-1.5 shadow-lg shadow-ink/10 sm:hidden"
+  class="mobile-dock md:hidden"
   aria-label="Navegación móvil"
+  data-mobile-nav
+  data-active={dockSections.has(initialActive) ? initialActive : ''}
 >
-  {links.map((link) => (
-    <a
-      href={link.href}
-      class:list={[
-        'flex flex-1 flex-col items-center gap-0.5 rounded-full py-1.5 text-[10px] font-medium no-underline',
-        isActive(link.href) ? 'tone-ink' : 'text-muted',
-      ]}
-    >
-      <AppIcon name={link.icon} size={16} />
-      {link.label}
-    </a>
-  ))}
+  <div class="mobile-dock__rail" style={`--dock-cols: ${dockLinks.length}`}>
+    <span class="mobile-dock__pill" data-mobile-pill aria-hidden="true"></span>
+    {dockLinks.map((link) => (
+      <a
+        href={link.href}
+        data-nav-section={link.section}
+        data-nav-kind="dock"
+        class="mobile-dock__item"
+        aria-current={initialActive === link.section ? 'page' : undefined}
+        aria-label={link.label}
+        title={link.label}
+      >
+        <span class="mobile-dock__icon">
+          <AppIcon name={link.icon} size={20} />
+        </span>
+      </a>
+    ))}
+  </div>
 </nav>
+
+<style is:global>
+  .desktop-nav {
+    scrollbar-width: none;
+  }
+
+  .desktop-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .desktop-nav__link,
+  .utility-nav__link {
+    color: var(--color-muted);
+    transition: color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .desktop-nav__link:hover,
+  .utility-nav__link:hover {
+    background: var(--color-sand);
+    color: var(--color-ink);
+  }
+
+  .desktop-nav__link[aria-current='page'],
+  .utility-nav__link[aria-current='page'] {
+    background: var(--strong);
+    color: var(--on-strong);
+  }
+
+  .desktop-nav__link[aria-current='page']:hover,
+  .utility-nav__link[aria-current='page']:hover {
+    background: var(--strong);
+    color: var(--on-strong);
+  }
+
+  .mobile-dock {
+    position: fixed;
+    inset-inline: 0.75rem;
+    bottom: max(0.75rem, env(safe-area-inset-bottom));
+    z-index: 40;
+  }
+
+  .mobile-dock__rail {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(var(--dock-cols, 5), minmax(0, 1fr));
+    align-items: stretch;
+    gap: 0.15rem;
+    padding: 0.35rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-sand) 92%, transparent);
+    box-shadow: 0 12px 32px color-mix(in srgb, var(--color-ink) 14%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .mobile-dock__pill {
+    position: absolute;
+    top: 0.35rem;
+    bottom: 0.35rem;
+    left: 0;
+    width: 0;
+    border-radius: 999px;
+    background: var(--strong);
+    transform: translateX(0);
+    transition:
+      transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      width 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.2s ease;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+    will-change: transform, width;
+  }
+
+  .mobile-dock[data-active]:not([data-active='']) .mobile-dock__pill {
+    opacity: 1;
+  }
+
+  .mobile-dock__item {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    padding: 0.55rem 0.15rem;
+    border-radius: 999px;
+    color: var(--color-muted);
+    text-decoration: none;
+    transition:
+      color 0.2s ease,
+      transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-dock__icon {
+    display: inline-flex;
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .mobile-dock__item[aria-current='page'] {
+    color: var(--on-strong);
+  }
+
+  .mobile-dock__item[aria-current='page'] .mobile-dock__icon {
+    transform: scale(1.08);
+  }
+
+  .mobile-dock__item.is-pressed {
+    transform: scale(0.88);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-dock__pill,
+    .mobile-dock__item,
+    .mobile-dock__icon {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  declare global {
+    interface Window {
+      __siteNavAbort?: AbortController;
+    }
+  }
+
+  function initSiteNav() {
+    const dock = document.querySelector<HTMLElement>('[data-mobile-nav]');
+    const pill = document.querySelector<HTMLElement>('[data-mobile-pill]');
+    const desktopNav = document.querySelector<HTMLElement>('[data-desktop-nav]');
+    const utilityNav = document.querySelector<HTMLElement>('[data-utility-nav]');
+    if (!dock || !pill) return;
+
+    window.__siteNavAbort?.abort();
+    const ac = new AbortController();
+    window.__siteNavAbort = ac;
+    const { signal } = ac;
+
+    const dockItems = [...dock.querySelectorAll<HTMLAnchorElement>('[data-nav-kind="dock"]')];
+    const desktopItems = desktopNav
+      ? [...desktopNav.querySelectorAll<HTMLAnchorElement>('[data-nav-section]')]
+      : [];
+    const utilityItems = utilityNav
+      ? [...utilityNav.querySelectorAll<HTMLAnchorElement>('[data-nav-section]')]
+      : [];
+    const allNavItems = [...dockItems, ...desktopItems, ...utilityItems];
+
+    const dockSectionIds = dockItems
+      .map((item) => item.dataset.navSection)
+      .filter((id): id is string => Boolean(id));
+    const spySectionIds = [
+      'inicio',
+      'sobre',
+      'proyectos',
+      'tecnologias',
+      'formacion',
+      'metricas',
+      'contacto',
+    ];
+
+    let active = dock.dataset.active || '';
+    let ticking = false;
+    let spyLocked = false;
+    let unlockTimer = 0;
+
+    const isDockSection = (section: string) => dockSectionIds.includes(section);
+
+    const movePill = (section: string, animate = true) => {
+      if (!isDockSection(section)) {
+        pill.style.opacity = '0';
+        dock.dataset.active = '';
+        return;
+      }
+
+      const index = dockItems.findIndex((item) => item.dataset.navSection === section);
+      if (index < 0) {
+        pill.style.opacity = '0';
+        return;
+      }
+
+      const target = dockItems[index]!;
+      const rail = target.parentElement;
+      if (!rail) return;
+
+      const railRect = rail.getBoundingClientRect();
+      const itemRect = target.getBoundingClientRect();
+      const left = itemRect.left - railRect.left;
+
+      if (!animate) pill.style.transition = 'none';
+      pill.style.width = `${itemRect.width}px`;
+      pill.style.transform = `translateX(${left}px)`;
+      pill.style.opacity = '1';
+      if (!animate) {
+        void pill.offsetWidth;
+        pill.style.transition = '';
+      }
+    };
+
+    const syncAria = (section: string) => {
+      for (const item of allNavItems) {
+        const on = item.dataset.navSection === section;
+        if (on) item.setAttribute('aria-current', 'page');
+        else item.removeAttribute('aria-current');
+      }
+    };
+
+    const setActive = (section: string, animate = true) => {
+      if (!section) return;
+
+      const changed = section !== active;
+      active = section;
+
+      if (isDockSection(section)) {
+        dock.dataset.active = section;
+      } else {
+        dock.dataset.active = '';
+      }
+
+      if (desktopNav) desktopNav.dataset.active = isDockSection(section) ? section : '';
+      if (utilityNav) utilityNav.dataset.active = section;
+
+      syncAria(section);
+      movePill(section, animate && changed);
+    };
+
+    const lockSpy = (ms = 1000) => {
+      spyLocked = true;
+      window.clearTimeout(unlockTimer);
+      unlockTimer = window.setTimeout(() => {
+        spyLocked = false;
+      }, ms);
+      signal.addEventListener('abort', () => window.clearTimeout(unlockTimer), { once: true });
+    };
+
+    const sectionFromPath = () => {
+      const path = location.pathname;
+      if (path.startsWith('/proyectos')) return 'proyectos';
+      if (path.startsWith('/sobre')) return 'sobre';
+      return '';
+    };
+
+    const updateFromScroll = () => {
+      if (spyLocked) return;
+
+      const pathSection = sectionFromPath();
+      if (pathSection) {
+        setActive(pathSection, false);
+        return;
+      }
+      if (location.pathname !== '/' && location.pathname !== '') return;
+
+      const marker = window.scrollY + window.innerHeight * 0.28;
+      let current = spySectionIds[0] ?? 'inicio';
+
+      for (const id of spySectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        if (el.offsetTop <= marker) current = id;
+      }
+
+      if (current !== active) setActive(current);
+    };
+
+    const onScroll = () => {
+      if (spyLocked || ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        updateFromScroll();
+        ticking = false;
+      });
+    };
+
+    const goToSection = (section: string, href: string) => {
+      lockSpy();
+      setActive(section, true);
+
+      const onHome = location.pathname === '/' || location.pathname === '';
+      const el = document.getElementById(section);
+
+      if (onHome && el) {
+        const reduce = document.documentElement.classList.contains('reduce-motion');
+        history.pushState(null, '', `#${section}`);
+
+        const navShell = document.querySelector<HTMLElement>('[data-nav]');
+        const headerOffset = (navShell?.getBoundingClientRect().bottom ?? 72) + 12;
+        const top = Math.max(0, el.getBoundingClientRect().top + window.scrollY - headerOffset);
+
+        window.scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' });
+        return;
+      }
+
+      location.assign(href);
+    };
+
+    const bindClick = (item: HTMLAnchorElement) => {
+      item.addEventListener(
+        'click',
+        (event) => {
+          const section = item.dataset.navSection;
+          if (!section) return;
+
+          event.preventDefault();
+          item.classList.add('is-pressed');
+          window.setTimeout(() => item.classList.remove('is-pressed'), 180);
+          goToSection(section, item.getAttribute('href') || `/#${section}`);
+        },
+        { signal },
+      );
+    };
+
+    for (const item of allNavItems) bindClick(item);
+
+    window.addEventListener('scroll', onScroll, { passive: true, signal });
+    window.addEventListener('resize', () => movePill(active, false), { passive: true, signal });
+    window.addEventListener(
+      'hashchange',
+      () => {
+        const hash = location.hash.replace('#', '');
+        if (!hash) return;
+        if (spySectionIds.includes(hash)) {
+          lockSpy();
+          setActive(hash, true);
+        }
+      },
+      { signal },
+    );
+
+    requestAnimationFrame(() => {
+      const hash = location.hash.replace('#', '');
+      if (hash && spySectionIds.includes(hash)) setActive(hash, false);
+      else if (active) setActive(active, false);
+      else updateFromScroll();
+    });
+  }
+
+  initSiteNav();
+  document.addEventListener('astro:page-load', initSiteNav);
+</script>

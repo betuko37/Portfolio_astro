@@ -17,7 +17,7 @@ const liveItems = getShowcase(live.id).filter(
 );
 ---
 
-<section id="proyectos" class="px-4 py-10 md:px-8 md:py-20">
+<section id="proyectos" class="scroll-mt-28 px-4 py-10 md:scroll-mt-32 md:px-8 md:py-20">
   <div class="mx-auto flex max-w-6xl flex-col gap-10 md:gap-16">
     <ShowcaseBreak
       kicker="Proyectos"
@@ -28,12 +28,12 @@ const liveItems = getShowcase(live.id).filter(
       <a
         slot="action"
         href="#live"
-        class="btn-accent inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-xs font-medium no-underline md:text-sm"
+        class="inline-flex items-center gap-1.5 rounded-full bg-ink px-3.5 py-2 text-xs font-medium text-paper no-underline md:text-sm"
       >
         Ver todos
         <AppIcon name="arrow-right" size={14} />
       </a>
-      <div class="grid grid-cols-2 gap-2.5 md:grid-cols-3 md:gap-3">
+      <div class="grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-3">
         {projectSpotlights.map((item) => (
           <SpotlightCard item={item} />
         ))}
@@ -48,13 +48,15 @@ const liveItems = getShowcase(live.id).filter(
       items={liveItems}
     />
 
-    <ShowcaseBreak
-      kicker="Stack"
-      icon="cpu"
-      title="Tecnologías utilizadas en producción."
-    >
-      <StackMarquee items={profile.stack} />
-    </ShowcaseBreak>
+    <div id="tecnologias" class="scroll-mt-28 md:scroll-mt-32">
+      <ShowcaseBreak
+        kicker="Stack"
+        icon="cpu"
+        title="Tecnologías utilizadas en producción."
+      >
+        <StackMarquee items={profile.stack} />
+      </ShowcaseBreak>
+    </div>
 
     <ShowcaseRail
       id={github.id}
@@ -64,39 +66,41 @@ const liveItems = getShowcase(live.id).filter(
       items={getShowcase(github.id)}
     />
 
-    <ShowcaseBreak
-      kicker="Formación"
-      icon="briefcase"
-      title="Ingeniería en Software y prácticas."
-      copy="Universidad Estatal de Sonora (2021–2025) y Cecytes Hermosillo V (2017–2020). Inglés B1."
-    >
-      <a
-        slot="action"
-        href="/sobre"
-        class="inline-flex items-center gap-1.5 rounded-full bg-ink px-3.5 py-2 text-xs font-medium text-paper no-underline md:text-sm"
+    <div id="formacion" class="scroll-mt-28 md:scroll-mt-32">
+      <ShowcaseBreak
+        kicker="Formación"
+        icon="briefcase"
+        title="Ingeniería en Software y prácticas."
+        copy="Universidad Estatal de Sonora (2021–2025) y Cecytes Hermosillo V (2017–2020). Inglés B1."
       >
-        Ver formación
-        <AppIcon name="arrow-right" size={14} />
-      </a>
-      <div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
-        {profile.education.map((item) => (
-          <article class="flex items-center gap-3 rounded-[1.2rem] bg-paper px-4 py-3 text-ink">
-            <span
-              class:list={[
-                'inline-flex h-12 w-20 items-center justify-center overflow-hidden rounded-xl px-2',
-                item.logoTone === 'night' ? 'bg-black' : 'bg-sand',
-              ]}
-            >
-              <img src={item.logo} alt={item.school} class="max-h-10 max-w-full object-contain" />
-            </span>
-            <div>
-              <p class="text-sm font-medium">{item.program}</p>
-              <p class="text-xs text-muted">{item.school}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-    </ShowcaseBreak>
+        <a
+          slot="action"
+          href="/sobre"
+          class="inline-flex items-center gap-1.5 rounded-full bg-ink px-3.5 py-2 text-xs font-medium text-paper no-underline md:text-sm"
+        >
+          Ver formación
+          <AppIcon name="arrow-right" size={14} />
+        </a>
+        <div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
+          {profile.education.map((item) => (
+            <article class="flex items-center gap-3 rounded-[1.2rem] bg-paper px-4 py-3 text-ink">
+              <span
+                class:list={[
+                  'inline-flex h-12 w-20 items-center justify-center overflow-hidden rounded-xl px-2',
+                  item.logoTone === 'night' ? 'bg-black' : 'bg-sand',
+                ]}
+              >
+                <img src={item.logo} alt={item.school} class="max-h-10 max-w-full object-contain" />
+              </span>
+              <div>
+                <p class="text-sm font-medium">{item.program}</p>
+                <p class="text-xs text-muted">{item.school}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </ShowcaseBreak>
+    </div>
 
     <ShowcaseRail
       id={practices.id}

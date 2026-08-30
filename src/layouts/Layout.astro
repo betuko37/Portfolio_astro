@@ -86,7 +86,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
       <ClickSparkLayer client:load />
     </div>
     <Header />
-    <main class="site-main pt-16 pb-[calc(5.75rem+env(safe-area-inset-bottom))] sm:pt-24 sm:pb-0">
+    <main class="site-main pt-16 pb-[calc(5.75rem+env(safe-area-inset-bottom))] md:pt-24 md:pb-0">
       <slot />
     </main>
     <Footer />
