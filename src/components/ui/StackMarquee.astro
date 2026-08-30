@@ -5,9 +5,10 @@ import { isBrandImage } from '@data/brands';
 interface Props {
   items: readonly string[];
   single?: boolean;
+  compact?: boolean;
 }
 
-const { items, single = false } = Astro.props;
+const { items, single = false, compact = false } = Astro.props;
 
 function splitRows(list: readonly string[], rows = 3) {
   const size = Math.ceil(list.length / rows);
@@ -31,8 +32,8 @@ const marqueeRows = single ? [items] : splitRows(items);
         ]}
       >
         {loop(row).map((item) => (
-          <span class="inline-flex items-center gap-2 rounded-full bg-paper px-4 py-2 text-sm text-ink">
-            <BrandIcon label={item} size={isBrandImage(item) ? 18 : 15} />
+          <span class:list={['text-ink', compact ? 'deck-pill' : 'inline-flex items-center gap-2 rounded-full bg-paper px-4 py-2 text-sm']}>
+            <BrandIcon label={item} size={isBrandImage(item) ? (compact ? 15 : 18) : (compact ? 13 : 15)} />
             {item}
           </span>
         ))}

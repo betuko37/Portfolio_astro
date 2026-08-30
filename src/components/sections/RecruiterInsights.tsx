@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import type { RecruiterStats } from "@data/recruiter-stats";
-import { applyLiveGithubStats } from "@data/recruiter-stats";
+import { applyLiveGithubStats } from "@data/recruiter-stats-client";
+import type { RecruiterStats } from "@data/recruiter-stats-types";
 import { getContributionYear, normalizeContributions, type ContributionDay, type GithubContributions, type GithubUsage } from "@lib/github-stats";
 import BrandIcon from "@components/ui/BrandIcon";
 import { getBrandColor } from "@data/brands";
@@ -97,19 +97,19 @@ function ContributionGrid({
   const gridWidth = safeWeeks.length * weekStep - cellGap;
 
   return (
-    <div className="w-full sm:flex sm:flex-col sm:items-center">
-      <div className="flex w-full items-baseline justify-between gap-2 sm:max-w-fit sm:justify-center sm:gap-x-4">
-        <p className="text-[10px] text-[var(--ink)]">
+    <div className="min-w-0 w-full max-w-full sm:flex sm:flex-col sm:items-center">
+      <div className="flex w-full min-w-0 items-baseline justify-between gap-2 sm:max-w-fit sm:justify-center sm:gap-x-4">
+        <p className="min-w-0 text-[10px] text-[var(--ink)]">
           <span className="font-medium tabular-nums">{total.toLocaleString("es-MX")}</span>
           <span className="text-[var(--muted)]"> contribuciones en {year} · </span>
           <span className="font-medium tabular-nums">{activeDays}</span>
           <span className="text-[var(--muted)]"> días activos · ene–dic</span>
         </p>
-        <p className="text-[9px] tabular-nums text-[var(--muted)]">@{login}</p>
+        <p className="shrink-0 text-[9px] tabular-nums text-[var(--muted)]">@{login}</p>
       </div>
 
-      <div className="mt-2 w-full sm:flex sm:justify-center">
-        <div className="flex w-full max-w-full gap-1.5 sm:w-auto">
+      <div className="mt-2 min-w-0 w-full max-w-full sm:flex sm:justify-center">
+        <div className="flex min-w-0 w-full max-w-full gap-1.5 sm:w-auto">
           <div
             className="flex w-7 shrink-0 flex-col gap-[3px] pt-4 sm:w-8"
             aria-hidden="true"
@@ -125,18 +125,18 @@ function ContributionGrid({
             ))}
           </div>
 
-          <div className="relative min-w-0 flex-1 sm:flex-none">
+          <div className="relative min-w-0 flex-1 overflow-hidden sm:flex-none sm:overflow-visible">
             <div
               className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-sand via-sand/80 to-transparent sm:hidden"
               aria-hidden="true"
             />
             <div
-              className="contrib-scroll w-full max-w-full overflow-x-scroll overscroll-x-contain pb-1 [-webkit-overflow-scrolling:touch] [scrollbar-width:thin] sm:mx-auto sm:overflow-x-visible sm:scroll-smooth [&::-webkit-scrollbar]:h-1 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[var(--mist)]/80 [&::-webkit-scrollbar-track]:bg-transparent"
+              className="contrib-scroll max-w-full overflow-x-auto overscroll-x-contain touch-pan-x pb-1 [-webkit-overflow-scrolling:touch] [scrollbar-width:thin] sm:mx-auto sm:overflow-x-visible sm:scroll-smooth [&::-webkit-scrollbar]:h-1 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[var(--mist)]/80 [&::-webkit-scrollbar-track]:bg-transparent"
               tabIndex={0}
               role="region"
               aria-label={`Cuadrícula de contribuciones ${year}, desliza horizontalmente`}
             >
-              <div className="w-max pr-2" style={{ minWidth: gridWidth }}>
+              <div className="w-max pr-2" style={{ width: gridWidth, minWidth: gridWidth }}>
                 <div
                   className="relative mb-1.5 h-3.5 text-[8px] text-[var(--muted)] sm:text-[9px]"
                   style={{ width: gridWidth }}
@@ -378,12 +378,12 @@ export default function RecruiterInsights({ stats: initial }: { stats: Recruiter
   const repoHint = `${stats.githubUsage.reposWithLanguages} de ${stats.githubUsage.totalRepos} repos`;
 
   return (
-    <div className="rounded-[1.25rem] bg-sand">
+    <div className="min-w-0 max-w-full overflow-hidden rounded-[1.25rem] bg-sand">
       <div className="grid grid-cols-4 divide-x divide-[var(--paper)]">
         {hero.map((kpi) => (
           <div
             key={kpi.label}
-            className="flex flex-col items-center px-2 py-2.5 text-center sm:px-2.5 md:py-3"
+            className="flex min-w-0 flex-col items-center px-2 py-2.5 text-center sm:px-2.5 md:py-3"
           >
             <p className="flex min-h-[2.6em] w-full items-end justify-center text-[9px] font-medium uppercase leading-[1.15] tracking-[0.1em] text-[var(--muted)]">
               {formatKpiLabel(kpi.label)}
@@ -395,14 +395,14 @@ export default function RecruiterInsights({ stats: initial }: { stats: Recruiter
         ))}
       </div>
 
-      <div className="grid gap-px bg-[var(--paper)] sm:grid-cols-2">
+      <div className="grid min-w-0 gap-px bg-[var(--paper)] sm:grid-cols-2">
         <div
-          className={`bg-sand px-3 py-2.5 sm:col-span-2 sm:flex sm:flex-col sm:items-center ${refreshing ? "opacity-60" : ""} transition-opacity`}
+          className={`min-w-0 max-w-full overflow-hidden bg-sand px-3 py-2.5 sm:col-span-2 sm:flex sm:flex-col sm:items-center ${refreshing ? "opacity-60" : ""} transition-opacity`}
         >
           <p className="w-full text-[10px] font-medium uppercase tracking-[0.14em] text-[var(--accent)] sm:text-center">
             GitHub
           </p>
-          <div className="mt-1.5 w-full max-w-full sm:flex sm:justify-center">
+          <div className="mt-1.5 min-w-0 w-full max-w-full sm:flex sm:justify-center">
             <ContributionGrid
               weeks={stats.github.weeks}
               total={stats.github.contributionsLastYear}

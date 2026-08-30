@@ -47,7 +47,7 @@ const description = project?.summary ?? lab!.tagline;
       <div class="mx-auto mb-3 max-w-7xl">
         <BackLink href="/#proyectos" />
       </div>
-      <div class="tone-night relative mx-auto max-w-7xl overflow-hidden rounded-[1.5rem] px-5 py-8 md:rounded-[2rem] md:px-10 md:py-12" data-hero>
+      <div class="project-hero tone-night relative mx-auto max-w-7xl overflow-hidden rounded-[1.25rem] px-4 py-6 md:rounded-[2rem] md:px-10 md:py-12" data-hero>
         {cover && (
           <img
             src={cover}
@@ -57,20 +57,38 @@ const description = project?.summary ?? lab!.tagline;
         )}
         <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-black via-black/85 to-[#2a1048]/70"></div>
         <span class="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-accent/25 blur-3xl"></span>
+        <span class="pointer-events-none absolute -bottom-20 -left-10 h-40 w-40 rounded-full bg-accent/15 blur-3xl md:hidden"></span>
         <div class="relative grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:gap-12">
           <div>
-            <div class="mb-1 flex lg:hidden" data-hero-item>
-              <span class:list={['inline-flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl p-2', logoLightBg ? 'bg-white' : 'bg-paper/10']}>
+            <div class="project-hero-top flex items-start gap-3 lg:hidden" data-hero-item>
+              <span class:list={['inline-flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl p-2', logoLightBg ? 'bg-white' : 'bg-paper/10 backdrop-blur-sm']}>
                 {logo ? (
                   <img src={logo} alt="" class="h-full w-full object-contain" />
                 ) : (
-                  <AppIcon name={projectIcons[project.slug]} size={28} />
+                  <AppIcon name={projectIcons[project.slug]} size={24} />
                 )}
               </span>
+              <div class="min-w-0 flex-1">
+                <div class="flex flex-wrap items-center gap-1.5">
+                  <span class="project-hero-chip">{project.kicker}</span>
+                  <span class="project-hero-chip tabular-nums">{project.year.replace(' — ', '–')}</span>
+                  {live && (
+                    <span class="live-badge px-2.5 py-0.5 text-[10px]">
+                      <span class="live-dot"></span>
+                      En vivo
+                    </span>
+                  )}
+                </div>
+                <p class="project-hero-role-mobile mt-2 inline-flex items-center gap-1.5 text-[10px]">
+                  <AppIcon name="briefcase" size={12} />
+                  {project.role}
+                </p>
+              </div>
             </div>
-            <div class="flex flex-wrap items-center gap-2" data-hero-item>
-              <span class="rounded-full bg-paper/10 px-3 py-1 text-[11px] font-medium text-mist">{project.kicker}</span>
-              <span class="rounded-full bg-paper/10 px-3 py-1 text-[11px] font-medium tabular-nums text-mist">{project.year.replace(' — ', '–')}</span>
+
+            <div class="hidden flex-wrap items-center gap-2 lg:flex" data-hero-item>
+              <span class="project-hero-chip">{project.kicker}</span>
+              <span class="project-hero-chip tabular-nums">{project.year.replace(' — ', '–')}</span>
               {live && (
                 <span class="live-badge px-3 py-1 text-[11px]">
                   <span class="live-dot"></span>
@@ -78,7 +96,7 @@ const description = project?.summary ?? lab!.tagline;
                 </span>
               )}
             </div>
-            <h1 class="mt-5 max-w-3xl font-display text-2xl tracking-tight sm:text-3xl md:text-6xl">
+            <h1 class="project-hero-title mt-3 max-w-3xl font-display text-[1.35rem] leading-[1.12] tracking-tight sm:text-3xl md:mt-5 md:text-6xl md:leading-none">
               <FoldText
                 client:load
                 text={project.title}
@@ -90,32 +108,32 @@ const description = project?.summary ?? lab!.tagline;
                 fontWeight={700}
               />
             </h1>
-            <p class="mt-4 max-w-xl text-base leading-relaxed text-mist md:text-lg" data-hero-item>{project.tagline}</p>
-            <p class="mt-4 inline-flex max-w-xl items-center gap-2 rounded-full bg-paper/10 px-3 py-1.5 text-xs text-mist md:text-sm" data-hero-item>
+            <p class="project-hero-tagline mt-3 max-w-xl text-[11px] leading-relaxed sm:text-base md:mt-4 md:text-lg" data-hero-item>{project.tagline}</p>
+            <p class="project-hero-role mt-3 hidden max-w-xl items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs md:mt-4 md:inline-flex md:text-sm" data-hero-item>
               <AppIcon name="briefcase" size={14} />
               {project.role}
             </p>
             {project.links.length > 0 ? (
-              <div class="mt-8 flex flex-wrap gap-2.5" data-hero-item>
+              <div class="project-hero-links mt-5 grid grid-cols-2 gap-2 md:mt-8 md:flex md:flex-wrap md:gap-2.5" data-hero-item>
                 {project.links.map((link) => (
                   <a
-                    class="inline-flex items-center gap-2 rounded-full bg-paper px-4 py-2.5 text-sm font-medium text-ink no-underline hover:bg-accent-soft"
+                    class="project-hero-link inline-flex min-w-0 items-center justify-center gap-1.5 rounded-full px-3 py-2 text-[10px] font-medium no-underline md:justify-start md:px-4 md:py-2.5 md:text-sm"
                     href={link.href}
                     target="_blank"
                     rel="noreferrer"
                     data-magnetic
                   >
                     {link.label}
-                    <AppIcon name="arrow-up-right" size={14} />
+                    <AppIcon name="arrow-up-right" size={13} class="shrink-0" />
                   </a>
                 ))}
               </div>
             ) : project.slug === 'jornalpro-mobile' && !gallery ? (
-              <p class="mt-8 text-sm text-mist">Aplicación Android (APK). Registro fotográfico pendiente.</p>
+              <p class="mt-5 text-[11px] text-mist md:mt-8 md:text-sm">Aplicación Android (APK). Registro fotográfico pendiente.</p>
             ) : null}
           </div>
           <div class="hidden lg:flex lg:justify-end" data-hero-icon>
-            <div class:list={['relative flex h-56 w-56 items-center justify-center overflow-hidden rounded-[2rem] border border-white/10 p-8 backdrop-blur-md', logoLightBg ? 'bg-white' : 'bg-paper/10']}>
+            <div class:list={['relative flex h-56 w-56 items-center justify-center overflow-hidden rounded-[2rem] p-8 backdrop-blur-md', logoLightBg ? 'bg-white' : 'bg-paper/10']}>
               {logo ? (
                 <img src={logo} alt="" class="max-h-full max-w-full object-contain" />
               ) : (

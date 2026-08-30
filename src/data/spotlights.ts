@@ -1,5 +1,5 @@
 import type { IconName } from "./icons";
-import { HIKCENTRAL_LOGO, getProjectLogo } from "./media";
+import { HIKCENTRAL_LOGO, getProjectLogo } from "./project-logos";
 
 export type ProjectSpotlight = {
   id: string;

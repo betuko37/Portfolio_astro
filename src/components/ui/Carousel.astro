@@ -14,27 +14,76 @@ const multi = images.length > 1;
 ---
 
 {images.length > 0 && (
-  <section class="px-4 pb-10 pt-4 md:px-8 md:pb-16" data-reveal>
+  <section class="px-4 pb-8 pt-4 md:px-8 md:pb-16" data-reveal>
     <div class="mx-auto max-w-6xl">
-      <p class="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.18em] text-accent">
+      <p class="deck-eyebrow">
         <AppIcon name="image" size={14} />
         {title}
       </p>
 
       <div
-        class:list={['carousel mt-8 md:overflow-visible', !phone && 'coverflow overflow-x-clip']}
+        class:list={['carousel mt-5 md:mt-8 md:overflow-visible', !phone && 'coverflow overflow-x-clip']}
         data-carousel
         data-variant={variant}
         data-count={images.length}
       >
-        <div class:list={['relative', phone ? 'mx-auto max-w-sm' : 'w-full']}>
+        <div class="relative w-full">
           {phone ? (
-            <div class="device">
-              <span class="device-notch"></span>
-              <div class="device-screen relative aspect-[9/19]">
+            <div class="carousel-stage-wrap relative mx-auto max-w-sm">
+              <div class="device">
+                <span class="device-notch"></span>
+                <div class="device-screen relative aspect-[9/19]">
+                  {images.map((image, index) => (
+                    <figure
+                      class:list={[
+                        'carousel-slide absolute inset-0 cursor-zoom-in',
+                        index === 0 && 'is-active',
+                      ]}
+                      data-slide
+                      data-slide-index={index}
+                      data-active={index === 0 || undefined}
+                    >
+                      <img
+                        src={image.src}
+                        alt={image.alt}
+                        class="h-full w-full object-cover"
+                        loading={index === 0 ? 'eager' : 'lazy'}
+                      />
+                    </figure>
+                  ))}
+                </div>
+              </div>
+
+              {multi && (
+                <>
+                  <button
+                    class="btn-accent carousel-prev carousel-nav-floating inline-flex h-8 w-8 items-center justify-center rounded-full md:hidden"
+                    type="button"
+                    aria-label="Anterior"
+                    data-magnetic
+                  >
+                    <AppIcon name="arrow-right" size={13} class="rotate-180" />
+                  </button>
+                  <button
+                    class="btn-accent carousel-next carousel-nav-floating inline-flex h-8 w-8 items-center justify-center rounded-full md:hidden"
+                    type="button"
+                    aria-label="Siguiente"
+                    data-magnetic
+                  >
+                    <AppIcon name="arrow-right" size={13} />
+                  </button>
+                </>
+              )}
+            </div>
+          ) : (
+            <div class="carousel-stage-wrap relative">
+              <div class="coverflow-stage relative mx-auto aspect-[3/2] w-full max-w-4xl overflow-visible md:aspect-[16/10] md:px-[4%]">
                 {images.map((image, index) => (
                   <figure
-                    class="carousel-slide absolute inset-0 cursor-zoom-in"
+                    class:list={[
+                      'carousel-slide carousel-slide-cover absolute top-0 flex h-full cursor-zoom-in items-center justify-center overflow-hidden rounded-xl md:rounded-[1.25rem]',
+                      index === 0 && 'is-active',
+                    ]}
                     data-slide
                     data-slide-index={index}
                     data-active={index === 0 || undefined}
@@ -42,42 +91,50 @@ const multi = images.length > 1;
                     <img
                       src={image.src}
                       alt={image.alt}
-                      class="h-full w-full object-cover"
+                      class="pointer-events-none h-full w-full object-contain object-center"
                       loading={index === 0 ? 'eager' : 'lazy'}
                     />
                   </figure>
                 ))}
               </div>
-            </div>
-          ) : (
-            <div class="coverflow-stage relative mx-auto aspect-[16/10] w-full max-w-4xl overflow-visible px-[4%]">
-              {images.map((image, index) => (
-                <figure
-                  class:list={[
-                    'carousel-slide carousel-slide-cover absolute top-0 flex h-full cursor-zoom-in items-center justify-center overflow-hidden rounded-[1.25rem]',
-                    index === 0 && 'is-active',
-                  ]}
-                  data-slide
-                  data-slide-index={index}
-                  data-active={index === 0 || undefined}
-                >
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    class="pointer-events-none h-full w-full object-contain object-center"
-                    loading={index === 0 ? 'eager' : 'lazy'}
-                  />
-                </figure>
-              ))}
+
+              {multi && (
+                <>
+                  <button
+                    class="btn-accent carousel-prev carousel-nav-floating inline-flex h-8 w-8 items-center justify-center rounded-full md:hidden"
+                    type="button"
+                    aria-label="Anterior"
+                    data-magnetic
+                  >
+                    <AppIcon name="arrow-right" size={13} class="rotate-180" />
+                  </button>
+                  <button
+                    class="btn-accent carousel-next carousel-nav-floating inline-flex h-8 w-8 items-center justify-center rounded-full md:hidden"
+                    type="button"
+                    aria-label="Siguiente"
+                    data-magnetic
+                  >
+                    <AppIcon name="arrow-right" size={13} />
+                  </button>
+                </>
+              )}
             </div>
           )}
 
-          <p class="carousel-hint mt-3 text-center text-xs text-muted">
-            Clic en una captura para verla en grande
-          </p>
+          <div class="carousel-meta mt-3 flex flex-col items-center gap-1 md:flex-row md:justify-center md:gap-3">
+            {multi && (
+              <p class="carousel-counter deck-meta font-medium tabular-nums md:hidden" data-carousel-counter>
+                1 / {images.length}
+              </p>
+            )}
+            <p class="carousel-hint deck-meta text-center">
+              <span class="md:hidden">Toca para ampliar</span>
+              <span class="hidden md:inline">Clic en una captura para verla en grande</span>
+            </p>
+          </div>
 
           {multi && (
-            <div class="mt-4 flex items-center justify-center gap-3">
+            <div class="mt-4 hidden items-center justify-center gap-3 md:flex">
               <button
                 class="btn-accent carousel-prev inline-flex h-9 w-9 items-center justify-center rounded-full"
                 type="button"
@@ -99,22 +156,24 @@ const multi = images.length > 1;
         </div>
 
         {multi && (
-          <div class="mt-5 flex flex-wrap items-center justify-center gap-2">
-            {images.map((image, index) => (
-              <button
-                class:list={[
-                  'carousel-dot overflow-hidden rounded-full opacity-55 transition-opacity',
-                  phone ? 'h-12 w-7' : 'h-11 w-[4.25rem]',
-                  index === 0 && 'is-active opacity-100',
-                ]}
-                type="button"
-                data-dot
-                data-index={index}
-                aria-label={`Ir a captura ${index + 1}`}
-              >
-                <img src={image.src} alt="" class="h-full w-full object-contain object-center" />
-              </button>
-            ))}
+          <div class="carousel-thumbs-shell mt-4 md:mt-5">
+            <div class="carousel-thumbs" data-carousel-thumbs>
+              {images.map((image, index) => (
+                <button
+                  class:list={[
+                    'carousel-dot shrink-0 overflow-hidden rounded-lg opacity-55 transition-opacity md:rounded-full',
+                    phone ? 'h-14 w-8 md:h-12 md:w-7' : 'h-14 w-[5.25rem] md:h-11 md:w-[4.25rem]',
+                    index === 0 && 'is-active opacity-100',
+                  ]}
+                  type="button"
+                  data-dot
+                  data-index={index}
+                  aria-label={`Ir a captura ${index + 1}`}
+                >
+                  <img src={image.src} alt="" class="h-full w-full object-cover object-center md:object-contain" />
+                </button>
+              ))}
+            </div>
           </div>
         )}
 
@@ -141,7 +200,7 @@ const multi = images.length > 1;
                   data-lightbox-hero
                   src={images[0]?.src}
                   alt={images[0]?.alt ?? ''}
-                  class="block max-h-[82vh] w-auto max-w-[min(96vw,88rem)] rounded-[1rem] object-contain ring-1 ring-white/10"
+                  class="block max-h-[82vh] w-auto max-w-[min(96vw,88rem)] rounded-[1rem] object-contain"
                   loading="eager"
                 />
               </figure>

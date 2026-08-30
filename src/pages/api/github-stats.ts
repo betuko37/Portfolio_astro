@@ -1,13 +1,19 @@
 import type { APIRoute } from "astro";
 import { GITHUB_LOGIN, GITHUB_TOKEN } from "astro:env/server";
-import { fetchGithubUsage, normalizeContributions } from "@lib/github-stats";
+import {
+  fetchGithubContributions,
+  fetchGithubUsage,
+  normalizeContributions,
+  type GithubContributions,
+} from "@lib/github-stats";
 import { githubUsageSnapshot } from "@data/github-usage";
 import { githubContributionsSnapshot } from "@data/recruiter-stats";
+import { profile } from "@data/profile";
 
 export const prerender = false;
 
 const TTL_MS = 15 * 60 * 1000;
-const CACHE_VERSION = 7;
+const CACHE_VERSION = 8;
 
 type CacheEntry = {
   version: number;
@@ -28,10 +34,14 @@ function json(data: Record<string, unknown>, status = 200) {
   });
 }
 
+function resolveLogin(tokenLogin?: string | undefined) {
+  return tokenLogin || GITHUB_LOGIN || profile.githubUser;
+}
+
 export const GET: APIRoute = async () => {
   const now = Date.now();
   const token = GITHUB_TOKEN;
-  const login = GITHUB_LOGIN;
+  const login = resolveLogin();
   const mode = token ? "auth" : "public";
 
   if (cache && cache.version === CACHE_VERSION && cache.expires > now && cache.mode === mode) {
@@ -63,14 +73,30 @@ export const GET: APIRoute = async () => {
   } catch (error) {
     console.error("github-stats", error);
 
+    let contributions: GithubContributions | null =
+      (error as Error & { contributions?: GithubContributions | null }).contributions ?? null;
+
+    if (!contributions?.dailyFromGithub) {
+      try {
+        contributions = await fetchGithubContributions(login, token);
+      } catch {
+        /* snapshot */
+      }
+    }
+
     const body = {
       ok: true,
       cached: false,
       stale: true,
       fetchedAt: new Date().toISOString(),
       usage: githubUsageSnapshot,
-      contributions: normalizeContributions(githubContributionsSnapshot),
+      contributions: normalizeContributions(contributions ?? githubContributionsSnapshot),
     };
+
+    // Cachea poco si al menos hay cuadrícula diaria (evita martillar GitHub HTML).
+    if (body.contributions.dailyFromGithub) {
+      cache = { version: CACHE_VERSION, expires: now + TTL_MS, mode, body };
+    }
 
     return json(body);
   }

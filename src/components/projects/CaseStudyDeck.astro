@@ -19,33 +19,78 @@ function splitLine(text: string, fallback: string) {
 }
 ---
 
-<div class="space-y-6 md:space-y-8">
-  <div class="grid items-stretch gap-3 md:grid-cols-2">
-    <article class="flex h-full flex-col rounded-[1.4rem] bg-sand p-5">
-      <span class="mb-3 inline-flex w-fit rounded-2xl bg-paper p-2 text-accent">
-        <AppIcon name="circle-alert" size={18} />
-      </span>
-      <h3 class="font-display text-lg font-semibold tracking-tight">Contexto</h3>
-      <p class="mt-2 text-sm leading-relaxed text-muted">{project.problem}</p>
-    </article>
-    <article class="flex h-full flex-col rounded-[1.4rem] bg-sand p-5">
-      <span class="mb-3 inline-flex w-fit rounded-2xl bg-paper p-2 text-accent">
-        <AppIcon name="sparkles" size={18} />
-      </span>
-      <h3 class="font-display text-lg font-semibold tracking-tight">Descripción</h3>
-      <p class="mt-2 text-sm leading-relaxed text-muted">{project.summary}</p>
-    </article>
+<div class="space-y-5 md:space-y-8">
+  <div data-case-blurb-deck>
+    <div class="grid grid-cols-2 items-stretch gap-2 md:gap-3">
+      <article class="case-blurb deck-card flex min-h-[8.75rem] flex-col md:min-h-0" data-case-blurb>
+        <span class="deck-card-icon">
+          <AppIcon name="circle-alert" size={15} />
+        </span>
+        <h3 class="deck-card-title">Contexto</h3>
+        <p class="case-blurb-text deck-card-body line-clamp-3 flex-1 md:line-clamp-none" data-case-blurb-text>
+          {project.problem}
+        </p>
+        <button
+          class="deck-action mt-1.5 text-left md:hidden"
+          type="button"
+          data-case-blurb-open
+          aria-haspopup="dialog"
+        >
+          Ver más
+        </button>
+      </article>
+      <article class="case-blurb deck-card flex min-h-[8.75rem] flex-col md:min-h-0" data-case-blurb>
+        <span class="deck-card-icon">
+          <AppIcon name="sparkles" size={15} />
+        </span>
+        <h3 class="deck-card-title">Descripción</h3>
+        <p class="case-blurb-text deck-card-body line-clamp-3 flex-1 md:line-clamp-none" data-case-blurb-text>
+          {project.summary}
+        </p>
+        <button
+          class="deck-action mt-1.5 text-left md:hidden"
+          type="button"
+          data-case-blurb-open
+          aria-haspopup="dialog"
+        >
+          Ver más
+        </button>
+      </article>
+    </div>
+
+    <dialog class="case-blurb-modal" data-case-blurb-modal aria-labelledby="case-blurb-modal-title">
+      <div class="case-blurb-modal-scrim" data-case-blurb-modal-scrim aria-hidden="true"></div>
+      <div class="case-blurb-modal-panel">
+        <div class="case-blurb-modal-toolbar">
+          <div class="min-w-0">
+            <p class="case-blurb-modal-label">Detalle</p>
+            <h2 id="case-blurb-modal-title" class="case-blurb-modal-title" data-case-blurb-modal-title>Contexto</h2>
+          </div>
+          <button
+            class="case-blurb-modal-close inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-paper text-ink md:h-9 md:w-9"
+            type="button"
+            data-case-blurb-modal-close
+            aria-label="Cerrar"
+          >
+            <AppIcon name="x" size={18} />
+          </button>
+        </div>
+        <div class="case-blurb-modal-body">
+          <p class="case-blurb-modal-text" data-case-blurb-modal-text></p>
+        </div>
+      </div>
+    </dialog>
   </div>
 
   {project.modules.length > 0 && (
     <section data-rail>
-      <div class="mb-4 flex items-end justify-between gap-3">
-        <p class="inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.16em] text-accent">
+      <div class="mb-3 flex items-end justify-between gap-3 md:mb-4">
+        <p class="deck-label">
           <AppIcon name="layers" size={14} />
           Módulos
         </p>
         {project.modules.length > 1 && (
-          <div class="flex gap-1.5">
+          <div class="deck-rail-controls flex gap-1.5">
             <button class="btn-accent rail-prev inline-flex h-9 w-9 items-center justify-center rounded-full" type="button" aria-label="Anterior">
               <AppIcon name="arrow-right" size={14} class="rotate-180" />
             </button>
@@ -57,12 +102,12 @@ function splitLine(text: string, fallback: string) {
       </div>
       <div class="rail">
         {project.modules.map((module) => (
-          <article id={module.id ?? moduleSlug(module.name)} class="rail-item scroll-mt-28 rounded-[1.4rem] bg-sand p-5">
-            <span class="mb-3 inline-flex w-fit rounded-2xl bg-paper p-2 text-accent">
-              <AppIcon name={iconForModule(module.name)} size={18} />
+          <article id={module.id ?? moduleSlug(module.name)} class="rail-item deck-card scroll-mt-28">
+            <span class="deck-card-icon">
+              <AppIcon name={iconForModule(module.name)} size={15} />
             </span>
-            <h3 class="font-display text-lg font-semibold tracking-tight">{module.name}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-muted">{module.description}</p>
+            <h3 class="deck-card-title">{module.name}</h3>
+            <p class="deck-card-body">{module.description}</p>
           </article>
         ))}
       </div>
@@ -77,24 +122,24 @@ function splitLine(text: string, fallback: string) {
   )}
 
   {project.stack.length > 0 && (
-    <section class="overflow-hidden rounded-[1.4rem] bg-sand px-5 py-6 md:px-6">
-      <p class="mb-4 inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.16em] text-accent">
+    <section class="deck-card overflow-hidden py-4 md:px-6 md:py-6">
+      <p class="deck-label mb-3 md:mb-4">
         <AppIcon name="cpu" size={14} />
         Stack
       </p>
-      <StackMarquee items={project.stack} single />
+      <StackMarquee items={project.stack} single compact />
     </section>
   )}
 
   {project.howItWorks.length > 0 && (
     <section data-rail>
-      <div class="mb-4 flex items-end justify-between gap-3">
-        <p class="inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.16em] text-accent">
+      <div class="mb-3 flex items-end justify-between gap-3 md:mb-4">
+        <p class="deck-label">
           <AppIcon name="waypoints" size={14} />
           Proceso
         </p>
         {project.howItWorks.length > 1 && (
-          <div class="flex gap-1.5">
+          <div class="deck-rail-controls flex gap-1.5">
             <button class="btn-accent rail-prev inline-flex h-9 w-9 items-center justify-center rounded-full" type="button" aria-label="Anterior">
               <AppIcon name="arrow-right" size={14} class="rotate-180" />
             </button>
@@ -109,12 +154,12 @@ function splitLine(text: string, fallback: string) {
           const n = String(index + 1).padStart(2, '0');
           const card = splitLine(step, `Paso ${n}`);
           return (
-            <article class="rail-item rounded-[1.4rem] bg-sand p-5">
-              <span class="mb-3 inline-flex h-9 w-fit min-w-9 items-center justify-center rounded-2xl bg-paper px-2.5 font-display text-sm font-semibold text-accent">
+            <article class="rail-item deck-card">
+              <span class="deck-card-icon inline-flex h-7 min-w-7 items-center justify-center px-2 font-display text-[11px] font-semibold md:h-9 md:min-w-9 md:px-2.5 md:text-sm">
                 {n}
               </span>
-              <h3 class="font-display text-lg font-semibold tracking-tight">{card.title}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-muted">{card.body}</p>
+              <h3 class="deck-card-title">{card.title}</h3>
+              <p class="deck-card-body">{card.body}</p>
             </article>
           );
         })}
@@ -124,13 +169,13 @@ function splitLine(text: string, fallback: string) {
 
   {project.highlights.length > 0 && (
     <section data-rail>
-      <div class="mb-4 flex items-end justify-between gap-3">
-        <p class="inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.16em] text-accent">
+      <div class="mb-3 flex items-end justify-between gap-3 md:mb-4">
+        <p class="deck-label">
           <AppIcon name="sparkles" size={14} />
           Resultados
         </p>
         {project.highlights.length > 1 && (
-          <div class="flex gap-1.5">
+          <div class="deck-rail-controls flex gap-1.5">
             <button class="btn-accent rail-prev inline-flex h-9 w-9 items-center justify-center rounded-full" type="button" aria-label="Anterior">
               <AppIcon name="arrow-right" size={14} class="rotate-180" />
             </button>
@@ -144,12 +189,12 @@ function splitLine(text: string, fallback: string) {
         {project.highlights.map((item, index) => {
           const card = splitLine(item, `Resultado ${String(index + 1).padStart(2, '0')}`);
           return (
-            <article class="rail-item rounded-[1.4rem] bg-sand p-5">
-              <span class="mb-3 inline-flex w-fit rounded-2xl bg-paper p-2 text-accent">
-                <AppIcon name={iconForModule(item)} size={18} />
+            <article class="rail-item deck-card">
+              <span class="deck-card-icon">
+                <AppIcon name={iconForModule(item)} size={15} />
               </span>
-              <h3 class="font-display text-lg font-semibold tracking-tight">{card.title}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-muted">{card.body}</p>
+              <h3 class="deck-card-title">{card.title}</h3>
+              <p class="deck-card-body">{card.body}</p>
             </article>
           );
         })}

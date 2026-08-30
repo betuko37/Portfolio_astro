@@ -1,38 +1,27 @@
-import type { ContributionDay, GithubContributions, GithubUsage } from "@lib/github-stats";
+import type { GithubContributions } from "@lib/github-stats";
 import { getContributionYear, resolveContributionWeeks } from "@lib/github-stats";
+import type { RecruiterStats } from "./recruiter-stats-types";
 import { githubUsageSnapshot } from "./github-usage";
+import { githubContributionsSnapshot } from "./github-contributions";
 import { practiceProjects } from "./practice-projects";
 import { projects } from "./projects";
 import { getShowcase } from "./showcase";
 
-/** Contribuciones — actualizar a mano o con GraphQL + GITHUB_TOKEN. */
-const contributionYear = getContributionYear();
+export type { RecruiterStats } from "./recruiter-stats-types";
+export { applyLiveGithubStats } from "./recruiter-stats-client";
+export { githubContributionsSnapshot } from "./github-contributions";
 
-const githubContributionsMonthly = [
-  { month: `${contributionYear}-01`, count: 317 },
-  { month: `${contributionYear}-02`, count: 313 },
-  { month: `${contributionYear}-03`, count: 475 },
-  { month: `${contributionYear}-04`, count: 316 },
-  { month: `${contributionYear}-05`, count: 371 },
-  { month: `${contributionYear}-06`, count: 382 },
-  { month: `${contributionYear}-07`, count: 347 },
-  { month: `${contributionYear}-08`, count: 302 },
-] as const;
-
-export const githubContributionsSnapshot: GithubContributions = {
-  year: contributionYear,
-  contributionsLastYear: githubContributionsMonthly.reduce((sum, m) => sum + m.count, 0),
-  activeDaysLastYear: 0,
-  monthlyContributions: [...githubContributionsMonthly],
-  weeks: [],
-  dailyFromGithub: false,
-};
+/** Año del snapshot; si el archivo aún no tiene daily, se usa el año actual. */
+const contributionYear = githubContributionsSnapshot.year ?? getContributionYear();
 
 function fromSnapshot(items: readonly { label: string; bytes: number }[]) {
   return items.map(({ label, bytes }) => ({ label, count: bytes }));
 }
 
-function buildGithubBlock(usage: GithubUsage, contributions: GithubContributions) {
+function buildGithubBlock(
+  usage: typeof githubUsageSnapshot,
+  contributions: GithubContributions,
+) {
   const weeks = resolveContributionWeeks(contributions);
 
   return {
@@ -48,85 +37,12 @@ function buildGithubBlock(usage: GithubUsage, contributions: GithubContributions
     monthlyContributions: contributions.monthlyContributions,
     weeks: weeks.length ? weeks : contributions.weeks,
     year: contributions.year,
-    dailyFromGithub: contributions.dailyFromGithub || weeks.length > 0 || contributions.weeks.length > 0,
-  };
-}
-
-export function applyLiveGithubStats(
-  base: RecruiterStats,
-  usage: GithubUsage,
-  contributions: GithubContributions,
-): RecruiterStats {
-  const avgMonthly = Math.round(
-    contributions.contributionsLastYear /
-      Math.max(contributions.monthlyContributions.length, 1),
-  );
-
-  return {
-    ...base,
-    github: buildGithubBlock(usage, contributions),
-    languages: fromSnapshot(usage.languages),
-    topTechnologies: fromSnapshot(usage.technologies),
-    stackFamilies: fromSnapshot(usage.layers),
-    githubUsage: usage,
-    kpis: base.kpis.map((kpi) => {
-      if (kpi.label.startsWith("Commits (")) {
-        return {
-          ...kpi,
-          label: `Commits (${contributions.year})`,
-          value: contributions.contributionsLastYear.toLocaleString("es-MX"),
-          hint: `${contributions.activeDaysLastYear} días activos · ene–dic ${contributions.year}`,
-        };
-      }
-      if (kpi.label === "Repos GitHub") {
-        return {
-          ...kpi,
-          value: String(usage.totalRepos),
-          hint:
-            usage.privateRepos > 0
-              ? `${usage.publicRepos} públicos · ${usage.privateRepos} privados`
-              : `${usage.reposWithLanguages} con lenguajes detectados`,
-        };
-      }
-      if (kpi.label === "Promedio mensual") {
-        return { ...kpi, value: String(avgMonthly) };
-      }
-      return kpi;
-    }),
+    dailyFromGithub:
+      contributions.dailyFromGithub || weeks.length > 0 || contributions.weeks.length > 0,
   };
 }
 
 const allProjects = [...projects, ...practiceProjects];
-
-export type RecruiterStats = {
-  github: {
-    updatedAt: string;
-    login: string;
-    name: string;
-    publicRepos: number;
-    followers: number;
-    memberSince: string;
-    contributionsLastYear: number;
-    activeDaysLastYear: number;
-    monthlyContributions: GithubContributions["monthlyContributions"];
-    weeks: ContributionDay[][];
-    year: number;
-    dailyFromGithub: boolean;
-    reposScanned: number;
-  };
-  kpis: {
-    label: string;
-    value: string;
-    hint: string;
-  }[];
-  topTechnologies: { label: string; count: number }[];
-  languages: { label: string; count: number }[];
-  githubUsage: GithubUsage;
-  stackFamilies: { label: string; count: number }[];
-  projectMix: { label: string; count: number }[];
-  productionStacks: number;
-  caseStudies: number;
-};
 
 export function getRecruiterStats(): RecruiterStats {
   const live = getShowcase("live");

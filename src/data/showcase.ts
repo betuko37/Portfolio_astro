@@ -2,7 +2,7 @@ import { labs } from "./labs";
 import type { IconName } from "./icons";
 import { projectIcons } from "./icons";
 import { getLiveLink, projects, type Project } from "./projects";
-import { getProjectLogo } from "./media";
+import { getProjectLogo } from "./project-logos";
 
 export type ShowcaseGroup = "live" | "github" | "cv";
 

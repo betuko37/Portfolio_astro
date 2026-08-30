@@ -556,9 +556,9 @@ function today() {
   return new Date().toISOString().slice(0, 10);
 }
 
-async function fetchContributions(
+async function fetchContributionsGraphql(
   login: string,
-  token?: string,
+  token: string,
 ): Promise<GithubContributions | null> {
   const year = getContributionYear();
   const { from, to } = getCalendarYearBounds(year);
@@ -613,30 +613,105 @@ async function fetchContributions(
 
   const yearPrefix = String(year);
   const daily: ContributionDay[] = [];
-  const monthly = new Map<string, number>();
-  let activeDays = 0;
 
   for (const week of calendar.weeks) {
     for (const day of week.contributionDays) {
       if (!day.date.startsWith(yearPrefix)) continue;
       daily.push({ date: day.date, count: day.contributionCount });
-      if (day.contributionCount > 0) activeDays++;
-      monthly.set(day.date.slice(0, 7), (monthly.get(day.date.slice(0, 7)) ?? 0) + day.contributionCount);
     }
   }
 
-  const contributionsLastYear = daily.reduce((sum, day) => sum + day.count, 0);
+  return contributionsFromDaily(daily, year);
+}
+
+/** Fallback público: el calendario HTML de GitHub no exige token (REST/GraphQL sí). */
+async function fetchContributionsFromHtml(
+  login: string,
+  year = getContributionYear(),
+): Promise<GithubContributions | null> {
+  const from = `${year}-01-01`;
+  const to = `${year}-12-31`;
+  const res = await fetch(
+    `https://github.com/users/${encodeURIComponent(login)}/contributions?from=${from}&to=${to}`,
+    {
+      headers: {
+        Accept: "text/html",
+        "User-Agent": "portfolio-astro",
+      },
+    },
+  );
+
+  if (!res.ok) return null;
+
+  const html = await res.text();
+  const countById = new Map<string, number>();
+
+  for (const match of html.matchAll(
+    /for="(contribution-day-component-[^"]+)"[^>]*>([^<]*)<\/tool-tip>/gi,
+  )) {
+    const id = match[1]!;
+    const text = match[2]!.trim();
+    const countMatch = text.match(/^(\d+)\s+contributions?\s+on\b/i);
+    countById.set(id, countMatch ? Number(countMatch[1]) : 0);
+  }
+
+  const yearPrefix = String(year);
+  const daily: ContributionDay[] = [];
+  const seen = new Set<string>();
+
+  for (const match of html.matchAll(/<td\b([^>]*\bContributionCalendar-day\b[^>]*)>/gi)) {
+    const attrs = match[1]!;
+    const date = attrs.match(/\bdata-date="(\d{4}-\d{2}-\d{2})"/)?.[1];
+    const id = attrs.match(/\bid="(contribution-day-component-[^"]+)"/)?.[1];
+    if (!date || !date.startsWith(yearPrefix) || seen.has(date)) continue;
+    seen.add(date);
+    daily.push({ date, count: id ? (countById.get(id) ?? 0) : 0 });
+  }
+
+  if (daily.length < 30) return null;
+  return contributionsFromDaily(daily, year);
+}
+
+function contributionsFromDaily(daily: ContributionDay[], year: number): GithubContributions {
+  const monthly = new Map<string, number>();
+  let activeDays = 0;
+
+  for (const day of daily) {
+    if (day.count > 0) activeDays++;
+    monthly.set(day.date.slice(0, 7), (monthly.get(day.date.slice(0, 7)) ?? 0) + day.count);
+  }
 
   return normalizeContributions({
     year,
     dailyFromGithub: true,
-    contributionsLastYear,
+    contributionsLastYear: daily.reduce((sum, day) => sum + day.count, 0),
     activeDaysLastYear: activeDays,
     monthlyContributions: [...monthly.entries()]
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([month, count]) => ({ month, count })),
     weeks: buildContributionWeeksFromDaily(daily, year),
   });
+}
+
+/** Contribuciones del año: GraphQL (con token) o HTML público. */
+export async function fetchGithubContributions(
+  login: string,
+  token?: string,
+): Promise<GithubContributions | null> {
+  if (token) {
+    try {
+      const fromGraphql = await fetchContributionsGraphql(login, token);
+      if (fromGraphql) return fromGraphql;
+    } catch {
+      /* fallback HTML */
+    }
+  }
+
+  try {
+    return await fetchContributionsFromHtml(login);
+  } catch {
+    return null;
+  }
 }
 
 async function mapPool<T>(items: T[], concurrency: number, fn: (item: T) => Promise<void>) {
@@ -657,16 +732,34 @@ export async function fetchGithubUsage(options: FetchGithubOptions = {}): Promis
   const login = options.login ?? profile.githubUser;
   const token = options.token;
 
-  const [user, repoNames, contributions] = await Promise.all([
-    fetchUserProfile(login, token),
-    options.repos ? Promise.resolve(options.repos) : fetchAllUserRepos(login, token),
-    fetchContributions(login, token),
-  ]);
+  const contributionsPromise = fetchGithubContributions(login, token);
 
-  const repoLangs = await fetchPortfolioReposWithLanguages(repoNames, token);
+  let usage: GithubUsage | null = null;
+  let usageError: unknown;
+
+  try {
+    const [user, repoNames] = await Promise.all([
+      fetchUserProfile(login, token),
+      options.repos ? Promise.resolve(options.repos) : fetchAllUserRepos(login, token),
+    ]);
+    const repoLangs = await fetchPortfolioReposWithLanguages(repoNames, token);
+    usage = buildUsageFromRepos(user, repoLangs, Boolean(token), repoNames.length);
+  } catch (error) {
+    usageError = error;
+  }
+
+  const contributions = await contributionsPromise;
+
+  if (!usage) {
+    const error =
+      usageError instanceof Error ? usageError : new Error("GitHub usage fetch failed");
+    (error as Error & { contributions: GithubContributions | null }).contributions =
+      contributions;
+    throw error;
+  }
 
   return {
-    usage: buildUsageFromRepos(user, repoLangs, Boolean(token), repoNames.length),
+    usage,
     contributions,
   };
 }

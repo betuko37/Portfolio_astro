@@ -1084,8 +1084,6 @@ export const projects: Project[] = [
     links: [
       { label: "En vivo", href: "https://soft.agroeasy.com.mx/" },
       { label: "Sitio oficial", href: "https://agroeasy.com.mx/" },
-      { label: "GitHub Frontend", href: "https://github.com/klevisoft/agroeasy_frontend" },
-      { label: "GitHub Backend", href: "https://github.com/klevisoft/agroeasy_backend" },
     ],
   },
   {
