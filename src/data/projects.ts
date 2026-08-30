@@ -1212,8 +1212,6 @@ export const projects: Project[] = [
     related: [],
     links: [
       { label: "En vivo", href: "https://cotiz.jornalpro.com/" },
-      { label: "GitHub Frontend", href: "https://github.com/JornalPro/frontend-cotizaciones" },
-      { label: "GitHub Backend", href: "https://github.com/JornalPro/backend-cotizaciones" },
     ],
   },
   {
@@ -1316,7 +1314,6 @@ export const projects: Project[] = [
     related: [],
     links: [
       { label: "En vivo", href: "https://itzcoleccionables.com/" },
-      { label: "GitHub", href: "https://github.com/betuko37/tienda-react-ivan" },
     ],
   },
   ...practiceProjects,
