@@ -208,12 +208,114 @@
   ],
   "connections": [
     {
-      "id": "c0-datos-prisma-datos-postgr",
+      "id": "c0-entrada-dash-auth-jwt-0",
+      "from": "entrada-dashboard-pwa-0",
+      "to": "auth-jwt-0",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c1-entrada-app--auth-jwt-0",
+      "from": "entrada-app-flutter-1",
+      "to": "auth-jwt-0",
+      "variant": "security",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c2-entrada-what-auth-totp-2f",
+      "from": "entrada-whatsapp-2",
+      "to": "auth-totp-2fa-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c3-auth-jwt-0-rutas-admin-",
+      "from": "auth-jwt-0",
+      "to": "rutas-admin-0",
+      "variant": "security",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c4-auth-jwt-0-rutas-proces",
+      "from": "auth-jwt-0",
+      "to": "rutas-processes-payroll-1",
+      "variant": "security",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c5-auth-jwt-0-servicios-pa",
+      "from": "auth-jwt-0",
+      "to": "servicios-payroll-0",
+      "variant": "security",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c6-rutas-admin--datos-prisma",
+      "from": "rutas-admin-0",
+      "to": "datos-prisma-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c7-servicios-ch-datos-prisma",
+      "from": "servicios-chatbot-joni-2",
+      "to": "datos-prisma-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c8-datos-prisma-datos-postgr",
       "from": "datos-prisma-0",
       "to": "datos-postgresql-1",
-      "variant": "emphasis",
       "fromSide": "right",
       "toSide": "left"
+    },
+    {
+      "id": "c9-o-entrada--auth-rol",
+      "from": "entrada-app-flutter-1",
+      "to": "auth-roleguard-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c10-o-entrada--auth-mod",
+      "from": "entrada-whatsapp-2",
+      "to": "auth-moduleguard-3",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c11-o-auth-tot-rutas-tr",
+      "from": "auth-totp-2fa-1",
+      "to": "rutas-treasury-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c12-o-servicio-servicio",
+      "from": "servicios-socket-gateway-1",
+      "to": "servicios-payroll-0",
+      "fromSide": "left",
+      "toSide": "right"
+    },
+    {
+      "id": "c13-o-datos-aw-datos-po",
+      "from": "datos-aws-s3-2",
+      "to": "datos-postgresql-1",
+      "fromSide": "left",
+      "toSide": "right"
+    },
+    {
+      "id": "c14-o-servicio-datos-no",
+      "from": "servicios-payroll-0",
+      "to": "datos-node-cron-3",
+      "fromSide": "bottom",
+      "toSide": "top"
     }
   ],
   "cards": [

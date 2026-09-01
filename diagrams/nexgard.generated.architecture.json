@@ -82,19 +82,33 @@
   ],
   "connections": [
     {
-      "id": "c0-presentacion-interaccion-",
+      "id": "c0-presentacion-presentacion",
+      "from": "presentacion-html-0",
+      "to": "presentacion-css-1",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c1-presentacion-presentacion",
+      "from": "presentacion-css-1",
+      "to": "presentacion-img-fondos-2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c2-presentacion-interaccion-",
       "from": "presentacion-html-0",
       "to": "interaccion-cart-js-0",
-      "variant": "emphasis",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c1-presentacion-interaccion-",
-      "from": "presentacion-html-0",
+      "id": "c3-interaccion--interaccion-",
+      "from": "interaccion-cart-js-0",
       "to": "interaccion-productservices-1",
-      "fromSide": "bottom",
-      "toSide": "top"
+      "fromSide": "right",
+      "toSide": "left"
     }
   ],
   "cards": [

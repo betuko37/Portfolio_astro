@@ -193,19 +193,96 @@
   ],
   "connections": [
     {
-      "id": "c0-frontend-mui-frontend-rea",
-      "from": "frontend-mui-6-1",
-      "to": "frontend-react-18-0",
+      "id": "c0-procesos-cot-reportes-his",
+      "from": "procesos-cotizaciones-0",
+      "to": "reportes-historial-cfdi-0",
       "variant": "emphasis",
-      "fromSide": "left",
-      "toSide": "right"
+      "fromSide": "bottom",
+      "toSide": "top"
     },
     {
-      "id": "c1-backend-expr-backend-pris",
+      "id": "c1-procesos-fac-reportes-cob",
+      "from": "procesos-facturacion-1",
+      "to": "reportes-cobranza-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c2-procesos-mov-reportes-flu",
+      "from": "procesos-movimientos-2",
+      "to": "reportes-flujo-de-efectivo-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c3-reportes-his-frontend-rea",
+      "from": "reportes-historial-cfdi-0",
+      "to": "frontend-react-18-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c4-reportes-cob-backend-expr",
+      "from": "reportes-cobranza-1",
+      "to": "backend-express-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c5-frontend-rea-frontend-mui",
+      "from": "frontend-react-18-0",
+      "to": "frontend-mui-6-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c6-backend-expr-backend-pris",
       "from": "backend-express-0",
       "to": "backend-prisma-1",
       "fromSide": "right",
       "toSide": "left"
+    },
+    {
+      "id": "c7-o-procesos-procesos",
+      "from": "procesos-servicios-3",
+      "to": "procesos-movimientos-2",
+      "fromSide": "left",
+      "toSide": "right"
+    },
+    {
+      "id": "c8-o-procesos-procesos",
+      "from": "procesos-calendario-financiero-4",
+      "to": "procesos-servicios-3",
+      "fromSide": "left",
+      "toSide": "right"
+    },
+    {
+      "id": "c9-o-procesos-reportes",
+      "from": "procesos-servicios-3",
+      "to": "reportes-impuestos-3",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c10-o-procesos-reportes",
+      "from": "procesos-calendario-financiero-4",
+      "to": "reportes-rentabilidad-4",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c11-o-reportes-frontend",
+      "from": "reportes-cobranza-1",
+      "to": "frontend-zustand-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c12-o-backend--backend-",
+      "from": "backend-facturoporti-2",
+      "to": "backend-prisma-1",
+      "fromSide": "left",
+      "toSide": "right"
     }
   ],
   "cards": [

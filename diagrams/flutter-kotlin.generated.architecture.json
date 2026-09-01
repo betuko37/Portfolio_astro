@@ -91,10 +91,47 @@
   ],
   "connections": [
     {
-      "id": "flow-0",
+      "id": "c0-flutter-dart-flutter-widg",
+      "from": "flutter-dart-0",
+      "to": "flutter-widgets-1",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c1-flutter-widg-flutter-http",
       "from": "flutter-widgets-1",
+      "to": "flutter-http-2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c2-flutter-http-android-kotl",
+      "from": "flutter-http-2",
+      "to": "android-kotlin-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c3-android-kotl-android-serv",
+      "from": "android-kotlin-0",
       "to": "android-services-1",
-      "variant": "emphasis"
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c4-android-serv-android-retr",
+      "from": "android-services-1",
+      "to": "android-retrofit-okhttp-2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c5-android-serv-flutter-http",
+      "from": "android-services-1",
+      "to": "flutter-http-2",
+      "fromSide": "top",
+      "toSide": "bottom"
     }
   ],
   "cards": [

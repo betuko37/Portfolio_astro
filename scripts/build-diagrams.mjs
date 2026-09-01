@@ -239,7 +239,40 @@ function connectionsFromMermaid(project, components, rawById) {
     }
   }
 
+  connectOrphanNodes(components, connections);
   return connections;
+}
+
+function connectOrphanNodes(components, connections) {
+  const linked = new Set(connections.flatMap((edge) => [edge.from, edge.to]));
+
+  for (const component of components) {
+    if (linked.has(component.id)) continue;
+    const hub = components
+      .filter((other) => other.id !== component.id)
+      .filter((other) => Math.abs(other.row - component.row) <= 2)
+      .filter((other) => !sameRowJump(component, other, components))
+      .sort((left, right) => {
+        const leftLinked = linked.has(left.id) ? 0 : 1;
+        const rightLinked = linked.has(right.id) ? 0 : 1;
+        if (leftLinked !== rightLinked) return leftLinked - rightLinked;
+        const colDelta = Math.abs(left.col - component.col) - Math.abs(right.col - component.col);
+        return colDelta || Math.abs(left.row - component.row) - Math.abs(right.row - component.row);
+      })[0];
+    if (!hub) continue;
+    const from = component.row <= hub.row ? component : hub;
+    const to = from === component ? hub : component;
+    connections.push({
+      id: `c${connections.length}-o-${from.id.slice(0, 8)}-${to.id.slice(0, 8)}`
+        .replace(/[^a-z0-9-]/g, "")
+        .slice(0, 48),
+      from: from.id,
+      to: to.id,
+      ...connectionSides(from, to),
+    });
+    linked.add(component.id);
+    linked.add(hub.id);
+  }
 }
 
 function truncate(text, max = 32) {

@@ -91,10 +91,40 @@
   ],
   "connections": [
     {
-      "id": "flow-0",
-      "from": "ui-stylei-css-1",
+      "id": "c0-ui-html-form-ui-stylei-cs",
+      "from": "ui-html-form-0",
+      "to": "ui-stylei-css-1",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c1-ui-html-form-api-guardar-",
+      "from": "ui-html-form-0",
+      "to": "api-guardar-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c2-api-guardar--api-get-1",
+      "from": "api-guardar-0",
+      "to": "api-get-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c3-api-get-1-api-editar-2",
+      "from": "api-get-1",
       "to": "api-editar-2",
-      "variant": "emphasis"
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c4-api-editar-2-api-eliminar",
+      "from": "api-editar-2",
+      "to": "api-eliminar-3",
+      "fromSide": "right",
+      "toSide": "left"
     }
   ],
   "cards": [

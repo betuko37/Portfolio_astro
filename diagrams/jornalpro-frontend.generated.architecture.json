@@ -193,33 +193,98 @@
   ],
   "connections": [
     {
-      "id": "c0-shell-nomina-shell-tesore",
+      "id": "c0-shell-nomina-modulos-asis",
       "from": "shell-nomina-0",
-      "to": "shell-tesoreria-1",
+      "to": "modulos-asistencias-0",
       "variant": "emphasis",
-      "fromSide": "right",
-      "toSide": "left"
+      "fromSide": "bottom",
+      "toSide": "top"
     },
     {
-      "id": "c1-shell-nomina-modulos-buzo",
-      "from": "shell-nomina-0",
+      "id": "c1-shell-tesore-modulos-buzo",
+      "from": "shell-tesoreria-1",
       "to": "modulos-buzon-sat-2",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c2-shell-nomina-modulos-chat",
-      "from": "shell-nomina-0",
+      "id": "c2-shell-empaqu-modulos-alta",
+      "from": "shell-empaque-2",
+      "to": "modulos-alta-de-empleado-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c3-modulos-asis-cliente-axio",
+      "from": "modulos-asistencias-0",
+      "to": "cliente-axios-jwt-0",
+      "variant": "security",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c4-modulos-chat-cliente-axio",
+      "from": "modulos-chat-joni-3",
+      "to": "cliente-axios-jwt-0",
+      "variant": "security",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c5-o-shell-al-modulos-",
+      "from": "shell-almacenes-3",
       "to": "modulos-chat-joni-3",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c3-shell-nomina-modulos-moni",
-      "from": "shell-nomina-0",
+      "id": "c6-o-shell-co-shell-al",
+      "from": "shell-configuracion-4",
+      "to": "shell-almacenes-3",
+      "fromSide": "left",
+      "toSide": "right"
+    },
+    {
+      "id": "c7-o-shell-co-modulos-",
+      "from": "shell-configuracion-4",
       "to": "modulos-monitor-4",
       "fromSide": "bottom",
       "toSide": "top"
+    },
+    {
+      "id": "c8-o-modulos--cliente-",
+      "from": "modulos-asistencias-0",
+      "to": "cliente-x-location-id-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c9-o-modulos--cliente-",
+      "from": "modulos-alta-de-empleado-1",
+      "to": "cliente-zustand-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c10-o-modulos--local-nf",
+      "from": "modulos-chat-joni-3",
+      "to": "local-nfc-service-47321-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c11-o-modulos--local-we",
+      "from": "modulos-monitor-4",
+      "to": "local-web-nfc-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c12-o-local-le-local-we",
+      "from": "local-leaflet-2",
+      "to": "local-web-nfc-1",
+      "fromSide": "left",
+      "toSide": "right"
     }
   ],
   "cards": [

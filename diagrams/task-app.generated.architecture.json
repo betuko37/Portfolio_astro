@@ -56,7 +56,23 @@
       ]
     }
   ],
-  "connections": [],
+  "connections": [
+    {
+      "id": "c0-cliente-html-cliente-boot",
+      "from": "cliente-html-0",
+      "to": "cliente-bootstrap-1",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c1-cliente-boot-cliente-scri",
+      "from": "cliente-bootstrap-1",
+      "to": "cliente-script-js-2",
+      "fromSide": "right",
+      "toSide": "left"
+    }
+  ],
   "cards": [
     {
       "dot": "cyan",

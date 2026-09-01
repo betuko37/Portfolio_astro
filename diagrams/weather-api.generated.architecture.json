@@ -97,15 +97,33 @@
   ],
   "connections": [
     {
-      "id": "flow-0",
+      "id": "c0-cliente-css--cliente-html",
       "from": "cliente-css-1",
-      "to": "datos-json-1",
-      "variant": "emphasis"
+      "to": "cliente-html-0",
+      "variant": "emphasis",
+      "fromSide": "left",
+      "toSide": "right"
     },
     {
-      "id": "flow-1",
-      "from": "datos-json-1",
-      "to": "deploy-github-pages-0"
+      "id": "c1-cliente-java-datos-fetch-",
+      "from": "cliente-javascript-2",
+      "to": "datos-fetch-api-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c2-datos-fetch--datos-json-1",
+      "from": "datos-fetch-api-0",
+      "to": "datos-json-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c3-datos-fetch--deploy-githu",
+      "from": "datos-fetch-api-0",
+      "to": "deploy-github-pages-0",
+      "fromSide": "bottom",
+      "toSide": "top"
     }
   ],
   "cards": [

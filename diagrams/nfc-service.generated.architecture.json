@@ -166,40 +166,89 @@
   ],
   "connections": [
     {
-      "id": "c0-hardware-nfc-servicio-loc",
+      "id": "c0-hardware-acr-hardware-pc-",
+      "from": "hardware-acr122u-0",
+      "to": "hardware-pc-sc-1",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c1-hardware-pc--hardware-nfc",
+      "from": "hardware-pc-sc-1",
+      "to": "hardware-nfc-pcsc-2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c2-hardware-nfc-servicio-loc",
       "from": "hardware-nfc-pcsc-2",
       "to": "servicio-local-rest-47321-0",
-      "variant": "emphasis",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c1-servicio-loc-clientes-alt",
+      "id": "c3-servicio-loc-servicio-loc",
+      "from": "servicio-local-rest-47321-0",
+      "to": "servicio-local-last-card-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c4-servicio-loc-clientes-alt",
       "from": "servicio-local-rest-47321-0",
       "to": "clientes-alta-de-empleado-0",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c2-servicio-loc-clientes-ent",
+      "id": "c5-servicio-loc-clientes-ent",
       "from": "servicio-local-rest-47321-0",
       "to": "clientes-entrega-de-gafetes-1",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c3-servicio-loc-clientes-loo",
+      "id": "c6-servicio-loc-clientes-loo",
       "from": "servicio-local-rest-47321-0",
       "to": "clientes-lookup-2",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c4-distribucion-servicio-loc",
+      "id": "c7-distribucion-servicio-loc",
+      "from": "distribucion-dmg-macos-0",
+      "to": "servicio-local-rest-47321-0",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "c8-distribucion-servicio-loc",
+      "from": "distribucion-exe-windows-1",
+      "to": "servicio-local-rest-47321-0",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "c9-distribucion-servicio-loc",
       "from": "distribucion-launchd-2",
       "to": "servicio-local-rest-47321-0",
       "fromSide": "top",
       "toSide": "bottom"
+    },
+    {
+      "id": "c10-o-hardware-servicio",
+      "from": "hardware-pc-sc-1",
+      "to": "servicio-local-status-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c11-o-hardware-servicio",
+      "from": "hardware-nfc-pcsc-2",
+      "to": "servicio-local-consola-web-3",
+      "fromSide": "bottom",
+      "toSide": "top"
     }
   ],
   "cards": [

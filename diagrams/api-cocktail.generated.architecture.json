@@ -106,15 +106,47 @@
   ],
   "connections": [
     {
-      "id": "flow-0",
-      "from": "vistas-pages-1",
-      "to": "logica-ruleta-1",
-      "variant": "emphasis"
+      "id": "c0-vistas-index-vistas-pages",
+      "from": "vistas-index-0",
+      "to": "vistas-pages-1",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left"
     },
     {
-      "id": "flow-1",
+      "id": "c1-vistas-pages-vistas-carru",
+      "from": "vistas-pages-1",
+      "to": "vistas-carrusel-2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c2-vistas-index-logica-fetch",
+      "from": "vistas-index-0",
+      "to": "logica-fetch-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c3-logica-fetch-logica-rulet",
+      "from": "logica-fetch-0",
+      "to": "logica-ruleta-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c4-logica-rulet-logica-filtr",
       "from": "logica-ruleta-1",
-      "to": "deploy-github-pages-0"
+      "to": "logica-filtros-2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c5-logica-fetch-deploy-githu",
+      "from": "logica-fetch-0",
+      "to": "deploy-github-pages-0",
+      "fromSide": "bottom",
+      "toSide": "top"
     }
   ],
   "cards": [

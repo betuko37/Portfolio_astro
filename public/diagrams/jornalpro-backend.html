@@ -5083,7 +5083,7 @@
     <!-- Main Diagram -->
     <div class="diagram-container" data-detail-level="read"
          data-preset-badge-editorial-plate="ARCHIFY / PLATE 04">
-      <svg viewBox="0 0 1266 1214" role="img" lang="en" aria-labelledby="archify-diagram-title archify-diagram-description" data-preset="classic" data-quality-profile="showcase">
+      <svg viewBox="0 0 1266 1214" role="img" lang="en" aria-labelledby="archify-diagram-title archify-diagram-description" data-preset="classic" data-quality-profile="standard">
         <title id="archify-diagram-title">JornalPro Backend</title>
         <desc id="archify-diagram-description">API en la nube de un ERP: aproximadamente 1.150 controladores y 182 modelos.</desc>
         <!-- Definitions -->
@@ -5120,7 +5120,21 @@
         <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="4" data-composition-frame-label="Datos" x="176" y="1036" width="702" height="110" rx="12" class="c-region" stroke-width="1"/>
 
         <!-- Connection paths (before components for correct z-order) -->
-        <path data-edge-from="datos-prisma-0" data-edge-to="datos-postgresql-1" data-edge-key="0" data-edge-id="c0-datos-prisma-datos-postgr" data-composition-points="326,1096;380,1096" d="M 326 1096 L 380 1096" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="entrada-dashboard-pwa-0" data-edge-to="auth-jwt-0" data-edge-key="0" data-edge-id="c0-entrada-dash-auth-jwt-0" data-composition-points="440,274;440,386;259,386;259,498" d="M 440 274 L 440 378 Q 440 386 432 386 L 267 386 Q 259 386 259 394 L 259 498" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="entrada-app-flutter-1" data-edge-to="auth-jwt-0" data-edge-key="1" data-edge-id="c1-entrada-app--auth-jwt-0" data-composition-points="607,274;607,386;273,386;273,498" d="M 607 274 L 607 378 Q 607 386 599 386 L 281 386 Q 273 386 273 394 L 273 498" class="a-security" stroke-width="1.5" marker-end="url(#arrowhead-security)"/>
+        <path data-edge-from="entrada-whatsapp-2" data-edge-to="auth-totp-2fa-1" data-edge-key="2" data-edge-id="c2-entrada-what-auth-totp-2f" data-composition-points="781,274;781,386;440,386;440,498" d="M 781 274 L 781 378 Q 781 386 773 386 L 448 386 Q 440 386 440 394 L 440 498" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="auth-jwt-0" data-edge-to="rutas-admin-0" data-edge-key="3" data-edge-id="c3-auth-jwt-0-rutas-admin-" data-composition-points="252,558;252,670;92,670;92,782" d="M 252 558 L 252 662 Q 252 670 244 670 L 100 670 Q 92 670 92 678 L 92 782" class="a-security" stroke-width="1.5" marker-end="url(#arrowhead-security)"/>
+        <path data-edge-from="auth-jwt-0" data-edge-to="rutas-processes-payroll-1" data-edge-key="4" data-edge-id="c4-auth-jwt-0-rutas-proces" data-composition-points="266,558;266,782" d="M 266 558 L 266 782" class="a-security" stroke-width="1.5" marker-end="url(#arrowhead-security)"/>
+        <path data-edge-from="auth-jwt-0" data-edge-to="servicios-payroll-0" data-edge-key="5" data-edge-id="c5-auth-jwt-0-servicios-pa" data-composition-points="280,558;280,670;788,670;788,782" d="M 280 558 L 280 662 Q 280 670 288 670 L 780 670 Q 788 670 788 678 L 788 782" class="a-security" stroke-width="1.5" marker-end="url(#arrowhead-security)"/>
+        <path data-edge-from="rutas-admin-0" data-edge-to="datos-prisma-0" data-edge-key="6" data-edge-id="c6-rutas-admin--datos-prisma" data-composition-points="92,842;92,954;259,954;259,1066" d="M 92 842 L 92 946 Q 92 954 100 954 L 251 954 Q 259 954 259 962 L 259 1066" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="servicios-chatbot-joni-2" data-edge-to="datos-prisma-0" data-edge-key="7" data-edge-id="c7-servicios-ch-datos-prisma" data-composition-points="1136,842;1136,954;273,954;273,1066" d="M 1136 842 L 1136 946 Q 1136 954 1128 954 L 281 954 Q 273 954 273 962 L 273 1066" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="datos-prisma-0" data-edge-to="datos-postgresql-1" data-edge-key="8" data-edge-id="c8-datos-prisma-datos-postgr" data-composition-points="326,1096;380,1096" d="M 326 1096 L 380 1096" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="entrada-app-flutter-1" data-edge-to="auth-roleguard-2" data-edge-key="9" data-edge-id="c9-o-entrada--auth-rol" data-composition-points="621,274;621,498" d="M 621 274 L 621 498" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="entrada-whatsapp-2" data-edge-to="auth-moduleguard-3" data-edge-key="10" data-edge-id="c10-o-entrada--auth-mod" data-composition-points="795,274;795,498" d="M 795 274 L 795 498" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="auth-totp-2fa-1" data-edge-to="rutas-treasury-2" data-edge-key="11" data-edge-id="c11-o-auth-tot-rutas-tr" data-composition-points="440,558;440,782" d="M 440 558 L 440 782" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="servicios-socket-gateway-1" data-edge-to="servicios-payroll-0" data-edge-key="12" data-edge-id="c12-o-servicio-servicio" data-composition-points="902,812;848,812" d="M 902 812 L 848 812" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="datos-aws-s3-2" data-edge-to="datos-postgresql-1" data-edge-key="13" data-edge-id="c13-o-datos-aw-datos-po" data-composition-points="554,1096;500,1096" d="M 554 1096 L 500 1096" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="servicios-payroll-0" data-edge-to="datos-node-cron-3" data-edge-key="14" data-edge-id="c14-o-servicio-datos-no" data-composition-points="788,842;788,1066" d="M 788 842 L 788 1066" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
 
         <!-- Components -->
         <g id="node-entrada-dashboard-pwa-0" data-node-id="entrada-dashboard-pwa-0" data-node-label="Dashboard PWA" tabindex="0" role="button" aria-label="Focus Dashboard PWA, Dashboard PWA, Entrada" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Dashboard PWA" data-node-context="Entrada">
@@ -5337,6 +5351,20 @@
         </g>
 
         <!-- Connection labels -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         <!-- Boundary labels (foreground masks keep routes out of titles) -->

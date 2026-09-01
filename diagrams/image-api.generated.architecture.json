@@ -82,12 +82,33 @@
   ],
   "connections": [
     {
-      "id": "c0-cliente-obte-persistencia",
+      "id": "c0-cliente-html-cliente-css-",
+      "from": "cliente-html-0",
+      "to": "cliente-css-1",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c1-cliente-css--cliente-obte",
+      "from": "cliente-css-1",
+      "to": "cliente-obtener-js-2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c2-cliente-obte-persistencia",
       "from": "cliente-obtener-js-2",
       "to": "persistencia-local-localstorage-0",
-      "variant": "emphasis",
       "fromSide": "bottom",
       "toSide": "top"
+    },
+    {
+      "id": "c3-persistencia-persistencia",
+      "from": "persistencia-local-localstorage-0",
+      "to": "persistencia-local-favoritos-1",
+      "fromSide": "right",
+      "toSide": "left"
     }
   ],
   "cards": [

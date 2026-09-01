@@ -274,6 +274,41 @@
       "to": "procesos-embarques-2",
       "fromSide": "top",
       "toSide": "bottom"
+    },
+    {
+      "id": "c13-o-apps-nom-procesos",
+      "from": "apps-nomina-1",
+      "to": "procesos-pallets-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c14-o-apps-cua-procesos",
+      "from": "apps-cuaderno-agricola-2",
+      "to": "procesos-embarques-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c15-o-apps-adm-procesos",
+      "from": "apps-administracion-3",
+      "to": "procesos-embarque-rapido-3",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c16-o-procesos-frontend",
+      "from": "procesos-pallets-1",
+      "to": "frontend-pinia-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c17-o-backend--backend-",
+      "from": "backend-socket-io-2",
+      "to": "backend-prisma-1",
+      "fromSide": "left",
+      "toSide": "right"
     }
   ],
   "cards": [

@@ -119,6 +119,34 @@
       "to": "control-c-0",
       "fromSide": "bottom",
       "toSide": "top"
+    },
+    {
+      "id": "c2-control-c-0-control-logi",
+      "from": "control-c-0",
+      "to": "control-logica-de-escenas-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c3-control-c-0-hardware-ard",
+      "from": "control-c-0",
+      "to": "hardware-arduino-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c4-hardware-ard-hardware-sen",
+      "from": "hardware-arduino-0",
+      "to": "hardware-sensores-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c5-o-hardware-hardware",
+      "from": "hardware-actuadores-2",
+      "to": "hardware-sensores-1",
+      "fromSide": "left",
+      "toSide": "right"
     }
   ],
   "cards": [

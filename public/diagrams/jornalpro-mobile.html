@@ -5083,7 +5083,7 @@
     <!-- Main Diagram -->
     <div class="diagram-container" data-detail-level="read"
          data-preset-badge-editorial-plate="ARCHIFY / PLATE 04">
-      <svg viewBox="0 0 1266 930" role="img" lang="en" aria-labelledby="archify-diagram-title archify-diagram-description" data-preset="classic" data-quality-profile="showcase">
+      <svg viewBox="0 0 1266 930" role="img" lang="en" aria-labelledby="archify-diagram-title archify-diagram-description" data-preset="classic" data-quality-profile="standard">
         <title id="archify-diagram-title">JornalPro Mobile</title>
         <desc id="archify-diagram-description">App de campo offline-first: NFC, QR, GPS y sincronización en segundo plano.</desc>
         <!-- Definitions -->
@@ -5118,9 +5118,14 @@
         <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="3" data-composition-frame-label="Nube" x="350" y="752" width="354" height="110" rx="12" class="c-region" stroke-width="1"/>
 
         <!-- Connection paths (before components for correct z-order) -->
-        <path data-edge-from="offline-betuko-offline-sync-0" data-edge-to="offline-cola-hive-1" data-edge-key="0" data-edge-id="c0-offline-betu-offline-cola" data-composition-points="848,528;902,528" d="M 848 528 L 902 528" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="offline-workmanager-2" data-edge-to="pantallas-asistencias-0" data-edge-key="1" data-edge-id="c1-offline-work-pantallas-as" data-composition-points="1136,498;1136,386;266,386;266,274" d="M 1136 498 L 1136 394 Q 1136 386 1128 386 L 274 386 Q 266 386 266 378 L 266 274" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="offline-betuko-offline-sync-0" data-edge-to="nube-backend-api-0" data-edge-key="2" data-edge-id="c2-offline-betu-nube-backend" data-composition-points="788,558;788,670;440,670;440,782" d="M 788 558 L 788 662 Q 788 670 780 670 L 448 670 Q 440 670 440 678 L 440 782" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="pantallas-asistencias-0" data-edge-to="campo-nfc-0" data-edge-key="0" data-edge-id="c0-pantallas-as-campo-nfc-0" data-composition-points="259,274;259,386;92,386;92,498" d="M 259 274 L 259 378 Q 259 386 251 386 L 100 386 Q 92 386 92 394 L 92 498" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="pantallas-asistencias-0" data-edge-to="campo-qr-1" data-edge-key="1" data-edge-id="c1-pantallas-as-campo-qr-1" data-composition-points="273,274;273,498" d="M 273 274 L 273 498" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="pantallas-alta-de-empleado-1" data-edge-to="campo-gps-2" data-edge-key="2" data-edge-id="c2-pantallas-al-campo-gps-2" data-composition-points="440,274;440,498" d="M 440 274 L 440 498" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="offline-betuko-offline-sync-0" data-edge-to="nube-backend-api-0" data-edge-key="3" data-edge-id="c3-offline-betu-nube-backend" data-composition-points="788,558;788,670;433,670;433,782" d="M 788 558 L 788 662 Q 788 670 780 670 L 441 670 Q 433 670 433 678 L 433 782" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="offline-cola-hive-1" data-edge-to="nube-daily-capture-bulk-1" data-edge-key="4" data-edge-id="c4-offline-cola-nube-daily-c" data-composition-points="962,558;962,670;614,670;614,782" d="M 962 558 L 962 662 Q 962 670 954 670 L 622 670 Q 614 670 614 678 L 614 782" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="offline-workmanager-2" data-edge-to="nube-backend-api-0" data-edge-key="5" data-edge-id="c5-offline-work-nube-backend" data-composition-points="1136,558;1136,670;447,670;447,782" d="M 1136 558 L 1136 662 Q 1136 670 1128 670 L 455 670 Q 447 670 447 678 L 447 782" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="pantallas-captura-de-surcos-2" data-edge-to="pantallas-alta-de-empleado-1" data-edge-key="6" data-edge-id="c6-o-pantalla-pantalla" data-composition-points="554,244;500,244" d="M 554 244 L 500 244" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="pantallas-cajas-3" data-edge-to="offline-betuko-offline-sync-0" data-edge-key="7" data-edge-id="c7-o-pantalla-offline-" data-composition-points="788,274;788,498" d="M 788 274 L 788 498" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
 
         <!-- Components -->
         <g id="node-pantallas-asistencias-0" data-node-id="pantallas-asistencias-0" data-node-label="Asistencias" tabindex="0" role="button" aria-label="Focus Asistencias, Asistencias, Pantallas" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Asistencias" data-node-context="Pantallas">
@@ -5258,6 +5263,11 @@
         </g>
 
         <!-- Connection labels -->
+
+
+
+
+
 
 
 

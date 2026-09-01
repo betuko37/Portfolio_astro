@@ -124,15 +124,61 @@
   ],
   "connections": [
     {
-      "id": "flow-0",
-      "from": "gameplay-enemigos-1",
-      "to": "motor-rigidbody2d-1",
-      "variant": "emphasis"
+      "id": "c0-gameplay-mov-motor-unity-",
+      "from": "gameplay-movimiento-0",
+      "to": "motor-unity-2d-0",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "top"
     },
     {
-      "id": "flow-1",
+      "id": "c1-gameplay-ene-motor-unity-",
+      "from": "gameplay-enemigos-1",
+      "to": "motor-unity-2d-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c2-gameplay-obj-motor-unity-",
+      "from": "gameplay-objetivos-2",
+      "to": "motor-unity-2d-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c3-motor-unity--motor-rigidb",
+      "from": "motor-unity-2d-0",
+      "to": "motor-rigidbody2d-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c4-motor-rigidb-motor-collid",
       "from": "motor-rigidbody2d-1",
-      "to": "contenido-nivel-2-1"
+      "to": "motor-colliders-2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c5-motor-unity--contenido-ni",
+      "from": "motor-unity-2d-0",
+      "to": "contenido-nivel-1-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c6-motor-unity--contenido-ni",
+      "from": "motor-unity-2d-0",
+      "to": "contenido-nivel-2-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c7-motor-collid-contenido-ui",
+      "from": "motor-colliders-2",
+      "to": "contenido-ui-2",
+      "fromSide": "bottom",
+      "toSide": "top"
     }
   ],
   "cards": [

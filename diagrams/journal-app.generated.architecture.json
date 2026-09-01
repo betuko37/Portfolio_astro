@@ -88,6 +88,28 @@
       "variant": "emphasis",
       "fromSide": "right",
       "toSide": "left"
+    },
+    {
+      "id": "c1-navegacion-a-ui-mui-6-0",
+      "from": "navegacion-auth-guard-1",
+      "to": "ui-mui-6-0",
+      "variant": "security",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c2-ui-mui-6-0-ui-roboto-1",
+      "from": "ui-mui-6-0",
+      "to": "ui-roboto-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c3-ui-roboto-1-ui-layouts-2",
+      "from": "ui-roboto-1",
+      "to": "ui-layouts-2",
+      "fromSide": "right",
+      "toSide": "left"
     }
   ],
   "cards": [

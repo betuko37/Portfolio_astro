@@ -124,12 +124,61 @@
   ],
   "connections": [
     {
-      "id": "c0-datos-hooks--datos-helper",
-      "from": "datos-hooks-1",
-      "to": "datos-helpers-0",
+      "id": "c0-ui-navbar-0-ui-gridgifts",
+      "from": "ui-navbar-0",
+      "to": "ui-gridgifts-1",
       "variant": "emphasis",
-      "fromSide": "left",
-      "toSide": "right"
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c1-ui-gridgifts-ui-search-2",
+      "from": "ui-gridgifts-1",
+      "to": "ui-search-2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c2-ui-search-2-ui-favorites",
+      "from": "ui-search-2",
+      "to": "ui-favorites-3",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c3-ui-gridgifts-datos-helper",
+      "from": "ui-gridgifts-1",
+      "to": "datos-helpers-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c4-datos-helper-datos-hooks-",
+      "from": "datos-helpers-0",
+      "to": "datos-hooks-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c5-datos-hooks--datos-apikey",
+      "from": "datos-hooks-1",
+      "to": "datos-apikey-2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c6-datos-apikey-deploy-vite-",
+      "from": "datos-apikey-2",
+      "to": "deploy-vite-build-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c7-deploy-vite--deploy-netli",
+      "from": "deploy-vite-build-0",
+      "to": "deploy-netlify-1",
+      "fromSide": "right",
+      "toSide": "left"
     }
   ],
   "cards": [

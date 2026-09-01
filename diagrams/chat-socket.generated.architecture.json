@@ -91,12 +91,33 @@
   ],
   "connections": [
     {
-      "id": "c0-servidor-soc-servidor-exp",
-      "from": "servidor-socket-io-1",
-      "to": "servidor-express-0",
+      "id": "c0-cliente-reac-cliente-vite",
+      "from": "cliente-react-0",
+      "to": "cliente-vite-1",
       "variant": "emphasis",
-      "fromSide": "left",
-      "toSide": "right"
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c1-cliente-vite-cliente-sock",
+      "from": "cliente-vite-1",
+      "to": "cliente-socket-io-client-2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c2-servidor-exp-servidor-soc",
+      "from": "servidor-express-0",
+      "to": "servidor-socket-io-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c3-servidor-soc-servidor-nod",
+      "from": "servidor-socket-io-1",
+      "to": "servidor-nodemon-2",
+      "fromSide": "right",
+      "toSide": "left"
     }
   ],
   "cards": [

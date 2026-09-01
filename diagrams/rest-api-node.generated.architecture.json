@@ -115,22 +115,50 @@
   ],
   "connections": [
     {
-      "id": "c0-dominio-movi-persistencia",
-      "from": "dominio-movie-model-0",
-      "to": "persistencia-local-json-0",
+      "id": "c0-api-express--api-movies-r",
+      "from": "api-express-0",
+      "to": "api-movies-routes-1",
       "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c1-api-movies-r-api-controll",
+      "from": "api-movies-routes-1",
+      "to": "api-controllers-2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c2-api-controll-dominio-movi",
+      "from": "api-controllers-2",
+      "to": "dominio-movie-model-0",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c1-dominio-movi-persistencia",
+      "id": "c3-dominio-movi-dominio-zod-",
+      "from": "dominio-movie-model-0",
+      "to": "dominio-zod-validation-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c4-dominio-movi-persistencia",
+      "from": "dominio-movie-model-0",
+      "to": "persistencia-local-json-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c5-dominio-movi-persistencia",
       "from": "dominio-movie-model-0",
       "to": "persistencia-mysql-1",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c2-dominio-movi-persistencia",
+      "id": "c6-dominio-movi-persistencia",
       "from": "dominio-movie-model-0",
       "to": "persistencia-mongodb-2",
       "fromSide": "bottom",

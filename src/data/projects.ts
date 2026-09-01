@@ -127,20 +127,24 @@ export const projects: Project[] = [
       "Socket.IO emite persistencias, notificaciones y eventos del buzón SAT.",
     ],
     architecture: `flowchart TB
-  Web[ERP web PWA] --> Auth[JWT / 2FA / RBAC]
-  App[App Flutter de campo] --> Auth
-  Auth --> Nomina[Nómina]
-  Auth --> Tes[Tesorería]
-  Auth --> Pack[Empaque]
-  Auth --> Wh[Almacenes]
-  App --> NFC[nfc-service :47321]
-  App --> Sync[betuko_offline_sync]
+  Web[ERP web PWA] --> Nomina[Nómina]
+  Web --> Tes[Tesorería]
+  Web --> Pack[Empaque]
+  Web --> Wh[Almacenes]
+  App[App Flutter de campo] --> Asist[Asistencias NFC/QR]
+  App --> Alta[Alta de empleados]
+  App --> Surcos[Captura de surcos]
+  App --> Cajas[Cajas]
+  Asist --> NFC[nfc-service :47321]
+  Alta --> Manager[nfc_manager]
+  Surcos --> Sync[betuko_offline_sync]
   Sync --> WM[WorkManager]
-  NFC --> Asist[Asistencias NFC/QR]
-  Joni[chatbot Joni] --> Web
-  Hik[hikcentral] --> Auth
-  IO[socket-gateway] --> Web
-  SAT[SAT CFDI] --> Tes`,
+  NFC --> Auth[JWT / 2FA / RBAC]
+  WM --> Payroll[processes/payroll]
+  Auth --> IO[socket-gateway]
+  Payroll --> Joni[chatbot Joni]
+  IO --> Hik[hikcentral]
+  Joni --> SAT[SAT CFDI]`,
     architectureLayers: [
       {
         name: "Superficies",
@@ -463,31 +467,20 @@ export const projects: Project[] = [
       "Tras un cierre de semana, servicios de sync actualizan préstamos, tesorería y ledgers.",
     ],
     architecture: `flowchart TB
-  subgraph clients [Clientes]
-    Web[Dashboard PWA]
-    App[App Flutter]
-    WA[WhatsApp]
-  end
-  Web --> Express
-  App --> Express
-  WA --> Joni[Joni IA router]
-  Joni --> Express
-  Express --> Auth[JWT 2FA Role Module]
-  Auth --> Ctrl[Controllers por convencion]
-  Ctrl --> Prisma
-  Prisma --> PG[(PostgreSQL)]
-  Express --> IO[Socket.IO]
-  Express --> Cron[node-cron]
-  Express --> S3[AWS S3]
-  Cron --> SAT[Buzon SAT CFDI]
-  Cron --> JobsWA[WhatsApp jobs]
-  Hik[HikCentral] --> Express
-  IO --> Web
-  IO --> SAT
-  Ctrl --> Nomina[Nomina]
-  Ctrl --> Tes[Tesoreria]
-  Ctrl --> Pack[Empaque]
-  Ctrl --> Buy[Compras]`,
+  Web[Dashboard PWA] --> JWT[JWT]
+  App[App Flutter] --> JWT
+  WA[WhatsApp] --> TOTP[TOTP / 2FA]
+  JWT --> Role[RoleGuard]
+  TOTP --> Module[ModuleGuard]
+  JWT --> Admin[admin]
+  JWT --> Payroll[processes/payroll]
+  WA --> Joni[chatbot Joni]
+  Admin --> Prisma[Prisma]
+  Payroll --> PaySvc[payroll]
+  Joni --> Prisma
+  Prisma --> PG[PostgreSQL]
+  Prisma --> S3[AWS S3]
+  PG --> Cron[node-cron]`,
     architectureLayers: [
       {
         name: "Entrada",
@@ -595,20 +588,15 @@ export const projects: Project[] = [
       "Socket.IO se conecta solo en Monitor, cobrowse o Dev Panel.",
     ],
     architecture: `flowchart TB
-  Shell[Shell multi-app PWA] --> Nomina[Nomina]
-  Shell --> Empaque[Empaque]
-  Shell --> Wh[Almacenes]
-  Shell --> Tes[Tesoreria y SAT]
-  Shell --> Joni[Chat Joni]
-  Shell --> Mon[Monitor Socket.IO]
-  Shell --> API[Axios JWT Location]
-  API --> Cloud[Backend Cloud]
-  Shell --> NFC[nfc-service 47321]
-  Shell --> WebNFC[Web NFC Android]
-  Shell --> Maps[Leaflet]
-  IO[Socket.IO] --> Mon
-  IO --> Tes
-  Joni --> Cloud`,
+  Nomina[Nómina] --> Asist[Asistencias]
+  Tes[Tesorería] --> SAT[Buzón SAT]
+  Empaque[Empaque] --> Alta[Alta de empleado]
+  Wh[Almacenes] --> Hik[HikCentral]
+  Asist --> Axios[Axios + JWT]
+  Joni[Chat Joni] --> Axios
+  Mon[Monitor] --> IO[Socket.IO]
+  SAT --> IO
+  Axios --> NFC[nfc-service :47321]`,
     architectureLayers: [
       {
         name: "Shell",
@@ -709,20 +697,16 @@ export const projects: Project[] = [
       "Logout hace resetAll() y limpia config de background sync.",
     ],
     architecture: `flowchart TB
-  UI[Pantallas Riverpod] --> Sync[betuko_offline_sync]
-  UI --> Queue[Cola Hive asistencias]
-  UI --> Alta[Alta de empleados]
-  NFC[NFC y QR] --> UI
-  GPS[Geolocalizacion] --> UI
-  Voice[Sherpa-ONNX] --> Surcos[Destajo surcos]
-  Surcos --> UI
-  Sync --> Hive[(Catalogos Hive)]
-  Queue --> HiveQ[(attendance_queue)]
-  WM[WorkManager] --> Sync
-  WM --> Queue
-  Sync --> API["Backend API"]
-  Queue --> Bulk["daily-capture bulk"]
-  Alta --> API`,
+  Asist[Asistencias] --> NFC[NFC]
+  Asist --> QR[QR]
+  Alta[Alta de empleado] --> GPS[GPS]
+  Surcos[Captura de surcos] --> Voice[Sherpa-ONNX]
+  NFC --> Sync[betuko_offline_sync]
+  QR --> Queue[Cola Hive]
+  GPS --> WM[WorkManager]
+  Sync --> API[Backend /api]
+  Queue --> Bulk[daily-capture/bulk]
+  WM --> API`,
     architectureLayers: [
       {
         name: "Pantallas",
@@ -813,15 +797,15 @@ export const projects: Project[] = [
       "En JornalPro, AttendanceManager usa Hive propio para la cola crítica y betuko para catálogos.",
     ],
     architecture: `flowchart TB
-  App[App Flutter] --> GConf[GlobalConfig]
-  App --> OOM[OnlineOfflineManager]
-  OOM --> LS[LocalStorage Hive]
+  Get[get] --> OOM[OnlineOfflineManager]
+  Save[save] --> OOM
+  Sync[syncAll] --> OOM
+  OOM --> Hive[LocalStorage Hive]
   OOM --> SS[SyncService]
-  OOM --> CS[ConnectivityService]
   SS --> API[ApiClient]
-  OOM --> Auto[Timer 10min + reconexion]
-  BGS[BackgroundSyncService] --> WM[WorkManager]
-  WM --> OOM`,
+  OOM --> Net[ConnectivityService]
+  Net --> Timer[Timer 10 min]
+  Timer --> WM[WorkManager 15 min]`,
     architectureLayers: [
       {
         name: "API pública",
@@ -901,13 +885,18 @@ export const projects: Project[] = [
       "El front de JornalPro no empaqueta el binario en src/: el DMG vive en public/.",
     ],
     architecture: `flowchart LR
-  Reader[ACR122U USB] --> PCSC[nfc-pcsc]
-  PCSC --> Svc[REST :47321]
-  Svc --> Web[Alta y gafetes]
-  Svc --> Lookup[Lookup empleado]
+  Reader[ACR122U] --> PCSC[PC/SC]
+  PCSC --> Driver[nfc-pcsc]
+  Driver --> Svc[REST :47321]
+  Svc --> Last[/last-card]
+  Svc --> Status[/status]
   Svc --> Console[Consola web]
-  Installer[DMG EXE launchd] --> Svc
-  Web --> Cloud[JornalPro Cloud]`,
+  Svc --> Alta[Alta de empleado]
+  Svc --> Gafetes[Entrega de gafetes]
+  Svc --> Lookup[Lookup]
+  DMG[DMG macOS] --> Svc
+  EXE[EXE Windows] --> Svc
+  Launch[launchd] --> Svc`,
     architectureLayers: [
       {
         name: "Hardware",
@@ -1147,19 +1136,17 @@ export const projects: Project[] = [
       "node-cron ejecuta reglas recurrentes, alertas financieras, recordatorios de deuda y reporte mensual.",
     ],
     architecture: `flowchart TB
-  React[React 18] --> Express[Express]
-  MUI[MUI 6] --> React
+  Quote[Cotizaciones] --> Hist[Historial CFDI]
+  Inv[Facturación] --> Cob[Cobranza]
+  Fin[Movimientos] --> Cash[Flujo de efectivo]
+  Hist --> React[React 18]
+  Cob --> Express[Express]
+  React --> MUI[MUI 6]
   Express --> Prisma[Prisma]
-  Express --> Quote[Cotizaciones]
-  Express --> Inv[Facturación]
-  Express --> Fin[Movimientos]
-  Quote --> Prisma
-  Inv --> Prisma
-  Fin --> Prisma
-  Inv --> FPT[FacturoPorTi]
-  Express --> S3[AWS S3]
-  Express --> Mail[Postmark]
-  Express --> Cron[node-cron]`,
+  Express --> FPT[FacturoPorTi]
+  Prisma --> S3[AWS S3]
+  S3 --> Mail[Postmark]
+  Mail --> Cron[node-cron]`,
     architectureLayers: [
       {
         name: "Procesos",

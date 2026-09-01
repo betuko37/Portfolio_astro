@@ -133,40 +133,61 @@
   ],
   "connections": [
     {
-      "id": "c0-nucleo-onlin-nucleo-local",
-      "from": "nucleo-onlineofflinemanager-0",
-      "to": "nucleo-localstorage-hive-1",
+      "id": "c0-api-publica--nucleo-onlin",
+      "from": "api-publica-get-0",
+      "to": "nucleo-onlineofflinemanager-0",
       "variant": "emphasis",
-      "fromSide": "right",
-      "toSide": "left"
-    },
-    {
-      "id": "c1-nucleo-onlin-red-connecti",
-      "from": "nucleo-onlineofflinemanager-0",
-      "to": "red-connectivityservice-0",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c2-nucleo-syncs-nucleo-apicl",
+      "id": "c1-api-publica--nucleo-onlin",
+      "from": "api-publica-save-1",
+      "to": "nucleo-onlineofflinemanager-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c2-api-publica--nucleo-onlin",
+      "from": "api-publica-syncall-2",
+      "to": "nucleo-onlineofflinemanager-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c3-nucleo-onlin-nucleo-local",
+      "from": "nucleo-onlineofflinemanager-0",
+      "to": "nucleo-localstorage-hive-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c4-nucleo-syncs-nucleo-apicl",
       "from": "nucleo-syncservice-2",
       "to": "nucleo-apiclient-3",
       "fromSide": "right",
       "toSide": "left"
     },
     {
-      "id": "c3-nucleo-syncs-red-workmana",
-      "from": "nucleo-syncservice-2",
-      "to": "red-workmanager-15-min-2",
+      "id": "c5-nucleo-onlin-red-connecti",
+      "from": "nucleo-onlineofflinemanager-0",
+      "to": "red-connectivityservice-0",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c4-red-workmana-nucleo-onlin",
-      "from": "red-workmanager-15-min-2",
-      "to": "nucleo-onlineofflinemanager-0",
-      "fromSide": "top",
-      "toSide": "bottom"
+      "id": "c6-red-connecti-red-timer-10",
+      "from": "red-connectivityservice-0",
+      "to": "red-timer-10-min-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c7-red-timer-10-red-workmana",
+      "from": "red-timer-10-min-1",
+      "to": "red-workmanager-15-min-2",
+      "fromSide": "right",
+      "toSide": "left"
     }
   ],
   "cards": [

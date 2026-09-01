@@ -124,12 +124,61 @@
   ],
   "connections": [
     {
-      "id": "c0-backend-php--datos-mysql-",
-      "from": "backend-php-0",
-      "to": "datos-mysql-0",
+      "id": "c0-frontend-jav-frontend-tab",
+      "from": "frontend-javascript-0",
+      "to": "frontend-tablas-1",
       "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c1-frontend-tab-frontend-for",
+      "from": "frontend-tablas-1",
+      "to": "frontend-formularios-2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c2-frontend-jav-backend-php-",
+      "from": "frontend-javascript-0",
+      "to": "backend-php-0",
       "fromSide": "bottom",
       "toSide": "top"
+    },
+    {
+      "id": "c3-backend-php--backend-pdo-",
+      "from": "backend-php-0",
+      "to": "backend-pdo-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c4-backend-pdo--backend-crud",
+      "from": "backend-pdo-1",
+      "to": "backend-crud-scripts-2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c5-backend-php--datos-mysql-",
+      "from": "backend-php-0",
+      "to": "datos-mysql-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c6-datos-mysql--datos-client",
+      "from": "datos-mysql-0",
+      "to": "datos-clientes-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c7-datos-client-datos-pedido",
+      "from": "datos-clientes-1",
+      "to": "datos-pedidos-2",
+      "fromSide": "right",
+      "toSide": "left"
     }
   ],
   "cards": [

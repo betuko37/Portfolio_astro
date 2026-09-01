@@ -106,15 +106,48 @@
   ],
   "connections": [
     {
-      "id": "flow-0",
-      "from": "ui-animate-css-1",
-      "to": "estado-query-string-1",
-      "variant": "emphasis"
+      "id": "c0-ui-tailwind--estado-auth-",
+      "from": "ui-tailwind-4-0",
+      "to": "estado-auth-context-0",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "top"
     },
     {
-      "id": "flow-1",
+      "id": "c1-estado-auth--estado-query",
+      "from": "estado-auth-context-0",
+      "to": "estado-query-string-1",
+      "variant": "security",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c2-estado-query-deploy-vite-",
       "from": "estado-query-string-1",
-      "to": "deploy-netlify-1"
+      "to": "deploy-vite-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c3-deploy-vite--deploy-netli",
+      "from": "deploy-vite-0",
+      "to": "deploy-netlify-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c4-o-ui-anima-estado-q",
+      "from": "ui-animate-css-1",
+      "to": "estado-query-string-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c5-o-ui-react-ui-anima",
+      "from": "ui-react-icons-2",
+      "to": "ui-animate-css-1",
+      "fromSide": "left",
+      "toSide": "right"
     }
   ],
   "cards": [

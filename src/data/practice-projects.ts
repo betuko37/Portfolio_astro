@@ -33,11 +33,11 @@ export const practiceProjects: Project[] = [
       "CSS aplica fondos e imágenes según la respuesta o errores de red.",
     ],
     architecture: `flowchart LR
-  User[Usuario] --> UI[index.html]
-  UI --> JS[script.js]
-  JS --> API[API clima]
-  API --> JS
-  JS --> UI`,
+  HTML[HTML] --> JavaScript[JavaScript]
+  CSS[CSS] --> HTML
+  JavaScript --> Fetch[Fetch API]
+  Fetch --> JSON[JSON]
+  Fetch --> Pages[GitHub Pages]`,
     architectureLayers: [
       { name: "Cliente", items: ["HTML", "CSS", "JavaScript"] },
       { name: "Datos", items: ["Fetch API", "JSON"] },
@@ -82,11 +82,12 @@ export const practiceProjects: Project[] = [
       "Feedback visual en el panel confirma el estado de cada zona.",
     ],
     architecture: `flowchart TB
-  Alexa[Alexa Skill] --> CS[C# App]
-  Panel[Panel tactil] --> CS
-  CS --> Serial["Serial y red"]
-  Serial --> Arduino[Arduino]
-  Arduino --> Actuadores[Luces Relés Sensores]`,
+  Alexa[Alexa] --> CS[C#]
+  Panel[Panel táctil] --> CS
+  CS --> Escenas[Lógica de escenas]
+  CS --> Arduino[Arduino]
+  Arduino --> Sensores[Sensores]
+  Arduino --> Actuadores[Actuadores]`,
     architectureLayers: [
       { name: "Entrada", items: ["Alexa", "Panel táctil"] },
       { name: "Control", items: ["C#", "Lógica de escenas"] },
@@ -128,11 +129,14 @@ export const practiceProjects: Project[] = [
       "Al cumplir objetivo se carga el siguiente nivel o pantalla final.",
     ],
     architecture: `flowchart TB
-  Input[Input jugador] --> Player[PlayerController]
-  Player --> Physics[Physics2D]
-  Physics --> Enemies[Enemy AI]
-  Enemies --> GM[Game Manager]
-  GM --> UI["HUD y escenas"]`,
+  Mov[Movimiento] --> Unity[Unity 2D]
+  Enem[Enemigos] --> Unity
+  Obj[Objetivos] --> Unity
+  Unity --> RB[Rigidbody2D]
+  RB --> Col[Colliders]
+  Unity --> N1[Nivel 1]
+  Unity --> N2[Nivel 2]
+  Col --> UI[UI]`,
     architectureLayers: [
       { name: "Gameplay", items: ["Movimiento", "Enemigos", "Objetivos"] },
       { name: "Motor", items: ["Unity 2D", "Rigidbody2D", "Colliders"] },
@@ -175,14 +179,13 @@ export const practiceProjects: Project[] = [
       "Zod rechaza body inválidos con respuesta 4xx.",
     ],
     architecture: `flowchart TB
-  Client[Cliente HTTP] --> Express[Express app.js]
-  Express --> CORS[CORS + methods]
-  CORS --> Router["movies router"]
-  Router --> Zod[Zod schemas]
-  Router --> Model[movieModel]
-  Model --> Local[(JSON local)]
-  Model --> MySQL[(MySQL)]
-  Model --> Mongo[(MongoDB)]`,
+  Express[Express] --> Routes[movies_routes]
+  Routes --> Ctrl[controllers]
+  Ctrl --> Model[Movie model]
+  Model --> Zod[Zod validation]
+  Model --> Local[Local JSON]
+  Model --> MySQL[MySQL]
+  Model --> Mongo[MongoDB]`,
     architectureLayers: [
       { name: "API", items: ["Express", "movies_routes", "controllers"] },
       { name: "Dominio", items: ["Movie model", "Zod validation"] },
@@ -224,14 +227,11 @@ export const practiceProjects: Project[] = [
       "Permisos y notificaciones según versión de Android.",
     ],
     architecture: `flowchart TB
-  subgraph flutter [Flutter]
-    UI[Widgets] --> State[Estado]
-    State --> API1[HTTP API]
-  end
-  subgraph kotlin [Kotlin Android]
-    Act[Activity] --> Svc[Background Service]
-    Svc --> API2[REST Client]
-  end`,
+  Dart[Dart] --> Widgets[Widgets]
+  Widgets --> HTTP[HTTP]
+  HTTP --> Kotlin[Kotlin]
+  Kotlin --> Services[Services]
+  Services --> Retro[Retrofit/OkHttp]`,
     architectureLayers: [
       { name: "Flutter", items: ["Dart", "Widgets", "HTTP"] },
       { name: "Android", items: ["Kotlin", "Services", "Retrofit/OkHttp"] },
@@ -272,11 +272,14 @@ export const practiceProjects: Project[] = [
       "Vite build genera estáticos para Netlify.",
     ],
     architecture: `flowchart TB
-  Browser --> Vite[React SPA]
-  Vite --> Router[React Router 7]
-  Router --> Hooks[useFetchGifs]
-  Hooks --> Helpers[getGifs helpers]
-  Helpers --> Giphy[Giphy API]`,
+  Nav[Navbar] --> Grid[GridGifts]
+  Grid --> Search[Search]
+  Search --> Fav[Favorites]
+  Grid --> Helpers[helpers]
+  Helpers --> Hooks[hooks]
+  Hooks --> Key[apiKey]
+  Key --> Vite[Vite build]
+  Vite --> Netlify[Netlify]`,
     architectureLayers: [
       { name: "UI", items: ["Navbar", "GridGifts", "Search", "Favorites"] },
       { name: "Datos", items: ["helpers", "hooks", "apiKey"] },
@@ -321,12 +324,13 @@ export const practiceProjects: Project[] = [
       "pre-deploy.js valida build antes de publicar en Netlify.",
     ],
     architecture: `flowchart TB
-  React[React Vite] --> Admin[Admin UI]
-  React --> Client[Vista cliente]
-  Admin --> FB[Firebase Firestore]
-  Client --> FB
-  React --> PDF[pdfmake]
-  React --> WA[WhatsApp share]`,
+  React[React 19] --> TW[Tailwind 4]
+  TW --> Vite[Vite]
+  React --> FB[Firebase]
+  FB --> Storage[storageService]
+  Storage --> PDF[PDF]
+  PDF --> WA[WhatsApp]
+  WA --> Netlify[Netlify]`,
     architectureLayers: [
       { name: "Frontend", items: ["React 19", "Tailwind 4", "Vite"] },
       { name: "Backend", items: ["Firebase", "storageService"] },
@@ -371,11 +375,10 @@ export const practiceProjects: Project[] = [
       "Vite + Tailwind compilan assets estáticos para Netlify.",
     ],
     architecture: `flowchart TB
-  Browser --> Router[React Router 7]
-  Router --> Auth[Auth Context]
-  Router --> Heroes[Heroes module]
-  Heroes --> Assets["public assets"]
-  Auth --> Router`,
+  TW[Tailwind 4] --> Auth[Auth context]
+  Auth --> QS[query-string]
+  QS --> Vite[Vite]
+  Vite --> Netlify[Netlify]`,
     architectureLayers: [
       { name: "UI", items: ["Tailwind 4", "animate.css", "react-icons"] },
       { name: "Estado", items: ["Auth context", "query-string"] },
@@ -419,10 +422,12 @@ export const practiceProjects: Project[] = [
       "GitHub Pages sirve el sitio estático.",
     ],
     architecture: `flowchart LR
-  Pages["pages HTML"] --> JS["JS modulos"]
-  JS --> API[Cocktail API]
-  JS --> DOM["DOM render"]
-  Styles["Styles CSS"] --> Pages`,
+  Index[index] --> Pages[pages/]
+  Pages --> Carrusel[carrusel]
+  Index --> Fetch[fetch]
+  Fetch --> Ruleta[ruleta]
+  Ruleta --> Filtros[filtros]
+  Fetch --> PagesDeploy[GitHub Pages]`,
     architectureLayers: [
       { name: "Vistas", items: ["index", "pages/", "carrusel"] },
       { name: "Lógica", items: ["fetch", "ruleta", "filtros"] },
@@ -465,9 +470,10 @@ export const practiceProjects: Project[] = [
       "GitHub Pages publica index.html estático.",
     ],
     architecture: `flowchart LR
-  UI[index.html] --> JS[Obtener.js]
-  JS --> API[Photos API]
-  JS --> LS[(localStorage)]`,
+  HTML[HTML] --> CSS[CSS]
+  CSS --> JS[Obtener.js]
+  JS --> LS[localStorage]
+  LS --> Fav[Favoritos]`,
     architectureLayers: [
       { name: "Cliente", items: ["HTML", "CSS", "Obtener.js"] },
       { name: "Persistencia local", items: ["localStorage", "Favoritos"] },
@@ -510,11 +516,14 @@ export const practiceProjects: Project[] = [
       "Form-Pets-Php complementa el alta de mascotas.",
     ],
     architecture: `flowchart TB
-  JS[Js app.js] --> PHP[Php endpoints]
-  PHP --> PDO[database.php]
-  PDO --> MySQL[(MySQL)]
-  PHP --> JSON[JSON response]
-  JSON --> JS`,
+  JS[JavaScript] --> Tablas[Tablas]
+  Tablas --> Forms[Formularios]
+  JS --> PHP[PHP]
+  PHP --> PDO[PDO]
+  PDO --> CRUD[CRUD scripts]
+  PHP --> MySQL[MySQL]
+  MySQL --> Clientes[Clientes]
+  Clientes --> Pedidos[Pedidos]`,
     architectureLayers: [
       { name: "Frontend", items: ["JavaScript", "Tablas", "Formularios"] },
       { name: "Backend", items: ["PHP", "PDO", "CRUD scripts"] },
@@ -554,9 +563,11 @@ export const practiceProjects: Project[] = [
       "Editar/eliminar reutilizan el mismo patrón fetch.",
     ],
     architecture: `flowchart LR
-  Form[index.html] --> Ajax[ajax.js]
-  Ajax --> PHP["php endpoints"]
-  PHP --> DB[(MySQL)]`,
+  Form[HTML form] --> CSS[stylei.css]
+  Form --> Guardar[guardar]
+  Guardar --> Get[get]
+  Get --> Editar[editar]
+  Editar --> Eliminar[eliminar]`,
     architectureLayers: [
       { name: "UI", items: ["HTML form", "stylei.css"] },
       { name: "API", items: ["guardar", "get", "editar", "eliminar"] },
@@ -595,9 +606,11 @@ export const practiceProjects: Project[] = [
       "npm run dev levanta nodemon ignorando rebuilds del frontend.",
     ],
     architecture: `flowchart TB
-  React[React frontend] --> IO[Socket.IO client]
-  IO --> Server["Express Socket.IO"]
-  Server --> Clients[Broadcast a clients]`,
+  React[React] --> Vite[Vite]
+  Vite --> Client[socket.io-client]
+  React --> Express[Express]
+  Express --> IO[Socket.IO]
+  IO --> Nodemon[nodemon]`,
     architectureLayers: [
       { name: "Cliente", lane: "left", items: ["React", "Vite", "socket.io-client"] },
       { name: "Servidor", lane: "right", items: ["Express", "Socket.IO", "nodemon"] },
@@ -636,9 +649,10 @@ export const practiceProjects: Project[] = [
       "Al terminar muestra resultado final.",
     ],
     architecture: `flowchart TB
-  UI[React MUI] --> Store[Zustand store]
-  Store --> Data[data.json]
-  UI --> Highlight[react-syntax-highlighter]`,
+  MUI[MUI 6] --> Start[Start]
+  Start --> Game[Game]
+  Game --> Zustand[Zustand]
+  Zustand --> Types[TypeScript types]`,
     architectureLayers: [
       { name: "UI", items: ["MUI 6", "Start", "Game"] },
       { name: "Estado", items: ["Zustand", "TypeScript types"] },
@@ -678,10 +692,10 @@ export const practiceProjects: Project[] = [
       "MUI layout responsive para móvil y desktop.",
     ],
     architecture: `flowchart TB
-  Router[AppRouter] --> Auth["auth module"]
-  Router --> App["app views"]
-  AppTheme[MUI Theme] --> Auth
-  AppTheme --> App`,
+  Router[React Router 7] --> Guard[Auth guard]
+  Guard --> MUI[MUI 6]
+  MUI --> Roboto[Roboto]
+  Roboto --> Layouts[Layouts]`,
     architectureLayers: [
       { name: "Navegación", items: ["React Router 7", "Auth guard"] },
       { name: "UI", items: ["MUI 6", "Roboto", "Layouts"] },
@@ -721,9 +735,8 @@ export const practiceProjects: Project[] = [
       "Botón eliminar filtra el array y actualiza DOM.",
     ],
     architecture: `flowchart LR
-  HTML[index.html] --> JS[script.js]
-  JS --> DOM[Lista DOM]
-  JS --> Mem[(Array tareas)]`,
+  HTML[HTML] --> Bootstrap[Bootstrap]
+  Bootstrap --> JS[script.js]`,
     architectureLayers: [
       { name: "Cliente", items: ["HTML", "Bootstrap", "script.js"] },
     ],
@@ -761,8 +774,10 @@ export const practiceProjects: Project[] = [
       "GitHub Pages o hosting estático sirve assets.",
     ],
     architecture: `flowchart LR
-  Pages[HTML pages] --> JS[cart.js + productServices]
-  JS --> LS[(localStorage carrito)]`,
+  HTML[HTML] --> CSS[CSS]
+  CSS --> Img[img/fondos]
+  HTML --> Cart[cart.js]
+  Cart --> Products[productServices]`,
     architectureLayers: [
       { name: "Presentación", items: ["HTML", "CSS", "img/fondos"] },
       { name: "Interacción", items: ["cart.js", "productServices"] },

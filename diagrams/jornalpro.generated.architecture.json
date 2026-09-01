@@ -250,27 +250,140 @@
   ],
   "connections": [
     {
-      "id": "c0-adaptadores--adaptadores-",
+      "id": "c0-superficies--panel-web-no",
+      "from": "superficies-erp-web-pwa-0",
+      "to": "panel-web-nomina-0",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c1-superficies--panel-web-te",
+      "from": "superficies-erp-web-pwa-0",
+      "to": "panel-web-tesoreria-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c2-superficies--panel-web-em",
+      "from": "superficies-erp-web-pwa-0",
+      "to": "panel-web-empaque-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c3-superficies--app-de-campo",
+      "from": "superficies-app-flutter-de-campo-1",
+      "to": "app-de-campo-asistencias-nfc-qr-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c4-superficies--app-de-campo",
+      "from": "superficies-app-flutter-de-campo-1",
+      "to": "app-de-campo-alta-de-empleados-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c5-superficies--app-de-campo",
+      "from": "superficies-app-flutter-de-campo-1",
+      "to": "app-de-campo-captura-de-surcos-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c6-app-de-campo-adaptadores-",
+      "from": "app-de-campo-asistencias-nfc-qr-0",
+      "to": "adaptadores-nfc-service-47321-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c7-app-de-campo-adaptadores-",
+      "from": "app-de-campo-alta-de-empleados-1",
+      "to": "adaptadores-nfc-manager-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c8-app-de-campo-adaptadores-",
+      "from": "app-de-campo-captura-de-surcos-2",
+      "to": "adaptadores-betuko-offline-sync-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c9-adaptadores--adaptadores-",
       "from": "adaptadores-betuko-offline-sync-2",
       "to": "adaptadores-workmanager-3",
-      "variant": "emphasis",
       "fromSide": "right",
       "toSide": "left"
     },
     {
-      "id": "c1-adaptadores--app-de-campo",
+      "id": "c10-adaptadores--api-jwt-2fa-",
       "from": "adaptadores-nfc-service-47321-0",
-      "to": "app-de-campo-asistencias-nfc-qr-0",
-      "fromSide": "top",
-      "toSide": "bottom"
-    },
-    {
-      "id": "c2-servicios-hi-api-jwt-2fa-",
-      "from": "servicios-hikcentral-2",
       "to": "api-jwt-2fa-rbac-0",
       "variant": "security",
-      "fromSide": "top",
-      "toSide": "bottom"
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c11-adaptadores--api-processe",
+      "from": "adaptadores-workmanager-3",
+      "to": "api-processes-payroll-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c12-api-jwt-2fa--servicios-so",
+      "from": "api-jwt-2fa-rbac-0",
+      "to": "servicios-socket-gateway-0",
+      "variant": "security",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c13-api-processe-servicios-ch",
+      "from": "api-processes-payroll-1",
+      "to": "servicios-chatbot-joni-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c14-o-adaptado-api-trea",
+      "from": "adaptadores-betuko-offline-sync-2",
+      "to": "api-treasury-sat-mailbox-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c15-o-adaptado-api-pack",
+      "from": "adaptadores-workmanager-3",
+      "to": "api-packing-3",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c16-o-api-ware-api-pack",
+      "from": "api-warehouses-4",
+      "to": "api-packing-3",
+      "fromSide": "left",
+      "toSide": "right"
+    },
+    {
+      "id": "c17-o-api-trea-servicio",
+      "from": "api-treasury-sat-mailbox-2",
+      "to": "servicios-hikcentral-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c18-o-api-pack-servicio",
+      "from": "api-packing-3",
+      "to": "servicios-sat-cfdi-3",
+      "fromSide": "bottom",
+      "toSide": "top"
     }
   ],
   "cards": [

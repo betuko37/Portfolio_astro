@@ -115,15 +115,54 @@
   ],
   "connections": [
     {
-      "id": "flow-0",
-      "from": "frontend-tailwind-4-1",
-      "to": "backend-storageservice-1",
-      "variant": "emphasis"
+      "id": "c0-frontend-rea-frontend-tai",
+      "from": "frontend-react-19-0",
+      "to": "frontend-tailwind-4-1",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left"
     },
     {
-      "id": "flow-1",
+      "id": "c1-frontend-tai-frontend-vit",
+      "from": "frontend-tailwind-4-1",
+      "to": "frontend-vite-2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c2-frontend-rea-backend-fire",
+      "from": "frontend-react-19-0",
+      "to": "backend-firebase-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c3-backend-fire-backend-stor",
+      "from": "backend-firebase-0",
+      "to": "backend-storageservice-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c4-backend-stor-salida-pdf-0",
       "from": "backend-storageservice-1",
-      "to": "salida-whatsapp-1"
+      "to": "salida-pdf-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c5-salida-pdf-0-salida-whats",
+      "from": "salida-pdf-0",
+      "to": "salida-whatsapp-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c6-salida-whats-salida-netli",
+      "from": "salida-whatsapp-1",
+      "to": "salida-netlify-2",
+      "fromSide": "right",
+      "toSide": "left"
     }
   ],
   "cards": [
