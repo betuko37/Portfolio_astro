@@ -1,100 +1,128 @@
 {
-  "pantallas-asistencias-0": {
+  "login": {
+    "title": "Login / Splash",
+    "subtitle": "JWT + sesión local",
+    "kind": "frontend",
+    "layer": "Pantallas — Flutter Android",
+    "body": "Login con usuario/email + contraseña. JWT guardado en Hive + SharedPreferences. Restauración automática de sesión local."
+  },
+  "asistencias": {
     "title": "Asistencias",
-    "subtitle": "Asistencias",
-    "kind": "backend",
-    "layer": "Pantallas",
-    "body": "Ubicación (sección/cuadro/lote), cuadrilla, concepto, modal NFC, panel QR, historial local y lista del día."
+    "subtitle": "NFC · QR · cuadrillas",
+    "kind": "frontend",
+    "layer": "Pantallas — Flutter Android",
+    "body": "Captura de asistencias en campo. Modo NFC (credencial), QR o manual. Lista, historial, cuadrillas y conceptos. GPS requerido."
   },
-  "pantallas-alta-de-empleado-1": {
-    "title": "Alta de empleado",
-    "subtitle": "Alta de empleado",
-    "kind": "backend",
-    "layer": "Pantallas",
-    "body": "Alta de empleado"
+  "surcos": {
+    "title": "Surcos + Voz",
+    "subtitle": "Destajos · comandos ASR",
+    "kind": "frontend",
+    "layer": "Pantallas — Flutter Android",
+    "body": "Captura de destajos/surcos con grid biométrico del día. Comandos de voz offline (Sherpa ONNX), TTS feedback y emisión de ticket térmico."
   },
-  "pantallas-captura-de-surcos-2": {
-    "title": "Captura de surcos",
-    "subtitle": "Captura de surcos",
-    "kind": "backend",
-    "layer": "Pantallas",
-    "body": "Grilla de destajo, roster del día, cierre de jornada y stores locales."
+  "alta": {
+    "title": "Alta empleado",
+    "subtitle": "Wizard · foto · NFC",
+    "kind": "frontend",
+    "layer": "Pantallas — Flutter Android",
+    "body": "Wizard de alta de empleado: configuración → datos → foto + firma → review. También Alta Express desde caras no reconocidas del checador HikCentral."
   },
-  "pantallas-cajas-3": {
+  "cajas": {
     "title": "Cajas",
-    "subtitle": "Cajas",
-    "kind": "backend",
-    "layer": "Pantallas",
-    "body": "Cajas"
+    "subtitle": "Tesorería (ENTERPRISE)",
+    "kind": "frontend",
+    "layer": "Pantallas — Flutter Android",
+    "body": "Módulo de tesorería de campo. Solo visible para ENTERPRISE_ADMIN. Cajas, movimientos y transferencias."
   },
-  "campo-nfc-0": {
-    "title": "NFC",
-    "subtitle": "NFC",
-    "kind": "backend",
-    "layer": "Campo",
-    "body": "NFC"
+  "router": {
+    "title": "go_router",
+    "subtitle": "Navegación + guards",
+    "kind": "frontend",
+    "layer": "JornalPro Mobile",
+    "body": "go_router 14.8. Guards redirigen según estado de auth y permisos de GPS. Rutas: login, location-required, home, asistencias, surcos, alta, cajas."
   },
-  "campo-qr-1": {
-    "title": "QR",
-    "subtitle": "QR",
-    "kind": "backend",
-    "layer": "Campo",
-    "body": "QR"
+  "riverpod": {
+    "title": "Riverpod",
+    "subtitle": "Estado reactivo",
+    "kind": "frontend",
+    "layer": "JornalPro Mobile",
+    "body": "flutter_riverpod 2.6.1. StateNotifier + ConsumerWidget. Providers: auth, attendance, alta, cajas, catalogs, customization, TTS, impresora…"
   },
-  "campo-gps-2": {
-    "title": "GPS",
-    "subtitle": "GPS",
-    "kind": "backend",
-    "layer": "Campo",
-    "body": "GPS"
-  },
-  "campo-sherpa-onnx-3": {
-    "title": "Sherpa-ONNX",
-    "subtitle": "Sherpa-ONNX",
-    "kind": "backend",
-    "layer": "Campo",
-    "body": "Sherpa-ONNX"
-  },
-  "offline-betuko-offline-sync-0": {
-    "title": "betuko_offline_sy…",
-    "subtitle": "betuko_offline_sync",
-    "kind": "backend",
-    "layer": "Offline",
-    "body": "Sherpa-ONNX, hotwords agrícolas, enrollment de capataz y foreground service."
-  },
-  "offline-cola-hive-1": {
-    "title": "Cola Hive",
-    "subtitle": "Cola Hive",
-    "kind": "database",
-    "layer": "Offline",
-    "body": "Sherpa-ONNX, hotwords agrícolas, enrollment de capataz y foreground service."
-  },
-  "offline-workmanager-2": {
+  "workmanager": {
     "title": "WorkManager",
-    "subtitle": "WorkManager",
+    "subtitle": "Sync background",
     "kind": "backend",
-    "layer": "Offline",
-    "body": "Sherpa-ONNX, hotwords agrícolas, enrollment de capataz y foreground service."
+    "layer": "JornalPro Mobile",
+    "body": "WorkManager (betuko) + flutter_foreground_task. Sincroniza catálogos, asistencias pendientes y telemetría cuando la app está en background."
   },
-  "offline-connectivity-plus-3": {
-    "title": "connectivity_plus",
-    "subtitle": "connectivity_plus",
-    "kind": "backend",
-    "layer": "Offline",
-    "body": "Sherpa-ONNX, hotwords agrícolas, enrollment de capataz y foreground service."
+  "jwt": {
+    "title": "Auth JWT",
+    "subtitle": "Bearer + sesión Hive",
+    "kind": "security",
+    "layer": "Servicios de datos",
+    "body": "JWT Bearer con sessionId. Guardado en Hive (betuko AuthManager) y SharedPreferences. GET /admin/users/my-profile para refrescar perfil."
   },
-  "nube-backend-api-0": {
-    "title": "Backend",
-    "subtitle": "Backend /api",
+  "attend_mgr": {
+    "title": "Attendance Mgr",
+    "subtitle": "Cola Hive + POST bulk",
     "kind": "backend",
-    "layer": "Nube",
-    "body": "Backend /api"
+    "layer": "Servicios de datos",
+    "body": "AttendanceManager (betuko OnlineOfflineManager). Cola Hive de asistencias pendientes + historial enviados. POST bulk al reconectar."
   },
-  "nube-daily-capture-bulk-1": {
-    "title": "daily-capture",
-    "subtitle": "daily-capture/bulk",
+  "voice": {
+    "title": "Sherpa ONNX",
+    "subtitle": "ASR on-device · speaker ID",
+    "kind": "external",
+    "layer": "Servicios de datos",
+    "body": "Sherpa ONNX 1.13.6 on-device. ASR con hotwords, speaker enrollment/matching, noise gate, calibración de micrófono y TTS queue en español."
+  },
+  "alta_svc": {
+    "title": "Alta Service",
+    "subtitle": "HTTP · foto · HikCentral",
     "kind": "backend",
-    "layer": "Nube",
-    "body": "daily-capture/bulk"
+    "layer": "Servicios de datos",
+    "body": "AltaEmpleadoService: sube foto y firma (multipart HTTP), verifica cara en HikCentral antes del registro, gestiona unknown-faces del checador."
+  },
+  "hive": {
+    "title": "betuko / Hive",
+    "subtitle": "Catálogos offline",
+    "kind": "backend",
+    "layer": "Servicios de datos",
+    "body": "betuko_offline_sync. Cajas Hive por entidad (employees_light, crews, concepts, season, auth). Sync REST automático al reconectar."
+  },
+  "backend": {
+    "title": "Backend REST",
+    "subtitle": "api.ultechzone.online/api",
+    "kind": "backend",
+    "layer": "Hardware y servicios externos",
+    "body": "JornalPro Cloud Backend. https://api.ultechzone.online/api. Express 5 + Prisma 7. ~134 rutas REST. Misma instancia que el panel web."
+  },
+  "nfc_gps": {
+    "title": "NFC · QR · GPS",
+    "subtitle": "Hardware de campo",
+    "kind": "external",
+    "layer": "Hardware y servicios externos",
+    "body": "NFC (nfc_manager 3.5.1): credenciales de tarjeta. QR (mobile_scanner 7.2.1): alternativa configurable. GPS (geolocator 13): coordenadas obligatorias por attendance."
+  },
+  "bt_print": {
+    "title": "BT Printer",
+    "subtitle": "ESC/POS 58 mm",
+    "kind": "external",
+    "layer": "Hardware y servicios externos",
+    "body": "Impresora térmica Bluetooth 58 mm. print_bluetooth_thermal + esc_pos_utils_plus. Tickets de captura de surcos. Solo Android."
+  },
+  "hik_api": {
+    "title": "HikCentral API",
+    "subtitle": "Registro facial",
+    "kind": "cloud",
+    "layer": "Hardware y servicios externos",
+    "body": "HikCentral API (vía backend). Verifica cara antes del registro, sincroniza personId y rostros, entrega eventos biométricos del checador ACS."
+  },
+  "sqlite": {
+    "title": "SQLite",
+    "subtitle": "Surcos local store",
+    "kind": "database",
+    "layer": "Hardware y servicios externos",
+    "body": "sqflite 2.4.2. Local store de surcos (field_work_local_store). DB de monitoreo/eventos del foreground service. Persiste sin internet indefinidamente."
   }
 }

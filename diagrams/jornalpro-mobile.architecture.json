@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "JornalPro Mobile",
+    "subtitle": "Flutter Android — offline-first, NFC · QR · GPS · voz on-device · impresora Bluetooth",
+    "quality_profile": "showcase",
+    "output": "jornalpro-mobile.html"
+  },
+  "components": [
+    { "id": "login",       "type": "frontend",   "label": "Login / Splash",   "sublabel": "JWT + sesión local",         "pos": [32,  72],  "size": [148, 56] },
+    { "id": "asistencias", "type": "frontend",   "label": "Asistencias",      "sublabel": "NFC · QR · cuadrillas",      "pos": [220, 72],  "size": [148, 56] },
+    { "id": "surcos",      "type": "frontend",   "label": "Surcos + Voz",     "sublabel": "Destajos · comandos ASR",    "pos": [408, 72],  "size": [148, 56] },
+    { "id": "alta",        "type": "frontend",   "label": "Alta empleado",    "sublabel": "Wizard · foto · NFC",        "pos": [596, 72],  "size": [148, 56] },
+    { "id": "cajas",       "type": "frontend",   "label": "Cajas",            "sublabel": "Tesorería (ENTERPRISE)",     "pos": [784, 72],  "size": [148, 56] },
+
+    { "id": "router",      "type": "frontend",   "label": "go_router",        "sublabel": "Navegación + guards",        "pos": [32,  240], "size": [148, 56] },
+    { "id": "riverpod",    "type": "frontend",   "label": "Riverpod",         "sublabel": "Estado reactivo",            "pos": [220, 240], "size": [148, 56] },
+    { "id": "workmanager", "type": "backend",    "label": "WorkManager",      "sublabel": "Sync background",            "pos": [784, 240], "size": [148, 56] },
+
+    { "id": "jwt",         "type": "security",   "label": "Auth JWT",         "sublabel": "Bearer + sesión Hive",       "pos": [32,  408], "size": [148, 56] },
+    { "id": "attend_mgr",  "type": "backend",    "label": "Attendance Mgr",   "sublabel": "Cola Hive + POST bulk",      "pos": [220, 408], "size": [148, 56] },
+    { "id": "voice",       "type": "external",   "label": "Sherpa ONNX",      "sublabel": "ASR on-device · speaker ID", "pos": [408, 408], "size": [148, 56] },
+    { "id": "alta_svc",    "type": "backend",    "label": "Alta Service",     "sublabel": "HTTP · foto · HikCentral",   "pos": [596, 408], "size": [148, 56] },
+    { "id": "hive",        "type": "backend",    "label": "betuko / Hive",    "sublabel": "Catálogos offline",          "pos": [784, 408], "size": [148, 56] },
+
+    { "id": "backend",     "type": "backend",    "label": "Backend REST",     "sublabel": "api.ultechzone.online/api",  "pos": [32,  576], "size": [148, 56] },
+    { "id": "nfc_gps",     "type": "external",   "label": "NFC · QR · GPS",   "sublabel": "Hardware de campo",          "pos": [220, 576], "size": [148, 56] },
+    { "id": "bt_print",    "type": "external",   "label": "BT Printer",       "sublabel": "ESC/POS 58 mm",              "pos": [408, 576], "size": [148, 56] },
+    { "id": "hik_api",     "type": "cloud",      "label": "HikCentral API",   "sublabel": "Registro facial",            "pos": [596, 576], "size": [148, 56] },
+    { "id": "sqlite",      "type": "database",   "label": "SQLite",           "sublabel": "Surcos local store",         "pos": [784, 576], "size": [148, 56] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Pantallas — Flutter Android",  "wraps": ["login","asistencias","surcos","alta","cajas"] },
+    { "kind": "region", "label": "Servicios de datos",           "wraps": ["jwt","attend_mgr","voice","alta_svc","hive"] },
+    { "kind": "region", "label": "Hardware y servicios externos","wraps": ["backend","nfc_gps","bt_print","hik_api","sqlite"] }
+  ],
+  "connections": [
+    { "id": "c1",  "from": "login",      "to": "router",     "variant": "emphasis" },
+    { "id": "c2",  "from": "asistencias","to": "riverpod" },
+    { "id": "c3",  "from": "surcos",     "to": "voice" },
+    { "id": "c4",  "from": "alta",       "to": "alta_svc" },
+    { "id": "c5",  "from": "cajas",      "to": "workmanager" },
+    { "id": "c6",  "from": "router",     "to": "jwt",        "variant": "security" },
+    { "id": "c7",  "from": "riverpod",   "to": "attend_mgr" },
+    { "id": "c8",  "from": "workmanager","to": "hive" },
+    { "id": "c9",  "from": "jwt",        "to": "attend_mgr", "variant": "security" },
+    { "id": "c10", "from": "jwt",        "to": "backend",    "variant": "security" },
+    { "id": "c11", "from": "attend_mgr", "to": "nfc_gps" },
+    { "id": "c12", "from": "voice",      "to": "bt_print" },
+    { "id": "c13", "from": "alta_svc",   "to": "hik_api" },
+    { "id": "c14", "from": "hive",       "to": "sqlite" }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Flutter offline-first",
+      "items": [
+        "betuko/Hive para catálogos y cola de asistencias, SQLite para destajos, WorkManager + foreground service para sync en background."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Captura multimodal de campo",
+      "items": [
+        "NFC (credential tag), QR (mobile_scanner), GPS obligatorio post-login y voz on-device con Sherpa ONNX (ASR + speaker ID sin internet)."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Alta empleado en campo",
+      "items": [
+        "Wizard: foto con cámara → verificación facial HikCentral → registro NFC → contrato digital. También admite Alta Express desde caras no reconocidas del checador."
+      ]
+    }
+  ]
+}
