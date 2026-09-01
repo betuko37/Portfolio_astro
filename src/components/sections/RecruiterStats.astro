@@ -31,7 +31,7 @@ const stats = await getLiveRecruiterStats();
       </p>
     </div>
     <div class="mt-4 min-w-0 max-w-full">
-      <RecruiterInsights client:load stats={stats} />
+      <RecruiterInsights client:visible stats={stats} />
     </div>
   </div>
 </section>

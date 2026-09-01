@@ -23,6 +23,8 @@
   --lightbox-text: var(--ink);
   --lightbox-caption: var(--muted);
   --lightbox-image-ring: color-mix(in srgb, var(--ink) 12%, transparent);
+  --cv-stage-bg: color-mix(in srgb, var(--sand) 72%, white);
+  --cv-page-shadow: 0 16px 40px color-mix(in srgb, var(--ink) 14%, transparent);
   color-scheme: light;
 }
 
@@ -49,6 +51,11 @@
   --lightbox-text: var(--on-dark);
   --lightbox-caption: color-mix(in srgb, var(--on-dark) 72%, transparent);
   --lightbox-image-ring: color-mix(in srgb, var(--on-dark) 14%, transparent);
+  --cv-stage-bg: color-mix(in srgb, var(--night) 88%, black);
+  --cv-page-shadow:
+    0 0 0 1px color-mix(in srgb, white 7%, transparent),
+    0 28px 72px rgba(0, 0, 0, 0.62),
+    0 10px 24px rgba(0, 0, 0, 0.42);
   color-scheme: dark;
 }
 
@@ -913,8 +920,174 @@ a {
 }
 
 body.carousel-lightbox-open,
-body.case-blurb-modal-open {
+body.case-blurb-modal-open,
+body.cv-modal-open {
   overflow: hidden;
+}
+
+.cv-modal {
+  margin: 0;
+  max-width: none;
+  max-height: none;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  overflow: hidden;
+  color: var(--lightbox-text);
+}
+
+.cv-modal::backdrop {
+  background: var(--lightbox-backdrop);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.cv-modal-panel {
+  display: flex;
+  height: 100%;
+  min-height: 100dvh;
+  flex-direction: column;
+  padding: 0.75rem 0.75rem max(0.75rem, env(safe-area-inset-bottom));
+}
+
+@media (min-width: 768px) {
+  .cv-modal-panel {
+    padding: 1rem 1.25rem max(1rem, env(safe-area-inset-bottom));
+  }
+}
+
+.cv-modal-toolbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 auto 0.75rem;
+  width: min(100%, 72rem);
+  flex-shrink: 0;
+}
+
+.cv-modal-meta {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.cv-modal-label {
+  margin: 0;
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lightbox-caption);
+}
+
+@media (min-width: 768px) {
+  .cv-modal-label {
+    font-size: 0.75rem;
+  }
+}
+
+.cv-modal-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .cv-modal-title {
+    font-size: 1.35rem;
+  }
+}
+
+.cv-modal-actions {
+  display: flex;
+  shrink: 0;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cv-modal-download {
+  background: var(--sand);
+  color: var(--ink);
+}
+
+.cv-modal-download:hover {
+  background: var(--color-accent-soft);
+}
+
+.cv-modal-body {
+  position: relative;
+  display: flex;
+  margin-inline: auto;
+  width: min(100%, 72rem);
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background: var(--cv-stage-bg);
+  border-radius: 0.875rem;
+  outline: 1px solid var(--lightbox-image-ring);
+}
+
+@media (min-width: 768px) {
+  .cv-modal-body {
+    padding: 0.75rem;
+  }
+}
+
+[data-theme="dark"] .cv-modal-body {
+  padding: 0.65rem;
+}
+
+@media (min-width: 768px) {
+  [data-theme="dark"] .cv-modal-body {
+    padding: 1rem;
+  }
+}
+
+.cv-modal-body.is-multi {
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow: auto;
+}
+
+.cv-modal-status {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--lightbox-caption);
+}
+
+.cv-modal-page {
+  display: block;
+  flex: 0 0 auto;
+  background: #fff;
+  box-shadow: var(--cv-page-shadow);
+}
+
+.cv-modal-body.is-multi .cv-modal-page + .cv-modal-page {
+  margin-top: 0.75rem;
+}
+
+.cv-modal-frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  border: 0;
+  background: #fff;
 }
 
 .case-blurb-modal[open] {
@@ -1104,11 +1277,20 @@ body.case-blurb-modal-open {
 }
 
 [data-hero] [data-hero-item],
-[data-hero-icon],
+[data-hero-icon] {
+  visibility: visible;
+}
+
 [data-reveal],
 [data-card],
 .split-inner {
   visibility: hidden;
+}
+
+html.motion-fallback [data-reveal],
+html.motion-fallback [data-card],
+html.motion-fallback .split-inner {
+  visibility: visible;
 }
 
 @media (prefers-reduced-motion: reduce) {

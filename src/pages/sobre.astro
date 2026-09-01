@@ -61,14 +61,23 @@ import FoldText from '@components/effects/fold-text/FoldText.jsx';
             Disponible
           </span>
         </div>
-        <a
-          href="/#contacto"
-          class="mt-8 inline-flex w-fit items-center gap-1.5 rounded-full bg-ink px-4 py-2.5 text-sm font-medium text-paper no-underline"
-          data-hero-item
-        >
-          Contacto
-          <AppIcon name="arrow-right" size={14} />
-        </a>
+        <div class="mt-8 flex flex-wrap gap-2.5" data-hero-item>
+          <a
+            href="/#contacto"
+            class="inline-flex w-fit items-center gap-1.5 rounded-full bg-ink px-4 py-2.5 text-sm font-medium text-paper no-underline"
+          >
+            Contacto
+            <AppIcon name="arrow-right" size={14} />
+          </a>
+          <button
+            type="button"
+            data-cv-open
+            class="inline-flex w-fit items-center gap-1.5 rounded-full bg-paper px-4 py-2.5 text-sm font-medium text-ink ring-1 ring-black/10"
+          >
+            Ver CV
+            <AppIcon name="file-text" size={14} />
+          </button>
+        </div>
       </div>
     </div>
 

@@ -54,6 +54,8 @@ export const profile = {
   whatsapp: "+52 6621324345",
   pubdev: "https://pub.dev/packages/betuko_offline_sync",
   availability: "Disponible para oportunidades en desarrollo full-stack, backend o aplicaciones móviles.",
+  cvPdf: "/cv/Jesus-Alberto-Zavala-CV.pdf",
+  cvFilename: "Jesus-Alberto-Zavala-CV.pdf",
   focus: [
     "Productos de dominio complejo",
     "Tres productos en producción",

@@ -447,7 +447,7 @@ function buildHtml(photoUrl) {
           </li>
           <li>
             <span class="contact-label">Ubicación</span>
-            Hermosillo, Sonora, México
+            Sonora, México
           </li>
           <li>
             <span class="contact-label">Email</span>
@@ -464,10 +464,6 @@ function buildHtml(photoUrl) {
           <li>
             <span class="contact-label">pub.dev</span>
             <a href="https://pub.dev/packages/betuko_offline_sync">betuko_offline_sync</a>
-          </li>
-          <li>
-            <span class="contact-label">WhatsApp</span>
-            +52 662 132 4345
           </li>
         </ul>
       </div>

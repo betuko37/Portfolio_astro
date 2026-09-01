@@ -23,6 +23,8 @@ function settleMotionTargets() {
 }
 
 export function initMotion() {
+  document.documentElement.classList.remove('motion-fallback');
+
   const reduce = prefersReducedMotion();
   const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
@@ -30,6 +32,11 @@ export function initMotion() {
   initRails(reduce);
   initCaseBlurbs(reduce);
   initProgress();
+
+  if (canHover) {
+    initMagnetic();
+  }
+
   if (reduce) {
     settleMotionTargets();
     return;
@@ -44,31 +51,6 @@ export function initMotion() {
       stagger: 0.045,
       ease: 'power4.out',
       delay: 0.08,
-    });
-  }
-
-  const heroItems = gsap.utils.toArray<HTMLElement>('[data-hero] [data-hero-item]');
-  if (heroItems.length) {
-    gsap.from(heroItems, {
-      y: 28,
-      autoAlpha: 0,
-      duration: 0.9,
-      stagger: 0.08,
-      delay: 0.15,
-      ease: 'power3.out',
-    });
-  }
-
-  const heroIcons = gsap.utils.toArray<HTMLElement>('[data-hero-icon]');
-  if (heroIcons.length) {
-    gsap.from(heroIcons, {
-      y: 36,
-      rotate: 6,
-      autoAlpha: 0,
-      duration: 0.85,
-      stagger: 0.07,
-      delay: 0.35,
-      ease: 'back.out(1.5)',
     });
   }
 
@@ -112,7 +94,7 @@ export function initMotion() {
   });
 
   if (canHover) {
-    initMagnetic();
+    const cards = gsap.utils.toArray<HTMLElement>('[data-card]');
     initCardTilt(cards);
     initOrbs();
   }

@@ -4,7 +4,6 @@ import AppIcon from '@components/ui/AppIcon.astro';
 import MexicoFlag from '@components/ui/MexicoFlag.astro';
 import ProfilePhoto from '@components/ui/ProfilePhoto.astro';
 import TrueFocus from '@components/effects/true-focus/TrueFocus.jsx';
-import FoldText from '@components/effects/fold-text/FoldText.jsx';
 ---
 
 <section id="inicio" class="scroll-mt-28 overflow-x-clip px-4 pb-6 pt-3 md:scroll-mt-32 md:px-8 md:pb-14 md:pt-8">
@@ -12,9 +11,8 @@ import FoldText from '@components/effects/fold-text/FoldText.jsx';
     class="mx-auto grid max-w-6xl items-center gap-4 md:gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12"
     data-hero
   >
-    <div class="contents lg:order-1 lg:flex lg:flex-col lg:items-start">
     <p
-      class="order-1 mx-auto inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full bg-sand px-3 py-1.5 text-xs font-medium sm:text-sm lg:mx-0"
+      class="order-1 mx-auto inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full bg-sand px-3 py-1.5 text-xs font-medium sm:text-sm lg:col-start-1 lg:mx-0"
       data-hero-item
     >
       <MexicoFlag />
@@ -23,47 +21,25 @@ import FoldText from '@components/effects/fold-text/FoldText.jsx';
       <span class="text-muted">{profile.location}</span>
     </p>
 
-    <div class="order-2 flex justify-center lg:hidden" data-hero-item>
+    <div
+      class="order-2 flex justify-center lg:col-start-2 lg:row-start-1 lg:row-span-3 lg:justify-end lg:self-center"
+      data-hero-item
+    >
       <div
-        class="photo-orbit relative aspect-square w-[9.5rem] shrink-0 sm:w-[13rem] md:w-[20rem]"
+        class="photo-orbit relative aspect-square w-[9.5rem] shrink-0 sm:w-[13rem] md:w-[20rem] lg:w-[28rem]"
         data-photo-orbit
       >
         <div class="photo-ring" aria-hidden="true">
           <div class="photo-ring__spin"></div>
         </div>
-        <ProfilePhoto class="relative z-[1] w-full" />
+        <ProfilePhoto priority class="relative z-[1] w-full" />
       </div>
     </div>
 
-    <div class="order-3 text-center lg:mt-4 lg:text-left">
+    <div class="order-3 text-center lg:col-start-1 lg:row-start-2 lg:mt-4 lg:text-left">
       <h1 class="mx-auto max-w-4xl font-display text-[1.55rem] leading-[1.2] sm:text-3xl md:text-5xl lg:mx-0 lg:text-6xl">
-        <FoldText
-          client:load
-          text={profile.headlineLead}
-          splitBy="word"
-          hinge="top"
-          trigger="mount"
-          duration={0.65}
-          stagger={0.045}
-          color="currentColor"
-          fontSize="inherit"
-          fontWeight={700}
-        />
-        {' '}
-        <em class="italic text-accent" data-headline-accent>
-          <FoldText
-            client:load
-            text={profile.headlineAccent}
-            splitBy="word"
-            hinge="top"
-            trigger="mount"
-            duration={0.65}
-            stagger={0.045}
-            color="var(--color-accent)"
-            fontSize="inherit"
-            fontWeight={700}
-          />
-        </em>
+        {profile.headlineLead}{' '}
+        <em class="italic text-accent">{profile.headlineAccent}</em>
       </h1>
 
       <div class="mt-4 flex justify-center md:mt-6 lg:justify-start">
@@ -100,19 +76,15 @@ import FoldText from '@components/effects/fold-text/FoldText.jsx';
           Contacto
           <AppIcon name="send" size={16} />
         </a>
-      </div>
-    </div>
-    </div>
-
-    <div class="hidden justify-end lg:order-2 lg:flex" data-hero-item>
-      <div
-        class="photo-orbit relative aspect-square w-[28rem] shrink-0"
-        data-photo-orbit
-      >
-        <div class="photo-ring" aria-hidden="true">
-          <div class="photo-ring__spin"></div>
-        </div>
-        <ProfilePhoto class="relative z-[1] w-full" />
+        <button
+          type="button"
+          data-cv-open
+          data-magnetic
+          class="inline-flex items-center gap-2 rounded-full bg-sand px-4 py-2.5 text-sm font-medium text-ink hover:bg-accent-soft md:px-5"
+        >
+          Ver CV
+          <AppIcon name="file-text" size={16} />
+        </button>
       </div>
     </div>
   </div>

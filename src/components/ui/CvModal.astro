@@ -1,0 +1,203 @@
+---
+import { profile } from '@data/profile';
+import AppIcon from '@components/ui/AppIcon.astro';
+
+const pdfJsVersion = '4.10.38';
+---
+
+<dialog class="cv-modal" data-cv-modal aria-labelledby="cv-modal-title">
+  <div class="cv-modal-panel">
+    <div class="cv-modal-toolbar">
+      <div class="cv-modal-meta">
+        <p class="cv-modal-label">Currículum</p>
+        <h2 id="cv-modal-title" class="cv-modal-title">{profile.fullName}</h2>
+      </div>
+      <div class="cv-modal-actions">
+        <a
+          href={profile.cvPdf}
+          download={profile.cvFilename}
+          class="cv-modal-download inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium no-underline"
+        >
+          Descargar PDF
+          <AppIcon name="file-text" size={15} />
+        </a>
+        <button
+          type="button"
+          class="cv-modal-close inline-flex h-9 w-9 items-center justify-center rounded-full bg-sand text-ink"
+          data-cv-close
+          aria-label="Cerrar"
+        >
+          <AppIcon name="x" size={18} />
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="cv-modal-body"
+      data-cv-viewport
+      data-cv-pdf={profile.cvPdf}
+      data-pdfjs-version={pdfJsVersion}
+      aria-busy="false"
+    >
+      <p class="cv-modal-status" data-cv-status hidden>Cargando CV…</p>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const PDF_JS = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.mjs';
+  const PDF_WORKER = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs';
+
+  type PdfJsModule = {
+    GlobalWorkerOptions: { workerSrc: string };
+    getDocument: (url: string) => { promise: Promise<{
+      numPages: number;
+      getPage: (n: number) => Promise<{
+        getViewport: (opts: { scale: number }) => { width: number; height: number };
+        render: (opts: {
+          canvasContext: CanvasRenderingContext2D;
+          viewport: { width: number; height: number };
+        }) => { promise: Promise<void> };
+      }>;
+    }> };
+  };
+
+  let pdfModulePromise: Promise<PdfJsModule> | null = null;
+  let renderToken = 0;
+  let resizeObserver: ResizeObserver | null = null;
+
+  function loadPdfJs() {
+    pdfModulePromise ??= import(/* @vite-ignore */ PDF_JS) as Promise<PdfJsModule>;
+    return pdfModulePromise;
+  }
+
+  async function renderCvPdf(viewport: HTMLElement) {
+    const pdfUrl = viewport.dataset.cvPdf;
+    if (!pdfUrl) return;
+
+    const token = ++renderToken;
+    const status = viewport.querySelector<HTMLElement>('[data-cv-status]');
+    viewport.setAttribute('aria-busy', 'true');
+    status?.removeAttribute('hidden');
+    viewport.querySelectorAll('.cv-modal-page').forEach((node) => node.remove());
+
+    try {
+      const pdfjs = await loadPdfJs();
+      if (token !== renderToken) return;
+
+      pdfjs.GlobalWorkerOptions.workerSrc = PDF_WORKER;
+      const pdf = await pdfjs.getDocument(pdfUrl).promise;
+      if (token !== renderToken) return;
+
+      const pages = pdf.numPages;
+      viewport.classList.toggle('is-multi', pages > 1);
+
+      for (let pageNumber = 1; pageNumber <= pages; pageNumber += 1) {
+        const page = await pdf.getPage(pageNumber);
+        if (token !== renderToken) return;
+
+        const canvas = document.createElement('canvas');
+        canvas.className = 'cv-modal-page';
+        canvas.setAttribute('role', 'img');
+        canvas.setAttribute('aria-label', `CV página ${pageNumber} de ${pages}`);
+        viewport.appendChild(canvas);
+
+        const base = page.getViewport({ scale: 1 });
+        const styles = getComputedStyle(viewport);
+        const padX = parseFloat(styles.paddingLeft) + parseFloat(styles.paddingRight);
+        const padY = parseFloat(styles.paddingTop) + parseFloat(styles.paddingBottom);
+        const width = Math.max(viewport.clientWidth - padX, 1);
+        const height = Math.max(viewport.clientHeight - padY, 1);
+        const scale =
+          pages === 1
+            ? Math.min(width / base.width, height / base.height)
+            : width / base.width;
+        const scaled = page.getViewport({ scale });
+
+        const context = canvas.getContext('2d');
+        if (!context) continue;
+
+        const ratio = window.devicePixelRatio || 1;
+        canvas.width = Math.floor(scaled.width * ratio);
+        canvas.height = Math.floor(scaled.height * ratio);
+        canvas.style.width = `${scaled.width}px`;
+        canvas.style.height = `${scaled.height}px`;
+        context.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+        await page.render({ canvasContext: context, viewport: scaled }).promise;
+      }
+    } catch {
+      if (token !== renderToken) return;
+      viewport.classList.remove('is-multi');
+      const fallback = document.createElement('iframe');
+      fallback.className = 'cv-modal-frame';
+      fallback.title = 'CV';
+      fallback.src = pdfUrl;
+      viewport.appendChild(fallback);
+    } finally {
+      if (token === renderToken) {
+        viewport.setAttribute('aria-busy', 'false');
+        status?.setAttribute('hidden', '');
+      }
+    }
+  }
+
+  function initCvModal() {
+    const dialog = document.querySelector<HTMLDialogElement>('[data-cv-modal]');
+    const viewport = dialog?.querySelector<HTMLElement>('[data-cv-viewport]');
+    if (!dialog || !viewport || dialog.dataset.cvBound === 'true') return;
+
+    dialog.dataset.cvBound = 'true';
+
+    const scheduleRender = () => {
+      window.requestAnimationFrame(() => {
+        if (dialog.open) void renderCvPdf(viewport);
+      });
+    };
+
+    const open = () => {
+      dialog.showModal();
+      document.body.classList.add('cv-modal-open');
+      scheduleRender();
+    };
+
+    const close = () => {
+      if (!dialog.open) return;
+      renderToken += 1;
+      dialog.close();
+    };
+
+    document.addEventListener('click', (event) => {
+      const trigger = (event.target as Element | null)?.closest('[data-cv-open]');
+      if (!trigger) return;
+      event.preventDefault();
+      open();
+    });
+
+    dialog.querySelector('[data-cv-close]')?.addEventListener('click', close);
+
+    dialog.addEventListener('cancel', (event) => {
+      event.preventDefault();
+      close();
+    });
+
+    dialog.addEventListener('close', () => {
+      document.body.classList.remove('cv-modal-open');
+      renderToken += 1;
+      viewport.querySelectorAll('.cv-modal-page, .cv-modal-frame').forEach((node) => node.remove());
+      viewport.classList.remove('is-multi');
+      viewport.setAttribute('aria-busy', 'false');
+    });
+
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) close();
+    });
+
+    resizeObserver?.disconnect();
+    resizeObserver = new ResizeObserver(scheduleRender);
+    resizeObserver.observe(viewport);
+  }
+
+  initCvModal();
+  document.addEventListener('astro:page-load', initCvModal);
+</script>

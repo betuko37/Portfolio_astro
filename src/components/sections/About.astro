@@ -73,6 +73,21 @@ import FoldText from '@components/effects/fold-text/FoldText.jsx';
 </section>
 
 <script>
-  import { initHeroScene } from '@lib/heroScene';
-  initHeroScene();
+  const stage = document.querySelector('[data-hero-stage]');
+  if (stage) {
+    const boot = () => import('@lib/heroScene').then((mod) => mod.initHeroScene());
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry.isIntersecting) return;
+          observer.disconnect();
+          void boot();
+        },
+        { rootMargin: '240px' },
+      );
+      observer.observe(stage);
+    } else {
+      void boot();
+    }
+  }
 </script>

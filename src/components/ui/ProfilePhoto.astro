@@ -4,15 +4,22 @@ import { profilePhoto } from '@data/media';
 
 interface Props {
   class?: string;
+  /** Prioriza la carga en el hero (LCP). */
+  priority?: boolean;
 }
 
-const { class: className } = Astro.props;
+const { class: className, priority = false } = Astro.props;
 ---
 
 <div class:list={['photo-disk', className]}>
   <img
     src={profilePhoto}
     alt={profile.name}
+    width={800}
+    height={800}
+    decoding="async"
+    fetchpriority={priority ? 'high' : 'auto'}
+    loading={priority ? 'eager' : 'lazy'}
     class="h-full w-full object-cover object-[center_18%]"
   />
 </div>
