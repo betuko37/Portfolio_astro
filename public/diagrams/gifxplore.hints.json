@@ -1,0 +1,65 @@
+{
+  "ui-navbar-0": {
+    "title": "Navbar",
+    "subtitle": "Navbar",
+    "kind": "backend",
+    "layer": "UI",
+    "body": "Navbar"
+  },
+  "ui-gridgifts-1": {
+    "title": "GridGifts",
+    "subtitle": "GridGifts",
+    "kind": "backend",
+    "layer": "UI",
+    "body": "GridGifts"
+  },
+  "ui-search-2": {
+    "title": "Search",
+    "subtitle": "Search",
+    "kind": "backend",
+    "layer": "UI",
+    "body": "Search"
+  },
+  "ui-favorites-3": {
+    "title": "Favorites",
+    "subtitle": "Favorites",
+    "kind": "backend",
+    "layer": "UI",
+    "body": "Favorites"
+  },
+  "datos-helpers-0": {
+    "title": "helpers",
+    "subtitle": "helpers",
+    "kind": "database",
+    "layer": "Datos",
+    "body": "helpers"
+  },
+  "datos-hooks-1": {
+    "title": "hooks",
+    "subtitle": "hooks",
+    "kind": "database",
+    "layer": "Datos",
+    "body": "hooks"
+  },
+  "datos-apikey-2": {
+    "title": "apiKey",
+    "subtitle": "apiKey",
+    "kind": "database",
+    "layer": "Datos",
+    "body": "apiKey"
+  },
+  "deploy-vite-build-0": {
+    "title": "Vite build",
+    "subtitle": "Vite build",
+    "kind": "backend",
+    "layer": "Deploy",
+    "body": "Vite build"
+  },
+  "deploy-netlify-1": {
+    "title": "Netlify",
+    "subtitle": "Netlify",
+    "kind": "backend",
+    "layer": "Deploy",
+    "body": "Netlify"
+  }
+}

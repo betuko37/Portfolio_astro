@@ -1,0 +1,107 @@
+{
+  "apps-empaques-embarques-0": {
+    "title": "Empaques & Embarq…",
+    "subtitle": "Empaques & Embarques",
+    "kind": "frontend",
+    "layer": "Apps",
+    "body": "Embarque completo y embarque rápido: armado de carga, facturación y documentación."
+  },
+  "apps-nomina-1": {
+    "title": "Nómina",
+    "subtitle": "Nómina",
+    "kind": "frontend",
+    "layer": "Apps",
+    "body": "Nómina"
+  },
+  "apps-cuaderno-agricola-2": {
+    "title": "Cuaderno agrícola",
+    "subtitle": "Cuaderno agrícola",
+    "kind": "messagebus",
+    "layer": "Apps",
+    "body": "Cuaderno agrícola"
+  },
+  "apps-administracion-3": {
+    "title": "Administración",
+    "subtitle": "Administración",
+    "kind": "frontend",
+    "layer": "Apps",
+    "body": "Administración"
+  },
+  "procesos-acarreos-0": {
+    "title": "Acarreos",
+    "subtitle": "Acarreos",
+    "kind": "backend",
+    "layer": "Procesos",
+    "body": "Recepción de cosecha desde campo y procesamiento a granel antes del empaque."
+  },
+  "procesos-pallets-1": {
+    "title": "Pallets",
+    "subtitle": "Pallets",
+    "kind": "backend",
+    "layer": "Procesos",
+    "body": "Creación de pallets, etiquetas QR/código de barras, trazabilidad e impresión."
+  },
+  "procesos-embarques-2": {
+    "title": "Embarques",
+    "subtitle": "Embarques",
+    "kind": "backend",
+    "layer": "Procesos",
+    "body": "Embarque completo y embarque rápido: armado de carga, facturación y documentación."
+  },
+  "procesos-embarque-rapido-3": {
+    "title": "Embarque rápido",
+    "subtitle": "Embarque rápido",
+    "kind": "backend",
+    "layer": "Procesos",
+    "body": "Embarque rápido"
+  },
+  "procesos-almacenes-4": {
+    "title": "Almacenes",
+    "subtitle": "Almacenes",
+    "kind": "database",
+    "layer": "Procesos",
+    "body": "Inventario por almacén con rutas dinámicas y entregas pendientes."
+  },
+  "frontend-vue-3-0": {
+    "title": "Vue 3",
+    "subtitle": "Vue 3",
+    "kind": "frontend",
+    "layer": "Frontend",
+    "body": "Vue 3"
+  },
+  "frontend-quasar-1": {
+    "title": "Quasar",
+    "subtitle": "Quasar",
+    "kind": "frontend",
+    "layer": "Frontend",
+    "body": "Quasar"
+  },
+  "frontend-pinia-2": {
+    "title": "Pinia",
+    "subtitle": "Pinia",
+    "kind": "backend",
+    "layer": "Frontend",
+    "body": "Pinia"
+  },
+  "backend-express-0": {
+    "title": "Express",
+    "subtitle": "Express",
+    "kind": "backend",
+    "layer": "Backend",
+    "body": "Express"
+  },
+  "backend-prisma-1": {
+    "title": "Prisma",
+    "subtitle": "Prisma",
+    "kind": "database",
+    "layer": "Backend",
+    "body": "Prisma"
+  },
+  "backend-socket-io-2": {
+    "title": "Socket.IO",
+    "subtitle": "Socket.IO",
+    "kind": "messagebus",
+    "layer": "Backend",
+    "body": "Socket.IO"
+  }
+}

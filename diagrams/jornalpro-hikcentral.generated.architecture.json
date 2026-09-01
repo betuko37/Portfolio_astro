@@ -1,0 +1,288 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Biometría HikCentral",
+    "subtitle": "Checador facial en caseta con HikCentral Professional: Open API, webhooks, alta de rost…",
+    "quality_profile": "showcase",
+    "output": "jornalpro-hikcentral.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 64,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "hardware-caseta-checador-acs-facial-0",
+      "type": "external",
+      "label": "Checador ACS faci…",
+      "sublabel": "Checador ACS facial",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "hardware-caseta-access-levels-1",
+      "type": "external",
+      "label": "Access levels",
+      "sublabel": "Access levels",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "hardware-caseta-focsign-pantallas-2",
+      "type": "external",
+      "label": "FOCSign pantallas",
+      "sublabel": "FOCSign pantallas",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "id": "conectividad-cloudflare-tunnel-0",
+      "type": "security",
+      "label": "Cloudflare Tunnel",
+      "sublabel": "Cloudflare Tunnel",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "conectividad-open-api-artemis-1",
+      "type": "backend",
+      "label": "Open API",
+      "sublabel": "Open API /artemis",
+      "row": 3,
+      "col": 3
+    },
+    {
+      "id": "conectividad-webhook-event-push-2",
+      "type": "messagebus",
+      "label": "Webhook Event Push",
+      "sublabel": "Webhook Event Push",
+      "row": 3,
+      "col": 4
+    },
+    {
+      "id": "backend-hikcentralconfig-por-location-0",
+      "type": "messagebus",
+      "label": "HikCentralConfig …",
+      "sublabel": "HikCentralConfig por Location",
+      "row": 5,
+      "col": 0
+    },
+    {
+      "id": "backend-proxy-firma-hmac-1",
+      "type": "security",
+      "label": "Proxy + firma HMAC",
+      "sublabel": "Proxy + firma HMAC",
+      "row": 5,
+      "col": 1
+    },
+    {
+      "id": "backend-webhook-async-2",
+      "type": "messagebus",
+      "label": "Webhook async",
+      "sublabel": "Webhook async",
+      "row": 5,
+      "col": 2
+    },
+    {
+      "id": "datos-employee-hikcentralpersonid-0",
+      "type": "database",
+      "label": "Employee.hikCentr…",
+      "sublabel": "Employee.hikCentralPersonId",
+      "row": 5,
+      "col": 4
+    },
+    {
+      "id": "datos-attendanceevent-1",
+      "type": "database",
+      "label": "AttendanceEvent",
+      "sublabel": "AttendanceEvent",
+      "row": 5,
+      "col": 5
+    },
+    {
+      "id": "datos-workdayentry-2",
+      "type": "database",
+      "label": "WorkDayEntry",
+      "sublabel": "WorkDayEntry",
+      "row": 5,
+      "col": 6
+    },
+    {
+      "id": "tiempo-real-hikcentral-raw-event-0",
+      "type": "messagebus",
+      "label": "hikcentral",
+      "sublabel": "hikcentral:raw_event",
+      "row": 7,
+      "col": 1
+    },
+    {
+      "id": "tiempo-real-attendance-webhook-event-1",
+      "type": "messagebus",
+      "label": "attendance",
+      "sublabel": "attendance:webhook-event",
+      "row": 7,
+      "col": 2
+    },
+    {
+      "id": "tiempo-real-hikcentral-clock-skew-2",
+      "type": "messagebus",
+      "label": "hikcentral",
+      "sublabel": "hikcentral:clock-skew",
+      "row": 7,
+      "col": 3
+    },
+    {
+      "id": "tiempo-real-hikcentral-status-3",
+      "type": "messagebus",
+      "label": "hikcentral_status",
+      "sublabel": "hikcentral_status",
+      "row": 7,
+      "col": 4
+    },
+    {
+      "id": "superficies-grid-asistencias-v3-0",
+      "type": "backend",
+      "label": "Grid asistencias …",
+      "sublabel": "Grid asistencias v3",
+      "row": 9,
+      "col": 1
+    },
+    {
+      "id": "superficies-eventos-biometricos-modal-1",
+      "type": "messagebus",
+      "label": "Eventos biométric…",
+      "sublabel": "Eventos biométricos modal",
+      "row": 9,
+      "col": 2
+    },
+    {
+      "id": "superficies-hikcentralserversscreen-2",
+      "type": "backend",
+      "label": "HikCentralServers…",
+      "sublabel": "HikCentralServersScreen",
+      "row": 9,
+      "col": 3
+    },
+    {
+      "id": "superficies-alta-empleado-movil-3",
+      "type": "backend",
+      "label": "Alta empleado móv…",
+      "sublabel": "Alta empleado móvil",
+      "row": 9,
+      "col": 4
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Hardware caseta",
+      "wraps": [
+        "hardware-caseta-checador-acs-facial-0",
+        "hardware-caseta-access-levels-1",
+        "hardware-caseta-focsign-pantallas-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Conectividad",
+      "wraps": [
+        "conectividad-cloudflare-tunnel-0",
+        "conectividad-open-api-artemis-1",
+        "conectividad-webhook-event-push-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Backend",
+      "wraps": [
+        "backend-hikcentralconfig-por-location-0",
+        "backend-proxy-firma-hmac-1",
+        "backend-webhook-async-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Datos",
+      "wraps": [
+        "datos-employee-hikcentralpersonid-0",
+        "datos-attendanceevent-1",
+        "datos-workdayentry-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Tiempo real",
+      "wraps": [
+        "tiempo-real-hikcentral-raw-event-0",
+        "tiempo-real-attendance-webhook-event-1",
+        "tiempo-real-hikcentral-clock-skew-2",
+        "tiempo-real-hikcentral-status-3"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Superficies",
+      "wraps": [
+        "superficies-grid-asistencias-v3-0",
+        "superficies-eventos-biometricos-modal-1",
+        "superficies-hikcentralserversscreen-2",
+        "superficies-alta-empleado-movil-3"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "flow-0",
+      "from": "hardware-caseta-access-levels-1",
+      "to": "conectividad-open-api-artemis-1",
+      "variant": "emphasis"
+    },
+    {
+      "id": "flow-1",
+      "from": "conectividad-open-api-artemis-1",
+      "to": "datos-employee-hikcentralpersonid-0"
+    },
+    {
+      "id": "flow-2",
+      "from": "datos-employee-hikcentralpersonid-0",
+      "to": "tiempo-real-hikcentral-clock-skew-2"
+    },
+    {
+      "id": "flow-3",
+      "from": "tiempo-real-hikcentral-clock-skew-2",
+      "to": "superficies-hikcentralserversscreen-2"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Open API HikCentral vía proxy por ubicación",
+      "items": [
+        "firma Alibaba Cloud Gateway (HMAC-SHA256, X-Ca-Key, Content-MD5)."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Event Push",
+      "items": [
+        "webhook público recibe rostro, huella, palma y multi-factor; responde 200 OK y procesa en backg…"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Marcaje → nómina",
+      "items": [
+        "AttendanceProcessor clasifica CHECK_IN, CHECK_OUT, tardanzas, horas extra y duplicados (ventana…"
+      ]
+    }
+  ]
+}

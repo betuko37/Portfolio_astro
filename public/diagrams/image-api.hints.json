@@ -1,0 +1,37 @@
+{
+  "cliente-html-0": {
+    "title": "HTML",
+    "subtitle": "HTML",
+    "kind": "frontend",
+    "layer": "Cliente",
+    "body": "HTML"
+  },
+  "cliente-css-1": {
+    "title": "CSS",
+    "subtitle": "CSS",
+    "kind": "frontend",
+    "layer": "Cliente",
+    "body": "CSS"
+  },
+  "cliente-obtener-js-2": {
+    "title": "Obtener.js",
+    "subtitle": "Obtener.js",
+    "kind": "backend",
+    "layer": "Cliente",
+    "body": "Obtener.js"
+  },
+  "persistencia-local-localstorage-0": {
+    "title": "localStorage",
+    "subtitle": "localStorage",
+    "kind": "backend",
+    "layer": "Persistencia local",
+    "body": "localStorage"
+  },
+  "persistencia-local-favoritos-1": {
+    "title": "Favoritos",
+    "subtitle": "Favoritos",
+    "kind": "backend",
+    "layer": "Persistencia local",
+    "body": "Toggle guarda IDs en localStorage."
+  }
+}

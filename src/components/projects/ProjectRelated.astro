@@ -1,0 +1,27 @@
+---
+import type { Project } from '@data/projects';
+import ProjectCard from '@components/projects/ProjectCard.astro';
+import AppIcon from '@components/ui/AppIcon.astro';
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+---
+
+{projects.length > 0 && (
+  <section class="project-related px-4 pb-10 pt-2 md:px-8 md:pb-16 md:pt-4" data-reveal>
+    <div class="mx-auto max-w-7xl">
+      <p class="deck-label mb-4 md:mb-6">
+        <AppIcon name="folder-kanban" size={14} />
+        Proyectos relacionados
+      </p>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 lg:gap-4">
+        {projects.map((item) => (
+          <ProjectCard project={item} />
+        ))}
+      </div>
+    </div>
+  </section>
+)}

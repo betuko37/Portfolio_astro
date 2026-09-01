@@ -1,0 +1,44 @@
+{
+  "cliente-react-0": {
+    "title": "React",
+    "subtitle": "React",
+    "kind": "backend",
+    "layer": "Cliente",
+    "body": "UI de chat conectada vía socket.io-client."
+  },
+  "cliente-vite-1": {
+    "title": "Vite",
+    "subtitle": "Vite",
+    "kind": "backend",
+    "layer": "Cliente",
+    "body": "UI de chat conectada vía socket.io-client."
+  },
+  "cliente-socket-io-client-2": {
+    "title": "socket.io-client",
+    "subtitle": "socket.io-client",
+    "kind": "messagebus",
+    "layer": "Cliente",
+    "body": "UI de chat conectada vía socket.io-client."
+  },
+  "servidor-express-0": {
+    "title": "Express",
+    "subtitle": "Express",
+    "kind": "backend",
+    "layer": "Servidor",
+    "body": "Express HTTP, lista de clients y eventos socket."
+  },
+  "servidor-socket-io-1": {
+    "title": "Socket.IO",
+    "subtitle": "Socket.IO",
+    "kind": "messagebus",
+    "layer": "Servidor",
+    "body": "Express HTTP, lista de clients y eventos socket."
+  },
+  "servidor-nodemon-2": {
+    "title": "nodemon",
+    "subtitle": "nodemon",
+    "kind": "backend",
+    "layer": "Servidor",
+    "body": "Express HTTP, lista de clients y eventos socket."
+  }
+}

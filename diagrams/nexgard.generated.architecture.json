@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Nexgard",
+    "subtitle": "Página de aterrizaje desarrollada con HTML y CSS.",
+    "quality_profile": "showcase",
+    "output": "nexgard.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "presentacion-html-0",
+      "type": "frontend",
+      "label": "HTML",
+      "sublabel": "HTML",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "presentacion-css-1",
+      "type": "frontend",
+      "label": "CSS",
+      "sublabel": "CSS",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "presentacion-img-fondos-2",
+      "type": "backend",
+      "label": "img",
+      "sublabel": "img/fondos",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "id": "interaccion-cart-js-0",
+      "type": "backend",
+      "label": "cart.js",
+      "sublabel": "cart.js",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "interaccion-productservices-1",
+      "type": "backend",
+      "label": "productServices",
+      "sublabel": "productServices",
+      "row": 3,
+      "col": 3
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Presentación",
+      "wraps": [
+        "presentacion-html-0",
+        "presentacion-css-1",
+        "presentacion-img-fondos-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Interacción",
+      "wraps": [
+        "interaccion-cart-js-0",
+        "interaccion-productservices-1"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "c0-presentacion-interaccion-",
+      "from": "presentacion-html-0",
+      "to": "interaccion-cart-js-0",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c1-presentacion-interaccion-",
+      "from": "presentacion-html-0",
+      "to": "interaccion-productservices-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Resultado 1",
+      "items": [
+        "Landing multipágina con assets optimizados."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Resultado 2",
+      "items": [
+        "Carrito simulado con cartService.js."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Resultado 3",
+      "items": [
+        "Catálogo estático de productos en productServices.js."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Cotizaciones y Facturaciones",
+    "subtitle": "Sistema comercial para cotizar, timbrar CFDI y conciliar finanzas: clientes, productos,…",
+    "quality_profile": "showcase",
+    "output": "cotizaciones-facturaciones.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "procesos-cotizaciones-0",
+      "type": "messagebus",
+      "label": "Cotizaciones",
+      "sublabel": "Cotizaciones",
+      "row": 1,
+      "col": 1
+    },
+    {
+      "id": "procesos-facturacion-1",
+      "type": "backend",
+      "label": "Facturación",
+      "sublabel": "Facturación",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "procesos-movimientos-2",
+      "type": "backend",
+      "label": "Movimientos",
+      "sublabel": "Movimientos",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "procesos-servicios-3",
+      "type": "messagebus",
+      "label": "Servicios",
+      "sublabel": "Servicios",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "id": "procesos-calendario-financiero-4",
+      "type": "messagebus",
+      "label": "Calendario financ…",
+      "sublabel": "Calendario financiero",
+      "row": 1,
+      "col": 5
+    },
+    {
+      "id": "reportes-historial-cfdi-0",
+      "type": "backend",
+      "label": "Historial CFDI",
+      "sublabel": "Historial CFDI",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "id": "reportes-cobranza-1",
+      "type": "backend",
+      "label": "Cobranza",
+      "sublabel": "Cobranza",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "reportes-flujo-de-efectivo-2",
+      "type": "backend",
+      "label": "Flujo de efectivo",
+      "sublabel": "Flujo de efectivo",
+      "row": 3,
+      "col": 3
+    },
+    {
+      "id": "reportes-impuestos-3",
+      "type": "backend",
+      "label": "Impuestos",
+      "sublabel": "Impuestos",
+      "row": 3,
+      "col": 4
+    },
+    {
+      "id": "reportes-rentabilidad-4",
+      "type": "backend",
+      "label": "Rentabilidad",
+      "sublabel": "Rentabilidad",
+      "row": 3,
+      "col": 5
+    },
+    {
+      "id": "frontend-react-18-0",
+      "type": "backend",
+      "label": "React 18",
+      "sublabel": "React 18",
+      "row": 5,
+      "col": 0
+    },
+    {
+      "id": "frontend-mui-6-1",
+      "type": "frontend",
+      "label": "MUI 6",
+      "sublabel": "MUI 6",
+      "row": 5,
+      "col": 1
+    },
+    {
+      "id": "frontend-zustand-2",
+      "type": "backend",
+      "label": "Zustand",
+      "sublabel": "Zustand",
+      "row": 5,
+      "col": 2
+    },
+    {
+      "id": "backend-express-0",
+      "type": "backend",
+      "label": "Express",
+      "sublabel": "Express",
+      "row": 5,
+      "col": 4
+    },
+    {
+      "id": "backend-prisma-1",
+      "type": "database",
+      "label": "Prisma",
+      "sublabel": "Prisma",
+      "row": 5,
+      "col": 5
+    },
+    {
+      "id": "backend-facturoporti-2",
+      "type": "external",
+      "label": "FacturoPorTi",
+      "sublabel": "FacturoPorTi",
+      "row": 5,
+      "col": 6
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Procesos",
+      "wraps": [
+        "procesos-cotizaciones-0",
+        "procesos-facturacion-1",
+        "procesos-movimientos-2",
+        "procesos-servicios-3",
+        "procesos-calendario-financiero-4"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Reportes",
+      "wraps": [
+        "reportes-historial-cfdi-0",
+        "reportes-cobranza-1",
+        "reportes-flujo-de-efectivo-2",
+        "reportes-impuestos-3",
+        "reportes-rentabilidad-4"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Frontend",
+      "wraps": [
+        "frontend-react-18-0",
+        "frontend-mui-6-1",
+        "frontend-zustand-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Backend",
+      "wraps": [
+        "backend-express-0",
+        "backend-prisma-1",
+        "backend-facturoporti-2"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "c0-frontend-mui-frontend-rea",
+      "from": "frontend-mui-6-1",
+      "to": "frontend-react-18-0",
+      "variant": "emphasis",
+      "fromSide": "left",
+      "toSide": "right"
+    },
+    {
+      "id": "c1-backend-expr-backend-pris",
+      "from": "backend-express-0",
+      "to": "backend-prisma-1",
+      "fromSide": "right",
+      "toSide": "left"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Resultado 1",
+      "items": [
+        "Cotizaciones con plantillas, tabs comerciales, juegos de puntos y PDF descargable."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Facturación CFDI",
+      "items": [
+        "timbrado FacturoPorTi, cancelación, re-facturación, XML y correo Postmark."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Resultado 3",
+      "items": [
+        "Perfiles fiscales con CSD cifrado al arrancar y sesión reutilizable al PAC."
+      ]
+    }
+  ]
+}

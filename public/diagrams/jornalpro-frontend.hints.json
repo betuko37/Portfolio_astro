@@ -1,0 +1,114 @@
+{
+  "shell-nomina-0": {
+    "title": "Nómina",
+    "subtitle": "Nómina",
+    "kind": "backend",
+    "layer": "Shell",
+    "body": "Asistencias v2/v3, captura diaria, cierre semanal, préstamos, deducciones, tarjetas bancarias y catálogos de campo."
+  },
+  "shell-tesoreria-1": {
+    "title": "Tesorería",
+    "subtitle": "Tesorería",
+    "kind": "backend",
+    "layer": "Shell",
+    "body": "Cajas, bancos, conciliación, flujo de efectivo, buzón SAT y caja de ahorro."
+  },
+  "shell-empaque-2": {
+    "title": "Empaque",
+    "subtitle": "Empaque",
+    "kind": "backend",
+    "layer": "Shell",
+    "body": "Etiquetado, pallets, embarques, facturas, acarreos, cotizaciones y catálogos logísticos."
+  },
+  "shell-almacenes-3": {
+    "title": "Almacenes",
+    "subtitle": "Almacenes",
+    "kind": "database",
+    "layer": "Shell",
+    "body": "Requisiciones, autorizaciones, OC, recepciones e historial de compras."
+  },
+  "shell-configuracion-4": {
+    "title": "Configuración",
+    "subtitle": "Configuración",
+    "kind": "backend",
+    "layer": "Shell",
+    "body": "Configuración"
+  },
+  "modulos-asistencias-0": {
+    "title": "Asistencias",
+    "subtitle": "Asistencias",
+    "kind": "backend",
+    "layer": "Módulos",
+    "body": "Asistencias"
+  },
+  "modulos-alta-de-empleado-1": {
+    "title": "Alta de empleado",
+    "subtitle": "Alta de empleado",
+    "kind": "backend",
+    "layer": "Módulos",
+    "body": "Alta de empleado"
+  },
+  "modulos-buzon-sat-2": {
+    "title": "Buzón SAT",
+    "subtitle": "Buzón SAT",
+    "kind": "backend",
+    "layer": "Módulos",
+    "body": "Buzón SAT"
+  },
+  "modulos-chat-joni-3": {
+    "title": "Chat Joni",
+    "subtitle": "Chat Joni",
+    "kind": "backend",
+    "layer": "Módulos",
+    "body": "Chat Joni"
+  },
+  "modulos-monitor-4": {
+    "title": "Monitor",
+    "subtitle": "Monitor",
+    "kind": "backend",
+    "layer": "Módulos",
+    "body": "Tablero fullscreen con Leaflet, feed de eventos, clima y presencia. MapDrawer para lotes y polígonos."
+  },
+  "cliente-axios-jwt-0": {
+    "title": "Axios + JWT",
+    "subtitle": "Axios + JWT",
+    "kind": "messagebus",
+    "layer": "Cliente",
+    "body": "Axios + JWT"
+  },
+  "cliente-x-location-id-1": {
+    "title": "X-Location-Id",
+    "subtitle": "X-Location-Id",
+    "kind": "messagebus",
+    "layer": "Cliente",
+    "body": "X-Location-Id"
+  },
+  "cliente-zustand-2": {
+    "title": "Zustand",
+    "subtitle": "Zustand",
+    "kind": "backend",
+    "layer": "Cliente",
+    "body": "Zustand"
+  },
+  "local-nfc-service-47321-0": {
+    "title": "nfc-service",
+    "subtitle": "nfc-service :47321",
+    "kind": "external",
+    "layer": "Local",
+    "body": "nfc-service :47321"
+  },
+  "local-web-nfc-1": {
+    "title": "Web NFC",
+    "subtitle": "Web NFC",
+    "kind": "external",
+    "layer": "Local",
+    "body": "Web NFC"
+  },
+  "local-leaflet-2": {
+    "title": "Leaflet",
+    "subtitle": "Leaflet",
+    "kind": "backend",
+    "layer": "Local",
+    "body": "Leaflet"
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Chat en tiempo real",
+    "subtitle": "Aplicación de chat en tiempo real con Express, Socket.IO y cliente en React.",
+    "quality_profile": "showcase",
+    "output": "chat-socket.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "cliente-react-0",
+      "type": "backend",
+      "label": "React",
+      "sublabel": "React",
+      "row": 1,
+      "col": 0
+    },
+    {
+      "id": "cliente-vite-1",
+      "type": "backend",
+      "label": "Vite",
+      "sublabel": "Vite",
+      "row": 1,
+      "col": 1
+    },
+    {
+      "id": "cliente-socket-io-client-2",
+      "type": "messagebus",
+      "label": "socket.io-client",
+      "sublabel": "socket.io-client",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "servidor-express-0",
+      "type": "backend",
+      "label": "Express",
+      "sublabel": "Express",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "id": "servidor-socket-io-1",
+      "type": "messagebus",
+      "label": "Socket.IO",
+      "sublabel": "Socket.IO",
+      "row": 1,
+      "col": 5
+    },
+    {
+      "id": "servidor-nodemon-2",
+      "type": "backend",
+      "label": "nodemon",
+      "sublabel": "nodemon",
+      "row": 1,
+      "col": 6
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Cliente",
+      "wraps": [
+        "cliente-react-0",
+        "cliente-vite-1",
+        "cliente-socket-io-client-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Servidor",
+      "wraps": [
+        "servidor-express-0",
+        "servidor-socket-io-1",
+        "servidor-nodemon-2"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "c0-servidor-soc-servidor-exp",
+      "from": "servidor-socket-io-1",
+      "to": "servidor-express-0",
+      "variant": "emphasis",
+      "fromSide": "left",
+      "toSide": "right"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Resultado 1",
+      "items": [
+        "Servidor HTTP + Socket.IO en server/index.js."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Resultado 2",
+      "items": [
+        "Broadcast de mensajes con from derivado de socket.id."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Resultado 3",
+      "items": [
+        "Frontend Vite en carpeta frontend/ con plugin PWA."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "cliente-navegador-0": {
+    "title": "Navegador",
+    "subtitle": "Navegador",
+    "kind": "backend",
+    "layer": "Cliente",
+    "body": "Navegador"
+  },
+  "runtime-oxygen-0": {
+    "title": "Oxygen",
+    "subtitle": "Oxygen",
+    "kind": "cloud",
+    "layer": "Runtime",
+    "body": "Oxygen"
+  },
+  "runtime-remix-1": {
+    "title": "Remix",
+    "subtitle": "Remix",
+    "kind": "backend",
+    "layer": "Runtime",
+    "body": "Remix"
+  },
+  "runtime-hydrogen-2": {
+    "title": "Hydrogen",
+    "subtitle": "Hydrogen",
+    "kind": "frontend",
+    "layer": "Runtime",
+    "body": "Catálogo, colecciones, producto, carrito y checkout Shopify. CacheShort en layout GraphQL."
+  },
+  "shopify-storefront-api-0": {
+    "title": "Storefront API",
+    "subtitle": "Storefront API",
+    "kind": "external",
+    "layer": "Shopify",
+    "body": "Catálogo, colecciones, producto, carrito y checkout Shopify. CacheShort en layout GraphQL."
+  },
+  "shopify-admin-api-1": {
+    "title": "Admin API",
+    "subtitle": "Admin API",
+    "kind": "external",
+    "layer": "Shopify",
+    "body": "Customer Account API, lista de emails admin, shouldRevalidate solo en mutaciones."
+  },
+  "shopify-customer-account-api-2": {
+    "title": "Customer Account …",
+    "subtitle": "Customer Account API",
+    "kind": "external",
+    "layer": "Shopify",
+    "body": "Customer Account API"
+  },
+  "shopify-checkout-3": {
+    "title": "Checkout",
+    "subtitle": "Checkout",
+    "kind": "external",
+    "layer": "Shopify",
+    "body": "Checkout"
+  },
+  "shopify-shopify-4": {
+    "title": "Shopify",
+    "subtitle": "Shopify",
+    "kind": "external",
+    "layer": "Shopify",
+    "body": "Shopify"
+  },
+  "media-y-correo-cloudinary-0": {
+    "title": "Cloudinary",
+    "subtitle": "Cloudinary",
+    "kind": "cloud",
+    "layer": "Media y correo",
+    "body": "ThemeProvider, fondo negro, Cloudinary con dns-prefetch, logo WebP y LCP cuidado."
+  },
+  "media-y-correo-nodemailer-1": {
+    "title": "Nodemailer",
+    "subtitle": "Nodemailer",
+    "kind": "backend",
+    "layer": "Media y correo",
+    "body": "ThemeProvider, fondo negro, Cloudinary con dns-prefetch, logo WebP y LCP cuidado."
+  }
+}

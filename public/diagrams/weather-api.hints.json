@@ -1,0 +1,44 @@
+{
+  "cliente-html-0": {
+    "title": "HTML",
+    "subtitle": "HTML",
+    "kind": "frontend",
+    "layer": "Cliente",
+    "body": "HTML"
+  },
+  "cliente-css-1": {
+    "title": "CSS",
+    "subtitle": "CSS",
+    "kind": "frontend",
+    "layer": "Cliente",
+    "body": "CSS"
+  },
+  "cliente-javascript-2": {
+    "title": "JavaScript",
+    "subtitle": "JavaScript",
+    "kind": "backend",
+    "layer": "Cliente",
+    "body": "JavaScript"
+  },
+  "datos-fetch-api-0": {
+    "title": "Fetch API",
+    "subtitle": "Fetch API",
+    "kind": "database",
+    "layer": "Datos",
+    "body": "Fetch API"
+  },
+  "datos-json-1": {
+    "title": "JSON",
+    "subtitle": "JSON",
+    "kind": "database",
+    "layer": "Datos",
+    "body": "JSON"
+  },
+  "deploy-github-pages-0": {
+    "title": "GitHub Pages",
+    "subtitle": "GitHub Pages",
+    "kind": "cloud",
+    "layer": "Deploy",
+    "body": "GitHub Pages"
+  }
+}

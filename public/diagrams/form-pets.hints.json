@@ -1,0 +1,44 @@
+{
+  "ui-html-form-0": {
+    "title": "HTML form",
+    "subtitle": "HTML form",
+    "kind": "frontend",
+    "layer": "UI",
+    "body": "HTML form"
+  },
+  "ui-stylei-css-1": {
+    "title": "stylei.css",
+    "subtitle": "stylei.css",
+    "kind": "frontend",
+    "layer": "UI",
+    "body": "stylei.css"
+  },
+  "api-guardar-0": {
+    "title": "guardar",
+    "subtitle": "guardar",
+    "kind": "backend",
+    "layer": "API",
+    "body": "guardar"
+  },
+  "api-get-1": {
+    "title": "get",
+    "subtitle": "get",
+    "kind": "backend",
+    "layer": "API",
+    "body": "get"
+  },
+  "api-editar-2": {
+    "title": "editar",
+    "subtitle": "editar",
+    "kind": "backend",
+    "layer": "API",
+    "body": "editar"
+  },
+  "api-eliminar-3": {
+    "title": "eliminar",
+    "subtitle": "eliminar",
+    "kind": "backend",
+    "layer": "API",
+    "body": "eliminar"
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "WheatherApi",
+    "subtitle": "Consulta del clima por ciudad con HTML, CSS y JavaScript, integrada con una API pública.",
+    "quality_profile": "showcase",
+    "output": "weather-api.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "cliente-html-0",
+      "type": "frontend",
+      "label": "HTML",
+      "sublabel": "HTML",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "cliente-css-1",
+      "type": "frontend",
+      "label": "CSS",
+      "sublabel": "CSS",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "cliente-javascript-2",
+      "type": "backend",
+      "label": "JavaScript",
+      "sublabel": "JavaScript",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "id": "datos-fetch-api-0",
+      "type": "database",
+      "label": "Fetch API",
+      "sublabel": "Fetch API",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "datos-json-1",
+      "type": "database",
+      "label": "JSON",
+      "sublabel": "JSON",
+      "row": 3,
+      "col": 3
+    },
+    {
+      "id": "deploy-github-pages-0",
+      "type": "cloud",
+      "label": "GitHub Pages",
+      "sublabel": "GitHub Pages",
+      "row": 5,
+      "col": 3
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Cliente",
+      "wraps": [
+        "cliente-html-0",
+        "cliente-css-1",
+        "cliente-javascript-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Datos",
+      "wraps": [
+        "datos-fetch-api-0",
+        "datos-json-1"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Deploy",
+      "wraps": [
+        "deploy-github-pages-0"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "flow-0",
+      "from": "cliente-css-1",
+      "to": "datos-json-1",
+      "variant": "emphasis"
+    },
+    {
+      "id": "flow-1",
+      "from": "datos-json-1",
+      "to": "deploy-github-pages-0"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Resultado 1",
+      "items": [
+        "Consulta por ciudad con feedback visual inmediato."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Resultado 2",
+      "items": [
+        "Assets locales para banner y fondos temáticos."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Resultado 3",
+      "items": [
+        "Desplegado en GitHub Pages."
+      ]
+    }
+  ]
+}

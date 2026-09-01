@@ -6,15 +6,16 @@ interface Props {
   images: GalleryImage[];
   variant?: GalleryVariant;
   title?: string;
+  shell?: 'default' | 'project';
 }
 
-const { images, variant = 'desktop', title = 'Capturas' } = Astro.props;
+const { images, variant = 'desktop', title = 'Capturas', shell = 'default' } = Astro.props;
 const phone = variant === 'phone';
 const multi = images.length > 1;
 ---
 
 {images.length > 0 && (
-  <section class="px-4 pb-8 pt-4 md:px-8 md:pb-16" data-reveal>
+  <section class:list={['px-4 pb-8 pt-4 md:px-8 md:pb-16', shell === 'project' && 'project-carousel']} data-reveal>
     <div class="mx-auto max-w-6xl">
       <p class="deck-eyebrow">
         <AppIcon name="image" size={14} />

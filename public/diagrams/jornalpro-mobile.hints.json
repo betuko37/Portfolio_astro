@@ -1,0 +1,86 @@
+{
+  "pantallas-asistencias-0": {
+    "title": "Asistencias",
+    "subtitle": "Asistencias",
+    "kind": "backend",
+    "layer": "Pantallas",
+    "body": "Ubicación (sección/cuadro/lote), cuadrilla, concepto, modal NFC, panel QR, historial local y lista del día."
+  },
+  "pantallas-alta-de-empleado-1": {
+    "title": "Alta de empleado",
+    "subtitle": "Alta de empleado",
+    "kind": "backend",
+    "layer": "Pantallas",
+    "body": "Alta de empleado"
+  },
+  "pantallas-captura-de-surcos-2": {
+    "title": "Captura de surcos",
+    "subtitle": "Captura de surcos",
+    "kind": "backend",
+    "layer": "Pantallas",
+    "body": "Grilla de destajo, roster del día, cierre de jornada y stores locales."
+  },
+  "pantallas-cajas-3": {
+    "title": "Cajas",
+    "subtitle": "Cajas",
+    "kind": "backend",
+    "layer": "Pantallas",
+    "body": "Cajas"
+  },
+  "campo-nfc-0": {
+    "title": "NFC",
+    "subtitle": "NFC",
+    "kind": "external",
+    "layer": "Campo",
+    "body": "NFC"
+  },
+  "campo-qr-1": {
+    "title": "QR",
+    "subtitle": "QR",
+    "kind": "backend",
+    "layer": "Campo",
+    "body": "QR"
+  },
+  "campo-gps-2": {
+    "title": "GPS",
+    "subtitle": "GPS",
+    "kind": "backend",
+    "layer": "Campo",
+    "body": "GPS"
+  },
+  "offline-betuko-offline-sync-0": {
+    "title": "betuko_offline_sy…",
+    "subtitle": "betuko_offline_sync",
+    "kind": "backend",
+    "layer": "Offline",
+    "body": "Sherpa-ONNX, hotwords agrícolas, enrollment de capataz y foreground service."
+  },
+  "offline-cola-hive-1": {
+    "title": "Cola Hive",
+    "subtitle": "Cola Hive",
+    "kind": "database",
+    "layer": "Offline",
+    "body": "Sherpa-ONNX, hotwords agrícolas, enrollment de capataz y foreground service."
+  },
+  "offline-workmanager-2": {
+    "title": "WorkManager",
+    "subtitle": "WorkManager",
+    "kind": "backend",
+    "layer": "Offline",
+    "body": "Sherpa-ONNX, hotwords agrícolas, enrollment de capataz y foreground service."
+  },
+  "nube-backend-api-0": {
+    "title": "Backend",
+    "subtitle": "Backend /api",
+    "kind": "backend",
+    "layer": "Nube",
+    "body": "Backend /api"
+  },
+  "nube-daily-capture-bulk-1": {
+    "title": "daily-capture",
+    "subtitle": "daily-capture/bulk",
+    "kind": "backend",
+    "layer": "Nube",
+    "body": "daily-capture/bulk"
+  }
+}

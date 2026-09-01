@@ -1,0 +1,51 @@
+{
+  "entrada-alexa-0": {
+    "title": "Alexa",
+    "subtitle": "Alexa",
+    "kind": "backend",
+    "layer": "Entrada",
+    "body": "Skills o rutinas que disparan acciones en el hogar."
+  },
+  "entrada-panel-tactil-1": {
+    "title": "Panel táctil",
+    "subtitle": "Panel táctil",
+    "kind": "frontend",
+    "layer": "Entrada",
+    "body": "Interfaz física para escenas manuales sin voz."
+  },
+  "control-c-0": {
+    "title": "C#",
+    "subtitle": "C#",
+    "kind": "backend",
+    "layer": "Control",
+    "body": "C#"
+  },
+  "control-logica-de-escenas-1": {
+    "title": "Lógica de escenas",
+    "subtitle": "Lógica de escenas",
+    "kind": "backend",
+    "layer": "Control",
+    "body": "Lógica de escenas"
+  },
+  "hardware-arduino-0": {
+    "title": "Arduino",
+    "subtitle": "Arduino",
+    "kind": "external",
+    "layer": "Hardware",
+    "body": "Lectura de sensores y control de salidas digitales/analogicas."
+  },
+  "hardware-sensores-1": {
+    "title": "Sensores",
+    "subtitle": "Sensores",
+    "kind": "external",
+    "layer": "Hardware",
+    "body": "Sensores"
+  },
+  "hardware-actuadores-2": {
+    "title": "Actuadores",
+    "subtitle": "Actuadores",
+    "kind": "external",
+    "layer": "Hardware",
+    "body": "Actuadores"
+  }
+}

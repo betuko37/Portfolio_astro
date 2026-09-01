@@ -1,0 +1,51 @@
+{
+  "ui-tailwind-4-0": {
+    "title": "Tailwind 4",
+    "subtitle": "Tailwind 4",
+    "kind": "backend",
+    "layer": "UI",
+    "body": "Tailwind 4"
+  },
+  "ui-animate-css-1": {
+    "title": "animate.css",
+    "subtitle": "animate.css",
+    "kind": "frontend",
+    "layer": "UI",
+    "body": "animate.css"
+  },
+  "ui-react-icons-2": {
+    "title": "react-icons",
+    "subtitle": "react-icons",
+    "kind": "backend",
+    "layer": "UI",
+    "body": "react-icons"
+  },
+  "estado-auth-context-0": {
+    "title": "Auth context",
+    "subtitle": "Auth context",
+    "kind": "security",
+    "layer": "Estado",
+    "body": "Auth context"
+  },
+  "estado-query-string-1": {
+    "title": "query-string",
+    "subtitle": "query-string",
+    "kind": "backend",
+    "layer": "Estado",
+    "body": "query-string"
+  },
+  "deploy-vite-0": {
+    "title": "Vite",
+    "subtitle": "Vite",
+    "kind": "backend",
+    "layer": "Deploy",
+    "body": "Vite"
+  },
+  "deploy-netlify-1": {
+    "title": "Netlify",
+    "subtitle": "Netlify",
+    "kind": "backend",
+    "layer": "Deploy",
+    "body": "Netlify"
+  }
+}

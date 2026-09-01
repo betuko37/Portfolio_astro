@@ -376,13 +376,18 @@ function initCarousels(reduce: boolean) {
     const syncChrome = (active: number) => {
       if (counter) counter.textContent = `${active + 1} / ${total}`;
       const activeDot = dots[active];
-      if (activeDot && thumbs) {
-        activeDot.scrollIntoView({
-          behavior: reduce ? 'auto' : 'smooth',
-          block: 'nearest',
-          inline: 'center',
-        });
-      }
+      if (!activeDot || !thumbs) return;
+
+      const overflow = thumbs.scrollWidth > thumbs.clientWidth + 1;
+      if (!overflow) return;
+
+      const targetLeft =
+        activeDot.offsetLeft - (thumbs.clientWidth - activeDot.clientWidth) / 2;
+      const maxLeft = thumbs.scrollWidth - thumbs.clientWidth;
+      thumbs.scrollTo({
+        left: Math.max(0, Math.min(targetLeft, maxLeft)),
+        behavior: reduce ? 'auto' : 'smooth',
+      });
     };
 
     const showLightboxSlide = (index: number) => {

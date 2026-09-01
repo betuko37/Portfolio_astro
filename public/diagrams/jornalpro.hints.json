@@ -1,0 +1,149 @@
+{
+  "superficies-erp-web-pwa-0": {
+    "title": "ERP web PWA",
+    "subtitle": "ERP web PWA",
+    "kind": "frontend",
+    "layer": "Superficies",
+    "body": "ERP web PWA"
+  },
+  "superficies-app-flutter-de-campo-1": {
+    "title": "App Flutter de ca…",
+    "subtitle": "App Flutter de campo",
+    "kind": "frontend",
+    "layer": "Superficies",
+    "body": "En el surco, el capataz pasa la credencial NFC o QR con la app — aunque no haya señal, la checada se guarda en el teléfono y se sincroniza después. El panel web recibe las persistencias en vivo y las mezcla con las de caseta en la misma semana de nómina."
+  },
+  "panel-web-nomina-0": {
+    "title": "Nómina",
+    "subtitle": "Nómina",
+    "kind": "frontend",
+    "layer": "Panel web",
+    "body": "Captura diaria, cuadrillas, temporadas, cierre de semana, TXT bancario, préstamos y conciliación."
+  },
+  "panel-web-tesoreria-1": {
+    "title": "Tesorería",
+    "subtitle": "Tesorería",
+    "kind": "frontend",
+    "layer": "Panel web",
+    "body": "Cajas, transferencias, plan de cuentas, buzón SAT y conciliación de CFDI."
+  },
+  "panel-web-empaque-2": {
+    "title": "Empaque",
+    "subtitle": "Empaque",
+    "kind": "frontend",
+    "layer": "Panel web",
+    "body": "Pallets, embarques, acarreos, requisiciones, órdenes y almacén."
+  },
+  "app-de-campo-asistencias-nfc-qr-0": {
+    "title": "Asistencias NFC",
+    "subtitle": "Asistencias NFC/QR",
+    "kind": "external",
+    "layer": "App de campo",
+    "body": "En el surco, el capataz pasa la credencial NFC o QR con la app — aunque no haya señal, la checada se guarda en el teléfono y se sincroniza después. El panel web recibe las persistencias en vivo y las mezcla con las de caseta en la misma semana de nómina."
+  },
+  "app-de-campo-alta-de-empleados-1": {
+    "title": "Alta de empleados",
+    "subtitle": "Alta de empleados",
+    "kind": "frontend",
+    "layer": "App de campo",
+    "body": "En el surco, el capataz pasa la credencial NFC o QR con la app — aunque no haya señal, la checada se guarda en el teléfono y se sincroniza después. El panel web recibe las persistencias en vivo y las mezcla con las de caseta en la misma semana de nómina."
+  },
+  "app-de-campo-captura-de-surcos-2": {
+    "title": "Captura de surcos",
+    "subtitle": "Captura de surcos",
+    "kind": "frontend",
+    "layer": "App de campo",
+    "body": "En el surco, el capataz pasa la credencial NFC o QR con la app — aunque no haya señal, la checada se guarda en el teléfono y se sincroniza después. El panel web recibe las persistencias en vivo y las mezcla con las de caseta en la misma semana de nómina."
+  },
+  "adaptadores-nfc-service-47321-0": {
+    "title": "nfc-service",
+    "subtitle": "nfc-service :47321",
+    "kind": "external",
+    "layer": "Adaptadores",
+    "body": "nfc-service :47321"
+  },
+  "adaptadores-nfc-manager-1": {
+    "title": "nfc_manager",
+    "subtitle": "nfc_manager",
+    "kind": "external",
+    "layer": "Adaptadores",
+    "body": "nfc_manager"
+  },
+  "adaptadores-betuko-offline-sync-2": {
+    "title": "betuko_offline_sy…",
+    "subtitle": "betuko_offline_sync",
+    "kind": "backend",
+    "layer": "Adaptadores",
+    "body": "Socket.IO por ubicación. La app Flutter opera sin red y sincroniza con betuko_offline_sync."
+  },
+  "adaptadores-workmanager-3": {
+    "title": "WorkManager",
+    "subtitle": "WorkManager",
+    "kind": "backend",
+    "layer": "Adaptadores",
+    "body": "WorkManager"
+  },
+  "api-jwt-2fa-rbac-0": {
+    "title": "JWT",
+    "subtitle": "JWT / 2FA / RBAC",
+    "kind": "security",
+    "layer": "API",
+    "body": "JWT / 2FA / RBAC"
+  },
+  "api-processes-payroll-1": {
+    "title": "processes",
+    "subtitle": "processes/payroll",
+    "kind": "backend",
+    "layer": "API",
+    "body": "processes/payroll"
+  },
+  "api-treasury-sat-mailbox-2": {
+    "title": "treasury",
+    "subtitle": "treasury/sat-mailbox",
+    "kind": "backend",
+    "layer": "API",
+    "body": "treasury/sat-mailbox"
+  },
+  "api-packing-3": {
+    "title": "packing",
+    "subtitle": "packing",
+    "kind": "backend",
+    "layer": "API",
+    "body": "packing"
+  },
+  "api-warehouses-4": {
+    "title": "warehouses",
+    "subtitle": "warehouses",
+    "kind": "backend",
+    "layer": "API",
+    "body": "warehouses"
+  },
+  "servicios-socket-gateway-0": {
+    "title": "socket-gateway",
+    "subtitle": "socket-gateway",
+    "kind": "messagebus",
+    "layer": "Servicios",
+    "body": "socket-gateway"
+  },
+  "servicios-chatbot-joni-1": {
+    "title": "chatbot Joni",
+    "subtitle": "chatbot Joni",
+    "kind": "messagebus",
+    "layer": "Servicios",
+    "body": "chatbot Joni"
+  },
+  "servicios-hikcentral-2": {
+    "title": "hikcentral",
+    "subtitle": "hikcentral",
+    "kind": "messagebus",
+    "layer": "Servicios",
+    "body": "En caseta, el trabajador se checa con el rostro; el checador avisa al backend y el marcaje cae en la misma captura de nómina que ve el administrador en el panel. Las fotos y IDs de HikCentral viven en la ficha de cada empleado en base de datos."
+  },
+  "servicios-sat-cfdi-3": {
+    "title": "SAT CFDI",
+    "subtitle": "SAT CFDI",
+    "kind": "messagebus",
+    "layer": "Servicios",
+    "body": "SAT CFDI"
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Casa domótica",
+    "subtitle": "Sistema de automatización residencial con panel táctil y control por voz, mediante Alex…",
+    "quality_profile": "showcase",
+    "output": "casa-domotica.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "entrada-alexa-0",
+      "type": "backend",
+      "label": "Alexa",
+      "sublabel": "Alexa",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "entrada-panel-tactil-1",
+      "type": "frontend",
+      "label": "Panel táctil",
+      "sublabel": "Panel táctil",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "control-c-0",
+      "type": "backend",
+      "label": "C#",
+      "sublabel": "C#",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "control-logica-de-escenas-1",
+      "type": "backend",
+      "label": "Lógica de escenas",
+      "sublabel": "Lógica de escenas",
+      "row": 3,
+      "col": 3
+    },
+    {
+      "id": "hardware-arduino-0",
+      "type": "external",
+      "label": "Arduino",
+      "sublabel": "Arduino",
+      "row": 5,
+      "col": 2
+    },
+    {
+      "id": "hardware-sensores-1",
+      "type": "external",
+      "label": "Sensores",
+      "sublabel": "Sensores",
+      "row": 5,
+      "col": 3
+    },
+    {
+      "id": "hardware-actuadores-2",
+      "type": "external",
+      "label": "Actuadores",
+      "sublabel": "Actuadores",
+      "row": 5,
+      "col": 4
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Entrada",
+      "wraps": [
+        "entrada-alexa-0",
+        "entrada-panel-tactil-1"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Control",
+      "wraps": [
+        "control-c-0",
+        "control-logica-de-escenas-1"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Hardware",
+      "wraps": [
+        "hardware-arduino-0",
+        "hardware-sensores-1",
+        "hardware-actuadores-2"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "c0-entrada-alex-control-c-0",
+      "from": "entrada-alexa-0",
+      "to": "control-c-0",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c1-entrada-pane-control-c-0",
+      "from": "entrada-panel-tactil-1",
+      "to": "control-c-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Resultado 1",
+      "items": [
+        "Arduino lee sensores y acciona relés o actuadores."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Resultado 2",
+      "items": [
+        "Aplicación C# como puente entre hardware y servicios."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Resultado 3",
+      "items": [
+        "Comandos de voz vía Alexa para escenas del hogar."
+      ]
+    }
+  ]
+}

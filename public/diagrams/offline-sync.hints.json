@@ -1,0 +1,72 @@
+{
+  "api-publica-get-0": {
+    "title": "get",
+    "subtitle": "get",
+    "kind": "backend",
+    "layer": "API pública",
+    "body": "get"
+  },
+  "api-publica-save-1": {
+    "title": "save",
+    "subtitle": "save",
+    "kind": "backend",
+    "layer": "API pública",
+    "body": "save"
+  },
+  "api-publica-syncall-2": {
+    "title": "syncAll",
+    "subtitle": "syncAll",
+    "kind": "backend",
+    "layer": "API pública",
+    "body": "syncAll"
+  },
+  "nucleo-onlineofflinemanager-0": {
+    "title": "OnlineOfflineMana…",
+    "subtitle": "OnlineOfflineManager",
+    "kind": "backend",
+    "layer": "Núcleo",
+    "body": "Orquestador. get, save, delete, getPending, getFullData, syncAll estático, streams de data/status."
+  },
+  "nucleo-localstorage-hive-1": {
+    "title": "LocalStorage Hive",
+    "subtitle": "LocalStorage Hive",
+    "kind": "database",
+    "layer": "Núcleo",
+    "body": "Una box Hive por entidad. Recupera boxes corruptas y registra boxes abiertas para debug."
+  },
+  "nucleo-syncservice-2": {
+    "title": "SyncService",
+    "subtitle": "SyncService",
+    "kind": "backend",
+    "layer": "Núcleo",
+    "body": "Sube pendientes (sync != true) y baja el GET del endpoint. Marca syncDate."
+  },
+  "nucleo-apiclient-3": {
+    "title": "ApiClient",
+    "subtitle": "ApiClient",
+    "kind": "backend",
+    "layer": "Núcleo",
+    "body": "Bearer, unwrap de { data: [] }, retry con backoff y timeout de 60s."
+  },
+  "red-connectivityservice-0": {
+    "title": "ConnectivityServi…",
+    "subtitle": "ConnectivityService",
+    "kind": "backend",
+    "layer": "Red",
+    "body": "Singleton. hasRealConnection pinea URLs reales, no solo el tipo de red."
+  },
+  "red-timer-10-min-1": {
+    "title": "Timer 10 min",
+    "subtitle": "Timer 10 min",
+    "kind": "backend",
+    "layer": "Red",
+    "body": "Timer 10 min"
+  },
+  "red-workmanager-15-min-2": {
+    "title": "WorkManager 15 min",
+    "subtitle": "WorkManager 15 min",
+    "kind": "backend",
+    "layer": "Red",
+    "body": "WorkManager 15 min"
+  }
+}

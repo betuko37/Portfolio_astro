@@ -1,0 +1,37 @@
+{
+  "navegacion-react-router-7-0": {
+    "title": "React Router 7",
+    "subtitle": "React Router 7",
+    "kind": "backend",
+    "layer": "Navegación",
+    "body": "Rutas públicas vs privadas con React Router 7."
+  },
+  "navegacion-auth-guard-1": {
+    "title": "Auth guard",
+    "subtitle": "Auth guard",
+    "kind": "security",
+    "layer": "Navegación",
+    "body": "Auth guard"
+  },
+  "ui-mui-6-0": {
+    "title": "MUI 6",
+    "subtitle": "MUI 6",
+    "kind": "frontend",
+    "layer": "UI",
+    "body": "MUI 6"
+  },
+  "ui-roboto-1": {
+    "title": "Roboto",
+    "subtitle": "Roboto",
+    "kind": "backend",
+    "layer": "UI",
+    "body": "Roboto"
+  },
+  "ui-layouts-2": {
+    "title": "Layouts",
+    "subtitle": "Layouts",
+    "kind": "backend",
+    "layer": "UI",
+    "body": "Layouts"
+  }
+}

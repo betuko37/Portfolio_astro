@@ -1,0 +1,65 @@
+{
+  "gameplay-movimiento-0": {
+    "title": "Movimiento",
+    "subtitle": "Movimiento",
+    "kind": "backend",
+    "layer": "Gameplay",
+    "body": "Movimiento"
+  },
+  "gameplay-enemigos-1": {
+    "title": "Enemigos",
+    "subtitle": "Enemigos",
+    "kind": "backend",
+    "layer": "Gameplay",
+    "body": "Patrullaje o persecución simple con daño al contacto."
+  },
+  "gameplay-objetivos-2": {
+    "title": "Objetivos",
+    "subtitle": "Objetivos",
+    "kind": "backend",
+    "layer": "Gameplay",
+    "body": "Objetivos"
+  },
+  "motor-unity-2d-0": {
+    "title": "Unity 2D",
+    "subtitle": "Unity 2D",
+    "kind": "backend",
+    "layer": "Motor",
+    "body": "Unity 2D"
+  },
+  "motor-rigidbody2d-1": {
+    "title": "Rigidbody2D",
+    "subtitle": "Rigidbody2D",
+    "kind": "backend",
+    "layer": "Motor",
+    "body": "Rigidbody2D"
+  },
+  "motor-colliders-2": {
+    "title": "Colliders",
+    "subtitle": "Colliders",
+    "kind": "backend",
+    "layer": "Motor",
+    "body": "Colliders"
+  },
+  "contenido-nivel-1-0": {
+    "title": "Nivel 1",
+    "subtitle": "Nivel 1",
+    "kind": "backend",
+    "layer": "Contenido",
+    "body": "Nivel 1"
+  },
+  "contenido-nivel-2-1": {
+    "title": "Nivel 2",
+    "subtitle": "Nivel 2",
+    "kind": "backend",
+    "layer": "Contenido",
+    "body": "Nivel 2"
+  },
+  "contenido-ui-2": {
+    "title": "UI",
+    "subtitle": "UI",
+    "kind": "backend",
+    "layer": "Contenido",
+    "body": "UI"
+  }
+}

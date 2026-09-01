@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Juego 2D de plataformas",
+    "subtitle": "Videojuego de plataformas en 2D con dos niveles, enemigos y objetivos, desarrollado en …",
+    "quality_profile": "showcase",
+    "output": "juego-2d.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "gameplay-movimiento-0",
+      "type": "backend",
+      "label": "Movimiento",
+      "sublabel": "Movimiento",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "gameplay-enemigos-1",
+      "type": "backend",
+      "label": "Enemigos",
+      "sublabel": "Enemigos",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "gameplay-objetivos-2",
+      "type": "backend",
+      "label": "Objetivos",
+      "sublabel": "Objetivos",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "id": "motor-unity-2d-0",
+      "type": "backend",
+      "label": "Unity 2D",
+      "sublabel": "Unity 2D",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "motor-rigidbody2d-1",
+      "type": "backend",
+      "label": "Rigidbody2D",
+      "sublabel": "Rigidbody2D",
+      "row": 3,
+      "col": 3
+    },
+    {
+      "id": "motor-colliders-2",
+      "type": "backend",
+      "label": "Colliders",
+      "sublabel": "Colliders",
+      "row": 3,
+      "col": 4
+    },
+    {
+      "id": "contenido-nivel-1-0",
+      "type": "backend",
+      "label": "Nivel 1",
+      "sublabel": "Nivel 1",
+      "row": 5,
+      "col": 2
+    },
+    {
+      "id": "contenido-nivel-2-1",
+      "type": "backend",
+      "label": "Nivel 2",
+      "sublabel": "Nivel 2",
+      "row": 5,
+      "col": 3
+    },
+    {
+      "id": "contenido-ui-2",
+      "type": "backend",
+      "label": "UI",
+      "sublabel": "UI",
+      "row": 5,
+      "col": 4
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Gameplay",
+      "wraps": [
+        "gameplay-movimiento-0",
+        "gameplay-enemigos-1",
+        "gameplay-objetivos-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Motor",
+      "wraps": [
+        "motor-unity-2d-0",
+        "motor-rigidbody2d-1",
+        "motor-colliders-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Contenido",
+      "wraps": [
+        "contenido-nivel-1-0",
+        "contenido-nivel-2-1",
+        "contenido-ui-2"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "flow-0",
+      "from": "gameplay-enemigos-1",
+      "to": "motor-rigidbody2d-1",
+      "variant": "emphasis"
+    },
+    {
+      "id": "flow-1",
+      "from": "motor-rigidbody2d-1",
+      "to": "contenido-nivel-2-1"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Resultado 1",
+      "items": [
+        "Dos niveles con plataformas, enemigos y meta."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Resultado 2",
+      "items": [
+        "Controles de salto y movimiento con Rigidbody2D."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Resultado 3",
+      "items": [
+        "UI mínima de vidas, puntaje o fin de nivel."
+      ]
+    }
+  ]
+}

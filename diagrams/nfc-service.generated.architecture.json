@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "NFC Service",
+    "subtitle": "Lector ACR122U expuesto como API local en el puerto 47321.",
+    "quality_profile": "showcase",
+    "output": "nfc-service.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "hardware-acr122u-0",
+      "type": "external",
+      "label": "ACR122U",
+      "sublabel": "ACR122U",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "hardware-pc-sc-1",
+      "type": "external",
+      "label": "PC",
+      "sublabel": "PC/SC",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "hardware-nfc-pcsc-2",
+      "type": "external",
+      "label": "nfc-pcsc",
+      "sublabel": "nfc-pcsc",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "id": "servicio-local-rest-47321-0",
+      "type": "messagebus",
+      "label": "REST",
+      "sublabel": "REST :47321",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "id": "servicio-local-last-card-1",
+      "type": "messagebus",
+      "label": "last-card",
+      "sublabel": "last-card",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "servicio-local-status-2",
+      "type": "messagebus",
+      "label": "status",
+      "sublabel": "status",
+      "row": 3,
+      "col": 3
+    },
+    {
+      "id": "servicio-local-consola-web-3",
+      "type": "messagebus",
+      "label": "Consola web",
+      "sublabel": "Consola web",
+      "row": 3,
+      "col": 4
+    },
+    {
+      "id": "clientes-alta-de-empleado-0",
+      "type": "backend",
+      "label": "Alta de empleado",
+      "sublabel": "Alta de empleado",
+      "row": 5,
+      "col": 0
+    },
+    {
+      "id": "clientes-entrega-de-gafetes-1",
+      "type": "backend",
+      "label": "Entrega de gafetes",
+      "sublabel": "Entrega de gafetes",
+      "row": 5,
+      "col": 1
+    },
+    {
+      "id": "clientes-lookup-2",
+      "type": "backend",
+      "label": "Lookup",
+      "sublabel": "Lookup",
+      "row": 5,
+      "col": 2
+    },
+    {
+      "id": "distribucion-dmg-macos-0",
+      "type": "backend",
+      "label": "DMG macOS",
+      "sublabel": "DMG macOS",
+      "row": 5,
+      "col": 4
+    },
+    {
+      "id": "distribucion-exe-windows-1",
+      "type": "backend",
+      "label": "EXE Windows",
+      "sublabel": "EXE Windows",
+      "row": 5,
+      "col": 5
+    },
+    {
+      "id": "distribucion-launchd-2",
+      "type": "backend",
+      "label": "launchd",
+      "sublabel": "launchd",
+      "row": 5,
+      "col": 6
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Hardware",
+      "wraps": [
+        "hardware-acr122u-0",
+        "hardware-pc-sc-1",
+        "hardware-nfc-pcsc-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Servicio local",
+      "wraps": [
+        "servicio-local-rest-47321-0",
+        "servicio-local-last-card-1",
+        "servicio-local-status-2",
+        "servicio-local-consola-web-3"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Clientes",
+      "wraps": [
+        "clientes-alta-de-empleado-0",
+        "clientes-entrega-de-gafetes-1",
+        "clientes-lookup-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Distribución",
+      "wraps": [
+        "distribucion-dmg-macos-0",
+        "distribucion-exe-windows-1",
+        "distribucion-launchd-2"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "c0-hardware-nfc-servicio-loc",
+      "from": "hardware-nfc-pcsc-2",
+      "to": "servicio-local-rest-47321-0",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c1-servicio-loc-clientes-alt",
+      "from": "servicio-local-rest-47321-0",
+      "to": "clientes-alta-de-empleado-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c2-servicio-loc-clientes-ent",
+      "from": "servicio-local-rest-47321-0",
+      "to": "clientes-entrega-de-gafetes-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c3-servicio-loc-clientes-loo",
+      "from": "servicio-local-rest-47321-0",
+      "to": "clientes-lookup-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c4-distribucion-servicio-loc",
+      "from": "distribucion-launchd-2",
+      "to": "servicio-local-rest-47321-0",
+      "fromSide": "top",
+      "toSide": "bottom"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Resultado 1",
+      "items": [
+        "Puente REST entre el lector ACR122U y el panel web, en tiempo real."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Resultado 2",
+      "items": [
+        "UID formateado. Se limpia al leer o a los cinco segundos."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Resultado 3",
+      "items": [
+        "Reconexión con espera, detección de suspensión y reinicio manual."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "frontend-javascript-0": {
+    "title": "JavaScript",
+    "subtitle": "JavaScript",
+    "kind": "backend",
+    "layer": "Frontend",
+    "body": "Tablas dinámicas y formularios en Js/."
+  },
+  "frontend-tablas-1": {
+    "title": "Tablas",
+    "subtitle": "Tablas",
+    "kind": "backend",
+    "layer": "Frontend",
+    "body": "Tablas dinámicas y formularios en Js/."
+  },
+  "frontend-formularios-2": {
+    "title": "Formularios",
+    "subtitle": "Formularios",
+    "kind": "messagebus",
+    "layer": "Frontend",
+    "body": "Tablas dinámicas y formularios en Js/."
+  },
+  "backend-php-0": {
+    "title": "PHP",
+    "subtitle": "PHP",
+    "kind": "backend",
+    "layer": "Backend",
+    "body": "PHP"
+  },
+  "backend-pdo-1": {
+    "title": "PDO",
+    "subtitle": "PDO",
+    "kind": "backend",
+    "layer": "Backend",
+    "body": "PDO"
+  },
+  "backend-crud-scripts-2": {
+    "title": "CRUD scripts",
+    "subtitle": "CRUD scripts",
+    "kind": "backend",
+    "layer": "Backend",
+    "body": "CRUD scripts"
+  },
+  "datos-mysql-0": {
+    "title": "MySQL",
+    "subtitle": "MySQL",
+    "kind": "database",
+    "layer": "Datos",
+    "body": "MySQL"
+  },
+  "datos-clientes-1": {
+    "title": "Clientes",
+    "subtitle": "Clientes",
+    "kind": "database",
+    "layer": "Datos",
+    "body": "add_client, get_clients, update y delete vía PHP."
+  },
+  "datos-pedidos-2": {
+    "title": "Pedidos",
+    "subtitle": "Pedidos",
+    "kind": "database",
+    "layer": "Datos",
+    "body": "get_orders, edit_order y flujo de estado."
+  }
+}

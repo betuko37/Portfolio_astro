@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Apps Flutter y Kotlin",
+    "subtitle": "Aplicaciones móviles de listas de tareas, CRUD y consumo de APIs. En Kotlin incluye ser…",
+    "quality_profile": "showcase",
+    "output": "flutter-kotlin.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "flutter-dart-0",
+      "type": "frontend",
+      "label": "Dart",
+      "sublabel": "Dart",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "flutter-widgets-1",
+      "type": "frontend",
+      "label": "Widgets",
+      "sublabel": "Widgets",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "flutter-http-2",
+      "type": "frontend",
+      "label": "HTTP",
+      "sublabel": "HTTP",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "id": "android-kotlin-0",
+      "type": "backend",
+      "label": "Kotlin",
+      "sublabel": "Kotlin",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "android-services-1",
+      "type": "backend",
+      "label": "Services",
+      "sublabel": "Services",
+      "row": 3,
+      "col": 3
+    },
+    {
+      "id": "android-retrofit-okhttp-2",
+      "type": "backend",
+      "label": "Retrofit",
+      "sublabel": "Retrofit/OkHttp",
+      "row": 3,
+      "col": 4
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Flutter",
+      "wraps": [
+        "flutter-dart-0",
+        "flutter-widgets-1",
+        "flutter-http-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Android",
+      "wraps": [
+        "android-kotlin-0",
+        "android-services-1",
+        "android-retrofit-okhttp-2"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "flow-0",
+      "from": "flutter-widgets-1",
+      "to": "android-services-1",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Resultado 1",
+      "items": [
+        "Listas de tareas y CRUD en Flutter."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Resultado 2",
+      "items": [
+        "Consumo de APIs con http/dio o Retrofit en Kotlin."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Resultado 3",
+      "items": [
+        "Servicios en segundo plano en Android nativo."
+      ]
+    }
+  ]
+}

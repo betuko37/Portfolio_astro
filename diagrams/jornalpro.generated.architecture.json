@@ -1,0 +1,299 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "JornalPro Cloud",
+    "subtitle": "ERP agrícola en producción: web, móvil, hardware NFC e IA operativa.",
+    "quality_profile": "showcase",
+    "output": "jornalpro.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "superficies-erp-web-pwa-0",
+      "type": "frontend",
+      "label": "ERP web PWA",
+      "sublabel": "ERP web PWA",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "superficies-app-flutter-de-campo-1",
+      "type": "frontend",
+      "label": "App Flutter de ca…",
+      "sublabel": "App Flutter de campo",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "panel-web-nomina-0",
+      "type": "frontend",
+      "label": "Nómina",
+      "sublabel": "Nómina",
+      "row": 3,
+      "col": 0
+    },
+    {
+      "id": "panel-web-tesoreria-1",
+      "type": "frontend",
+      "label": "Tesorería",
+      "sublabel": "Tesorería",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "id": "panel-web-empaque-2",
+      "type": "frontend",
+      "label": "Empaque",
+      "sublabel": "Empaque",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "app-de-campo-asistencias-nfc-qr-0",
+      "type": "external",
+      "label": "Asistencias NFC",
+      "sublabel": "Asistencias NFC/QR",
+      "row": 3,
+      "col": 4
+    },
+    {
+      "id": "app-de-campo-alta-de-empleados-1",
+      "type": "frontend",
+      "label": "Alta de empleados",
+      "sublabel": "Alta de empleados",
+      "row": 3,
+      "col": 5
+    },
+    {
+      "id": "app-de-campo-captura-de-surcos-2",
+      "type": "frontend",
+      "label": "Captura de surcos",
+      "sublabel": "Captura de surcos",
+      "row": 3,
+      "col": 6
+    },
+    {
+      "id": "adaptadores-nfc-service-47321-0",
+      "type": "external",
+      "label": "nfc-service",
+      "sublabel": "nfc-service :47321",
+      "row": 5,
+      "col": 1
+    },
+    {
+      "id": "adaptadores-nfc-manager-1",
+      "type": "external",
+      "label": "nfc_manager",
+      "sublabel": "nfc_manager",
+      "row": 5,
+      "col": 2
+    },
+    {
+      "id": "adaptadores-betuko-offline-sync-2",
+      "type": "backend",
+      "label": "betuko_offline_sy…",
+      "sublabel": "betuko_offline_sync",
+      "row": 5,
+      "col": 3
+    },
+    {
+      "id": "adaptadores-workmanager-3",
+      "type": "backend",
+      "label": "WorkManager",
+      "sublabel": "WorkManager",
+      "row": 5,
+      "col": 4
+    },
+    {
+      "id": "api-jwt-2fa-rbac-0",
+      "type": "security",
+      "label": "JWT",
+      "sublabel": "JWT / 2FA / RBAC",
+      "row": 7,
+      "col": 1
+    },
+    {
+      "id": "api-processes-payroll-1",
+      "type": "backend",
+      "label": "processes",
+      "sublabel": "processes/payroll",
+      "row": 7,
+      "col": 2
+    },
+    {
+      "id": "api-treasury-sat-mailbox-2",
+      "type": "backend",
+      "label": "treasury",
+      "sublabel": "treasury/sat-mailbox",
+      "row": 7,
+      "col": 3
+    },
+    {
+      "id": "api-packing-3",
+      "type": "backend",
+      "label": "packing",
+      "sublabel": "packing",
+      "row": 7,
+      "col": 4
+    },
+    {
+      "id": "api-warehouses-4",
+      "type": "backend",
+      "label": "warehouses",
+      "sublabel": "warehouses",
+      "row": 7,
+      "col": 5
+    },
+    {
+      "id": "servicios-socket-gateway-0",
+      "type": "messagebus",
+      "label": "socket-gateway",
+      "sublabel": "socket-gateway",
+      "row": 9,
+      "col": 1
+    },
+    {
+      "id": "servicios-chatbot-joni-1",
+      "type": "messagebus",
+      "label": "chatbot Joni",
+      "sublabel": "chatbot Joni",
+      "row": 9,
+      "col": 2
+    },
+    {
+      "id": "servicios-hikcentral-2",
+      "type": "messagebus",
+      "label": "hikcentral",
+      "sublabel": "hikcentral",
+      "row": 9,
+      "col": 3
+    },
+    {
+      "id": "servicios-sat-cfdi-3",
+      "type": "messagebus",
+      "label": "SAT CFDI",
+      "sublabel": "SAT CFDI",
+      "row": 9,
+      "col": 4
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Superficies",
+      "wraps": [
+        "superficies-erp-web-pwa-0",
+        "superficies-app-flutter-de-campo-1"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Panel web",
+      "wraps": [
+        "panel-web-nomina-0",
+        "panel-web-tesoreria-1",
+        "panel-web-empaque-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "App de campo",
+      "wraps": [
+        "app-de-campo-asistencias-nfc-qr-0",
+        "app-de-campo-alta-de-empleados-1",
+        "app-de-campo-captura-de-surcos-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Adaptadores",
+      "wraps": [
+        "adaptadores-nfc-service-47321-0",
+        "adaptadores-nfc-manager-1",
+        "adaptadores-betuko-offline-sync-2",
+        "adaptadores-workmanager-3"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "API",
+      "wraps": [
+        "api-jwt-2fa-rbac-0",
+        "api-processes-payroll-1",
+        "api-treasury-sat-mailbox-2",
+        "api-packing-3",
+        "api-warehouses-4"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Servicios",
+      "wraps": [
+        "servicios-socket-gateway-0",
+        "servicios-chatbot-joni-1",
+        "servicios-hikcentral-2",
+        "servicios-sat-cfdi-3"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "c0-adaptadores--adaptadores-",
+      "from": "adaptadores-betuko-offline-sync-2",
+      "to": "adaptadores-workmanager-3",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c1-adaptadores--app-de-campo",
+      "from": "adaptadores-nfc-service-47321-0",
+      "to": "app-de-campo-asistencias-nfc-qr-0",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "c2-servicios-hi-api-jwt-2fa-",
+      "from": "servicios-hikcentral-2",
+      "to": "api-jwt-2fa-rbac-0",
+      "variant": "security",
+      "fromSide": "top",
+      "toSide": "bottom"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Tres productos en producción",
+      "items": [
+        "ERP web, app de campo y tienda Shopify en paralelo."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Biometría HikCentral en caseta",
+      "items": [
+        "facial, credenciales y conciliación con nómina semanal."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Resultado 3",
+      "items": [
+        "Asistencias NFC/QR en surco con app offline-first y nfc-service en escritorio."
+      ]
+    }
+  ]
+}

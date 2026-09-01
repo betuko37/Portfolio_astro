@@ -1,0 +1,121 @@
+{
+  "entrada-dashboard-pwa-0": {
+    "title": "Dashboard PWA",
+    "subtitle": "Dashboard PWA",
+    "kind": "frontend",
+    "layer": "Entrada",
+    "body": "Dashboard PWA"
+  },
+  "entrada-app-flutter-1": {
+    "title": "App Flutter",
+    "subtitle": "App Flutter",
+    "kind": "frontend",
+    "layer": "Entrada",
+    "body": "App Flutter"
+  },
+  "entrada-whatsapp-2": {
+    "title": "WhatsApp",
+    "subtitle": "WhatsApp",
+    "kind": "frontend",
+    "layer": "Entrada",
+    "body": "Telemetría de app, APK, bot Joni, extracción de listas de asistencia con visión, notificaciones."
+  },
+  "auth-jwt-0": {
+    "title": "JWT",
+    "subtitle": "JWT",
+    "kind": "security",
+    "layer": "Auth",
+    "body": "JWT"
+  },
+  "auth-totp-2fa-1": {
+    "title": "TOTP",
+    "subtitle": "TOTP / 2FA",
+    "kind": "security",
+    "layer": "Auth",
+    "body": "TOTP / 2FA"
+  },
+  "auth-roleguard-2": {
+    "title": "RoleGuard",
+    "subtitle": "RoleGuard",
+    "kind": "security",
+    "layer": "Auth",
+    "body": "RoleGuard"
+  },
+  "auth-moduleguard-3": {
+    "title": "ModuleGuard",
+    "subtitle": "ModuleGuard",
+    "kind": "security",
+    "layer": "Auth",
+    "body": "ModuleGuard"
+  },
+  "rutas-admin-0": {
+    "title": "admin",
+    "subtitle": "admin",
+    "kind": "backend",
+    "layer": "Rutas",
+    "body": "Login, 2FA, empresas, ubicaciones, roles por módulo (nómina, empaque, almacenes), dashboard y presencia."
+  },
+  "rutas-processes-payroll-1": {
+    "title": "processes",
+    "subtitle": "processes/payroll",
+    "kind": "backend",
+    "layer": "Rutas",
+    "body": "processes/payroll"
+  },
+  "rutas-treasury-2": {
+    "title": "treasury",
+    "subtitle": "treasury",
+    "kind": "backend",
+    "layer": "Rutas",
+    "body": "treasury"
+  },
+  "servicios-payroll-0": {
+    "title": "payroll",
+    "subtitle": "payroll",
+    "kind": "messagebus",
+    "layer": "Servicios",
+    "body": "payroll"
+  },
+  "servicios-socket-gateway-1": {
+    "title": "socket-gateway",
+    "subtitle": "socket-gateway",
+    "kind": "messagebus",
+    "layer": "Servicios",
+    "body": "socket-gateway"
+  },
+  "servicios-chatbot-joni-2": {
+    "title": "chatbot Joni",
+    "subtitle": "chatbot Joni",
+    "kind": "messagebus",
+    "layer": "Servicios",
+    "body": "chatbot Joni"
+  },
+  "datos-prisma-0": {
+    "title": "Prisma",
+    "subtitle": "Prisma",
+    "kind": "database",
+    "layer": "Datos",
+    "body": "Prisma"
+  },
+  "datos-postgresql-1": {
+    "title": "PostgreSQL",
+    "subtitle": "PostgreSQL",
+    "kind": "database",
+    "layer": "Datos",
+    "body": "PostgreSQL"
+  },
+  "datos-aws-s3-2": {
+    "title": "AWS S3",
+    "subtitle": "AWS S3",
+    "kind": "database",
+    "layer": "Datos",
+    "body": "AWS S3"
+  },
+  "datos-node-cron-3": {
+    "title": "node-cron",
+    "subtitle": "node-cron",
+    "kind": "database",
+    "layer": "Datos",
+    "body": "node-cron"
+  }
+}

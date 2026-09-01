@@ -1,0 +1,58 @@
+{
+  "frontend-react-19-0": {
+    "title": "React 19",
+    "subtitle": "React 19",
+    "kind": "backend",
+    "layer": "Frontend",
+    "body": "React 19"
+  },
+  "frontend-tailwind-4-1": {
+    "title": "Tailwind 4",
+    "subtitle": "Tailwind 4",
+    "kind": "backend",
+    "layer": "Frontend",
+    "body": "Tailwind 4"
+  },
+  "frontend-vite-2": {
+    "title": "Vite",
+    "subtitle": "Vite",
+    "kind": "backend",
+    "layer": "Frontend",
+    "body": "Vite"
+  },
+  "backend-firebase-0": {
+    "title": "Firebase",
+    "subtitle": "Firebase",
+    "kind": "backend",
+    "layer": "Backend",
+    "body": "Firebase"
+  },
+  "backend-storageservice-1": {
+    "title": "storageService",
+    "subtitle": "storageService",
+    "kind": "backend",
+    "layer": "Backend",
+    "body": "storageService"
+  },
+  "salida-pdf-0": {
+    "title": "PDF",
+    "subtitle": "PDF",
+    "kind": "backend",
+    "layer": "Salida",
+    "body": "PDF"
+  },
+  "salida-whatsapp-1": {
+    "title": "WhatsApp",
+    "subtitle": "WhatsApp",
+    "kind": "frontend",
+    "layer": "Salida",
+    "body": "Export pdfmake y deep links de WhatsApp."
+  },
+  "salida-netlify-2": {
+    "title": "Netlify",
+    "subtitle": "Netlify",
+    "kind": "backend",
+    "layer": "Salida",
+    "body": "Netlify"
+  }
+}

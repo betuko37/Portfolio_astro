@@ -7,9 +7,11 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/build-diagrams.mjs && astro build",
     "astro": "astro",
     "preview": "astro preview",
+    "diagrams:setup": "node scripts/diagrams-setup.mjs",
+    "diagrams:build": "node scripts/build-diagrams.mjs",
     "stats:github": "node --experimental-strip-types scripts/update-github-stats.ts",
     "stats:codebase": "pnpm stats:github",
     "stats:languages": "pnpm stats:github",

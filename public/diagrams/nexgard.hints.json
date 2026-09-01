@@ -1,0 +1,37 @@
+{
+  "presentacion-html-0": {
+    "title": "HTML",
+    "subtitle": "HTML",
+    "kind": "frontend",
+    "layer": "Presentación",
+    "body": "HTML"
+  },
+  "presentacion-css-1": {
+    "title": "CSS",
+    "subtitle": "CSS",
+    "kind": "frontend",
+    "layer": "Presentación",
+    "body": "CSS"
+  },
+  "presentacion-img-fondos-2": {
+    "title": "img",
+    "subtitle": "img/fondos",
+    "kind": "backend",
+    "layer": "Presentación",
+    "body": "img/fondos"
+  },
+  "interaccion-cart-js-0": {
+    "title": "cart.js",
+    "subtitle": "cart.js",
+    "kind": "backend",
+    "layer": "Interacción",
+    "body": "cart.js"
+  },
+  "interaccion-productservices-1": {
+    "title": "productServices",
+    "subtitle": "productServices",
+    "kind": "backend",
+    "layer": "Interacción",
+    "body": "productServices"
+  }
+}

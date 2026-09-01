@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "JornalPro Backend",
+    "subtitle": "API en la nube de un ERP: aproximadamente 1.150 controladores y 182 modelos.",
+    "quality_profile": "showcase",
+    "output": "jornalpro-backend.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "entrada-dashboard-pwa-0",
+      "type": "frontend",
+      "label": "Dashboard PWA",
+      "sublabel": "Dashboard PWA",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "entrada-app-flutter-1",
+      "type": "frontend",
+      "label": "App Flutter",
+      "sublabel": "App Flutter",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "entrada-whatsapp-2",
+      "type": "frontend",
+      "label": "WhatsApp",
+      "sublabel": "WhatsApp",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "id": "auth-jwt-0",
+      "type": "security",
+      "label": "JWT",
+      "sublabel": "JWT",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "id": "auth-totp-2fa-1",
+      "type": "security",
+      "label": "TOTP",
+      "sublabel": "TOTP / 2FA",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "auth-roleguard-2",
+      "type": "security",
+      "label": "RoleGuard",
+      "sublabel": "RoleGuard",
+      "row": 3,
+      "col": 3
+    },
+    {
+      "id": "auth-moduleguard-3",
+      "type": "security",
+      "label": "ModuleGuard",
+      "sublabel": "ModuleGuard",
+      "row": 3,
+      "col": 4
+    },
+    {
+      "id": "rutas-admin-0",
+      "type": "backend",
+      "label": "admin",
+      "sublabel": "admin",
+      "row": 5,
+      "col": 0
+    },
+    {
+      "id": "rutas-processes-payroll-1",
+      "type": "backend",
+      "label": "processes",
+      "sublabel": "processes/payroll",
+      "row": 5,
+      "col": 1
+    },
+    {
+      "id": "rutas-treasury-2",
+      "type": "backend",
+      "label": "treasury",
+      "sublabel": "treasury",
+      "row": 5,
+      "col": 2
+    },
+    {
+      "id": "servicios-payroll-0",
+      "type": "messagebus",
+      "label": "payroll",
+      "sublabel": "payroll",
+      "row": 5,
+      "col": 4
+    },
+    {
+      "id": "servicios-socket-gateway-1",
+      "type": "messagebus",
+      "label": "socket-gateway",
+      "sublabel": "socket-gateway",
+      "row": 5,
+      "col": 5
+    },
+    {
+      "id": "servicios-chatbot-joni-2",
+      "type": "messagebus",
+      "label": "chatbot Joni",
+      "sublabel": "chatbot Joni",
+      "row": 5,
+      "col": 6
+    },
+    {
+      "id": "datos-prisma-0",
+      "type": "database",
+      "label": "Prisma",
+      "sublabel": "Prisma",
+      "row": 7,
+      "col": 1
+    },
+    {
+      "id": "datos-postgresql-1",
+      "type": "database",
+      "label": "PostgreSQL",
+      "sublabel": "PostgreSQL",
+      "row": 7,
+      "col": 2
+    },
+    {
+      "id": "datos-aws-s3-2",
+      "type": "database",
+      "label": "AWS S3",
+      "sublabel": "AWS S3",
+      "row": 7,
+      "col": 3
+    },
+    {
+      "id": "datos-node-cron-3",
+      "type": "database",
+      "label": "node-cron",
+      "sublabel": "node-cron",
+      "row": 7,
+      "col": 4
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Entrada",
+      "wraps": [
+        "entrada-dashboard-pwa-0",
+        "entrada-app-flutter-1",
+        "entrada-whatsapp-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Auth",
+      "wraps": [
+        "auth-jwt-0",
+        "auth-totp-2fa-1",
+        "auth-roleguard-2",
+        "auth-moduleguard-3"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Rutas",
+      "wraps": [
+        "rutas-admin-0",
+        "rutas-processes-payroll-1",
+        "rutas-treasury-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Servicios",
+      "wraps": [
+        "servicios-payroll-0",
+        "servicios-socket-gateway-1",
+        "servicios-chatbot-joni-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Datos",
+      "wraps": [
+        "datos-prisma-0",
+        "datos-postgresql-1",
+        "datos-aws-s3-2",
+        "datos-node-cron-3"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "c0-datos-prisma-datos-postgr",
+      "from": "datos-prisma-0",
+      "to": "datos-postgresql-1",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Resultado 1",
+      "items": [
+        "126 controladores REST y 182 modelos Prisma en un monolito modular."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Autenticación empresarial",
+      "items": [
+        "JWT, 2FA, OTP y dispositivos de confianza."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Dominio",
+      "items": [
+        "nómina, asistencias, tesorería, empaque, compras y SAT."
+      ]
+    }
+  ]
+}

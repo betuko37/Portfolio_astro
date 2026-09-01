@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "betuko_offline_sync",
+    "subtitle": "Sincronización offline-first mediante tres operaciones: get, save y syncAll.",
+    "quality_profile": "showcase",
+    "output": "offline-sync.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "api-publica-get-0",
+      "type": "backend",
+      "label": "get",
+      "sublabel": "get",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "api-publica-save-1",
+      "type": "backend",
+      "label": "save",
+      "sublabel": "save",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "api-publica-syncall-2",
+      "type": "backend",
+      "label": "syncAll",
+      "sublabel": "syncAll",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "id": "nucleo-onlineofflinemanager-0",
+      "type": "backend",
+      "label": "OnlineOfflineMana…",
+      "sublabel": "OnlineOfflineManager",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "id": "nucleo-localstorage-hive-1",
+      "type": "database",
+      "label": "LocalStorage Hive",
+      "sublabel": "LocalStorage Hive",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "nucleo-syncservice-2",
+      "type": "backend",
+      "label": "SyncService",
+      "sublabel": "SyncService",
+      "row": 3,
+      "col": 3
+    },
+    {
+      "id": "nucleo-apiclient-3",
+      "type": "backend",
+      "label": "ApiClient",
+      "sublabel": "ApiClient",
+      "row": 3,
+      "col": 4
+    },
+    {
+      "id": "red-connectivityservice-0",
+      "type": "backend",
+      "label": "ConnectivityServi…",
+      "sublabel": "ConnectivityService",
+      "row": 5,
+      "col": 2
+    },
+    {
+      "id": "red-timer-10-min-1",
+      "type": "backend",
+      "label": "Timer 10 min",
+      "sublabel": "Timer 10 min",
+      "row": 5,
+      "col": 3
+    },
+    {
+      "id": "red-workmanager-15-min-2",
+      "type": "backend",
+      "label": "WorkManager 15 min",
+      "sublabel": "WorkManager 15 min",
+      "row": 5,
+      "col": 4
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "API pública",
+      "wraps": [
+        "api-publica-get-0",
+        "api-publica-save-1",
+        "api-publica-syncall-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Núcleo",
+      "wraps": [
+        "nucleo-onlineofflinemanager-0",
+        "nucleo-localstorage-hive-1",
+        "nucleo-syncservice-2",
+        "nucleo-apiclient-3"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Red",
+      "wraps": [
+        "red-connectivityservice-0",
+        "red-timer-10-min-1",
+        "red-workmanager-15-min-2"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "c0-nucleo-onlin-nucleo-local",
+      "from": "nucleo-onlineofflinemanager-0",
+      "to": "nucleo-localstorage-hive-1",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c1-nucleo-onlin-red-connecti",
+      "from": "nucleo-onlineofflinemanager-0",
+      "to": "red-connectivityservice-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c2-nucleo-syncs-nucleo-apicl",
+      "from": "nucleo-syncservice-2",
+      "to": "nucleo-apiclient-3",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c3-nucleo-syncs-red-workmana",
+      "from": "nucleo-syncservice-2",
+      "to": "red-workmanager-15-min-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c4-red-workmana-nucleo-onlin",
+      "from": "red-workmanager-15-min-2",
+      "to": "nucleo-onlineofflinemanager-0",
+      "fromSide": "top",
+      "toSide": "bottom"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Resultado 1",
+      "items": [
+        "get() responde siempre desde Hive, de forma inmediata."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Resultado 2",
+      "items": [
+        "Auto-sync cada 10 minutos y al recuperar red."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Resultado 3",
+      "items": [
+        "Background sync Android cada 15 min vía WorkManager."
+      ]
+    }
+  ]
+}

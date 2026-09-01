@@ -7,14 +7,33 @@ import ArchLayers from '@components/projects/ArchLayers.astro';
 interface Props {
   layers?: ArchLayer[];
   chart?: string;
+  archifySrc?: string;
+  diagramHints?: Record<string, DiagramHint>;
 }
 
-const { layers, chart } = Astro.props;
+interface DiagramHint {
+  title: string;
+  subtitle?: string;
+  kind?: string;
+  layer?: string;
+  body: string;
+}
+
+const { layers, chart, archifySrc, diagramHints } = Astro.props;
+const useArchify = Boolean(archifySrc);
 const hasChart = Boolean(chart);
 const hasLayers = Boolean(layers?.length);
+const embedSrc = archifySrc ? `${archifySrc}?embed=1` : undefined;
+const hintsJson = diagramHints ? JSON.stringify(diagramHints) : '';
 ---
 
-<section class="arch-view text-center" data-arch-view>
+<section
+  class="arch-view text-center"
+  data-arch-view
+  data-arch-mode={useArchify ? 'archify' : 'legacy'}
+  data-arch-src={archifySrc}
+  data-arch-hints={hintsJson || undefined}
+>
   <div class="arch-view-head">
     <p class="deck-label">
       <AppIcon name="share-2" size={14} />
@@ -31,7 +50,47 @@ const hasLayers = Boolean(layers?.length);
   </div>
 
   <div class="arch-view-stage" data-arch-stage>
-    {hasChart ? (
+    {useArchify ? (
+      <div class="arch-embed-shell" data-arch-embed-shell>
+        <div class="arch-embed-wrap">
+          <iframe
+            class="arch-embed"
+            src={embedSrc}
+            title="Diagrama de arquitectura"
+            loading="lazy"
+            data-arch-iframe
+          />
+        </div>
+        <p class="arch-embed-hint">
+          <AppIcon name="info" size={13} />
+          Haz clic en un componente para ver detalle
+        </p>
+        <div class="arch-popover" data-arch-popover hidden>
+          <div
+            class="arch-popover-panel"
+            role="dialog"
+            aria-modal="false"
+            aria-labelledby="arch-popover-title"
+            data-arch-popover-panel
+          >
+            <button type="button" class="arch-popover-close" data-arch-popover-close aria-label="Cerrar detalle">
+              <AppIcon name="x" size={16} />
+            </button>
+            <div class="arch-popover-meta">
+              <span class="arch-popover-kind" data-arch-popover-kind hidden></span>
+              <span class="arch-popover-layer" data-arch-popover-layer hidden></span>
+            </div>
+            <h3 class="arch-popover-title" id="arch-popover-title" data-arch-popover-title></h3>
+            <p class="arch-popover-sub" data-arch-popover-sub hidden></p>
+            <p class="arch-popover-body" data-arch-popover-body></p>
+            <div class="arch-popover-rels" data-arch-popover-rels hidden>
+              <p class="arch-popover-rels-label">Conexiones</p>
+              <div class="arch-popover-rel-list" data-arch-popover-rel-list></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ) : hasChart ? (
       <ArchDiagram chart={chart!} />
     ) : hasLayers ? (
       <ArchLayers layers={layers!} />
@@ -63,7 +122,12 @@ const hasLayers = Boolean(layers?.length);
           <div class="arch-viewport" data-arch-viewport>
             <div class="arch-canvas" data-arch-canvas></div>
           </div>
-          <p class="arch-viewport-hint">Arrastra para mover · Usa la rueda o los controles para zoom</p>
+          <iframe
+            class="arch-dialog-iframe hidden"
+            title="Diagrama de arquitectura en pantalla completa"
+            data-arch-dialog-iframe
+          />
+          <p class="arch-viewport-hint" data-arch-hint>Arrastra para mover · Usa la rueda o los controles para zoom</p>
         </div>
       </div>
     </div>
@@ -83,6 +147,213 @@ const hasLayers = Boolean(layers?.length);
   .arch-view-stage {
     display: flex;
     justify-content: center;
+  }
+
+  .arch-embed-shell {
+    position: relative;
+    width: min(100%, 72rem);
+    margin: 0 auto;
+  }
+
+  .arch-embed-wrap {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    max-height: min(82vh, 720px);
+  }
+
+  .arch-embed {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 1rem;
+    background: var(--color-paper);
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-mist) 35%, transparent);
+  }
+
+  .arch-embed-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0.75rem 0 0;
+    font-size: 0.72rem;
+    color: var(--color-muted);
+  }
+
+  .arch-view {
+    position: relative;
+  }
+
+  .arch-popover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 120;
+    width: min(22rem, calc(100vw - 1.5rem));
+    pointer-events: none;
+  }
+
+  .arch-popover[hidden] {
+    display: none;
+  }
+
+  .arch-popover-panel {
+    pointer-events: auto;
+    max-height: min(42vh, 16rem);
+    overflow: auto;
+    padding: 0.85rem 0.95rem 0.95rem;
+    border-radius: 1rem;
+    border: 1px solid color-mix(in oklab, var(--color-accent) 28%, var(--color-mist));
+    background: color-mix(in oklab, var(--color-paper) 92%, transparent);
+    box-shadow:
+      0 18px 40px color-mix(in oklab, var(--color-night) 18%, transparent),
+      inset 0 1px 0 color-mix(in oklab, var(--color-paper) 70%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    text-align: left;
+    animation: arch-popover-in 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @keyframes arch-popover-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.45rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .arch-popover-close {
+    position: absolute;
+    top: 0.55rem;
+    right: 0.55rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.85rem;
+    height: 1.85rem;
+    border: 0;
+    border-radius: 999px;
+    background: var(--color-sand);
+    color: var(--color-ink);
+    cursor: pointer;
+  }
+
+  .arch-popover-close:hover {
+    background: var(--color-accent-soft);
+  }
+
+  .arch-popover-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 0.45rem;
+    padding-right: 2rem;
+  }
+
+  .arch-popover-kind,
+  .arch-popover-layer {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 0.15rem 0.55rem;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .arch-popover-kind {
+    background: color-mix(in oklab, var(--color-accent) 16%, var(--color-sand));
+    color: var(--color-accent);
+  }
+
+  .arch-popover-layer {
+    background: var(--color-sand);
+    color: var(--color-muted);
+  }
+
+  .arch-popover-kind[hidden],
+  .arch-popover-layer[hidden],
+  .arch-popover-sub[hidden],
+  .arch-popover-rels[hidden] {
+    display: none;
+  }
+
+  .arch-popover-title {
+    margin: 0 0 0.25rem;
+    padding-right: 1.75rem;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+  }
+
+  .arch-popover-sub {
+    margin: 0 0 0.45rem;
+    font-size: 0.75rem;
+    color: var(--color-muted);
+  }
+
+  .arch-popover-body {
+    margin: 0;
+    font-size: 0.78rem;
+    line-height: 1.55;
+    color: color-mix(in oklab, var(--color-ink) 88%, var(--color-muted));
+  }
+
+  .arch-popover-rels {
+    margin-top: 0.75rem;
+    padding-top: 0.7rem;
+    border-top: 1px solid color-mix(in oklab, var(--color-mist) 50%, transparent);
+  }
+
+  .arch-popover-rels-label {
+    margin: 0 0 0.45rem;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .arch-popover-rel-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .arch-popover-rel {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    max-width: 100%;
+    border: 0;
+    border-radius: 999px;
+    padding: 0.28rem 0.65rem;
+    background: var(--color-sand);
+    color: var(--color-ink);
+    font-size: 0.68rem;
+    cursor: pointer;
+    transition: background-color 0.18s ease;
+  }
+
+  .arch-popover-rel:hover {
+    background: var(--color-accent-soft);
+  }
+
+  .arch-popover-rel small {
+    color: var(--color-muted);
+    font-size: 0.62rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .arch-popover-panel {
+      animation: none;
+    }
   }
 
   .arch-dialog {
@@ -239,12 +510,44 @@ const hasLayers = Boolean(layers?.length);
     max-width: none;
   }
 
+  .arch-dialog-panel .arch-popover {
+    z-index: 30;
+  }
+
+  .arch-dialog-iframe {
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 12rem;
+    border: 0;
+    background: var(--color-paper);
+  }
+
+  .arch-dialog-iframe.hidden {
+    display: none;
+  }
+
   .arch-viewport-hint {
     margin: 0;
     padding: 0.65rem 1rem 0.85rem;
     text-align: center;
     font-size: 0.7rem;
     color: var(--color-muted);
+  }
+
+  .arch-dialog[data-archify-open] .arch-zoom-controls,
+  .arch-dialog[data-archify-open] .arch-viewport-hint {
+    display: none;
+  }
+
+  .arch-dialog[data-archify-open] .arch-viewport {
+    display: none;
+  }
+
+  .arch-dialog[data-archify-open] .arch-dialog-iframe.hidden {
+    display: block;
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -322,7 +625,351 @@ const hasLayers = Boolean(layers?.length);
 </style>
 
 <script>
-  function initArchViewer(root: HTMLElement) {
+  type DiagramHint = {
+    title: string;
+    subtitle?: string;
+    kind?: string;
+    layer?: string;
+    body: string;
+  };
+
+  type ArchifyRelationship = {
+    id: string;
+    label: string;
+    direction: 'in' | 'out';
+    edgeLabel?: string;
+  };
+
+  type ArchifyNodePayload = {
+    id: string;
+    label: string;
+    sublabel?: string;
+    kind?: string;
+    tag?: string;
+    context?: string;
+    relationships?: ArchifyRelationship[];
+  };
+
+  type ArchifyAnchor = {
+    x: number;
+    y: number;
+  };
+
+  type PopoverPlacement = {
+    anchor?: ArchifyAnchor;
+    frame: HTMLIFrameElement | null;
+  };
+
+  const POPOVER_GAP = 14;
+  const POPOVER_MARGIN = 12;
+
+  function placeArchPopover(popover: HTMLElement, placement: PopoverPlacement) {
+    const { frame } = placement;
+    if (!frame) return;
+
+    const frameRect = frame.getBoundingClientRect();
+    let anchorX = frameRect.left + frameRect.width / 2;
+    let anchorY = frameRect.top + frameRect.height / 2;
+    if (placement.anchor) {
+      anchorX = frameRect.left + placement.anchor.x;
+      anchorY = frameRect.top + placement.anchor.y;
+    }
+
+    popover.style.transform = 'none';
+    popover.style.bottom = 'auto';
+
+    const margin = POPOVER_MARGIN;
+    const gap = POPOVER_GAP;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const popW = popover.offsetWidth;
+    const popH = popover.offsetHeight;
+    const stackBelow = vw < 640 || popW >= vw - margin * 2 - 40;
+
+    let left: number;
+    let top: number;
+
+    if (stackBelow) {
+      left = Math.max(margin, Math.min(anchorX - popW / 2, vw - popW - margin));
+      top = anchorY + gap;
+      if (top + popH > vh - margin) {
+        top = anchorY - gap - popH;
+      }
+    } else {
+      const spaceRight = vw - margin - (anchorX + gap);
+      const spaceLeft = anchorX - gap - margin;
+      if (spaceRight >= popW || spaceRight >= spaceLeft) {
+        left = anchorX + gap;
+      } else {
+        left = anchorX - gap - popW;
+      }
+      left = Math.max(margin, Math.min(left, vw - popW - margin));
+      top = anchorY - popH / 2;
+    }
+
+    top = Math.max(margin, Math.min(top, vh - popH - margin));
+
+    const coversClick =
+      anchorX >= left && anchorX <= left + popW && anchorY >= top && anchorY <= top + popH;
+    if (coversClick) {
+      top = anchorY + gap;
+      if (top + popH > vh - margin) {
+        top = anchorY - gap - popH;
+      }
+      top = Math.max(margin, Math.min(top, vh - popH - margin));
+    }
+
+    popover.style.left = `${Math.round(left)}px`;
+    popover.style.top = `${Math.round(top)}px`;
+  }
+
+  const KIND_LABELS: Record<string, string> = {
+    frontend: 'Frontend',
+    backend: 'Backend',
+    database: 'Datos',
+    cloud: 'Nube',
+    security: 'Seguridad',
+    messagebus: 'Mensajería',
+    external: 'Externo',
+  };
+
+  function parseHints(raw: string | undefined) {
+    if (!raw) return {} as Record<string, DiagramHint>;
+    try {
+      return JSON.parse(raw) as Record<string, DiagramHint>;
+    } catch {
+      return {};
+    }
+  }
+
+  function postToFrame(frame: HTMLIFrameElement | null, payload: Record<string, unknown>) {
+    if (!frame?.contentWindow) return;
+    frame.contentWindow.postMessage({ source: 'portfolio-archify-host', ...payload }, window.location.origin);
+  }
+
+  function initArchifyPopover(
+    root: HTMLElement,
+    getActiveFrame: () => HTMLIFrameElement | null,
+    getPopoverHost: () => HTMLElement,
+  ) {
+    const popover = root.querySelector<HTMLElement>('[data-arch-popover]');
+    const closeBtn = root.querySelector<HTMLButtonElement>('[data-arch-popover-close]');
+    const titleEl = root.querySelector<HTMLElement>('[data-arch-popover-title]');
+    const subEl = root.querySelector<HTMLElement>('[data-arch-popover-sub]');
+    const bodyEl = root.querySelector<HTMLElement>('[data-arch-popover-body]');
+    const kindEl = root.querySelector<HTMLElement>('[data-arch-popover-kind]');
+    const layerEl = root.querySelector<HTMLElement>('[data-arch-popover-layer]');
+    const relWrap = root.querySelector<HTMLElement>('[data-arch-popover-rels]');
+    const relList = root.querySelector<HTMLElement>('[data-arch-popover-rel-list]');
+    if (!popover || !closeBtn || !titleEl || !subEl || !bodyEl || !kindEl || !layerEl || !relWrap || !relList) {
+      return { open: () => {}, close: () => {} };
+    }
+
+    const mountPopover = () => {
+      const host = getPopoverHost();
+      if (popover.parentElement !== host) host.appendChild(popover);
+    };
+
+    mountPopover();
+
+    const hints = parseHints(root.dataset.archHints);
+    let lastPlacement: PopoverPlacement | null = null;
+
+    const reposition = () => {
+      if (popover.hidden || !lastPlacement) return;
+      placeArchPopover(popover, lastPlacement);
+    };
+
+    window.addEventListener('scroll', reposition, { passive: true });
+    window.addEventListener('resize', reposition);
+
+    const setMeta = (element: HTMLElement, value: string | undefined) => {
+      const clean = value?.trim();
+      element.textContent = clean ?? '';
+      element.hidden = !clean;
+    };
+
+    const close = (notifyFrame = true) => {
+      popover.hidden = true;
+      lastPlacement = null;
+      if (notifyFrame) postToFrame(getActiveFrame(), { type: 'clear' });
+    };
+
+    const open = (node: ArchifyNodePayload, placement: PopoverPlacement) => {
+      const hint = hints[node.id];
+      const title = hint?.title || node.label;
+      const subtitle = hint?.subtitle || node.sublabel || node.context || '';
+      const body =
+        hint?.body ||
+        node.context ||
+        node.sublabel ||
+        'Componente del flujo de arquitectura. Explora las conexiones relacionadas abajo.';
+
+      titleEl.textContent = title;
+      setMeta(subEl, subtitle);
+      bodyEl.textContent = body;
+      setMeta(kindEl, KIND_LABELS[hint?.kind || node.kind || ''] || hint?.kind || node.kind);
+      setMeta(layerEl, hint?.layer || node.context);
+
+      relList.textContent = '';
+      const relationships = node.relationships ?? [];
+      if (relationships.length) {
+        relWrap.hidden = false;
+        relationships.slice(0, 6).forEach((rel) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'arch-popover-rel';
+          btn.dataset.relId = rel.id;
+          const arrow = rel.direction === 'out' ? '→' : '←';
+          const edge = rel.edgeLabel ? `<small>${rel.edgeLabel}</small>` : '';
+          btn.innerHTML = `${arrow} ${rel.label} ${edge}`;
+          btn.addEventListener('click', () => {
+            postToFrame(getActiveFrame(), { type: 'set-focus', id: rel.id });
+          });
+          relList.appendChild(btn);
+        });
+      } else {
+        relWrap.hidden = true;
+      }
+
+      popover.hidden = false;
+      lastPlacement = placement;
+      mountPopover();
+
+      const measureAndPlace = () => {
+        if (popover.offsetHeight < 1) {
+          requestAnimationFrame(measureAndPlace);
+          return;
+        }
+        placeArchPopover(popover, placement);
+      };
+      measureAndPlace();
+    };
+
+    closeBtn.addEventListener('click', close);
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !popover.hidden) close();
+    });
+
+    return { open, close, mount: mountPopover };
+  }
+
+  function archifyEmbedSrc(pathname: string, options?: { fullscreen?: boolean }) {
+    const theme = document.documentElement.dataset.theme;
+    const params = new URLSearchParams();
+    params.set('embed', '1');
+    if (options?.fullscreen) params.set('fullscreen', '1');
+    if (theme === 'light' || theme === 'dark') {
+      params.set('theme', theme);
+    }
+    return `${pathname}?${params.toString()}`;
+  }
+
+  function initArchifyViewer(root: HTMLElement) {
+    const dialog = root.querySelector<HTMLDialogElement>('[data-arch-dialog]');
+    const openBtn = root.querySelector<HTMLButtonElement>('[data-arch-expand]');
+    const closeBtn = root.querySelector<HTMLButtonElement>('[data-arch-close]');
+    const inlineFrame = root.querySelector<HTMLIFrameElement>('[data-arch-iframe]');
+    const dialogFrame = root.querySelector<HTMLIFrameElement>('[data-arch-dialog-iframe]');
+    const baseSrc = root.dataset.archSrc;
+    if (!dialog || !openBtn || !closeBtn || !inlineFrame || !dialogFrame || !baseSrc) return;
+
+    const dialogPanel = dialog.querySelector<HTMLElement>('.arch-dialog-panel');
+    if (!dialogPanel) return;
+
+    let scrollY = 0;
+    const CLOSE_MS = 240;
+    const getActiveFrame = () => (dialog.open ? dialogFrame : inlineFrame);
+    const getPopoverHost = () => (dialog.open ? dialogPanel : document.body);
+    const popover = initArchifyPopover(root, getActiveFrame, getPopoverHost);
+
+    const syncTheme = () => {
+      inlineFrame.src = archifyEmbedSrc(baseSrc);
+    };
+
+    syncTheme();
+    const themeObserver = new MutationObserver(syncTheme);
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+    window.addEventListener('message', (event) => {
+      if (event.origin !== window.location.origin) return;
+      if (event.source !== inlineFrame.contentWindow && event.source !== dialogFrame.contentWindow) return;
+      const data = event.data as {
+        source?: string;
+        type?: string;
+        node?: ArchifyNodePayload;
+        anchor?: ArchifyAnchor;
+      };
+      if (data?.source !== 'portfolio-archify') return;
+      if (data.type === 'clear') {
+        popover.close(false);
+        return;
+      }
+      if (data.type === 'node-focus' && data.node) {
+        const frame = event.source === dialogFrame.contentWindow ? dialogFrame : inlineFrame;
+        popover.open(data.node, { anchor: data.anchor, frame });
+      }
+    });
+
+    const unlockScroll = () => {
+      document.body.classList.remove('arch-dialog-open');
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      window.scrollTo(0, scrollY);
+    };
+
+    const open = () => {
+      scrollY = window.scrollY;
+      dialog.classList.remove('is-closing');
+      dialog.setAttribute('data-archify-open', '');
+      root.setAttribute('data-arch-dialog-open', '');
+      popover.mount();
+      dialogFrame.src = archifyEmbedSrc(baseSrc, { fullscreen: true });
+      dialog.showModal();
+      document.body.classList.add('arch-dialog-open');
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+    };
+
+    const finishClose = () => {
+      dialog.classList.remove('is-closing');
+      dialog.removeAttribute('data-archify-open');
+      root.removeAttribute('data-arch-dialog-open');
+      dialogFrame.removeAttribute('src');
+      popover.close();
+      popover.mount();
+      if (!dialog.open) {
+        unlockScroll();
+        return;
+      }
+      dialog.close();
+      unlockScroll();
+    };
+
+    const close = () => {
+      if (!dialog.open || dialog.classList.contains('is-closing')) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        finishClose();
+        return;
+      }
+      dialog.classList.add('is-closing');
+      window.setTimeout(finishClose, CLOSE_MS);
+    };
+
+    openBtn.addEventListener('click', open);
+    closeBtn.addEventListener('click', close);
+    dialog.addEventListener('cancel', (event) => {
+      event.preventDefault();
+      close();
+    });
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) close();
+    });
+  }
+
+  function initLegacyArchViewer(root: HTMLElement) {
     const dialog = root.querySelector<HTMLDialogElement>('[data-arch-dialog]');
     const openBtn = root.querySelector<HTMLButtonElement>('[data-arch-expand]');
     const closeBtn = root.querySelector<HTMLButtonElement>('[data-arch-close]');
@@ -481,6 +1128,7 @@ const hasLayers = Boolean(layers?.length);
     const CLOSE_MS = 240;
 
     const unlockScroll = () => {
+      document.body.classList.remove('arch-dialog-open');
       document.body.style.position = '';
       document.body.style.top = '';
       document.body.style.width = '';
@@ -492,6 +1140,7 @@ const hasLayers = Boolean(layers?.length);
       dialog.classList.remove('is-closing');
       await ensureStageRendered();
       dialog.showModal();
+      document.body.classList.add('arch-dialog-open');
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollY}px`;
       document.body.style.width = '100%';
@@ -583,5 +1232,11 @@ const hasLayers = Boolean(layers?.length);
     });
   }
 
-  document.querySelectorAll<HTMLElement>('[data-arch-view]').forEach(initArchViewer);
+  document.querySelectorAll<HTMLElement>('[data-arch-view]').forEach((root) => {
+    if (root.dataset.archMode === 'archify') {
+      initArchifyViewer(root);
+      return;
+    }
+    initLegacyArchViewer(root);
+  });
 </script>

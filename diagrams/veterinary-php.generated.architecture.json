@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "VeterinaryPHP",
+    "subtitle": "Sistema de gestión veterinaria en PHP, desarrollado en el mismo ciclo que el formulario…",
+    "quality_profile": "showcase",
+    "output": "veterinary-php.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "frontend-javascript-0",
+      "type": "backend",
+      "label": "JavaScript",
+      "sublabel": "JavaScript",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "frontend-tablas-1",
+      "type": "backend",
+      "label": "Tablas",
+      "sublabel": "Tablas",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "frontend-formularios-2",
+      "type": "messagebus",
+      "label": "Formularios",
+      "sublabel": "Formularios",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "id": "backend-php-0",
+      "type": "backend",
+      "label": "PHP",
+      "sublabel": "PHP",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "backend-pdo-1",
+      "type": "backend",
+      "label": "PDO",
+      "sublabel": "PDO",
+      "row": 3,
+      "col": 3
+    },
+    {
+      "id": "backend-crud-scripts-2",
+      "type": "backend",
+      "label": "CRUD scripts",
+      "sublabel": "CRUD scripts",
+      "row": 3,
+      "col": 4
+    },
+    {
+      "id": "datos-mysql-0",
+      "type": "database",
+      "label": "MySQL",
+      "sublabel": "MySQL",
+      "row": 5,
+      "col": 2
+    },
+    {
+      "id": "datos-clientes-1",
+      "type": "database",
+      "label": "Clientes",
+      "sublabel": "Clientes",
+      "row": 5,
+      "col": 3
+    },
+    {
+      "id": "datos-pedidos-2",
+      "type": "database",
+      "label": "Pedidos",
+      "sublabel": "Pedidos",
+      "row": 5,
+      "col": 4
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Frontend",
+      "wraps": [
+        "frontend-javascript-0",
+        "frontend-tablas-1",
+        "frontend-formularios-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Backend",
+      "wraps": [
+        "backend-php-0",
+        "backend-pdo-1",
+        "backend-crud-scripts-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Datos",
+      "wraps": [
+        "datos-mysql-0",
+        "datos-clientes-1",
+        "datos-pedidos-2"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "c0-backend-php--datos-mysql-",
+      "from": "backend-php-0",
+      "to": "datos-mysql-0",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "top"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Resultado 1",
+      "items": [
+        "CRUD de clientes, pedidos, productos y compras."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Resultado 2",
+      "items": [
+        "Endpoints PHP en carpeta Php/ consumidos por fetch."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Resultado 3",
+      "items": [
+        "Búsqueda y listados en app.js y módulos JS."
+      ]
+    }
+  ]
+}

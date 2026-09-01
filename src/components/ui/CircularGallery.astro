@@ -1,0 +1,27 @@
+---
+import type { GalleryImage, GalleryVariant } from '@data/media';
+import CircularGallerySection from '@components/ui/CircularGallerySection';
+
+interface Props {
+  images: GalleryImage[];
+  variant?: GalleryVariant;
+  title?: string;
+  shell?: 'default' | 'project';
+}
+
+const { images, variant = 'desktop' } = Astro.props;
+const phone = variant === 'phone';
+const items = images.map((image) => ({
+  image: image.src,
+  text: image.alt,
+  alt: image.alt,
+}));
+---
+
+{images.length > 0 && (
+  <section class:list={['px-4 pb-8 pt-2 md:px-8 md:pb-12', Astro.props.shell === 'project' && 'project-carousel']} data-reveal>
+    <div class="mx-auto max-w-6xl">
+      <CircularGallerySection client:visible items={items} phone={phone} />
+    </div>
+  </section>
+)}

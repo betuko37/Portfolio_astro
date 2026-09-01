@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "TaskApp",
+    "subtitle": "Aplicación de lista de tareas en JavaScript, correspondiente a las prácticas del curríc…",
+    "quality_profile": "showcase",
+    "output": "task-app.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "cliente-html-0",
+      "type": "frontend",
+      "label": "HTML",
+      "sublabel": "HTML",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "cliente-bootstrap-1",
+      "type": "backend",
+      "label": "Bootstrap",
+      "sublabel": "Bootstrap",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "cliente-script-js-2",
+      "type": "backend",
+      "label": "script.js",
+      "sublabel": "script.js",
+      "row": 1,
+      "col": 4
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Cliente",
+      "wraps": [
+        "cliente-html-0",
+        "cliente-bootstrap-1",
+        "cliente-script-js-2"
+      ]
+    }
+  ],
+  "connections": [],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Resultado 1",
+      "items": [
+        "CRUD de tareas en memoria con Bootstrap UI."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Resultado 2",
+      "items": [
+        "script.js sin dependencias de framework."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Resultado 3",
+      "items": [
+        "Proyecto base del currículum formativo."
+      ]
+    }
+  ]
+}

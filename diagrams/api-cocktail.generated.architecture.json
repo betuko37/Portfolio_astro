@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "apiCoktel",
+    "subtitle": "Buscador de cócteles integrado con una API pública.",
+    "quality_profile": "showcase",
+    "output": "api-cocktail.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "vistas-index-0",
+      "type": "backend",
+      "label": "index",
+      "sublabel": "index",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "vistas-pages-1",
+      "type": "backend",
+      "label": "pages",
+      "sublabel": "pages/",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "vistas-carrusel-2",
+      "type": "backend",
+      "label": "carrusel",
+      "sublabel": "carrusel",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "id": "logica-fetch-0",
+      "type": "backend",
+      "label": "fetch",
+      "sublabel": "fetch",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "logica-ruleta-1",
+      "type": "backend",
+      "label": "ruleta",
+      "sublabel": "ruleta",
+      "row": 3,
+      "col": 3
+    },
+    {
+      "id": "logica-filtros-2",
+      "type": "backend",
+      "label": "filtros",
+      "sublabel": "filtros",
+      "row": 3,
+      "col": 4
+    },
+    {
+      "id": "deploy-github-pages-0",
+      "type": "cloud",
+      "label": "GitHub Pages",
+      "sublabel": "GitHub Pages",
+      "row": 5,
+      "col": 3
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Vistas",
+      "wraps": [
+        "vistas-index-0",
+        "vistas-pages-1",
+        "vistas-carrusel-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Lógica",
+      "wraps": [
+        "logica-fetch-0",
+        "logica-ruleta-1",
+        "logica-filtros-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Deploy",
+      "wraps": [
+        "deploy-github-pages-0"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "flow-0",
+      "from": "vistas-pages-1",
+      "to": "logica-ruleta-1",
+      "variant": "emphasis"
+    },
+    {
+      "id": "flow-1",
+      "from": "logica-ruleta-1",
+      "to": "deploy-github-pages-0"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Secciones",
+      "items": [
+        "clásicos, shots, sin alcohol, cafés y más."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Resultado 2",
+      "items": [
+        "Ruleta y carrusel para descubrir bebidas."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Resultado 3",
+      "items": [
+        "Estilos modulares en Styles/."
+      ]
+    }
+  ]
+}

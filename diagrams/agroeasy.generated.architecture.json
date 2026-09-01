@@ -1,0 +1,302 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Agroeasy — Empaques & Embarques",
+    "subtitle": "ERP agrícola de paletización y logística: acarreos, pallets, embarques y facturación SA…",
+    "quality_profile": "showcase",
+    "output": "agroeasy.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "apps-empaques-embarques-0",
+      "type": "frontend",
+      "label": "Empaques & Embarq…",
+      "sublabel": "Empaques & Embarques",
+      "row": 1,
+      "col": 1
+    },
+    {
+      "id": "apps-nomina-1",
+      "type": "frontend",
+      "label": "Nómina",
+      "sublabel": "Nómina",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "apps-cuaderno-agricola-2",
+      "type": "messagebus",
+      "label": "Cuaderno agrícola",
+      "sublabel": "Cuaderno agrícola",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "apps-administracion-3",
+      "type": "frontend",
+      "label": "Administración",
+      "sublabel": "Administración",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "id": "procesos-acarreos-0",
+      "type": "backend",
+      "label": "Acarreos",
+      "sublabel": "Acarreos",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "id": "procesos-pallets-1",
+      "type": "backend",
+      "label": "Pallets",
+      "sublabel": "Pallets",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "procesos-embarques-2",
+      "type": "backend",
+      "label": "Embarques",
+      "sublabel": "Embarques",
+      "row": 3,
+      "col": 3
+    },
+    {
+      "id": "procesos-embarque-rapido-3",
+      "type": "backend",
+      "label": "Embarque rápido",
+      "sublabel": "Embarque rápido",
+      "row": 3,
+      "col": 4
+    },
+    {
+      "id": "procesos-almacenes-4",
+      "type": "database",
+      "label": "Almacenes",
+      "sublabel": "Almacenes",
+      "row": 3,
+      "col": 5
+    },
+    {
+      "id": "frontend-vue-3-0",
+      "type": "frontend",
+      "label": "Vue 3",
+      "sublabel": "Vue 3",
+      "row": 5,
+      "col": 0
+    },
+    {
+      "id": "frontend-quasar-1",
+      "type": "frontend",
+      "label": "Quasar",
+      "sublabel": "Quasar",
+      "row": 5,
+      "col": 1
+    },
+    {
+      "id": "frontend-pinia-2",
+      "type": "backend",
+      "label": "Pinia",
+      "sublabel": "Pinia",
+      "row": 5,
+      "col": 2
+    },
+    {
+      "id": "backend-express-0",
+      "type": "backend",
+      "label": "Express",
+      "sublabel": "Express",
+      "row": 5,
+      "col": 4
+    },
+    {
+      "id": "backend-prisma-1",
+      "type": "database",
+      "label": "Prisma",
+      "sublabel": "Prisma",
+      "row": 5,
+      "col": 5
+    },
+    {
+      "id": "backend-socket-io-2",
+      "type": "messagebus",
+      "label": "Socket.IO",
+      "sublabel": "Socket.IO",
+      "row": 5,
+      "col": 6
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Apps",
+      "wraps": [
+        "apps-empaques-embarques-0",
+        "apps-nomina-1",
+        "apps-cuaderno-agricola-2",
+        "apps-administracion-3"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Procesos",
+      "wraps": [
+        "procesos-acarreos-0",
+        "procesos-pallets-1",
+        "procesos-embarques-2",
+        "procesos-embarque-rapido-3",
+        "procesos-almacenes-4"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Frontend",
+      "wraps": [
+        "frontend-vue-3-0",
+        "frontend-quasar-1",
+        "frontend-pinia-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Backend",
+      "wraps": [
+        "backend-express-0",
+        "backend-prisma-1",
+        "backend-socket-io-2"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "c0-frontend-qua-frontend-vue",
+      "from": "frontend-quasar-1",
+      "to": "frontend-vue-3-0",
+      "variant": "emphasis",
+      "fromSide": "left",
+      "toSide": "right"
+    },
+    {
+      "id": "c1-backend-expr-backend-pris",
+      "from": "backend-express-0",
+      "to": "backend-prisma-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c2-apps-empaque-procesos-aca",
+      "from": "apps-empaques-embarques-0",
+      "to": "procesos-acarreos-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c3-apps-empaque-procesos-pal",
+      "from": "apps-empaques-embarques-0",
+      "to": "procesos-pallets-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c4-procesos-emb-procesos-pal",
+      "from": "procesos-embarques-2",
+      "to": "procesos-pallets-1",
+      "fromSide": "left",
+      "toSide": "right"
+    },
+    {
+      "id": "c5-apps-empaque-procesos-emb",
+      "from": "apps-empaques-embarques-0",
+      "to": "procesos-embarques-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c6-apps-empaque-procesos-emb",
+      "from": "apps-empaques-embarques-0",
+      "to": "procesos-embarque-rapido-3",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c7-procesos-emb-procesos-emb",
+      "from": "procesos-embarques-2",
+      "to": "procesos-embarque-rapido-3",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c8-apps-empaque-procesos-alm",
+      "from": "apps-empaques-embarques-0",
+      "to": "procesos-almacenes-4",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c9-procesos-aca-backend-pris",
+      "from": "procesos-acarreos-0",
+      "to": "backend-prisma-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c10-procesos-pal-backend-pris",
+      "from": "procesos-pallets-1",
+      "to": "backend-prisma-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c11-procesos-emb-backend-pris",
+      "from": "procesos-embarques-2",
+      "to": "backend-prisma-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c12-backend-expr-procesos-emb",
+      "from": "backend-express-0",
+      "to": "procesos-embarques-2",
+      "fromSide": "top",
+      "toSide": "bottom"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Hub multi-app",
+      "items": [
+        "Empaques & Embarques, Nómina, Cuaderno agrícola y panel admin en una sola sesión."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Procesos de campo",
+      "items": [
+        "acarreos, granel, pallets, embarques, embarque rápido y almacenes de materiales."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Resultado 3",
+      "items": [
+        "Etiquetado con QR/códigos de barras, reportes de inventario, acarreos y facturación CFDI."
+      ]
+    }
+  ]
+}

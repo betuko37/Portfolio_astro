@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Form Pets PHP",
+    "subtitle": "Formulario de registro de mascotas en PHP, complementario a VeterinaryPHP.",
+    "quality_profile": "showcase",
+    "output": "form-pets.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "ui-html-form-0",
+      "type": "frontend",
+      "label": "HTML form",
+      "sublabel": "HTML form",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "ui-stylei-css-1",
+      "type": "frontend",
+      "label": "stylei.css",
+      "sublabel": "stylei.css",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "api-guardar-0",
+      "type": "backend",
+      "label": "guardar",
+      "sublabel": "guardar",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "id": "api-get-1",
+      "type": "backend",
+      "label": "get",
+      "sublabel": "get",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "api-editar-2",
+      "type": "backend",
+      "label": "editar",
+      "sublabel": "editar",
+      "row": 3,
+      "col": 3
+    },
+    {
+      "id": "api-eliminar-3",
+      "type": "backend",
+      "label": "eliminar",
+      "sublabel": "eliminar",
+      "row": 3,
+      "col": 4
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "UI",
+      "wraps": [
+        "ui-html-form-0",
+        "ui-stylei-css-1"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "API",
+      "wraps": [
+        "api-guardar-0",
+        "api-get-1",
+        "api-editar-2",
+        "api-eliminar-3"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "flow-0",
+      "from": "ui-stylei-css-1",
+      "to": "api-editar-2",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Resultado 1",
+      "items": [
+        "ajax.js comunica formulario sin recargar página."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Resultado 2",
+      "items": [
+        "Endpoints guardar, get, editar y eliminar."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Resultado 3",
+      "items": [
+        "Complemento directo de VeterinaryPHP."
+      ]
+    }
+  ]
+}

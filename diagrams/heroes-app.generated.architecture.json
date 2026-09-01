@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Comicpedia",
+    "subtitle": "Catálogo de héroes con React Router, Tailwind CSS y búsqueda.",
+    "quality_profile": "showcase",
+    "output": "heroes-app.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "ui-tailwind-4-0",
+      "type": "backend",
+      "label": "Tailwind 4",
+      "sublabel": "Tailwind 4",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "ui-animate-css-1",
+      "type": "frontend",
+      "label": "animate.css",
+      "sublabel": "animate.css",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "ui-react-icons-2",
+      "type": "backend",
+      "label": "react-icons",
+      "sublabel": "react-icons",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "id": "estado-auth-context-0",
+      "type": "security",
+      "label": "Auth context",
+      "sublabel": "Auth context",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "estado-query-string-1",
+      "type": "backend",
+      "label": "query-string",
+      "sublabel": "query-string",
+      "row": 3,
+      "col": 3
+    },
+    {
+      "id": "deploy-vite-0",
+      "type": "backend",
+      "label": "Vite",
+      "sublabel": "Vite",
+      "row": 5,
+      "col": 2
+    },
+    {
+      "id": "deploy-netlify-1",
+      "type": "backend",
+      "label": "Netlify",
+      "sublabel": "Netlify",
+      "row": 5,
+      "col": 3
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "UI",
+      "wraps": [
+        "ui-tailwind-4-0",
+        "ui-animate-css-1",
+        "ui-react-icons-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Estado",
+      "wraps": [
+        "estado-auth-context-0",
+        "estado-query-string-1"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Deploy",
+      "wraps": [
+        "deploy-vite-0",
+        "deploy-netlify-1"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "flow-0",
+      "from": "ui-animate-css-1",
+      "to": "estado-query-string-1",
+      "variant": "emphasis"
+    },
+    {
+      "id": "flow-1",
+      "from": "estado-query-string-1",
+      "to": "deploy-netlify-1"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Resultado 1",
+      "items": [
+        "Módulos auth/ y heroes/ separados por dominio."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Resultado 2",
+      "items": [
+        "Búsqueda con query-string y filtros."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Resultado 3",
+      "items": [
+        "Assets DC/Marvel en public/assets."
+      ]
+    }
+  ]
+}

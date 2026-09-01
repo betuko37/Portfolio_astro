@@ -5,12 +5,20 @@ import { moduleSlug } from '@lib/module-slug';
 import AppIcon from '@components/ui/AppIcon.astro';
 import StackMarquee from '@components/ui/StackMarquee.astro';
 import ArchViewer from '@components/projects/ArchViewer.astro';
+import fs from 'node:fs';
+import path from 'node:path';
 
 interface Props {
   project: Project;
 }
 
 const { project } = Astro.props;
+const archifyPath = path.join(process.cwd(), 'public', 'diagrams', `${project.slug}.html`);
+const hintsPath = path.join(process.cwd(), 'public', 'diagrams', `${project.slug}.hints.json`);
+const archifySrc = fs.existsSync(archifyPath) ? `/diagrams/${project.slug}.html` : undefined;
+const diagramHints = archifySrc && fs.existsSync(hintsPath)
+  ? JSON.parse(fs.readFileSync(hintsPath, 'utf8'))
+  : undefined;
 
 function splitLine(text: string, fallback: string) {
   const colon = text.match(/^([^:]{6,52}):\s+(.+)$/);
@@ -19,19 +27,19 @@ function splitLine(text: string, fallback: string) {
 }
 ---
 
-<div class="space-y-5 md:space-y-8">
+<div class="project-deck space-y-8 md:space-y-12">
   <div data-case-blurb-deck>
-    <div class="grid grid-cols-2 items-stretch gap-2 md:gap-3">
-      <article class="case-blurb deck-card flex min-h-[8.75rem] flex-col md:min-h-0" data-case-blurb>
+    <div class="project-intro grid gap-3 md:grid-cols-2 md:gap-4">
+      <article class="case-blurb deck-card project-intro-card flex min-h-0 flex-col" data-case-blurb>
         <span class="deck-card-icon">
           <AppIcon name="circle-alert" size={15} />
         </span>
         <h3 class="deck-card-title">Contexto</h3>
-        <p class="case-blurb-text deck-card-body line-clamp-3 flex-1 md:line-clamp-none" data-case-blurb-text>
+        <p class="case-blurb-text deck-card-body flex-1 md:line-clamp-none" data-case-blurb-text>
           {project.problem}
         </p>
         <button
-          class="deck-action mt-1.5 text-left md:hidden"
+          class="deck-action mt-2 text-left md:hidden"
           type="button"
           data-case-blurb-open
           aria-haspopup="dialog"
@@ -39,16 +47,16 @@ function splitLine(text: string, fallback: string) {
           Ver más
         </button>
       </article>
-      <article class="case-blurb deck-card flex min-h-[8.75rem] flex-col md:min-h-0" data-case-blurb>
+      <article class="case-blurb deck-card project-intro-card flex min-h-0 flex-col" data-case-blurb>
         <span class="deck-card-icon">
           <AppIcon name="sparkles" size={15} />
         </span>
         <h3 class="deck-card-title">Descripción</h3>
-        <p class="case-blurb-text deck-card-body line-clamp-3 flex-1 md:line-clamp-none" data-case-blurb-text>
+        <p class="case-blurb-text deck-card-body flex-1 md:line-clamp-none" data-case-blurb-text>
           {project.summary}
         </p>
         <button
-          class="deck-action mt-1.5 text-left md:hidden"
+          class="deck-action mt-2 text-left md:hidden"
           type="button"
           data-case-blurb-open
           aria-haspopup="dialog"
@@ -83,11 +91,12 @@ function splitLine(text: string, fallback: string) {
   </div>
 
   {project.modules.length > 0 && (
-    <section data-rail>
-      <div class="mb-3 flex items-end justify-between gap-3 md:mb-4">
+    <section class="project-section" data-rail>
+      <div class="project-section-head">
         <p class="deck-label">
           <AppIcon name="layers" size={14} />
           Módulos
+          <span class="project-section-count">{project.modules.length}</span>
         </p>
         {project.modules.length > 1 && (
           <div class="deck-rail-controls flex gap-1.5">
@@ -100,9 +109,9 @@ function splitLine(text: string, fallback: string) {
           </div>
         )}
       </div>
-      <div class="rail">
+      <div class="rail project-rail">
         {project.modules.map((module) => (
-          <article id={module.id ?? moduleSlug(module.name)} class="rail-item deck-card scroll-mt-28">
+          <article id={module.id ?? moduleSlug(module.name)} class="rail-item deck-card project-rail-card scroll-mt-28">
             <span class="deck-card-icon">
               <AppIcon name={iconForModule(module.name)} size={15} />
             </span>
@@ -115,15 +124,19 @@ function splitLine(text: string, fallback: string) {
   )}
 
   {(project.architectureLayers || project.architecture) && (
-    <ArchViewer
-      chart={project.architecture}
-      layers={project.architectureLayers}
-    />
+    <section class="project-section project-section-arch">
+      <ArchViewer
+        archifySrc={archifySrc}
+        diagramHints={diagramHints}
+        chart={archifySrc ? undefined : project.architecture}
+        layers={archifySrc ? undefined : project.architectureLayers}
+      />
+    </section>
   )}
 
   {project.stack.length > 0 && (
-    <section class="deck-card overflow-hidden py-4 md:px-6 md:py-6">
-      <p class="deck-label mb-3 md:mb-4">
+    <section class="project-section deck-card project-stack-card overflow-hidden py-5 md:px-6 md:py-6">
+      <p class="deck-label mb-4 md:mb-5">
         <AppIcon name="cpu" size={14} />
         Stack
       </p>
@@ -132,11 +145,12 @@ function splitLine(text: string, fallback: string) {
   )}
 
   {project.howItWorks.length > 0 && (
-    <section data-rail>
-      <div class="mb-3 flex items-end justify-between gap-3 md:mb-4">
+    <section class="project-section" data-rail>
+      <div class="project-section-head">
         <p class="deck-label">
           <AppIcon name="waypoints" size={14} />
           Proceso
+          <span class="project-section-count">{project.howItWorks.length}</span>
         </p>
         {project.howItWorks.length > 1 && (
           <div class="deck-rail-controls flex gap-1.5">
@@ -149,13 +163,13 @@ function splitLine(text: string, fallback: string) {
           </div>
         )}
       </div>
-      <div class="rail">
+      <div class="rail project-rail">
         {project.howItWorks.map((step, index) => {
           const n = String(index + 1).padStart(2, '0');
           const card = splitLine(step, `Paso ${n}`);
           return (
-            <article class="rail-item deck-card">
-              <span class="deck-card-icon inline-flex h-7 min-w-7 items-center justify-center px-2 font-display text-[11px] font-semibold md:h-9 md:min-w-9 md:px-2.5 md:text-sm">
+            <article class="rail-item deck-card project-rail-card">
+              <span class="deck-card-icon inline-flex h-7 min-w-7 items-center justify-center px-2 font-display text-[11px] font-semibold tabular-nums md:h-9 md:min-w-9 md:px-2.5 md:text-sm">
                 {n}
               </span>
               <h3 class="deck-card-title">{card.title}</h3>
@@ -168,11 +182,12 @@ function splitLine(text: string, fallback: string) {
   )}
 
   {project.highlights.length > 0 && (
-    <section data-rail>
-      <div class="mb-3 flex items-end justify-between gap-3 md:mb-4">
+    <section class="project-section" data-rail>
+      <div class="project-section-head">
         <p class="deck-label">
           <AppIcon name="sparkles" size={14} />
           Resultados
+          <span class="project-section-count">{project.highlights.length}</span>
         </p>
         {project.highlights.length > 1 && (
           <div class="deck-rail-controls flex gap-1.5">
@@ -185,11 +200,11 @@ function splitLine(text: string, fallback: string) {
           </div>
         )}
       </div>
-      <div class="rail">
+      <div class="rail project-rail">
         {project.highlights.map((item, index) => {
           const card = splitLine(item, `Resultado ${String(index + 1).padStart(2, '0')}`);
           return (
-            <article class="rail-item deck-card">
+            <article class="rail-item deck-card project-rail-card">
               <span class="deck-card-icon">
                 <AppIcon name={iconForModule(item)} size={15} />
               </span>

@@ -1,0 +1,23 @@
+{
+  "cliente-html-0": {
+    "title": "HTML",
+    "subtitle": "HTML",
+    "kind": "frontend",
+    "layer": "Cliente",
+    "body": "HTML"
+  },
+  "cliente-bootstrap-1": {
+    "title": "Bootstrap",
+    "subtitle": "Bootstrap",
+    "kind": "backend",
+    "layer": "Cliente",
+    "body": "Grid y componentes CSS predefinidos."
+  },
+  "cliente-script-js-2": {
+    "title": "script.js",
+    "subtitle": "script.js",
+    "kind": "backend",
+    "layer": "Cliente",
+    "body": "script.js"
+  }
+}

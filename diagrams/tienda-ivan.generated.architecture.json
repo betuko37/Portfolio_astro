@@ -1,0 +1,252 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "ITZ Coleccionables",
+    "subtitle": "Tienda Shopify Hydrogen y Remix para Funko y figuras coleccionables.",
+    "quality_profile": "showcase",
+    "output": "tienda-ivan.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "cliente-navegador-0",
+      "type": "backend",
+      "label": "Navegador",
+      "sublabel": "Navegador",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "runtime-oxygen-0",
+      "type": "cloud",
+      "label": "Oxygen",
+      "sublabel": "Oxygen",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "runtime-remix-1",
+      "type": "backend",
+      "label": "Remix",
+      "sublabel": "Remix",
+      "row": 3,
+      "col": 3
+    },
+    {
+      "id": "runtime-hydrogen-2",
+      "type": "frontend",
+      "label": "Hydrogen",
+      "sublabel": "Hydrogen",
+      "row": 3,
+      "col": 4
+    },
+    {
+      "id": "shopify-storefront-api-0",
+      "type": "external",
+      "label": "Storefront API",
+      "sublabel": "Storefront API",
+      "row": 5,
+      "col": 1
+    },
+    {
+      "id": "shopify-admin-api-1",
+      "type": "external",
+      "label": "Admin API",
+      "sublabel": "Admin API",
+      "row": 5,
+      "col": 2
+    },
+    {
+      "id": "shopify-customer-account-api-2",
+      "type": "external",
+      "label": "Customer Account …",
+      "sublabel": "Customer Account API",
+      "row": 5,
+      "col": 3
+    },
+    {
+      "id": "shopify-checkout-3",
+      "type": "external",
+      "label": "Checkout",
+      "sublabel": "Checkout",
+      "row": 5,
+      "col": 4
+    },
+    {
+      "id": "shopify-shopify-4",
+      "type": "external",
+      "label": "Shopify",
+      "sublabel": "Shopify",
+      "row": 5,
+      "col": 5
+    },
+    {
+      "id": "media-y-correo-cloudinary-0",
+      "type": "cloud",
+      "label": "Cloudinary",
+      "sublabel": "Cloudinary",
+      "row": 7,
+      "col": 2
+    },
+    {
+      "id": "media-y-correo-nodemailer-1",
+      "type": "backend",
+      "label": "Nodemailer",
+      "sublabel": "Nodemailer",
+      "row": 7,
+      "col": 3
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Cliente",
+      "wraps": [
+        "cliente-navegador-0"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Runtime",
+      "wraps": [
+        "runtime-oxygen-0",
+        "runtime-remix-1",
+        "runtime-hydrogen-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Shopify",
+      "wraps": [
+        "shopify-storefront-api-0",
+        "shopify-admin-api-1",
+        "shopify-customer-account-api-2",
+        "shopify-checkout-3",
+        "shopify-shopify-4"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Media y correo",
+      "wraps": [
+        "media-y-correo-cloudinary-0",
+        "media-y-correo-nodemailer-1"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "c0-cliente-nave-runtime-oxyg",
+      "from": "cliente-navegador-0",
+      "to": "runtime-oxygen-0",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c1-runtime-oxyg-runtime-remi",
+      "from": "runtime-oxygen-0",
+      "to": "runtime-remix-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c2-runtime-remi-runtime-hydr",
+      "from": "runtime-remix-1",
+      "to": "runtime-hydrogen-2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c3-runtime-remi-shopify-stor",
+      "from": "runtime-remix-1",
+      "to": "shopify-storefront-api-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c4-runtime-remi-shopify-cust",
+      "from": "runtime-remix-1",
+      "to": "shopify-customer-account-api-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c5-runtime-remi-shopify-admi",
+      "from": "runtime-remix-1",
+      "to": "shopify-admin-api-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c6-runtime-hydr-shopify-stor",
+      "from": "runtime-hydrogen-2",
+      "to": "shopify-storefront-api-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c7-runtime-hydr-shopify-chec",
+      "from": "runtime-hydrogen-2",
+      "to": "shopify-checkout-3",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c8-shopify-chec-shopify-shop",
+      "from": "shopify-checkout-3",
+      "to": "shopify-shopify-4",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c9-shopify-stor-media-y-corr",
+      "from": "shopify-storefront-api-0",
+      "to": "media-y-correo-cloudinary-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c10-shopify-cust-media-y-corr",
+      "from": "shopify-customer-account-api-2",
+      "to": "media-y-correo-nodemailer-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Resultado 1",
+      "items": [
+        "Storefront Hydrogen en producción, publicado en Oxygen."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Resultado 2",
+      "items": [
+        "Storefront API, Admin API y Customer Account API."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Comercio headless",
+      "items": [
+        "el checkout permanece en Shopify."
+      ]
+    }
+  ]
+}

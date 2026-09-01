@@ -156,13 +156,28 @@ a {
 .deck-card {
   border-radius: 1rem;
   background: var(--color-sand);
-  padding: 0.75rem;
+  padding: 0.875rem;
+  border: 1px solid color-mix(in srgb, var(--color-ink) 6%, transparent);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
 @media (min-width: 768px) {
   .deck-card {
     border-radius: 1.4rem;
     padding: 1.25rem;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-intro-card:hover,
+  .project-rail-card:hover,
+  .project-stack-card:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--color-accent) 22%, transparent);
+    box-shadow: 0 14px 36px color-mix(in srgb, var(--color-ink) 8%, transparent);
   }
 }
 
@@ -199,9 +214,9 @@ a {
 }
 
 .deck-card-body {
-  margin-top: 0.25rem;
-  font-size: 0.6875rem;
-  line-height: 1.45;
+  margin-top: 0.35rem;
+  font-size: 0.75rem;
+  line-height: 1.5;
   color: var(--color-muted);
 }
 
@@ -252,6 +267,44 @@ a {
 
 .project-hero {
   color: #f3f0fa;
+  --project-hero-end: #2a1048;
+  --project-glow-a: color-mix(in srgb, var(--color-accent) 28%, transparent);
+  --project-glow-b: color-mix(in srgb, var(--color-accent) 16%, transparent);
+}
+
+.project-hero[data-accent='ink'] {
+  --project-hero-end: #1e1b4b;
+}
+
+.project-hero[data-accent='sand'] {
+  --project-hero-end: #4c1d95;
+}
+
+.project-hero[data-accent='night'] {
+  --project-hero-end: #0f172a;
+}
+
+.project-hero-gradient {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.94) 0%,
+    rgba(0, 0, 0, 0.82) 42%,
+    color-mix(in srgb, var(--project-hero-end) 88%, black) 100%
+  );
+}
+
+.project-hero-glow-a {
+  background: var(--project-glow-a);
+}
+
+.project-hero-glow-b {
+  background: var(--project-glow-b);
+}
+
+.project-hero-logo {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, white 8%, transparent),
+    0 24px 48px rgba(0, 0, 0, 0.35);
 }
 
 .project-hero-chip {
@@ -297,8 +350,9 @@ a {
     width: 2rem;
   }
 
-  .rail-item {
-    flex: 0 0 min(calc(100vw - 3rem), 16.5rem);
+  .rail-item,
+  .project-rail-card {
+    flex: 0 0 min(calc(100vw - 3rem), 17.5rem);
   }
 
   .project-hero-title {
@@ -309,6 +363,88 @@ a {
 @media (min-width: 768px) {
   .project-hero-role-mobile {
     display: none;
+  }
+
+  .project-rail-card {
+    flex: 0 0 min(22rem, 42vw);
+  }
+
+  .project-intro-card {
+    min-height: 12rem;
+  }
+}
+
+.project-page {
+  padding-bottom: 0.5rem;
+}
+
+.project-study {
+  border-top: 1px solid color-mix(in srgb, var(--color-ink) 8%, transparent);
+}
+
+.project-deck {
+  max-width: none;
+}
+
+.project-section + .project-section {
+  padding-top: 0.25rem;
+}
+
+.project-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.875rem;
+}
+
+@media (min-width: 768px) {
+  .project-section-head {
+    margin-bottom: 1rem;
+  }
+}
+
+.project-section-count {
+  margin-left: 0.15rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  padding: 0.1rem 0.45rem;
+  font-size: 0.625rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: var(--color-accent);
+}
+
+.project-section-arch {
+  padding: 0.25rem 0;
+}
+
+.project-stack-card {
+  background: color-mix(in srgb, var(--color-sand) 88%, var(--color-paper));
+}
+
+.project-carousel {
+  margin-top: 0;
+  padding-top: 0.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.project-related {
+  border-top: 1px solid color-mix(in srgb, var(--color-ink) 8%, transparent);
+}
+
+.project-intro-card .case-blurb-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .project-intro-card .case-blurb-text {
+    display: block;
+    -webkit-line-clamp: unset;
+    overflow: visible;
   }
 }
 
@@ -714,7 +850,7 @@ a {
 }
 
 .rail-item {
-  flex: 0 0 min(calc(100vw - 2.5rem), 300px);
+  flex: 0 0 min(calc(100vw - 2.5rem), 18.5rem);
   scroll-snap-align: start;
 }
 
@@ -843,6 +979,7 @@ a {
   max-height: none;
   width: 100%;
   height: 100%;
+  height: 100dvh;
   border: 0;
   padding: 0;
   background: transparent;
@@ -859,9 +996,10 @@ a {
 .carousel-lightbox-panel {
   display: flex;
   min-height: 100%;
+  min-height: 100dvh;
   flex-direction: column;
   justify-content: center;
-  padding: 1rem 1rem 1.5rem;
+  padding: 1rem 1rem max(1.5rem, env(safe-area-inset-bottom));
 }
 
 @media (min-width: 768px) {
@@ -914,15 +1052,27 @@ a {
 .carousel-lightbox-hero img {
   width: auto;
   height: auto;
-  max-height: 82vh;
+  max-height: min(88vh, calc(100dvh - 7rem));
   max-width: min(96vw, 88rem);
+  border-radius: 1rem;
+  object-fit: contain;
   outline: 1px solid var(--lightbox-image-ring);
 }
 
 body.carousel-lightbox-open,
 body.case-blurb-modal-open,
-body.cv-modal-open {
+body.cv-modal-open,
+body.arch-dialog-open {
   overflow: hidden;
+}
+
+body:has(dialog[open]) .circular-gallery,
+body.carousel-lightbox-open .circular-gallery,
+body.case-blurb-modal-open .circular-gallery,
+body.cv-modal-open .circular-gallery,
+body.arch-dialog-open .circular-gallery {
+  pointer-events: none;
+  user-select: none;
 }
 
 .cv-modal {

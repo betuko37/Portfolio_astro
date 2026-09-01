@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Gifxplore",
+    "subtitle": "Explorador de GIFs desarrollado en React y Vite, con enrutamiento y publicación en Netl…",
+    "quality_profile": "showcase",
+    "output": "gifxplore.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "ui-navbar-0",
+      "type": "backend",
+      "label": "Navbar",
+      "sublabel": "Navbar",
+      "row": 1,
+      "col": 1
+    },
+    {
+      "id": "ui-gridgifts-1",
+      "type": "backend",
+      "label": "GridGifts",
+      "sublabel": "GridGifts",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "ui-search-2",
+      "type": "backend",
+      "label": "Search",
+      "sublabel": "Search",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "ui-favorites-3",
+      "type": "backend",
+      "label": "Favorites",
+      "sublabel": "Favorites",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "id": "datos-helpers-0",
+      "type": "database",
+      "label": "helpers",
+      "sublabel": "helpers",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "datos-hooks-1",
+      "type": "database",
+      "label": "hooks",
+      "sublabel": "hooks",
+      "row": 3,
+      "col": 3
+    },
+    {
+      "id": "datos-apikey-2",
+      "type": "database",
+      "label": "apiKey",
+      "sublabel": "apiKey",
+      "row": 3,
+      "col": 4
+    },
+    {
+      "id": "deploy-vite-build-0",
+      "type": "backend",
+      "label": "Vite build",
+      "sublabel": "Vite build",
+      "row": 5,
+      "col": 2
+    },
+    {
+      "id": "deploy-netlify-1",
+      "type": "backend",
+      "label": "Netlify",
+      "sublabel": "Netlify",
+      "row": 5,
+      "col": 3
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "UI",
+      "wraps": [
+        "ui-navbar-0",
+        "ui-gridgifts-1",
+        "ui-search-2",
+        "ui-favorites-3"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Datos",
+      "wraps": [
+        "datos-helpers-0",
+        "datos-hooks-1",
+        "datos-apikey-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Deploy",
+      "wraps": [
+        "deploy-vite-build-0",
+        "deploy-netlify-1"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "c0-datos-hooks--datos-helper",
+      "from": "datos-hooks-1",
+      "to": "datos-helpers-0",
+      "variant": "emphasis",
+      "fromSide": "left",
+      "toSide": "right"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Resultado 1",
+      "items": [
+        "Grid de categorías, trending y búsqueda por término."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Resultado 2",
+      "items": [
+        "Hook useFetchGifs centraliza loading y errores."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Resultado 3",
+      "items": [
+        "Favoritos persistidos en cliente."
+      ]
+    }
+  ]
+}

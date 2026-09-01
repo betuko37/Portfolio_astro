@@ -127,45 +127,20 @@ export const projects: Project[] = [
       "Socket.IO emite persistencias, notificaciones y eventos del buzón SAT.",
     ],
     architecture: `flowchart TB
-  subgraph surfaces [Superficies]
-    Web[ERP Web PWA]
-    App[App de campo Flutter]
-  end
-  subgraph api [JornalPro Cloud]
-    Express[Express Prisma PostgreSQL]
-    IO[Socket.IO]
-    Joni[Joni IA router]
-    Auth[JWT 2FA RBAC]
-  end
-  subgraph domain [Dominio]
-    Nomina[Nomina y cuadrillas]
-    Tes[Tesoreria y cajas]
-    Pack[Empaque y embarques]
-    SAT[Buzon SAT CFDI]
-  end
-  subgraph field [Campo y oficina]
-    Hik[HikCentral facial]
-    NFC[nfc-service ACR122U]
-    Sync[betuko_offline_sync]
-    WA[WhatsApp]
-  end
-  Web --> Auth
-  App --> Auth
-  Auth --> Express
-  Express --> Nomina
-  Express --> Tes
-  Express --> Pack
-  Express --> SAT
-  Express --> IO
-  Joni --> WA
-  Joni --> Web
-  Joni --> Express
-  Hik --> Express
-  NFC --> Web
-  NFC --> App
-  Sync --> App
-  IO --> Web
-  IO --> SAT`,
+  Web[ERP web PWA] --> Auth[JWT / 2FA / RBAC]
+  App[App Flutter de campo] --> Auth
+  Auth --> Nomina[Nómina]
+  Auth --> Tes[Tesorería]
+  Auth --> Pack[Empaque]
+  Auth --> Wh[Almacenes]
+  App --> NFC[nfc-service :47321]
+  App --> Sync[betuko_offline_sync]
+  Sync --> WM[WorkManager]
+  NFC --> Asist[Asistencias NFC/QR]
+  Joni[chatbot Joni] --> Web
+  Hik[hikcentral] --> Auth
+  IO[socket-gateway] --> Web
+  SAT[SAT CFDI] --> Tes`,
     architectureLayers: [
       {
         name: "Superficies",
@@ -1041,25 +1016,25 @@ export const projects: Project[] = [
       "La PWA cachea assets; el sync móvil expone catálogos de campo para operación offline.",
     ],
     architecture: `flowchart TB
-  subgraph clients [Clientes]
-    Web[PWA Vue 3 Quasar]
-    Mobile[Sync movil catalogos]
-  end
-  Web --> API[Express API]
-  Mobile --> API
-  API --> Auth[JWT Roles Membresia]
-  Auth --> Palet[Paletizacion]
-  Auth --> Pay[Nomina]
-  Auth --> Note[Cuaderno agricola]
-  Auth --> Admin[Auth y empresas]
-  Palet --> Prisma[Prisma PostgreSQL]
-  Pay --> Prisma
-  Note --> Prisma
-  Admin --> Prisma
-  API --> IO[Socket.IO]
-  IO --> AI[Chat IA Portkey]
-  API --> S3[AWS S3 SES]
-  API --> Mail[Postmark]`,
+  Vue[Vue 3] --> Express[Express]
+  Quasar[Quasar] --> Vue
+  Pinia[Pinia] --> Vue
+  Express --> Prisma[Prisma]
+  Express --> IO[Socket.IO]
+  Empaques[Empaques & Embarques] --> Acarreos[Acarreos]
+  Empaques --> Pallets[Pallets]
+  Empaques --> Embarques[Embarques]
+  Empaques --> Rapido[Embarque rápido]
+  Empaques --> Almacenes[Almacenes]
+  Acarreos --> Prisma
+  Pallets --> Prisma
+  Embarques --> Prisma
+  Nomina[Nómina] --> Prisma
+  Cuaderno[Cuaderno agrícola] --> Prisma
+  Admin[Administración] --> Prisma
+  Express --> Empaques
+  Express --> Nomina
+  Express --> Cuaderno`,
     architectureLayers: [
       {
         name: "Apps",
@@ -1172,23 +1147,19 @@ export const projects: Project[] = [
       "node-cron ejecuta reglas recurrentes, alertas financieras, recordatorios de deuda y reporte mensual.",
     ],
     architecture: `flowchart TB
-  subgraph clients [Clientes]
-    Web[PWA React MUI]
-  end
-  Web --> API[Express API]
-  API --> Auth[JWT Sesiones]
-  Auth --> Quote[Cotizaciones]
-  Auth --> Inv[Facturacion CFDI]
-  Auth --> Fin[Finanzas]
-  Auth --> Cat[Catalogos]
-  Quote --> Prisma[Prisma PostgreSQL]
+  React[React 18] --> Express[Express]
+  MUI[MUI 6] --> React
+  Express --> Prisma[Prisma]
+  Express --> Quote[Cotizaciones]
+  Express --> Inv[Facturación]
+  Express --> Fin[Movimientos]
+  Quote --> Prisma
   Inv --> Prisma
   Fin --> Prisma
-  Cat --> Prisma
-  Inv --> FPT[FacturoPorTi PAC]
-  API --> S3[AWS S3]
-  API --> Mail[Postmark]
-  API --> Cron[node-cron Jobs]`,
+  Inv --> FPT[FacturoPorTi]
+  Express --> S3[AWS S3]
+  Express --> Mail[Postmark]
+  Express --> Cron[node-cron]`,
     architectureLayers: [
       {
         name: "Procesos",
@@ -1287,24 +1258,29 @@ export const projects: Project[] = [
       "Oxygen sirve el storefront; el checkout sigue en el dominio Shopify.",
     ],
     architecture: `flowchart TB
-  Browser --> Ox[Oxygen]
-  Ox --> Remix[Remix + Hydrogen]
+  Browser[Navegador] --> Ox[Oxygen]
+  Ox --> Remix[Remix]
+  Remix --> Hydrogen[Hydrogen]
   Remix --> SF[Storefront API]
   Remix --> CA[Customer Account API]
   Remix --> Admin[Admin API]
-  SF --> Shopify[(Shopify)]
-  Admin --> Shopify
-  Remix --> Cloudinary
-  Remix --> Mail[Nodemailer]
-  Remix --> Checkout[Checkout Shopify]`,
+  Hydrogen --> SF
+  Hydrogen --> Checkout[Checkout]
+  Checkout --> Shopify[Shopify]
+  SF --> Cloudinary[Cloudinary]
+  CA --> Mail[Nodemailer]`,
     architectureLayers: [
+      {
+        name: "Cliente",
+        items: ["Navegador"],
+      },
       {
         name: "Runtime",
         items: ["Oxygen", "Remix", "Hydrogen"],
       },
       {
         name: "Shopify",
-        items: ["Storefront API", "Admin API", "Customer Account API", "Checkout"],
+        items: ["Storefront API", "Admin API", "Customer Account API", "Checkout", "Shopify"],
       },
       {
         name: "Media y correo",

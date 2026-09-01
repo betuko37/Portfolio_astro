@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "JornalPro Mobile",
+    "subtitle": "App de campo offline-first: NFC, QR, GPS y sincronización en segundo plano.",
+    "quality_profile": "showcase",
+    "output": "jornalpro-mobile.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "pantallas-asistencias-0",
+      "type": "backend",
+      "label": "Asistencias",
+      "sublabel": "Asistencias",
+      "row": 1,
+      "col": 1
+    },
+    {
+      "id": "pantallas-alta-de-empleado-1",
+      "type": "backend",
+      "label": "Alta de empleado",
+      "sublabel": "Alta de empleado",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "pantallas-captura-de-surcos-2",
+      "type": "backend",
+      "label": "Captura de surcos",
+      "sublabel": "Captura de surcos",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "pantallas-cajas-3",
+      "type": "backend",
+      "label": "Cajas",
+      "sublabel": "Cajas",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "id": "campo-nfc-0",
+      "type": "external",
+      "label": "NFC",
+      "sublabel": "NFC",
+      "row": 3,
+      "col": 0
+    },
+    {
+      "id": "campo-qr-1",
+      "type": "backend",
+      "label": "QR",
+      "sublabel": "QR",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "id": "campo-gps-2",
+      "type": "backend",
+      "label": "GPS",
+      "sublabel": "GPS",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "offline-betuko-offline-sync-0",
+      "type": "backend",
+      "label": "betuko_offline_sy…",
+      "sublabel": "betuko_offline_sync",
+      "row": 3,
+      "col": 4
+    },
+    {
+      "id": "offline-cola-hive-1",
+      "type": "database",
+      "label": "Cola Hive",
+      "sublabel": "Cola Hive",
+      "row": 3,
+      "col": 5
+    },
+    {
+      "id": "offline-workmanager-2",
+      "type": "backend",
+      "label": "WorkManager",
+      "sublabel": "WorkManager",
+      "row": 3,
+      "col": 6
+    },
+    {
+      "id": "nube-backend-api-0",
+      "type": "backend",
+      "label": "Backend",
+      "sublabel": "Backend /api",
+      "row": 5,
+      "col": 2
+    },
+    {
+      "id": "nube-daily-capture-bulk-1",
+      "type": "backend",
+      "label": "daily-capture",
+      "sublabel": "daily-capture/bulk",
+      "row": 5,
+      "col": 3
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Pantallas",
+      "wraps": [
+        "pantallas-asistencias-0",
+        "pantallas-alta-de-empleado-1",
+        "pantallas-captura-de-surcos-2",
+        "pantallas-cajas-3"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Campo",
+      "wraps": [
+        "campo-nfc-0",
+        "campo-qr-1",
+        "campo-gps-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Offline",
+      "wraps": [
+        "offline-betuko-offline-sync-0",
+        "offline-cola-hive-1",
+        "offline-workmanager-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Nube",
+      "wraps": [
+        "nube-backend-api-0",
+        "nube-daily-capture-bulk-1"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "c0-offline-betu-offline-cola",
+      "from": "offline-betuko-offline-sync-0",
+      "to": "offline-cola-hive-1",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c1-offline-work-pantallas-as",
+      "from": "offline-workmanager-2",
+      "to": "pantallas-asistencias-0",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "c2-offline-betu-nube-backend",
+      "from": "offline-betuko-offline-sync-0",
+      "to": "nube-backend-api-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Operación offline-first",
+      "items": [
+        "se trabaja sin red y se sincroniza al recuperar conexión."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Resultado 2",
+      "items": [
+        "Asistencias NFC y QR con geolocalización y confirmación por voz."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Resultado 3",
+      "items": [
+        "Sincronización en segundo plano con WorkManager y cola Hive."
+      ]
+    }
+  ]
+}

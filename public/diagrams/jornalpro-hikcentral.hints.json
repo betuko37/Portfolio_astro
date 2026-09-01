@@ -1,0 +1,79 @@
+{
+  "acs": {
+    "title": "Checador ACS",
+    "subtitle": "Caseta facial",
+    "kind": "external",
+    "layer": "Hardware caseta",
+    "body": "Checador biométrico HikCentral en caseta. Cada marcaje dispara Event Push hacia el túnel Cloudflare; el backend responde al instante y procesa la asistencia sin bloquear la fila."
+  },
+  "tunnel": {
+    "title": "Cloudflare",
+    "subtitle": "Tunnel + proxy",
+    "kind": "security",
+    "layer": "Conectividad",
+    "body": "Expone de forma segura el webhook público y la Open API /artemis hacia HikCentral. Las credenciales y la firma HMAC-SHA256 se resuelven por ubicación, sin secretos hardcodeados."
+  },
+  "webhook": {
+    "title": "Event Push",
+    "subtitle": "POST webhook",
+    "kind": "messagebus",
+    "layer": "Backend",
+    "body": "Recibe rostro, huella, palma y eventos multi-factor desde HikCentral. Responde 200 OK de inmediato y encola el procesamiento en background para no frenar el checador."
+  },
+  "proxy": {
+    "title": "Open API",
+    "subtitle": "ProxyService",
+    "kind": "backend",
+    "layer": "Backend",
+    "body": "Cliente firmado hacia HikCentral Professional: alta de personas, sincronización de rostros, consulta de dispositivos y polling de respaldo cuando el webhook no llegó."
+  },
+  "proc": {
+    "title": "Attendance",
+    "subtitle": "Processor",
+    "kind": "backend",
+    "layer": "Procesador de asistencias",
+    "body": "Cruza cada evento con el empleado, turno del día y ventana anti-duplicados (120 min). Clasifica entrada, salida, retardo o duplicado y escribe asistencia y captura de nómina semanal."
+  },
+  "face": {
+    "title": "Face + Person",
+    "subtitle": "Alta rostros",
+    "kind": "backend",
+    "layer": "Personas y rostros",
+    "body": "Crea personas en HikCentral, registra rostros en el checador ACS y guarda los IDs en la ficha del empleado junto con la foto en S3. La app móvil valida la imagen contra un checador real antes del alta."
+  },
+  "pay": {
+    "title": "Nómina",
+    "subtitle": "Semanal",
+    "kind": "backend",
+    "layer": "Nómina",
+    "body": "Integra checadas de caseta con NFC en surco en el mismo ciclo semanal. Lo que ve el capataz en la cuadrícula es el mismo dato que queda ligado al cierre de jornal."
+  },
+  "io": {
+    "title": "Socket.IO",
+    "subtitle": "Tiempo real",
+    "kind": "messagebus",
+    "layer": "Tiempo real",
+    "body": "Emite eventos crudos, checadas procesadas, estado del servidor ACS y alertas de desfase de reloj. El panel web actualiza la cuadrícula de asistencias sin recargar."
+  },
+  "web": {
+    "title": "Panel web",
+    "subtitle": "React MUI",
+    "kind": "frontend",
+    "layer": "Superficies",
+    "body": "Cuadrícula de asistencias v3, modal de eventos biométricos y pantallas de monitoreo HikCentral. Permite reenviar fotos pendientes y vigilar checadas en vivo."
+  },
+  "app": {
+    "title": "App móvil",
+    "subtitle": "Flutter",
+    "kind": "frontend",
+    "layer": "Alta en app móvil",
+    "body": "En campo, el capataz captura la foto del trabajador. El backend la prueba contra un checador real; si HikCentral la rechaza, la app lo marca pero conserva el alta local para reintento desde el panel."
+  },
+  "db": {
+    "title": "PostgreSQL",
+    "subtitle": "Prisma 7",
+    "kind": "database",
+    "layer": "Datos",
+    "body": "Persiste HikCentralConfig por Location, IDs de persona, AttendanceEvent, WorkDayEntry y auditoría de sincronización biométrica."
+  }
+}

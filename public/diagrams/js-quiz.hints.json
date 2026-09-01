@@ -1,0 +1,37 @@
+{
+  "ui-mui-6-0": {
+    "title": "MUI 6",
+    "subtitle": "MUI 6",
+    "kind": "frontend",
+    "layer": "UI",
+    "body": "MUI 6"
+  },
+  "ui-start-1": {
+    "title": "Start",
+    "subtitle": "Start",
+    "kind": "backend",
+    "layer": "UI",
+    "body": "Pantalla inicial y reglas del quiz."
+  },
+  "ui-game-2": {
+    "title": "Game",
+    "subtitle": "Game",
+    "kind": "backend",
+    "layer": "UI",
+    "body": "Game"
+  },
+  "estado-zustand-0": {
+    "title": "Zustand",
+    "subtitle": "Zustand",
+    "kind": "backend",
+    "layer": "Estado",
+    "body": "Zustand"
+  },
+  "estado-typescript-types-1": {
+    "title": "TypeScript types",
+    "subtitle": "TypeScript types",
+    "kind": "backend",
+    "layer": "Estado",
+    "body": "TypeScript types"
+  }
+}

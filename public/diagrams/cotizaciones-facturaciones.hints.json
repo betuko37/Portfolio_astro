@@ -1,0 +1,114 @@
+{
+  "procesos-cotizaciones-0": {
+    "title": "Cotizaciones",
+    "subtitle": "Cotizaciones",
+    "kind": "messagebus",
+    "layer": "Procesos",
+    "body": "Arma propuestas por cliente con productos, plantillas, tabs y exportación PDF antes de facturar."
+  },
+  "procesos-facturacion-1": {
+    "title": "Facturación",
+    "subtitle": "Facturación",
+    "kind": "backend",
+    "layer": "Procesos",
+    "body": "Timbrado, cancelación, consulta de XML, envío por correo y flujos de re-facturación manual."
+  },
+  "procesos-movimientos-2": {
+    "title": "Movimientos",
+    "subtitle": "Movimientos",
+    "kind": "backend",
+    "layer": "Procesos",
+    "body": "Transacciones, conciliación, cuentas bancarias, créditos, deudas, presupuestos y servicios."
+  },
+  "procesos-servicios-3": {
+    "title": "Servicios",
+    "subtitle": "Servicios",
+    "kind": "messagebus",
+    "layer": "Procesos",
+    "body": "Servicios"
+  },
+  "procesos-calendario-financiero-4": {
+    "title": "Calendario financ…",
+    "subtitle": "Calendario financiero",
+    "kind": "messagebus",
+    "layer": "Procesos",
+    "body": "Calendario financiero"
+  },
+  "reportes-historial-cfdi-0": {
+    "title": "Historial CFDI",
+    "subtitle": "Historial CFDI",
+    "kind": "backend",
+    "layer": "Reportes",
+    "body": "Historial de cotizaciones y facturas, antigüedad de saldos, flujo de caja e impuestos pagados."
+  },
+  "reportes-cobranza-1": {
+    "title": "Cobranza",
+    "subtitle": "Cobranza",
+    "kind": "backend",
+    "layer": "Reportes",
+    "body": "Historial de cotizaciones y facturas, antigüedad de saldos, flujo de caja e impuestos pagados."
+  },
+  "reportes-flujo-de-efectivo-2": {
+    "title": "Flujo de efectivo",
+    "subtitle": "Flujo de efectivo",
+    "kind": "backend",
+    "layer": "Reportes",
+    "body": "Historial de cotizaciones y facturas, antigüedad de saldos, flujo de caja e impuestos pagados."
+  },
+  "reportes-impuestos-3": {
+    "title": "Impuestos",
+    "subtitle": "Impuestos",
+    "kind": "backend",
+    "layer": "Reportes",
+    "body": "Historial de cotizaciones y facturas, antigüedad de saldos, flujo de caja e impuestos pagados."
+  },
+  "reportes-rentabilidad-4": {
+    "title": "Rentabilidad",
+    "subtitle": "Rentabilidad",
+    "kind": "backend",
+    "layer": "Reportes",
+    "body": "Historial de cotizaciones y facturas, antigüedad de saldos, flujo de caja e impuestos pagados."
+  },
+  "frontend-react-18-0": {
+    "title": "React 18",
+    "subtitle": "React 18",
+    "kind": "backend",
+    "layer": "Frontend",
+    "body": "React 18"
+  },
+  "frontend-mui-6-1": {
+    "title": "MUI 6",
+    "subtitle": "MUI 6",
+    "kind": "frontend",
+    "layer": "Frontend",
+    "body": "MUI 6"
+  },
+  "frontend-zustand-2": {
+    "title": "Zustand",
+    "subtitle": "Zustand",
+    "kind": "backend",
+    "layer": "Frontend",
+    "body": "Zustand"
+  },
+  "backend-express-0": {
+    "title": "Express",
+    "subtitle": "Express",
+    "kind": "backend",
+    "layer": "Backend",
+    "body": "Express"
+  },
+  "backend-prisma-1": {
+    "title": "Prisma",
+    "subtitle": "Prisma",
+    "kind": "database",
+    "layer": "Backend",
+    "body": "Prisma"
+  },
+  "backend-facturoporti-2": {
+    "title": "FacturoPorTi",
+    "subtitle": "FacturoPorTi",
+    "kind": "external",
+    "layer": "Backend",
+    "body": "FacturoPorTi"
+  }
+}

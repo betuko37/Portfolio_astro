@@ -1,0 +1,44 @@
+{
+  "flutter-dart-0": {
+    "title": "Dart",
+    "subtitle": "Dart",
+    "kind": "frontend",
+    "layer": "Flutter",
+    "body": "Widgets, estado setState/Provider y navegación básica."
+  },
+  "flutter-widgets-1": {
+    "title": "Widgets",
+    "subtitle": "Widgets",
+    "kind": "frontend",
+    "layer": "Flutter",
+    "body": "Widgets, estado setState/Provider y navegación básica."
+  },
+  "flutter-http-2": {
+    "title": "HTTP",
+    "subtitle": "HTTP",
+    "kind": "frontend",
+    "layer": "Flutter",
+    "body": "Widgets, estado setState/Provider y navegación básica."
+  },
+  "android-kotlin-0": {
+    "title": "Kotlin",
+    "subtitle": "Kotlin",
+    "kind": "backend",
+    "layer": "Android",
+    "body": "Workers o services para tareas periódicas en Android."
+  },
+  "android-services-1": {
+    "title": "Services",
+    "subtitle": "Services",
+    "kind": "backend",
+    "layer": "Android",
+    "body": "Workers o services para tareas periódicas en Android."
+  },
+  "android-retrofit-okhttp-2": {
+    "title": "Retrofit",
+    "subtitle": "Retrofit/OkHttp",
+    "kind": "backend",
+    "layer": "Android",
+    "body": "Retrofit/OkHttp"
+  }
+}

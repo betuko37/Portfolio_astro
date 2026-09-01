@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Journal App",
+    "subtitle": "Aplicación de diario personal en React y Material UI, con enrutamiento.",
+    "quality_profile": "showcase",
+    "output": "journal-app.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "navegacion-react-router-7-0",
+      "type": "backend",
+      "label": "React Router 7",
+      "sublabel": "React Router 7",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "navegacion-auth-guard-1",
+      "type": "security",
+      "label": "Auth guard",
+      "sublabel": "Auth guard",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "ui-mui-6-0",
+      "type": "frontend",
+      "label": "MUI 6",
+      "sublabel": "MUI 6",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "ui-roboto-1",
+      "type": "backend",
+      "label": "Roboto",
+      "sublabel": "Roboto",
+      "row": 3,
+      "col": 3
+    },
+    {
+      "id": "ui-layouts-2",
+      "type": "backend",
+      "label": "Layouts",
+      "sublabel": "Layouts",
+      "row": 3,
+      "col": 4
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Navegación",
+      "wraps": [
+        "navegacion-react-router-7-0",
+        "navegacion-auth-guard-1"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "UI",
+      "wraps": [
+        "ui-mui-6-0",
+        "ui-roboto-1",
+        "ui-layouts-2"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "c0-navegacion-r-navegacion-a",
+      "from": "navegacion-react-router-7-0",
+      "to": "navegacion-auth-guard-1",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Resultado 1",
+      "items": [
+        "Auth layout separado del dashboard del diario."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Resultado 2",
+      "items": [
+        "AppTheme.jsx centraliza palette y typography."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Resultado 3",
+      "items": [
+        "Rutas protegidas en router/AppRouter.jsx."
+      ]
+    }
+  ]
+}

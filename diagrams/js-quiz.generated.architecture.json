@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "JavaScript Quiz",
+    "subtitle": "Cuestionario de JavaScript desarrollado con React, TypeScript, Material UI y Zustand.",
+    "quality_profile": "showcase",
+    "output": "js-quiz.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "ui-mui-6-0",
+      "type": "frontend",
+      "label": "MUI 6",
+      "sublabel": "MUI 6",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "ui-start-1",
+      "type": "backend",
+      "label": "Start",
+      "sublabel": "Start",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "ui-game-2",
+      "type": "backend",
+      "label": "Game",
+      "sublabel": "Game",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "id": "estado-zustand-0",
+      "type": "backend",
+      "label": "Zustand",
+      "sublabel": "Zustand",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "estado-typescript-types-1",
+      "type": "backend",
+      "label": "TypeScript types",
+      "sublabel": "TypeScript types",
+      "row": 3,
+      "col": 3
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "UI",
+      "wraps": [
+        "ui-mui-6-0",
+        "ui-start-1",
+        "ui-game-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Estado",
+      "wraps": [
+        "estado-zustand-0",
+        "estado-typescript-types-1"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "flow-0",
+      "from": "ui-start-1",
+      "to": "estado-typescript-types-1",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Resultado 1",
+      "items": [
+        "Flujo Start → Game con transiciones MUI."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Resultado 2",
+      "items": [
+        "Preguntas cargadas desde data.json estático."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Resultado 3",
+      "items": [
+        "Syntax highlight para fragmentos de JS en enunciados."
+      ]
+    }
+  ]
+}

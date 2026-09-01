@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Biometría HikCentral",
+    "subtitle": "Event Push, Open API firmada y nómina semanal en JornalPro Cloud",
+    "quality_profile": "showcase",
+    "output": "jornalpro-hikcentral.html"
+  },
+  "components": [
+    { "id": "acs", "type": "external", "label": "Checador ACS", "sublabel": "Caseta facial", "pos": [48, 248], "size": [124, 56] },
+    { "id": "tunnel", "type": "security", "label": "Cloudflare", "sublabel": "Tunnel + proxy", "pos": [228, 248], "size": [124, 56] },
+    { "id": "webhook", "type": "messagebus", "label": "Event Push", "sublabel": "POST webhook", "pos": [408, 148], "size": [124, 56] },
+    { "id": "proxy", "type": "backend", "label": "Open API", "sublabel": "ProxyService", "pos": [408, 348], "size": [124, 56] },
+    { "id": "proc", "type": "backend", "label": "Attendance", "sublabel": "Processor", "pos": [588, 148], "size": [124, 56] },
+    { "id": "face", "type": "backend", "label": "Face + Person", "sublabel": "Alta rostros", "pos": [588, 348], "size": [124, 56] },
+    { "id": "pay", "type": "backend", "label": "Nómina", "sublabel": "Semanal", "pos": [768, 148], "size": [116, 56] },
+    { "id": "io", "type": "messagebus", "label": "Socket.IO", "sublabel": "Tiempo real", "pos": [768, 348], "size": [116, 56] },
+    { "id": "web", "type": "frontend", "label": "Panel web", "sublabel": "React MUI", "pos": [928, 148], "size": [116, 56] },
+    { "id": "app", "type": "frontend", "label": "App móvil", "sublabel": "Flutter", "pos": [928, 348], "size": [116, 56] },
+    { "id": "db", "type": "database", "label": "PostgreSQL", "sublabel": "Prisma 7", "pos": [768, 508], "size": [116, 56] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Caseta", "wraps": ["acs"] },
+    { "kind": "region", "label": "JornalPro Cloud", "wraps": ["webhook", "proxy", "proc", "face", "pay", "io", "db"] },
+    { "kind": "region", "label": "Superficies", "wraps": ["web", "app"] }
+  ],
+  "connections": [
+    { "id": "acs-tunnel", "from": "acs", "to": "tunnel", "label": "Event Push", "variant": "emphasis" },
+    { "id": "tunnel-webhook", "from": "tunnel", "to": "webhook" },
+    { "id": "webhook-proc", "from": "webhook", "to": "proc" },
+    { "id": "proc-pay", "from": "proc", "to": "pay" },
+    { "id": "pay-web", "from": "pay", "to": "web" },
+    { "id": "proxy-tunnel", "from": "proxy", "to": "tunnel", "variant": "security" },
+    { "id": "face-proxy", "from": "face", "to": "proxy" },
+    { "id": "proc-io", "from": "proc", "to": "io" },
+    { "id": "io-web", "from": "io", "to": "web" },
+    { "id": "proc-db", "from": "proc", "to": "db", "variant": "dashed" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Caseta → nube", "items": ["Checador ACS envía Event Push vía Cloudflare Tunnel", "Webhook responde 200 y procesa en background"] },
+    { "dot": "emerald", "title": "Nómina en vivo", "items": ["AttendanceProcessor escribe asistencia y captura semanal", "Socket.IO actualiza la cuadrícula del panel sin recargar"] },
+    { "dot": "rose", "title": "Alta en campo", "items": ["App Flutter valida foto contra checador real", "Face + Person sincroniza personas con Open API firmada"] }
+  ]
+}

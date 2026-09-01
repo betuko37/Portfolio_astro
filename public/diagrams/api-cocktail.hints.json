@@ -1,0 +1,51 @@
+{
+  "vistas-index-0": {
+    "title": "index",
+    "subtitle": "index",
+    "kind": "backend",
+    "layer": "Vistas",
+    "body": "index"
+  },
+  "vistas-pages-1": {
+    "title": "pages",
+    "subtitle": "pages/",
+    "kind": "backend",
+    "layer": "Vistas",
+    "body": "pages/"
+  },
+  "vistas-carrusel-2": {
+    "title": "carrusel",
+    "subtitle": "carrusel",
+    "kind": "backend",
+    "layer": "Vistas",
+    "body": "carrusel"
+  },
+  "logica-fetch-0": {
+    "title": "fetch",
+    "subtitle": "fetch",
+    "kind": "backend",
+    "layer": "Lógica",
+    "body": "fetch"
+  },
+  "logica-ruleta-1": {
+    "title": "ruleta",
+    "subtitle": "ruleta",
+    "kind": "backend",
+    "layer": "Lógica",
+    "body": "ruleta.js elige cóctel aleatorio con animación."
+  },
+  "logica-filtros-2": {
+    "title": "filtros",
+    "subtitle": "filtros",
+    "kind": "backend",
+    "layer": "Lógica",
+    "body": "filtros"
+  },
+  "deploy-github-pages-0": {
+    "title": "GitHub Pages",
+    "subtitle": "GitHub Pages",
+    "kind": "cloud",
+    "layer": "Deploy",
+    "body": "GitHub Pages"
+  }
+}

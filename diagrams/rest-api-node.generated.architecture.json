@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "REST API Node",
+    "subtitle": "API REST de películas con Express, validación Zod, CORS y persistencia en MySQL o Mongo…",
+    "quality_profile": "showcase",
+    "output": "rest-api-node.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "api-express-0",
+      "type": "backend",
+      "label": "Express",
+      "sublabel": "Express",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "api-movies-routes-1",
+      "type": "backend",
+      "label": "movies_routes",
+      "sublabel": "movies_routes",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "api-controllers-2",
+      "type": "backend",
+      "label": "controllers",
+      "sublabel": "controllers",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "id": "dominio-movie-model-0",
+      "type": "messagebus",
+      "label": "Movie model",
+      "sublabel": "Movie model",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "dominio-zod-validation-1",
+      "type": "messagebus",
+      "label": "Zod validation",
+      "sublabel": "Zod validation",
+      "row": 3,
+      "col": 3
+    },
+    {
+      "id": "persistencia-local-json-0",
+      "type": "backend",
+      "label": "Local JSON",
+      "sublabel": "Local JSON",
+      "row": 5,
+      "col": 2
+    },
+    {
+      "id": "persistencia-mysql-1",
+      "type": "database",
+      "label": "MySQL",
+      "sublabel": "MySQL",
+      "row": 5,
+      "col": 3
+    },
+    {
+      "id": "persistencia-mongodb-2",
+      "type": "database",
+      "label": "MongoDB",
+      "sublabel": "MongoDB",
+      "row": 5,
+      "col": 4
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "API",
+      "wraps": [
+        "api-express-0",
+        "api-movies-routes-1",
+        "api-controllers-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Dominio",
+      "wraps": [
+        "dominio-movie-model-0",
+        "dominio-zod-validation-1"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Persistencia",
+      "wraps": [
+        "persistencia-local-json-0",
+        "persistencia-mysql-1",
+        "persistencia-mongodb-2"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "c0-dominio-movi-persistencia",
+      "from": "dominio-movie-model-0",
+      "to": "persistencia-local-json-0",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c1-dominio-movi-persistencia",
+      "from": "dominio-movie-model-0",
+      "to": "persistencia-mysql-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c2-dominio-movi-persistencia",
+      "from": "dominio-movie-model-0",
+      "to": "persistencia-mongodb-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Resultado 1",
+      "items": [
+        "createApp({ movieModel }) inyecta persistencia."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Tres backends",
+      "items": [
+        "JSON local, MySQL y MongoDB."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Resultado 3",
+      "items": [
+        "Middleware CORS y restricción de métodos HTTP."
+      ]
+    }
+  ]
+}

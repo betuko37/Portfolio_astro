@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "JornalPro Frontend",
+    "subtitle": "ERP web en producción: nómina, tesorería, empaque, SAT y Joni.",
+    "quality_profile": "showcase",
+    "output": "jornalpro-frontend.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      32,
+      72
+    ],
+    "cols": 7,
+    "gapX": 22,
+    "gapY": 84,
+    "cellW": 152,
+    "cellH": 58
+  },
+  "components": [
+    {
+      "id": "shell-nomina-0",
+      "type": "backend",
+      "label": "Nómina",
+      "sublabel": "Nómina",
+      "row": 1,
+      "col": 1
+    },
+    {
+      "id": "shell-tesoreria-1",
+      "type": "backend",
+      "label": "Tesorería",
+      "sublabel": "Tesorería",
+      "row": 1,
+      "col": 2
+    },
+    {
+      "id": "shell-empaque-2",
+      "type": "backend",
+      "label": "Empaque",
+      "sublabel": "Empaque",
+      "row": 1,
+      "col": 3
+    },
+    {
+      "id": "shell-almacenes-3",
+      "type": "database",
+      "label": "Almacenes",
+      "sublabel": "Almacenes",
+      "row": 1,
+      "col": 4
+    },
+    {
+      "id": "shell-configuracion-4",
+      "type": "backend",
+      "label": "Configuración",
+      "sublabel": "Configuración",
+      "row": 1,
+      "col": 5
+    },
+    {
+      "id": "modulos-asistencias-0",
+      "type": "backend",
+      "label": "Asistencias",
+      "sublabel": "Asistencias",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "id": "modulos-alta-de-empleado-1",
+      "type": "backend",
+      "label": "Alta de empleado",
+      "sublabel": "Alta de empleado",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "modulos-buzon-sat-2",
+      "type": "backend",
+      "label": "Buzón SAT",
+      "sublabel": "Buzón SAT",
+      "row": 3,
+      "col": 3
+    },
+    {
+      "id": "modulos-chat-joni-3",
+      "type": "backend",
+      "label": "Chat Joni",
+      "sublabel": "Chat Joni",
+      "row": 3,
+      "col": 4
+    },
+    {
+      "id": "modulos-monitor-4",
+      "type": "backend",
+      "label": "Monitor",
+      "sublabel": "Monitor",
+      "row": 3,
+      "col": 5
+    },
+    {
+      "id": "cliente-axios-jwt-0",
+      "type": "messagebus",
+      "label": "Axios + JWT",
+      "sublabel": "Axios + JWT",
+      "row": 5,
+      "col": 0
+    },
+    {
+      "id": "cliente-x-location-id-1",
+      "type": "messagebus",
+      "label": "X-Location-Id",
+      "sublabel": "X-Location-Id",
+      "row": 5,
+      "col": 1
+    },
+    {
+      "id": "cliente-zustand-2",
+      "type": "backend",
+      "label": "Zustand",
+      "sublabel": "Zustand",
+      "row": 5,
+      "col": 2
+    },
+    {
+      "id": "local-nfc-service-47321-0",
+      "type": "external",
+      "label": "nfc-service",
+      "sublabel": "nfc-service :47321",
+      "row": 5,
+      "col": 4
+    },
+    {
+      "id": "local-web-nfc-1",
+      "type": "external",
+      "label": "Web NFC",
+      "sublabel": "Web NFC",
+      "row": 5,
+      "col": 5
+    },
+    {
+      "id": "local-leaflet-2",
+      "type": "backend",
+      "label": "Leaflet",
+      "sublabel": "Leaflet",
+      "row": 5,
+      "col": 6
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Shell",
+      "wraps": [
+        "shell-nomina-0",
+        "shell-tesoreria-1",
+        "shell-empaque-2",
+        "shell-almacenes-3",
+        "shell-configuracion-4"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Módulos",
+      "wraps": [
+        "modulos-asistencias-0",
+        "modulos-alta-de-empleado-1",
+        "modulos-buzon-sat-2",
+        "modulos-chat-joni-3",
+        "modulos-monitor-4"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Cliente",
+      "wraps": [
+        "cliente-axios-jwt-0",
+        "cliente-x-location-id-1",
+        "cliente-zustand-2"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Local",
+      "wraps": [
+        "local-nfc-service-47321-0",
+        "local-web-nfc-1",
+        "local-leaflet-2"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "c0-shell-nomina-shell-tesore",
+      "from": "shell-nomina-0",
+      "to": "shell-tesoreria-1",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c1-shell-nomina-modulos-buzo",
+      "from": "shell-nomina-0",
+      "to": "modulos-buzon-sat-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c2-shell-nomina-modulos-chat",
+      "from": "shell-nomina-0",
+      "to": "modulos-chat-joni-3",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c3-shell-nomina-modulos-moni",
+      "from": "shell-nomina-0",
+      "to": "modulos-monitor-4",
+      "fromSide": "bottom",
+      "toSide": "top"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Seis aplicaciones en una SPA",
+      "items": [
+        "nómina, empaque, almacenes, tesorería, configuración y resultados."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Login multifactor",
+      "items": [
+        "contraseña, OTP por correo, TOTP y aprobación de dispositivo."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Resultado 3",
+      "items": [
+        "NFC de escritorio (ACR122U) y Web NFC en Android, en el mismo flujo de alta."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "hardware-acr122u-0": {
+    "title": "ACR122U",
+    "subtitle": "ACR122U",
+    "kind": "external",
+    "layer": "Hardware",
+    "body": "ACR122U"
+  },
+  "hardware-pc-sc-1": {
+    "title": "PC",
+    "subtitle": "PC/SC",
+    "kind": "external",
+    "layer": "Hardware",
+    "body": "PC/SC"
+  },
+  "hardware-nfc-pcsc-2": {
+    "title": "nfc-pcsc",
+    "subtitle": "nfc-pcsc",
+    "kind": "external",
+    "layer": "Hardware",
+    "body": "nfc-pcsc"
+  },
+  "servicio-local-rest-47321-0": {
+    "title": "REST",
+    "subtitle": "REST :47321",
+    "kind": "messagebus",
+    "layer": "Servicio local",
+    "body": "REST :47321"
+  },
+  "servicio-local-last-card-1": {
+    "title": "last-card",
+    "subtitle": "last-card",
+    "kind": "messagebus",
+    "layer": "Servicio local",
+    "body": "last-card"
+  },
+  "servicio-local-status-2": {
+    "title": "status",
+    "subtitle": "status",
+    "kind": "messagebus",
+    "layer": "Servicio local",
+    "body": "status"
+  },
+  "servicio-local-consola-web-3": {
+    "title": "Consola web",
+    "subtitle": "Consola web",
+    "kind": "messagebus",
+    "layer": "Servicio local",
+    "body": "Terminal oscura con auto-scroll, filtro por tipo y estado del lector."
+  },
+  "clientes-alta-de-empleado-0": {
+    "title": "Alta de empleado",
+    "subtitle": "Alta de empleado",
+    "kind": "backend",
+    "layer": "Clientes",
+    "body": "Alta de empleado"
+  },
+  "clientes-entrega-de-gafetes-1": {
+    "title": "Entrega de gafetes",
+    "subtitle": "Entrega de gafetes",
+    "kind": "backend",
+    "layer": "Clientes",
+    "body": "Entrega de gafetes"
+  },
+  "clientes-lookup-2": {
+    "title": "Lookup",
+    "subtitle": "Lookup",
+    "kind": "backend",
+    "layer": "Clientes",
+    "body": "Lookup"
+  },
+  "distribucion-dmg-macos-0": {
+    "title": "DMG macOS",
+    "subtitle": "DMG macOS",
+    "kind": "backend",
+    "layer": "Distribución",
+    "body": "exe con pkg, DMG con INSTALAR.app, runtime Node propio, firma/notarización Apple opcional."
+  },
+  "distribucion-exe-windows-1": {
+    "title": "EXE Windows",
+    "subtitle": "EXE Windows",
+    "kind": "backend",
+    "layer": "Distribución",
+    "body": "exe con pkg, DMG con INSTALAR.app, runtime Node propio, firma/notarización Apple opcional."
+  },
+  "distribucion-launchd-2": {
+    "title": "launchd",
+    "subtitle": "launchd",
+    "kind": "backend",
+    "layer": "Distribución",
+    "body": "exe con pkg, DMG con INSTALAR.app, runtime Node propio, firma/notarización Apple opcional."
+  }
+}
