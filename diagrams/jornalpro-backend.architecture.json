@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "JornalPro Backend",
+    "subtitle": "Monolito Express 5 + Prisma 7 — ~134 rutas, 193 modelos, Socket.IO y crons en un proceso",
+    "quality_profile": "showcase",
+    "output": "jornalpro-backend.html"
+  },
+  "components": [
+    { "id": "spa",       "type": "frontend",   "label": "Frontend SPA",    "sublabel": "React + MUI",               "pos": [32,  72],  "size": [148, 56] },
+    { "id": "wa_meta",   "type": "external",   "label": "Meta WhatsApp",   "sublabel": "Webhook inbound",           "pos": [220, 72],  "size": [148, 56] },
+    { "id": "field",     "type": "external",   "label": "Field Server",    "sublabel": "On-prem por ubicación",     "pos": [596, 72],  "size": [148, 56] },
+
+    { "id": "rest",      "type": "backend",    "label": "Express REST",    "sublabel": "~134 rutas /api",           "pos": [32,  240], "size": [148, 56] },
+    { "id": "auth",      "type": "security",   "label": "JWT + RBAC",      "sublabel": "Guards + TOTP + OTP",       "pos": [220, 240], "size": [148, 56] },
+    { "id": "cron",      "type": "backend",    "label": "node-cron",       "sublabel": "14 jobs programados",       "pos": [408, 240], "size": [148, 56] },
+    { "id": "socket",    "type": "messagebus", "label": "Socket.IO",       "sublabel": "Presencia + eventos",       "pos": [596, 240], "size": [148, 56] },
+
+    { "id": "nomina",    "type": "backend",    "label": "Nómina / Campo",  "sublabel": "Captura · asistencias",     "pos": [32,  408], "size": [148, 56] },
+    { "id": "empaque",   "type": "backend",    "label": "Empaque",         "sublabel": "Pallets · embarques",       "pos": [220, 408], "size": [148, 56] },
+    { "id": "wa_ai",     "type": "backend",    "label": "WA + Chatbot AI", "sublabel": "Joni · templates · LLMs",  "pos": [408, 408], "size": [148, 56] },
+    { "id": "hik_svc",   "type": "backend",    "label": "HikCentral Svc",  "sublabel": "Proxy · monitor · crons",  "pos": [596, 408], "size": [148, 56] },
+    { "id": "tesoreria", "type": "backend",    "label": "Tesorería",       "sublabel": "Cajas · bancos · SAT",      "pos": [784, 408], "size": [148, 56] },
+    { "id": "almacenes", "type": "backend",    "label": "Almacenes",       "sublabel": "Compras · OC · recepciones","pos": [972, 408], "size": [148, 56] },
+
+    { "id": "postgres",  "type": "database",   "label": "PostgreSQL",      "sublabel": "193 modelos Prisma",        "pos": [32,  576], "size": [148, 56] },
+    { "id": "s3",        "type": "cloud",      "label": "AWS S3",          "sublabel": "PDFs · firmas · avatares",  "pos": [220, 576], "size": [148, 56] },
+    { "id": "llms",      "type": "cloud",      "label": "LLMs",            "sublabel": "OpenAI · Gemini · Claude",  "pos": [408, 576], "size": [148, 56] },
+    { "id": "hik_api",   "type": "external",   "label": "HikCentral API",  "sublabel": "Digest Auth · event push",  "pos": [596, 576], "size": [148, 56] },
+    { "id": "sat",       "type": "external",   "label": "SAT / CFDI",      "sublabel": "WS descarga · timbrado",    "pos": [784, 576], "size": [148, 56] },
+    { "id": "postmark",  "type": "external",   "label": "Postmark",        "sublabel": "Correo transaccional",      "pos": [972, 576], "size": [148, 56] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Superficies",              "wraps": ["spa","wa_meta","field"] },
+    { "kind": "region", "label": "API — Express 5 + Prisma 7","wraps": ["rest","auth","cron","socket"] },
+    { "kind": "region", "label": "Módulos de dominio",       "wraps": ["nomina","empaque","wa_ai","hik_svc","tesoreria","almacenes"] },
+    { "kind": "region", "label": "Integraciones",            "wraps": ["postgres","s3","llms","hik_api","sat","postmark"] }
+  ],
+  "connections": [
+    { "id": "c1",  "from": "spa",      "to": "rest",     "variant": "emphasis" },
+    { "id": "c2",  "from": "wa_meta",  "to": "auth" },
+    { "id": "c3",  "from": "field",    "to": "socket" },
+    { "id": "c4",  "from": "rest",     "to": "auth",     "variant": "security" },
+    { "id": "c5",  "from": "rest",     "to": "nomina" },
+    { "id": "c6",  "from": "auth",     "to": "empaque",  "variant": "security" },
+    { "id": "c7",  "from": "cron",     "to": "wa_ai" },
+    { "id": "c8",  "from": "socket",   "to": "hik_svc" },
+    { "id": "c9",  "from": "nomina",   "to": "postgres" },
+    { "id": "c10", "from": "empaque",  "to": "s3" },
+    { "id": "c11", "from": "wa_ai",    "to": "llms" },
+    { "id": "c12", "from": "hik_svc",  "to": "hik_api" },
+    { "id": "c13", "from": "tesoreria","to": "sat" }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Monolito Express 5 + Prisma 7",
+      "items": [
+        "~134 rutas REST bajo /api, 193 modelos PostgreSQL, Socket.IO y 14 cron jobs, todo en un solo proceso PM2 en EC2."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Auth multi-capa",
+      "items": [
+        "JWT con sessionId, 2FA TOTP/OTP, dispositivos de confianza y RBAC por rol + módulo + ubicación (X-Location-Id)."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Integraciones nativas",
+      "items": [
+        "HikCentral (Digest Auth + event push), WhatsApp Cloud API + Joni AI (multi-provider), SAT WS descarga masiva, Facturo por Ti (CFDI), AWS S3 y Banxico."
+      ]
+    }
+  ]
+}
