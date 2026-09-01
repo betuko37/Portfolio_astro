@@ -9,21 +9,21 @@
   "ui-start-1": {
     "title": "Start",
     "subtitle": "Start",
-    "kind": "backend",
+    "kind": "frontend",
     "layer": "UI",
     "body": "Pantalla inicial y reglas del quiz."
   },
   "ui-game-2": {
     "title": "Game",
     "subtitle": "Game",
-    "kind": "backend",
+    "kind": "frontend",
     "layer": "UI",
     "body": "Game"
   },
   "estado-zustand-0": {
     "title": "Zustand",
     "subtitle": "Zustand",
-    "kind": "backend",
+    "kind": "frontend",
     "layer": "Estado",
     "body": "Zustand"
   },

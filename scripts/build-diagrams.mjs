@@ -58,20 +58,45 @@ function normalizeHaystack(value) {
 }
 
 function inferType(layerName, item) {
+  const layerHay = normalizeHaystack(layerName);
   const itemHay = item.toLowerCase();
   const hay = `${layerName} ${item}`.toLowerCase();
+
+  if (/dispositivo|local/.test(layerHay)) {
+    if (/nfc-service|web nfc|:47321/.test(hay)) return "external";
+    if (/socket\.?io/.test(hay)) return "messagebus";
+    if (/leaflet|mapa|map/.test(hay)) return "frontend";
+  }
+
+  if (/^cliente$/.test(layerHay)) {
+    if (/guard|mfa|axios|jwt|x-location|location-id/.test(hay)) return "security";
+    if (/zustand|pwa|workbox|router|swr|zod/.test(hay)) return "frontend";
+  }
+
+  if (/shell|modulos|modulo|ui|frontend|app/.test(layerHay)) {
+    if (/hikcentral/.test(hay)) return "cloud";
+    if (/nfc-service|hardware|checador/.test(hay)) return "external";
+    return "frontend";
+  }
+
   if (
     /^shopify$/.test(itemHay) ||
     /storefront api|admin api|customer account|checkout|facturoporti|pac\b/.test(itemHay)
   ) {
     return "external";
   }
-  if (/hardware|checador|acs|nfc|usb|lector|acr|biometr|camara|cámara/.test(hay)) return "external";
-  if (/postgres|prisma|sql|redis|hive|datos|db\b|s3|almacen/.test(hay)) return "database";
-  if (/socket|webhook|event push|tiempo real|io|cola|queue|cron/.test(hay)) return "messagebus";
-  if (/cloudflare|tunnel|proxy|firma|hmac|jwt|security|auth|webhook/.test(hay)) return "security";
-  if (/panel|web|mui|vue|quasar|flutter|app|mobile|pwa|hydrogen|html|css/.test(hay)) return "frontend";
-  if (/aws|s3|openai|cloud|oxygen|vercel|cloudinary|github pages/.test(hay)) return "cloud";
+  if (/hardware|checador|acs|nfc-service|usb|lector|acr|biometr|camara|cámara|web nfc/.test(hay)) {
+    return "external";
+  }
+  if (/postgres|prisma|sql|redis|hive|\bdatos\b|db\b|s3\b/.test(hay)) return "database";
+  if (/socket\.?io|webhook|event push|tiempo real|\bio\b|cola|queue|cron|axios|jwt/.test(hay)) {
+    return "messagebus";
+  }
+  if (/cloudflare|tunnel|proxy|firma|hmac|security|auth/.test(hay)) return "security";
+  if (/panel|web|mui|vue|quasar|flutter|app|mobile|pwa|hydrogen|html|css|leaflet|zustand/.test(hay)) {
+    return "frontend";
+  }
+  if (/aws|openai|cloud|oxygen|vercel|cloudinary|github pages|hikcentral/.test(hay)) return "cloud";
   return "backend";
 }
 
@@ -115,7 +140,18 @@ const FLOW_ALIASES = {
   html: ["ui", "index"],
   fetch: ["api"],
   api: ["fetch"],
-  pwa: ["web", "dashboard"],
+  pwa: ["web", "dashboard", "workbox"],
+  io: ["socket", "socketio"],
+  hik: ["hikcentral"],
+  wh: ["almacenes"],
+  sat: ["buzon"],
+  mon: ["monitor"],
+  joni: ["chat"],
+  asist: ["asistencias"],
+  alta: ["empleado"],
+  nomina: ["nomina"],
+  tes: ["tesoreria"],
+  nfc: ["nfc-service"],
 };
 
 function flowTokens(value) {
@@ -154,10 +190,18 @@ function mermaidMatchScore(query, component, rawItem) {
   return best;
 }
 
-function connectionSides(fromComp, toComp) {
+function connectionSides(fromComp, toComp, components) {
   if (toComp.row > fromComp.row) return { fromSide: "bottom", toSide: "top" };
   if (toComp.row < fromComp.row) return { fromSide: "top", toSide: "bottom" };
-  if (toComp.col > fromComp.col) return { fromSide: "right", toSide: "left" };
+  if (toComp.col > fromComp.col) {
+    if (sameRowJump(fromComp, toComp, components)) {
+      return { fromSide: "bottom", toSide: "top" };
+    }
+    return { fromSide: "right", toSide: "left" };
+  }
+  if (toComp.col < fromComp.col && sameRowJump(fromComp, toComp, components)) {
+    return { fromSide: "bottom", toSide: "top" };
+  }
   return { fromSide: "left", toSide: "right" };
 }
 
@@ -221,8 +265,7 @@ function connectionsFromMermaid(project, components, rawById) {
         if (from === to) continue;
         const fromComp = byId.get(from);
         const toComp = byId.get(to);
-        if (!fromComp || !toComp || sameRowJump(fromComp, toComp, components)) continue;
-        if (Math.abs(fromComp.row - toComp.row) > 2) continue;
+        if (!fromComp || !toComp) continue;
         const key = `${from}->${to}`;
         if (seen.has(key)) continue;
         seen.add(key);
@@ -233,11 +276,13 @@ function connectionsFromMermaid(project, components, rawById) {
           to,
           label: edge.label ? truncate(edge.label, 22) : undefined,
           variant: connections.length === 0 ? "emphasis" : /hmac|jwt|auth|firma|security/.test(hay) ? "security" : undefined,
-          ...connectionSides(fromComp, toComp),
+          ...connectionSides(fromComp, toComp, components),
         });
       }
     }
   }
+
+  if (connections.length) return connections;
 
   connectOrphanNodes(components, connections);
   return connections;
@@ -290,17 +335,20 @@ function itemSublabel(item) {
   return truncate(item.replace(/^[/\s]+/, "").trim(), 40);
 }
 
+function shouldPairLayers(layer, next) {
+  if (!layer.lane || !next?.lane || layer.lane === next.lane) return false;
+  if (layer.items.length + next.items.length > 6) return false;
+  const names = `${normalizeHaystack(layer.name)} ${normalizeHaystack(next.name)}`;
+  if (/cliente/.test(names) && /local/.test(names)) return false;
+  return true;
+}
+
 function pairLayers(layers) {
   const rows = [];
   for (let i = 0; i < layers.length; i += 1) {
     const layer = layers[i];
     const next = layers[i + 1];
-    if (
-      layer.lane &&
-      next?.lane &&
-      layer.lane !== next.lane &&
-      !rows.at(-1)?.some((entry) => entry.lane)
-    ) {
+    if (shouldPairLayers(layer, next) && !rows.at(-1)?.some((entry) => entry.lane)) {
       rows.push([layer, next]);
       i += 1;
       continue;
@@ -321,22 +369,27 @@ function layersToArchify(project) {
   const layerAnchors = [];
   let gridRow = 1;
 
-  for (const rowLayers of pairLayers(layers)) {
+  const layerRows = pairLayers(layers);
+  const maxRowItems = Math.max(
+    1,
+    ...layerRows.map((rowLayers) => rowLayers.reduce((sum, layer) => sum + layer.items.length, 0)),
+    ...layers.map((layer) => layer.items.length),
+  );
+  const gridCols = Math.min(10, Math.max(7, maxRowItems + 1));
+
+  for (const rowLayers of layerRows) {
     const boundaryIds = [];
     const rowAnchors = [];
     const split = rowLayers.length > 1;
-    const slots = split ? [0, 4] : [1];
+    const laneWidth = split ? Math.floor(gridCols / 2) : gridCols;
 
     rowLayers.forEach((layer, laneIndex) => {
-      const colStart = slots[laneIndex] ?? 1;
-      const maxCols = split ? 3 : 5;
-      const span = Math.min(layer.items.length, maxCols);
-      const offset = Math.max(0, Math.floor((maxCols - span) / 2));
+      const colStart = split ? (laneIndex === 0 ? 0 : laneWidth) : Math.max(0, Math.floor((gridCols - layer.items.length) / 2));
       const laneIds = [];
 
-      layer.items.slice(0, maxCols).forEach((item, index) => {
+      layer.items.forEach((item, index) => {
         const id = slugify(`${layer.name}-${item}-${index}`);
-        const col = colStart + offset + index;
+        const col = colStart + index;
         const type = inferType(layer.name, item);
         components.push({
           id,
@@ -401,7 +454,7 @@ function layersToArchify(project) {
       layout: {
         mode: "grid",
         origin: [32, 72],
-        cols: 7,
+        cols: gridCols,
         gapX: 22,
         gapY: 84,
         cellW: 152,

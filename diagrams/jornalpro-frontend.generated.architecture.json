@@ -22,131 +22,171 @@
   "components": [
     {
       "id": "shell-nomina-0",
-      "type": "backend",
+      "type": "frontend",
       "label": "Nómina",
       "sublabel": "Nómina",
+      "row": 1,
+      "col": 0
+    },
+    {
+      "id": "shell-tesoreria-1",
+      "type": "frontend",
+      "label": "Tesorería",
+      "sublabel": "Tesorería",
       "row": 1,
       "col": 1
     },
     {
-      "id": "shell-tesoreria-1",
-      "type": "backend",
-      "label": "Tesorería",
-      "sublabel": "Tesorería",
+      "id": "shell-empaque-2",
+      "type": "frontend",
+      "label": "Empaque",
+      "sublabel": "Empaque",
       "row": 1,
       "col": 2
     },
     {
-      "id": "shell-empaque-2",
-      "type": "backend",
-      "label": "Empaque",
-      "sublabel": "Empaque",
+      "id": "shell-almacenes-3",
+      "type": "frontend",
+      "label": "Almacenes",
+      "sublabel": "Almacenes",
       "row": 1,
       "col": 3
     },
     {
-      "id": "shell-almacenes-3",
-      "type": "database",
-      "label": "Almacenes",
-      "sublabel": "Almacenes",
+      "id": "shell-configuracion-4",
+      "type": "frontend",
+      "label": "Configuración",
+      "sublabel": "Configuración",
       "row": 1,
       "col": 4
     },
     {
-      "id": "shell-configuracion-4",
-      "type": "backend",
-      "label": "Configuración",
-      "sublabel": "Configuración",
+      "id": "shell-resultados-5",
+      "type": "frontend",
+      "label": "Resultados",
+      "sublabel": "Resultados",
       "row": 1,
       "col": 5
     },
     {
       "id": "modulos-asistencias-0",
-      "type": "backend",
+      "type": "frontend",
       "label": "Asistencias",
       "sublabel": "Asistencias",
+      "row": 3,
+      "col": 0
+    },
+    {
+      "id": "modulos-buzon-sat-1",
+      "type": "frontend",
+      "label": "Buzón SAT",
+      "sublabel": "Buzón SAT",
       "row": 3,
       "col": 1
     },
     {
-      "id": "modulos-alta-de-empleado-1",
-      "type": "backend",
-      "label": "Alta de empleado",
-      "sublabel": "Alta de empleado",
+      "id": "modulos-alta-empleado-2",
+      "type": "frontend",
+      "label": "Alta empleado",
+      "sublabel": "Alta empleado",
       "row": 3,
       "col": 2
     },
     {
-      "id": "modulos-buzon-sat-2",
-      "type": "backend",
-      "label": "Buzón SAT",
-      "sublabel": "Buzón SAT",
+      "id": "modulos-chat-joni-3",
+      "type": "frontend",
+      "label": "Chat Joni",
+      "sublabel": "Chat Joni",
       "row": 3,
       "col": 3
     },
     {
-      "id": "modulos-chat-joni-3",
-      "type": "backend",
-      "label": "Chat Joni",
-      "sublabel": "Chat Joni",
+      "id": "modulos-monitor-4",
+      "type": "frontend",
+      "label": "Monitor",
+      "sublabel": "Monitor",
       "row": 3,
       "col": 4
     },
     {
-      "id": "modulos-monitor-4",
-      "type": "backend",
-      "label": "Monitor",
-      "sublabel": "Monitor",
+      "id": "modulos-hikcentral-5",
+      "type": "cloud",
+      "label": "HikCentral",
+      "sublabel": "HikCentral",
       "row": 3,
       "col": 5
     },
     {
-      "id": "cliente-axios-jwt-0",
-      "type": "messagebus",
-      "label": "Axios + JWT",
-      "sublabel": "Axios + JWT",
-      "row": 5,
-      "col": 0
-    },
-    {
-      "id": "cliente-x-location-id-1",
-      "type": "messagebus",
-      "label": "X-Location-Id",
-      "sublabel": "X-Location-Id",
+      "id": "cliente-guards-mfa-0",
+      "type": "security",
+      "label": "Guards + MFA",
+      "sublabel": "Guards + MFA",
       "row": 5,
       "col": 1
     },
     {
-      "id": "cliente-zustand-2",
-      "type": "backend",
-      "label": "Zustand",
-      "sublabel": "Zustand",
+      "id": "cliente-axios-jwt-1",
+      "type": "security",
+      "label": "Axios + JWT",
+      "sublabel": "Axios + JWT",
       "row": 5,
       "col": 2
     },
     {
-      "id": "local-nfc-service-47321-0",
-      "type": "external",
-      "label": "nfc-service",
-      "sublabel": "nfc-service :47321",
+      "id": "cliente-x-location-id-2",
+      "type": "security",
+      "label": "X-Location-Id",
+      "sublabel": "X-Location-Id",
+      "row": 5,
+      "col": 3
+    },
+    {
+      "id": "cliente-zustand-3",
+      "type": "frontend",
+      "label": "Zustand",
+      "sublabel": "Zustand",
       "row": 5,
       "col": 4
     },
     {
-      "id": "local-web-nfc-1",
-      "type": "external",
-      "label": "Web NFC",
-      "sublabel": "Web NFC",
+      "id": "cliente-pwa-workbox-4",
+      "type": "frontend",
+      "label": "PWA Workbox",
+      "sublabel": "PWA Workbox",
       "row": 5,
       "col": 5
     },
     {
-      "id": "local-leaflet-2",
-      "type": "backend",
+      "id": "dispositivo-nfc-service-47321-0",
+      "type": "external",
+      "label": "nfc-service",
+      "sublabel": "nfc-service :47321",
+      "row": 7,
+      "col": 1
+    },
+    {
+      "id": "dispositivo-web-nfc-1",
+      "type": "external",
+      "label": "Web NFC",
+      "sublabel": "Web NFC",
+      "row": 7,
+      "col": 2
+    },
+    {
+      "id": "dispositivo-leaflet-2",
+      "type": "frontend",
       "label": "Leaflet",
       "sublabel": "Leaflet",
-      "row": 5,
-      "col": 6
+      "row": 7,
+      "col": 3
+    },
+    {
+      "id": "dispositivo-socket-io-3",
+      "type": "messagebus",
+      "label": "Socket.IO",
+      "sublabel": "Socket.IO",
+      "row": 7,
+      "col": 4
     }
   ],
   "boundaries": [
@@ -158,7 +198,8 @@
         "shell-tesoreria-1",
         "shell-empaque-2",
         "shell-almacenes-3",
-        "shell-configuracion-4"
+        "shell-configuracion-4",
+        "shell-resultados-5"
       ]
     },
     {
@@ -166,28 +207,32 @@
       "label": "Módulos",
       "wraps": [
         "modulos-asistencias-0",
-        "modulos-alta-de-empleado-1",
-        "modulos-buzon-sat-2",
+        "modulos-buzon-sat-1",
+        "modulos-alta-empleado-2",
         "modulos-chat-joni-3",
-        "modulos-monitor-4"
+        "modulos-monitor-4",
+        "modulos-hikcentral-5"
       ]
     },
     {
       "kind": "region",
       "label": "Cliente",
       "wraps": [
-        "cliente-axios-jwt-0",
-        "cliente-x-location-id-1",
-        "cliente-zustand-2"
+        "cliente-guards-mfa-0",
+        "cliente-axios-jwt-1",
+        "cliente-x-location-id-2",
+        "cliente-zustand-3",
+        "cliente-pwa-workbox-4"
       ]
     },
     {
       "kind": "region",
-      "label": "Local",
+      "label": "Dispositivo",
       "wraps": [
-        "local-nfc-service-47321-0",
-        "local-web-nfc-1",
-        "local-leaflet-2"
+        "dispositivo-nfc-service-47321-0",
+        "dispositivo-web-nfc-1",
+        "dispositivo-leaflet-2",
+        "dispositivo-socket-io-3"
       ]
     }
   ],
@@ -203,88 +248,89 @@
     {
       "id": "c1-shell-tesore-modulos-buzo",
       "from": "shell-tesoreria-1",
-      "to": "modulos-buzon-sat-2",
+      "to": "modulos-buzon-sat-1",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
       "id": "c2-shell-empaqu-modulos-alta",
       "from": "shell-empaque-2",
-      "to": "modulos-alta-de-empleado-1",
+      "to": "modulos-alta-empleado-2",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c3-modulos-asis-cliente-axio",
-      "from": "modulos-asistencias-0",
-      "to": "cliente-axios-jwt-0",
-      "variant": "security",
-      "fromSide": "bottom",
-      "toSide": "top"
-    },
-    {
-      "id": "c4-modulos-chat-cliente-axio",
-      "from": "modulos-chat-joni-3",
-      "to": "cliente-axios-jwt-0",
-      "variant": "security",
-      "fromSide": "bottom",
-      "toSide": "top"
-    },
-    {
-      "id": "c5-o-shell-al-modulos-",
-      "from": "shell-almacenes-3",
+      "id": "c3-shell-config-modulos-chat",
+      "from": "shell-configuracion-4",
       "to": "modulos-chat-joni-3",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c6-o-shell-co-shell-al",
-      "from": "shell-configuracion-4",
-      "to": "shell-almacenes-3",
-      "fromSide": "left",
-      "toSide": "right"
-    },
-    {
-      "id": "c7-o-shell-co-modulos-",
-      "from": "shell-configuracion-4",
+      "id": "c4-shell-result-modulos-moni",
+      "from": "shell-resultados-5",
       "to": "modulos-monitor-4",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c8-o-modulos--cliente-",
-      "from": "modulos-asistencias-0",
-      "to": "cliente-x-location-id-1",
-      "fromSide": "bottom",
-      "toSide": "top"
-    },
-    {
-      "id": "c9-o-modulos--cliente-",
-      "from": "modulos-alta-de-empleado-1",
-      "to": "cliente-zustand-2",
-      "fromSide": "bottom",
-      "toSide": "top"
-    },
-    {
-      "id": "c10-o-modulos--local-nf",
-      "from": "modulos-chat-joni-3",
-      "to": "local-nfc-service-47321-0",
-      "fromSide": "bottom",
-      "toSide": "top"
-    },
-    {
-      "id": "c11-o-modulos--local-we",
+      "id": "c5-modulos-moni-modulos-hikc",
       "from": "modulos-monitor-4",
-      "to": "local-web-nfc-1",
+      "to": "modulos-hikcentral-5",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "c6-modulos-asis-cliente-axio",
+      "from": "modulos-asistencias-0",
+      "to": "cliente-axios-jwt-1",
+      "variant": "security",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c12-o-local-le-local-we",
-      "from": "local-leaflet-2",
-      "to": "local-web-nfc-1",
-      "fromSide": "left",
-      "toSide": "right"
+      "id": "c7-modulos-buzo-cliente-axio",
+      "from": "modulos-buzon-sat-1",
+      "to": "cliente-axios-jwt-1",
+      "variant": "security",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c8-modulos-chat-cliente-axio",
+      "from": "modulos-chat-joni-3",
+      "to": "cliente-axios-jwt-1",
+      "variant": "security",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c9-modulos-alta-dispositivo-",
+      "from": "modulos-alta-empleado-2",
+      "to": "dispositivo-nfc-service-47321-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c10-modulos-alta-dispositivo-",
+      "from": "modulos-alta-empleado-2",
+      "to": "dispositivo-web-nfc-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c11-modulos-moni-dispositivo-",
+      "from": "modulos-monitor-4",
+      "to": "dispositivo-leaflet-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c12-modulos-moni-dispositivo-",
+      "from": "modulos-monitor-4",
+      "to": "dispositivo-socket-io-3",
+      "fromSide": "bottom",
+      "toSide": "top"
     }
   ],
   "cards": [

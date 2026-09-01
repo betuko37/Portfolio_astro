@@ -590,13 +590,16 @@ export const projects: Project[] = [
     architecture: `flowchart TB
   Nomina[Nómina] --> Asist[Asistencias]
   Tes[Tesorería] --> SAT[Buzón SAT]
-  Empaque[Empaque] --> Alta[Alta de empleado]
+  Empaque[Empaque] --> Alta[Alta empleado]
   Wh[Almacenes] --> Hik[HikCentral]
-  Asist --> Axios[Axios + JWT]
-  Joni[Chat Joni] --> Axios
-  Mon[Monitor] --> IO[Socket.IO]
-  SAT --> IO
-  Axios --> NFC[nfc-service :47321]`,
+  Config[Configuración] --> Joni[Chat Joni]
+  Res[Resultados] --> Mon[Monitor]
+  Asist --> Guards[Guards + MFA]
+  SAT --> Axios[Axios + JWT]
+  Alta --> NFC[nfc-service]
+  NFC --> WebNFC[Web NFC]
+  Mon --> Leaflet[Leaflet]
+  Leaflet --> IO[Socket.IO]`,
     architectureLayers: [
       {
         name: "Shell",
@@ -604,16 +607,14 @@ export const projects: Project[] = [
       },
       {
         name: "Módulos",
-        items: ["Asistencias", "Alta de empleado", "Buzón SAT", "Chat Joni", "Monitor", "HikCentral"],
+        items: ["Asistencias", "Buzón SAT", "Alta empleado", "HikCentral", "Chat Joni", "Monitor"],
       },
       {
         name: "Cliente",
-        lane: "left",
-        items: ["Axios + JWT", "X-Location-Id", "Zustand", "PWA Workbox"],
+        items: ["Guards + MFA", "Axios + JWT", "X-Location-Id", "Zustand", "PWA Workbox"],
       },
       {
-        name: "Local",
-        lane: "right",
+        name: "Dispositivo",
         items: ["nfc-service :47321", "Web NFC", "Leaflet", "Socket.IO"],
       },
     ],

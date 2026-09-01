@@ -2,28 +2,28 @@
   "ui-navbar-0": {
     "title": "Navbar",
     "subtitle": "Navbar",
-    "kind": "backend",
+    "kind": "frontend",
     "layer": "UI",
     "body": "Navbar"
   },
   "ui-gridgifts-1": {
     "title": "GridGifts",
     "subtitle": "GridGifts",
-    "kind": "backend",
+    "kind": "frontend",
     "layer": "UI",
     "body": "GridGifts"
   },
   "ui-search-2": {
     "title": "Search",
     "subtitle": "Search",
-    "kind": "backend",
+    "kind": "frontend",
     "layer": "UI",
     "body": "Search"
   },
   "ui-favorites-3": {
     "title": "Favorites",
     "subtitle": "Favorites",
-    "kind": "backend",
+    "kind": "frontend",
     "layer": "UI",
     "body": "Favorites"
   },

@@ -162,28 +162,35 @@
       "toSide": "left"
     },
     {
-      "id": "c4-nucleo-syncs-nucleo-apicl",
+      "id": "c4-nucleo-onlin-nucleo-syncs",
+      "from": "nucleo-onlineofflinemanager-0",
+      "to": "nucleo-syncservice-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c5-nucleo-syncs-nucleo-apicl",
       "from": "nucleo-syncservice-2",
       "to": "nucleo-apiclient-3",
       "fromSide": "right",
       "toSide": "left"
     },
     {
-      "id": "c5-nucleo-onlin-red-connecti",
+      "id": "c6-nucleo-onlin-red-connecti",
       "from": "nucleo-onlineofflinemanager-0",
       "to": "red-connectivityservice-0",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c6-red-connecti-red-timer-10",
+      "id": "c7-red-connecti-red-timer-10",
       "from": "red-connectivityservice-0",
       "to": "red-timer-10-min-1",
       "fromSide": "right",
       "toSide": "left"
     },
     {
-      "id": "c7-red-timer-10-red-workmana",
+      "id": "c8-red-timer-10-red-workmana",
       "from": "red-timer-10-min-1",
       "to": "red-workmanager-15-min-2",
       "fromSide": "right",

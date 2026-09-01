@@ -13,7 +13,7 @@
       32,
       72
     ],
-    "cols": 7,
+    "cols": 9,
     "gapX": 22,
     "gapY": 84,
     "cellW": 152,
@@ -26,7 +26,7 @@
       "label": "Dashboard PWA",
       "sublabel": "Dashboard PWA",
       "row": 1,
-      "col": 2
+      "col": 3
     },
     {
       "id": "entrada-app-flutter-1",
@@ -34,7 +34,7 @@
       "label": "App Flutter",
       "sublabel": "App Flutter",
       "row": 1,
-      "col": 3
+      "col": 4
     },
     {
       "id": "entrada-whatsapp-2",
@@ -42,15 +42,15 @@
       "label": "WhatsApp",
       "sublabel": "WhatsApp",
       "row": 1,
-      "col": 4
+      "col": 5
     },
     {
       "id": "auth-jwt-0",
-      "type": "security",
+      "type": "messagebus",
       "label": "JWT",
       "sublabel": "JWT",
       "row": 3,
-      "col": 1
+      "col": 2
     },
     {
       "id": "auth-totp-2fa-1",
@@ -58,7 +58,7 @@
       "label": "TOTP",
       "sublabel": "TOTP / 2FA",
       "row": 3,
-      "col": 2
+      "col": 3
     },
     {
       "id": "auth-roleguard-2",
@@ -66,7 +66,7 @@
       "label": "RoleGuard",
       "sublabel": "RoleGuard",
       "row": 3,
-      "col": 3
+      "col": 4
     },
     {
       "id": "auth-moduleguard-3",
@@ -74,7 +74,7 @@
       "label": "ModuleGuard",
       "sublabel": "ModuleGuard",
       "row": 3,
-      "col": 4
+      "col": 5
     },
     {
       "id": "rutas-admin-0",
@@ -101,27 +101,91 @@
       "col": 2
     },
     {
-      "id": "servicios-payroll-0",
-      "type": "messagebus",
-      "label": "payroll",
-      "sublabel": "payroll",
+      "id": "rutas-packing-3",
+      "type": "backend",
+      "label": "packing",
+      "sublabel": "packing",
+      "row": 5,
+      "col": 3
+    },
+    {
+      "id": "rutas-warehouses-4",
+      "type": "backend",
+      "label": "warehouses",
+      "sublabel": "warehouses",
       "row": 5,
       "col": 4
     },
     {
-      "id": "servicios-socket-gateway-1",
-      "type": "messagebus",
-      "label": "socket-gateway",
-      "sublabel": "socket-gateway",
+      "id": "rutas-mobile-5",
+      "type": "frontend",
+      "label": "mobile",
+      "sublabel": "mobile",
       "row": 5,
       "col": 5
     },
     {
+      "id": "rutas-whatsapp-6",
+      "type": "frontend",
+      "label": "whatsapp-*",
+      "sublabel": "whatsapp-*",
+      "row": 5,
+      "col": 6
+    },
+    {
+      "id": "rutas-ai-7",
+      "type": "backend",
+      "label": "ai",
+      "sublabel": "ai",
+      "row": 5,
+      "col": 7
+    },
+    {
+      "id": "servicios-payroll-0",
+      "type": "backend",
+      "label": "payroll",
+      "sublabel": "payroll",
+      "row": 7,
+      "col": 1
+    },
+    {
+      "id": "servicios-socket-gateway-1",
+      "type": "backend",
+      "label": "socket-gateway",
+      "sublabel": "socket-gateway",
+      "row": 7,
+      "col": 2
+    },
+    {
       "id": "servicios-chatbot-joni-2",
-      "type": "messagebus",
+      "type": "backend",
       "label": "chatbot Joni",
       "sublabel": "chatbot Joni",
-      "row": 5,
+      "row": 7,
+      "col": 3
+    },
+    {
+      "id": "servicios-hikcentral-3",
+      "type": "cloud",
+      "label": "hikcentral",
+      "sublabel": "hikcentral",
+      "row": 7,
+      "col": 4
+    },
+    {
+      "id": "servicios-whatsapp-4",
+      "type": "frontend",
+      "label": "whatsapp",
+      "sublabel": "whatsapp",
+      "row": 7,
+      "col": 5
+    },
+    {
+      "id": "servicios-sat-mailbox-5",
+      "type": "backend",
+      "label": "sat-mailbox",
+      "sublabel": "sat-mailbox",
+      "row": 7,
       "col": 6
     },
     {
@@ -129,32 +193,32 @@
       "type": "database",
       "label": "Prisma",
       "sublabel": "Prisma",
-      "row": 7,
-      "col": 1
+      "row": 9,
+      "col": 2
     },
     {
       "id": "datos-postgresql-1",
       "type": "database",
       "label": "PostgreSQL",
       "sublabel": "PostgreSQL",
-      "row": 7,
-      "col": 2
+      "row": 9,
+      "col": 3
     },
     {
       "id": "datos-aws-s3-2",
       "type": "database",
       "label": "AWS S3",
       "sublabel": "AWS S3",
-      "row": 7,
-      "col": 3
+      "row": 9,
+      "col": 4
     },
     {
       "id": "datos-node-cron-3",
       "type": "database",
       "label": "node-cron",
       "sublabel": "node-cron",
-      "row": 7,
-      "col": 4
+      "row": 9,
+      "col": 5
     }
   ],
   "boundaries": [
@@ -183,7 +247,12 @@
       "wraps": [
         "rutas-admin-0",
         "rutas-processes-payroll-1",
-        "rutas-treasury-2"
+        "rutas-treasury-2",
+        "rutas-packing-3",
+        "rutas-warehouses-4",
+        "rutas-mobile-5",
+        "rutas-whatsapp-6",
+        "rutas-ai-7"
       ]
     },
     {
@@ -192,7 +261,10 @@
       "wraps": [
         "servicios-payroll-0",
         "servicios-socket-gateway-1",
-        "servicios-chatbot-joni-2"
+        "servicios-chatbot-joni-2",
+        "servicios-hikcentral-3",
+        "servicios-whatsapp-4",
+        "servicios-sat-mailbox-5"
       ]
     },
     {
@@ -231,7 +303,22 @@
       "toSide": "top"
     },
     {
-      "id": "c3-auth-jwt-0-rutas-admin-",
+      "id": "c3-auth-jwt-0-auth-rolegua",
+      "from": "auth-jwt-0",
+      "to": "auth-roleguard-2",
+      "variant": "security",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c4-auth-totp-2f-auth-moduleg",
+      "from": "auth-totp-2fa-1",
+      "to": "auth-moduleguard-3",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c5-auth-jwt-0-rutas-admin-",
       "from": "auth-jwt-0",
       "to": "rutas-admin-0",
       "variant": "security",
@@ -239,7 +326,7 @@
       "toSide": "top"
     },
     {
-      "id": "c4-auth-jwt-0-rutas-proces",
+      "id": "c6-auth-jwt-0-rutas-proces",
       "from": "auth-jwt-0",
       "to": "rutas-processes-payroll-1",
       "variant": "security",
@@ -247,7 +334,7 @@
       "toSide": "top"
     },
     {
-      "id": "c5-auth-jwt-0-servicios-pa",
+      "id": "c7-auth-jwt-0-servicios-pa",
       "from": "auth-jwt-0",
       "to": "servicios-payroll-0",
       "variant": "security",
@@ -255,64 +342,50 @@
       "toSide": "top"
     },
     {
-      "id": "c6-rutas-admin--datos-prisma",
+      "id": "c8-entrada-what-servicios-ch",
+      "from": "entrada-whatsapp-2",
+      "to": "servicios-chatbot-joni-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c9-rutas-admin--datos-prisma",
       "from": "rutas-admin-0",
       "to": "datos-prisma-0",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c7-servicios-ch-datos-prisma",
+      "id": "c10-rutas-proces-servicios-pa",
+      "from": "rutas-processes-payroll-1",
+      "to": "servicios-payroll-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c11-servicios-ch-datos-prisma",
       "from": "servicios-chatbot-joni-2",
       "to": "datos-prisma-0",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c8-datos-prisma-datos-postgr",
+      "id": "c12-datos-prisma-datos-postgr",
       "from": "datos-prisma-0",
       "to": "datos-postgresql-1",
       "fromSide": "right",
       "toSide": "left"
     },
     {
-      "id": "c9-o-entrada--auth-rol",
-      "from": "entrada-app-flutter-1",
-      "to": "auth-roleguard-2",
+      "id": "c13-datos-prisma-datos-aws-s3",
+      "from": "datos-prisma-0",
+      "to": "datos-aws-s3-2",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c10-o-entrada--auth-mod",
-      "from": "entrada-whatsapp-2",
-      "to": "auth-moduleguard-3",
-      "fromSide": "bottom",
-      "toSide": "top"
-    },
-    {
-      "id": "c11-o-auth-tot-rutas-tr",
-      "from": "auth-totp-2fa-1",
-      "to": "rutas-treasury-2",
-      "fromSide": "bottom",
-      "toSide": "top"
-    },
-    {
-      "id": "c12-o-servicio-servicio",
-      "from": "servicios-socket-gateway-1",
-      "to": "servicios-payroll-0",
-      "fromSide": "left",
-      "toSide": "right"
-    },
-    {
-      "id": "c13-o-datos-aw-datos-po",
-      "from": "datos-aws-s3-2",
-      "to": "datos-postgresql-1",
-      "fromSide": "left",
-      "toSide": "right"
-    },
-    {
-      "id": "c14-o-servicio-datos-no",
-      "from": "servicios-payroll-0",
+      "id": "c14-datos-postgr-datos-node-c",
+      "from": "datos-postgresql-1",
       "to": "datos-node-cron-3",
       "fromSide": "bottom",
       "toSide": "top"

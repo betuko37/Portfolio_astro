@@ -13,7 +13,7 @@
       32,
       72
     ],
-    "cols": 7,
+    "cols": 8,
     "gapX": 22,
     "gapY": 84,
     "cellW": 152,
@@ -26,7 +26,7 @@
       "label": "ERP web PWA",
       "sublabel": "ERP web PWA",
       "row": 1,
-      "col": 2
+      "col": 3
     },
     {
       "id": "superficies-app-flutter-de-campo-1",
@@ -34,7 +34,7 @@
       "label": "App Flutter de ca…",
       "sublabel": "App Flutter de campo",
       "row": 1,
-      "col": 3
+      "col": 4
     },
     {
       "id": "panel-web-nomina-0",
@@ -42,7 +42,7 @@
       "label": "Nómina",
       "sublabel": "Nómina",
       "row": 3,
-      "col": 0
+      "col": 1
     },
     {
       "id": "panel-web-tesoreria-1",
@@ -50,7 +50,7 @@
       "label": "Tesorería",
       "sublabel": "Tesorería",
       "row": 3,
-      "col": 1
+      "col": 2
     },
     {
       "id": "panel-web-empaque-2",
@@ -58,135 +58,183 @@
       "label": "Empaque",
       "sublabel": "Empaque",
       "row": 3,
-      "col": 2
+      "col": 3
+    },
+    {
+      "id": "panel-web-almacenes-3",
+      "type": "frontend",
+      "label": "Almacenes",
+      "sublabel": "Almacenes",
+      "row": 3,
+      "col": 4
+    },
+    {
+      "id": "panel-web-configuracion-4",
+      "type": "frontend",
+      "label": "Configuración",
+      "sublabel": "Configuración",
+      "row": 3,
+      "col": 5
+    },
+    {
+      "id": "panel-web-resultados-5",
+      "type": "frontend",
+      "label": "Resultados",
+      "sublabel": "Resultados",
+      "row": 3,
+      "col": 6
     },
     {
       "id": "app-de-campo-asistencias-nfc-qr-0",
-      "type": "external",
+      "type": "frontend",
       "label": "Asistencias NFC",
       "sublabel": "Asistencias NFC/QR",
-      "row": 3,
-      "col": 4
+      "row": 5,
+      "col": 2
     },
     {
       "id": "app-de-campo-alta-de-empleados-1",
       "type": "frontend",
       "label": "Alta de empleados",
       "sublabel": "Alta de empleados",
-      "row": 3,
-      "col": 5
+      "row": 5,
+      "col": 3
     },
     {
       "id": "app-de-campo-captura-de-surcos-2",
       "type": "frontend",
       "label": "Captura de surcos",
       "sublabel": "Captura de surcos",
-      "row": 3,
-      "col": 6
+      "row": 5,
+      "col": 4
+    },
+    {
+      "id": "app-de-campo-cajas-3",
+      "type": "frontend",
+      "label": "Cajas",
+      "sublabel": "Cajas",
+      "row": 5,
+      "col": 5
     },
     {
       "id": "adaptadores-nfc-service-47321-0",
       "type": "external",
       "label": "nfc-service",
       "sublabel": "nfc-service :47321",
-      "row": 5,
-      "col": 1
+      "row": 7,
+      "col": 2
     },
     {
       "id": "adaptadores-nfc-manager-1",
-      "type": "external",
+      "type": "backend",
       "label": "nfc_manager",
       "sublabel": "nfc_manager",
-      "row": 5,
-      "col": 2
+      "row": 7,
+      "col": 3
     },
     {
       "id": "adaptadores-betuko-offline-sync-2",
       "type": "backend",
       "label": "betuko_offline_sy…",
       "sublabel": "betuko_offline_sync",
-      "row": 5,
-      "col": 3
+      "row": 7,
+      "col": 4
     },
     {
       "id": "adaptadores-workmanager-3",
       "type": "backend",
       "label": "WorkManager",
       "sublabel": "WorkManager",
-      "row": 5,
-      "col": 4
+      "row": 7,
+      "col": 5
     },
     {
       "id": "api-jwt-2fa-rbac-0",
-      "type": "security",
+      "type": "messagebus",
       "label": "JWT",
       "sublabel": "JWT / 2FA / RBAC",
-      "row": 7,
-      "col": 1
+      "row": 9,
+      "col": 0
     },
     {
       "id": "api-processes-payroll-1",
       "type": "backend",
       "label": "processes",
       "sublabel": "processes/payroll",
-      "row": 7,
-      "col": 2
+      "row": 9,
+      "col": 1
     },
     {
       "id": "api-treasury-sat-mailbox-2",
       "type": "backend",
       "label": "treasury",
       "sublabel": "treasury/sat-mailbox",
-      "row": 7,
-      "col": 3
+      "row": 9,
+      "col": 2
     },
     {
       "id": "api-packing-3",
       "type": "backend",
       "label": "packing",
       "sublabel": "packing",
-      "row": 7,
-      "col": 4
+      "row": 9,
+      "col": 3
     },
     {
       "id": "api-warehouses-4",
       "type": "backend",
       "label": "warehouses",
       "sublabel": "warehouses",
-      "row": 7,
+      "row": 9,
+      "col": 4
+    },
+    {
+      "id": "api-whatsapp-5",
+      "type": "frontend",
+      "label": "whatsapp",
+      "sublabel": "whatsapp",
+      "row": 9,
       "col": 5
     },
     {
-      "id": "servicios-socket-gateway-0",
-      "type": "messagebus",
-      "label": "socket-gateway",
-      "sublabel": "socket-gateway",
+      "id": "api-mobile-6",
+      "type": "frontend",
+      "label": "mobile",
+      "sublabel": "mobile",
       "row": 9,
-      "col": 1
+      "col": 6
     },
     {
-      "id": "servicios-chatbot-joni-1",
-      "type": "messagebus",
-      "label": "chatbot Joni",
-      "sublabel": "chatbot Joni",
-      "row": 9,
+      "id": "servicios-socket-gateway-0",
+      "type": "backend",
+      "label": "socket-gateway",
+      "sublabel": "socket-gateway",
+      "row": 11,
       "col": 2
     },
     {
-      "id": "servicios-hikcentral-2",
-      "type": "messagebus",
-      "label": "hikcentral",
-      "sublabel": "hikcentral",
-      "row": 9,
+      "id": "servicios-chatbot-joni-1",
+      "type": "backend",
+      "label": "chatbot Joni",
+      "sublabel": "chatbot Joni",
+      "row": 11,
       "col": 3
     },
     {
+      "id": "servicios-hikcentral-2",
+      "type": "cloud",
+      "label": "hikcentral",
+      "sublabel": "hikcentral",
+      "row": 11,
+      "col": 4
+    },
+    {
       "id": "servicios-sat-cfdi-3",
-      "type": "messagebus",
+      "type": "backend",
       "label": "SAT CFDI",
       "sublabel": "SAT CFDI",
-      "row": 9,
-      "col": 4
+      "row": 11,
+      "col": 5
     }
   ],
   "boundaries": [
@@ -204,7 +252,10 @@
       "wraps": [
         "panel-web-nomina-0",
         "panel-web-tesoreria-1",
-        "panel-web-empaque-2"
+        "panel-web-empaque-2",
+        "panel-web-almacenes-3",
+        "panel-web-configuracion-4",
+        "panel-web-resultados-5"
       ]
     },
     {
@@ -213,7 +264,8 @@
       "wraps": [
         "app-de-campo-asistencias-nfc-qr-0",
         "app-de-campo-alta-de-empleados-1",
-        "app-de-campo-captura-de-surcos-2"
+        "app-de-campo-captura-de-surcos-2",
+        "app-de-campo-cajas-3"
       ]
     },
     {
@@ -234,7 +286,9 @@
         "api-processes-payroll-1",
         "api-treasury-sat-mailbox-2",
         "api-packing-3",
-        "api-warehouses-4"
+        "api-warehouses-4",
+        "api-whatsapp-5",
+        "api-mobile-6"
       ]
     },
     {
@@ -272,56 +326,70 @@
       "toSide": "top"
     },
     {
-      "id": "c3-superficies--app-de-campo",
-      "from": "superficies-app-flutter-de-campo-1",
-      "to": "app-de-campo-asistencias-nfc-qr-0",
+      "id": "c3-superficies--panel-web-al",
+      "from": "superficies-erp-web-pwa-0",
+      "to": "panel-web-almacenes-3",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
       "id": "c4-superficies--app-de-campo",
       "from": "superficies-app-flutter-de-campo-1",
-      "to": "app-de-campo-alta-de-empleados-1",
+      "to": "app-de-campo-asistencias-nfc-qr-0",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
       "id": "c5-superficies--app-de-campo",
       "from": "superficies-app-flutter-de-campo-1",
+      "to": "app-de-campo-alta-de-empleados-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c6-superficies--app-de-campo",
+      "from": "superficies-app-flutter-de-campo-1",
       "to": "app-de-campo-captura-de-surcos-2",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c6-app-de-campo-adaptadores-",
+      "id": "c7-superficies--app-de-campo",
+      "from": "superficies-app-flutter-de-campo-1",
+      "to": "app-de-campo-cajas-3",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c8-app-de-campo-adaptadores-",
       "from": "app-de-campo-asistencias-nfc-qr-0",
       "to": "adaptadores-nfc-service-47321-0",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c7-app-de-campo-adaptadores-",
+      "id": "c9-app-de-campo-adaptadores-",
       "from": "app-de-campo-alta-de-empleados-1",
       "to": "adaptadores-nfc-manager-1",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c8-app-de-campo-adaptadores-",
+      "id": "c10-app-de-campo-adaptadores-",
       "from": "app-de-campo-captura-de-surcos-2",
       "to": "adaptadores-betuko-offline-sync-2",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c9-adaptadores--adaptadores-",
+      "id": "c11-adaptadores--adaptadores-",
       "from": "adaptadores-betuko-offline-sync-2",
       "to": "adaptadores-workmanager-3",
       "fromSide": "right",
       "toSide": "left"
     },
     {
-      "id": "c10-adaptadores--api-jwt-2fa-",
+      "id": "c12-adaptadores--api-jwt-2fa-",
       "from": "adaptadores-nfc-service-47321-0",
       "to": "api-jwt-2fa-rbac-0",
       "variant": "security",
@@ -329,14 +397,14 @@
       "toSide": "top"
     },
     {
-      "id": "c11-adaptadores--api-processe",
+      "id": "c13-adaptadores--api-processe",
       "from": "adaptadores-workmanager-3",
       "to": "api-processes-payroll-1",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c12-api-jwt-2fa--servicios-so",
+      "id": "c14-api-jwt-2fa--servicios-so",
       "from": "api-jwt-2fa-rbac-0",
       "to": "servicios-socket-gateway-0",
       "variant": "security",
@@ -344,43 +412,22 @@
       "toSide": "top"
     },
     {
-      "id": "c13-api-processe-servicios-ch",
+      "id": "c15-api-processe-servicios-ch",
       "from": "api-processes-payroll-1",
       "to": "servicios-chatbot-joni-1",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c14-o-adaptado-api-trea",
-      "from": "adaptadores-betuko-offline-sync-2",
-      "to": "api-treasury-sat-mailbox-2",
-      "fromSide": "bottom",
-      "toSide": "top"
-    },
-    {
-      "id": "c15-o-adaptado-api-pack",
-      "from": "adaptadores-workmanager-3",
-      "to": "api-packing-3",
-      "fromSide": "bottom",
-      "toSide": "top"
-    },
-    {
-      "id": "c16-o-api-ware-api-pack",
-      "from": "api-warehouses-4",
-      "to": "api-packing-3",
-      "fromSide": "left",
-      "toSide": "right"
-    },
-    {
-      "id": "c17-o-api-trea-servicio",
-      "from": "api-treasury-sat-mailbox-2",
+      "id": "c16-servicios-so-servicios-hi",
+      "from": "servicios-socket-gateway-0",
       "to": "servicios-hikcentral-2",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c18-o-api-pack-servicio",
-      "from": "api-packing-3",
+      "id": "c17-servicios-ch-servicios-sa",
+      "from": "servicios-chatbot-joni-1",
       "to": "servicios-sat-cfdi-3",
       "fromSide": "bottom",
       "toSide": "top"

@@ -23,14 +23,14 @@
   "ui-roboto-1": {
     "title": "Roboto",
     "subtitle": "Roboto",
-    "kind": "backend",
+    "kind": "frontend",
     "layer": "UI",
     "body": "Roboto"
   },
   "ui-layouts-2": {
     "title": "Layouts",
     "subtitle": "Layouts",
-    "kind": "backend",
+    "kind": "frontend",
     "layer": "UI",
     "body": "Layouts"
   }

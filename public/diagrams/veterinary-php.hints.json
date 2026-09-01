@@ -2,21 +2,21 @@
   "frontend-javascript-0": {
     "title": "JavaScript",
     "subtitle": "JavaScript",
-    "kind": "backend",
+    "kind": "frontend",
     "layer": "Frontend",
     "body": "Tablas dinámicas y formularios en Js/."
   },
   "frontend-tablas-1": {
     "title": "Tablas",
     "subtitle": "Tablas",
-    "kind": "backend",
+    "kind": "frontend",
     "layer": "Frontend",
     "body": "Tablas dinámicas y formularios en Js/."
   },
   "frontend-formularios-2": {
     "title": "Formularios",
     "subtitle": "Formularios",
-    "kind": "messagebus",
+    "kind": "frontend",
     "layer": "Frontend",
     "body": "Tablas dinámicas y formularios en Js/."
   },

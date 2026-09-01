@@ -46,7 +46,7 @@
     },
     {
       "id": "ui-roboto-1",
-      "type": "backend",
+      "type": "frontend",
       "label": "Roboto",
       "sublabel": "Roboto",
       "row": 3,
@@ -54,7 +54,7 @@
     },
     {
       "id": "ui-layouts-2",
-      "type": "backend",
+      "type": "frontend",
       "label": "Layouts",
       "sublabel": "Layouts",
       "row": 3,

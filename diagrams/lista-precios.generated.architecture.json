@@ -22,7 +22,7 @@
   "components": [
     {
       "id": "frontend-react-19-0",
-      "type": "backend",
+      "type": "frontend",
       "label": "React 19",
       "sublabel": "React 19",
       "row": 1,
@@ -30,7 +30,7 @@
     },
     {
       "id": "frontend-tailwind-4-1",
-      "type": "backend",
+      "type": "frontend",
       "label": "Tailwind 4",
       "sublabel": "Tailwind 4",
       "row": 1,
@@ -38,7 +38,7 @@
     },
     {
       "id": "frontend-vite-2",
-      "type": "backend",
+      "type": "frontend",
       "label": "Vite",
       "sublabel": "Vite",
       "row": 1,

@@ -2,7 +2,7 @@
   "ui-tailwind-4-0": {
     "title": "Tailwind 4",
     "subtitle": "Tailwind 4",
-    "kind": "backend",
+    "kind": "frontend",
     "layer": "UI",
     "body": "Tailwind 4"
   },
@@ -16,7 +16,7 @@
   "ui-react-icons-2": {
     "title": "react-icons",
     "subtitle": "react-icons",
-    "kind": "backend",
+    "kind": "frontend",
     "layer": "UI",
     "body": "react-icons"
   },

@@ -50,7 +50,7 @@
       "label": "Express",
       "sublabel": "Express",
       "row": 1,
-      "col": 4
+      "col": 3
     },
     {
       "id": "servidor-socket-io-1",
@@ -58,7 +58,7 @@
       "label": "Socket.IO",
       "sublabel": "Socket.IO",
       "row": 1,
-      "col": 5
+      "col": 4
     },
     {
       "id": "servidor-nodemon-2",
@@ -66,7 +66,7 @@
       "label": "nodemon",
       "sublabel": "nodemon",
       "row": 1,
-      "col": 6
+      "col": 5
     }
   ],
   "boundaries": [
@@ -106,14 +106,21 @@
       "toSide": "left"
     },
     {
-      "id": "c2-servidor-exp-servidor-soc",
+      "id": "c2-cliente-reac-servidor-exp",
+      "from": "cliente-react-0",
+      "to": "servidor-express-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c3-servidor-exp-servidor-soc",
       "from": "servidor-express-0",
       "to": "servidor-socket-io-1",
       "fromSide": "right",
       "toSide": "left"
     },
     {
-      "id": "c3-servidor-soc-servidor-nod",
+      "id": "c4-servidor-soc-servidor-nod",
       "from": "servidor-socket-io-1",
       "to": "servidor-nodemon-2",
       "fromSide": "right",

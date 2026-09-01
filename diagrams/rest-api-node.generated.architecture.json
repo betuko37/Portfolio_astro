@@ -46,7 +46,7 @@
     },
     {
       "id": "dominio-movie-model-0",
-      "type": "messagebus",
+      "type": "backend",
       "label": "Movie model",
       "sublabel": "Movie model",
       "row": 3,
@@ -54,7 +54,7 @@
     },
     {
       "id": "dominio-zod-validation-1",
-      "type": "messagebus",
+      "type": "backend",
       "label": "Zod validation",
       "sublabel": "Zod validation",
       "row": 3,

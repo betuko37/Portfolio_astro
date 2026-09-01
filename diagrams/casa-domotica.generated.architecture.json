@@ -142,11 +142,11 @@
       "toSide": "left"
     },
     {
-      "id": "c5-o-hardware-hardware",
-      "from": "hardware-actuadores-2",
-      "to": "hardware-sensores-1",
-      "fromSide": "left",
-      "toSide": "right"
+      "id": "c5-hardware-ard-hardware-act",
+      "from": "hardware-arduino-0",
+      "to": "hardware-actuadores-2",
+      "fromSide": "bottom",
+      "toSide": "top"
     }
   ],
   "cards": [

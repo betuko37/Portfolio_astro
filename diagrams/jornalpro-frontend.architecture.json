@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "JornalPro Frontend",
+    "subtitle": "SPA React: seis apps, guards por rol, NFC y tiempo real",
+    "quality_profile": "showcase",
+    "output": "jornalpro-frontend.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [32, 72],
+    "cols": 7,
+    "gapX": 28,
+    "gapY": 96,
+    "cellW": 148,
+    "cellH": 58
+  },
+  "components": [
+    { "id": "nomina", "type": "frontend", "label": "Nómina", "sublabel": "App SPA", "row": 1, "col": 0 },
+    { "id": "tesoreria", "type": "frontend", "label": "Tesorería", "sublabel": "App SPA", "row": 1, "col": 1 },
+    { "id": "empaque", "type": "frontend", "label": "Empaque", "sublabel": "App SPA", "row": 1, "col": 2 },
+    { "id": "almacenes", "type": "frontend", "label": "Almacenes", "sublabel": "App SPA", "row": 1, "col": 3 },
+    { "id": "config", "type": "frontend", "label": "Configuración", "sublabel": "App SPA", "row": 1, "col": 4 },
+    { "id": "resultados", "type": "frontend", "label": "Resultados", "sublabel": "App SPA", "row": 1, "col": 5 },
+
+    { "id": "asistencias", "type": "frontend", "label": "Asistencias", "sublabel": "Captura / cierre", "row": 3, "col": 0 },
+    { "id": "sat", "type": "frontend", "label": "Buzón SAT", "sublabel": "CFDI", "row": 3, "col": 1 },
+    { "id": "alta", "type": "frontend", "label": "Alta empleado", "sublabel": "Formularios", "row": 3, "col": 2 },
+    { "id": "hik", "type": "cloud", "label": "HikCentral", "sublabel": "UI cámaras", "row": 3, "col": 3 },
+    { "id": "joni", "type": "frontend", "label": "Chat Joni", "sublabel": "IA en panel", "row": 3, "col": 4 },
+    { "id": "monitor", "type": "frontend", "label": "Monitor", "sublabel": "Mapas / feed", "row": 3, "col": 5 },
+
+    { "id": "guards", "type": "security", "label": "Guards + MFA", "sublabel": "Roles / sesión", "row": 5, "col": 0 },
+    { "id": "axios", "type": "security", "label": "Axios + JWT", "sublabel": "Bearer token", "row": 5, "col": 1 },
+    { "id": "nfc", "type": "external", "label": "nfc-service", "sublabel": ":47321", "row": 5, "col": 2 },
+    { "id": "zustand", "type": "frontend", "label": "Zustand", "sublabel": "Estado cliente", "row": 5, "col": 3 },
+    { "id": "pwa", "type": "frontend", "label": "PWA Workbox", "sublabel": "Cache assets", "row": 5, "col": 4 },
+    { "id": "leaflet", "type": "frontend", "label": "Leaflet", "sublabel": "Mapas / lotes", "row": 5, "col": 5 },
+
+    { "id": "location", "type": "security", "label": "X-Location-Id", "sublabel": "Contexto sitio", "row": 7, "col": 1 },
+    { "id": "webnfc", "type": "external", "label": "Web NFC", "sublabel": "Chrome Android", "row": 7, "col": 2 },
+    { "id": "socket", "type": "messagebus", "label": "Socket.IO", "sublabel": "Tiempo real", "row": 7, "col": 5 }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Shell — 6 apps",
+      "wraps": ["nomina", "tesoreria", "empaque", "almacenes", "config", "resultados"]
+    },
+    {
+      "kind": "region",
+      "label": "Módulos de UI",
+      "wraps": ["asistencias", "sat", "alta", "hik", "joni", "monitor"]
+    },
+    {
+      "kind": "region",
+      "label": "Cliente",
+      "wraps": ["guards", "axios", "location", "zustand", "pwa"]
+    },
+    {
+      "kind": "region",
+      "label": "Dispositivo y tiempo real",
+      "wraps": ["nfc", "webnfc", "leaflet", "socket"]
+    }
+  ],
+  "connections": [
+    { "id": "nomina-asist", "from": "nomina", "to": "asistencias", "variant": "emphasis" },
+    { "id": "tesoreria-sat", "from": "tesoreria", "to": "sat" },
+    { "id": "empaque-alta", "from": "empaque", "to": "alta" },
+    { "id": "almacenes-hik", "from": "almacenes", "to": "hik" },
+    { "id": "config-joni", "from": "config", "to": "joni" },
+    { "id": "resultados-monitor", "from": "resultados", "to": "monitor" },
+
+    { "id": "asist-guards", "from": "asistencias", "to": "guards", "variant": "security" },
+    { "id": "sat-axios", "from": "sat", "to": "axios", "variant": "security" },
+    { "id": "alta-nfc", "from": "alta", "to": "nfc" },
+    { "id": "joni-pwa", "from": "joni", "to": "pwa" },
+    { "id": "monitor-leaflet", "from": "monitor", "to": "leaflet" },
+
+    { "id": "guards-axios", "from": "guards", "to": "axios", "variant": "security" },
+    { "id": "axios-location", "from": "axios", "to": "location", "variant": "security" },
+    { "id": "nfc-webnfc", "from": "nfc", "to": "webnfc" },
+    { "id": "leaflet-socket", "from": "leaflet", "to": "socket" },
+    { "id": "hik-zustand", "from": "hik", "to": "zustand" }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Seis apps en una SPA",
+      "items": ["Nómina, empaque, almacenes, tesorería, configuración y resultados."]
+    },
+    {
+      "dot": "emerald",
+      "title": "Guards y MFA",
+      "items": ["Contraseña, OTP, TOTP y roles (Admin, Packing, SAT…)."]
+    },
+    {
+      "dot": "rose",
+      "title": "NFC híbrido",
+      "items": ["ACR122U vía nfc-service y Web NFC en Android, mismo alta."]
+    }
+  ]
+}

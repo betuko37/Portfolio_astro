@@ -1,114 +1,149 @@
 {
-  "shell-nomina-0": {
+  "nomina": {
     "title": "Nómina",
-    "subtitle": "Nómina",
-    "kind": "backend",
-    "layer": "Shell",
+    "subtitle": "App SPA",
+    "kind": "frontend",
+    "layer": "Shell — 6 apps",
     "body": "Asistencias v2/v3, captura diaria, cierre semanal, préstamos, deducciones, tarjetas bancarias y catálogos de campo."
   },
-  "shell-tesoreria-1": {
+  "tesoreria": {
     "title": "Tesorería",
-    "subtitle": "Tesorería",
-    "kind": "backend",
-    "layer": "Shell",
+    "subtitle": "App SPA",
+    "kind": "frontend",
+    "layer": "Shell — 6 apps",
     "body": "Cajas, bancos, conciliación, flujo de efectivo, buzón SAT y caja de ahorro."
   },
-  "shell-empaque-2": {
+  "empaque": {
     "title": "Empaque",
-    "subtitle": "Empaque",
-    "kind": "backend",
-    "layer": "Shell",
+    "subtitle": "App SPA",
+    "kind": "frontend",
+    "layer": "Shell — 6 apps",
     "body": "Etiquetado, pallets, embarques, facturas, acarreos, cotizaciones y catálogos logísticos."
   },
-  "shell-almacenes-3": {
+  "almacenes": {
     "title": "Almacenes",
-    "subtitle": "Almacenes",
-    "kind": "database",
-    "layer": "Shell",
+    "subtitle": "App SPA",
+    "kind": "frontend",
+    "layer": "Shell — 6 apps",
     "body": "Requisiciones, autorizaciones, OC, recepciones e historial de compras."
   },
-  "shell-configuracion-4": {
+  "config": {
     "title": "Configuración",
-    "subtitle": "Configuración",
-    "kind": "backend",
-    "layer": "Shell",
-    "body": "Configuración"
+    "subtitle": "App SPA",
+    "kind": "frontend",
+    "layer": "Shell — 6 apps",
+    "body": "App SPA"
   },
-  "modulos-asistencias-0": {
+  "resultados": {
+    "title": "Resultados",
+    "subtitle": "App SPA",
+    "kind": "frontend",
+    "layer": "Shell — 6 apps",
+    "body": "App SPA"
+  },
+  "asistencias": {
     "title": "Asistencias",
-    "subtitle": "Asistencias",
-    "kind": "backend",
-    "layer": "Módulos",
-    "body": "Asistencias"
+    "subtitle": "Captura / cierre",
+    "kind": "frontend",
+    "layer": "Módulos de UI",
+    "body": "Captura / cierre"
   },
-  "modulos-alta-de-empleado-1": {
-    "title": "Alta de empleado",
-    "subtitle": "Alta de empleado",
-    "kind": "backend",
-    "layer": "Módulos",
-    "body": "Alta de empleado"
-  },
-  "modulos-buzon-sat-2": {
+  "sat": {
     "title": "Buzón SAT",
-    "subtitle": "Buzón SAT",
-    "kind": "backend",
-    "layer": "Módulos",
-    "body": "Buzón SAT"
+    "subtitle": "CFDI",
+    "kind": "frontend",
+    "layer": "Módulos de UI",
+    "body": "CFDI"
   },
-  "modulos-chat-joni-3": {
+  "alta": {
+    "title": "Alta empleado",
+    "subtitle": "Formularios",
+    "kind": "frontend",
+    "layer": "Módulos de UI",
+    "body": "Formularios"
+  },
+  "hik": {
+    "title": "HikCentral",
+    "subtitle": "UI cámaras",
+    "kind": "cloud",
+    "layer": "Módulos de UI",
+    "body": "UI cámaras"
+  },
+  "joni": {
     "title": "Chat Joni",
-    "subtitle": "Chat Joni",
-    "kind": "backend",
-    "layer": "Módulos",
-    "body": "Chat Joni"
+    "subtitle": "IA en panel",
+    "kind": "frontend",
+    "layer": "Módulos de UI",
+    "body": "IA en panel"
   },
-  "modulos-monitor-4": {
+  "monitor": {
     "title": "Monitor",
-    "subtitle": "Monitor",
-    "kind": "backend",
-    "layer": "Módulos",
+    "subtitle": "Mapas / feed",
+    "kind": "frontend",
+    "layer": "Módulos de UI",
     "body": "Tablero fullscreen con Leaflet, feed de eventos, clima y presencia. MapDrawer para lotes y polígonos."
   },
-  "cliente-axios-jwt-0": {
+  "guards": {
+    "title": "Guards + MFA",
+    "subtitle": "Roles / sesión",
+    "kind": "security",
+    "layer": "Cliente",
+    "body": "Roles / sesión"
+  },
+  "axios": {
     "title": "Axios + JWT",
-    "subtitle": "Axios + JWT",
-    "kind": "messagebus",
+    "subtitle": "Bearer token",
+    "kind": "security",
     "layer": "Cliente",
-    "body": "Axios + JWT"
+    "body": "Bearer token"
   },
-  "cliente-x-location-id-1": {
-    "title": "X-Location-Id",
-    "subtitle": "X-Location-Id",
-    "kind": "messagebus",
-    "layer": "Cliente",
-    "body": "X-Location-Id"
-  },
-  "cliente-zustand-2": {
-    "title": "Zustand",
-    "subtitle": "Zustand",
-    "kind": "backend",
-    "layer": "Cliente",
-    "body": "Zustand"
-  },
-  "local-nfc-service-47321-0": {
+  "nfc": {
     "title": "nfc-service",
-    "subtitle": "nfc-service :47321",
+    "subtitle": ":47321",
     "kind": "external",
-    "layer": "Local",
-    "body": "nfc-service :47321"
+    "layer": "Dispositivo y tiempo real",
+    "body": ":47321"
   },
-  "local-web-nfc-1": {
-    "title": "Web NFC",
-    "subtitle": "Web NFC",
-    "kind": "external",
-    "layer": "Local",
-    "body": "Web NFC"
+  "zustand": {
+    "title": "Zustand",
+    "subtitle": "Estado cliente",
+    "kind": "frontend",
+    "layer": "Cliente",
+    "body": "Estado cliente"
   },
-  "local-leaflet-2": {
+  "pwa": {
+    "title": "PWA Workbox",
+    "subtitle": "Cache assets",
+    "kind": "frontend",
+    "layer": "Cliente",
+    "body": "Cache assets"
+  },
+  "leaflet": {
     "title": "Leaflet",
-    "subtitle": "Leaflet",
-    "kind": "backend",
-    "layer": "Local",
-    "body": "Leaflet"
+    "subtitle": "Mapas / lotes",
+    "kind": "frontend",
+    "layer": "Dispositivo y tiempo real",
+    "body": "Mapas / lotes"
+  },
+  "location": {
+    "title": "X-Location-Id",
+    "subtitle": "Contexto sitio",
+    "kind": "security",
+    "layer": "Cliente",
+    "body": "Contexto sitio"
+  },
+  "webnfc": {
+    "title": "Web NFC",
+    "subtitle": "Chrome Android",
+    "kind": "external",
+    "layer": "Dispositivo y tiempo real",
+    "body": "Chrome Android"
+  },
+  "socket": {
+    "title": "Socket.IO",
+    "subtitle": "Tiempo real",
+    "kind": "messagebus",
+    "layer": "Dispositivo y tiempo real",
+    "body": "Tiempo real"
   }
 }

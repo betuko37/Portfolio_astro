@@ -54,11 +54,11 @@
     },
     {
       "id": "campo-nfc-0",
-      "type": "external",
+      "type": "backend",
       "label": "NFC",
       "sublabel": "NFC",
       "row": 3,
-      "col": 0
+      "col": 1
     },
     {
       "id": "campo-qr-1",
@@ -66,7 +66,7 @@
       "label": "QR",
       "sublabel": "QR",
       "row": 3,
-      "col": 1
+      "col": 2
     },
     {
       "id": "campo-gps-2",
@@ -74,38 +74,54 @@
       "label": "GPS",
       "sublabel": "GPS",
       "row": 3,
-      "col": 2
+      "col": 3
+    },
+    {
+      "id": "campo-sherpa-onnx-3",
+      "type": "backend",
+      "label": "Sherpa-ONNX",
+      "sublabel": "Sherpa-ONNX",
+      "row": 3,
+      "col": 4
     },
     {
       "id": "offline-betuko-offline-sync-0",
       "type": "backend",
       "label": "betuko_offline_sy…",
       "sublabel": "betuko_offline_sync",
-      "row": 3,
-      "col": 4
+      "row": 5,
+      "col": 1
     },
     {
       "id": "offline-cola-hive-1",
       "type": "database",
       "label": "Cola Hive",
       "sublabel": "Cola Hive",
-      "row": 3,
-      "col": 5
+      "row": 5,
+      "col": 2
     },
     {
       "id": "offline-workmanager-2",
       "type": "backend",
       "label": "WorkManager",
       "sublabel": "WorkManager",
-      "row": 3,
-      "col": 6
+      "row": 5,
+      "col": 3
+    },
+    {
+      "id": "offline-connectivity-plus-3",
+      "type": "backend",
+      "label": "connectivity_plus",
+      "sublabel": "connectivity_plus",
+      "row": 5,
+      "col": 4
     },
     {
       "id": "nube-backend-api-0",
       "type": "backend",
       "label": "Backend",
       "sublabel": "Backend /api",
-      "row": 5,
+      "row": 7,
       "col": 2
     },
     {
@@ -113,7 +129,7 @@
       "type": "backend",
       "label": "daily-capture",
       "sublabel": "daily-capture/bulk",
-      "row": 5,
+      "row": 7,
       "col": 3
     }
   ],
@@ -134,7 +150,8 @@
       "wraps": [
         "campo-nfc-0",
         "campo-qr-1",
-        "campo-gps-2"
+        "campo-gps-2",
+        "campo-sherpa-onnx-3"
       ]
     },
     {
@@ -143,7 +160,8 @@
       "wraps": [
         "offline-betuko-offline-sync-0",
         "offline-cola-hive-1",
-        "offline-workmanager-2"
+        "offline-workmanager-2",
+        "offline-connectivity-plus-3"
       ]
     },
     {
@@ -179,37 +197,51 @@
       "toSide": "top"
     },
     {
-      "id": "c3-offline-betu-nube-backend",
+      "id": "c3-pantallas-ca-campo-sherpa",
+      "from": "pantallas-captura-de-surcos-2",
+      "to": "campo-sherpa-onnx-3",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c4-campo-nfc-0-offline-betu",
+      "from": "campo-nfc-0",
+      "to": "offline-betuko-offline-sync-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c5-campo-qr-1-offline-cola",
+      "from": "campo-qr-1",
+      "to": "offline-cola-hive-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c6-campo-gps-2-offline-work",
+      "from": "campo-gps-2",
+      "to": "offline-workmanager-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c7-offline-betu-nube-backend",
       "from": "offline-betuko-offline-sync-0",
       "to": "nube-backend-api-0",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c4-offline-cola-nube-daily-c",
+      "id": "c8-offline-cola-nube-daily-c",
       "from": "offline-cola-hive-1",
       "to": "nube-daily-capture-bulk-1",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c5-offline-work-nube-backend",
+      "id": "c9-offline-work-nube-backend",
       "from": "offline-workmanager-2",
       "to": "nube-backend-api-0",
-      "fromSide": "bottom",
-      "toSide": "top"
-    },
-    {
-      "id": "c6-o-pantalla-pantalla",
-      "from": "pantallas-captura-de-surcos-2",
-      "to": "pantallas-alta-de-empleado-1",
-      "fromSide": "left",
-      "toSide": "right"
-    },
-    {
-      "id": "c7-o-pantalla-offline-",
-      "from": "pantallas-cajas-3",
-      "to": "offline-betuko-offline-sync-0",
       "fromSide": "bottom",
       "toSide": "top"
     }

@@ -22,7 +22,7 @@
   "components": [
     {
       "id": "procesos-cotizaciones-0",
-      "type": "messagebus",
+      "type": "backend",
       "label": "Cotizaciones",
       "sublabel": "Cotizaciones",
       "row": 1,
@@ -46,7 +46,7 @@
     },
     {
       "id": "procesos-servicios-3",
-      "type": "messagebus",
+      "type": "backend",
       "label": "Servicios",
       "sublabel": "Servicios",
       "row": 1,
@@ -54,7 +54,7 @@
     },
     {
       "id": "procesos-calendario-financiero-4",
-      "type": "messagebus",
+      "type": "backend",
       "label": "Calendario financ…",
       "sublabel": "Calendario financiero",
       "row": 1,
@@ -102,7 +102,7 @@
     },
     {
       "id": "frontend-react-18-0",
-      "type": "backend",
+      "type": "frontend",
       "label": "React 18",
       "sublabel": "React 18",
       "row": 5,
@@ -118,35 +118,83 @@
     },
     {
       "id": "frontend-zustand-2",
-      "type": "backend",
+      "type": "frontend",
       "label": "Zustand",
       "sublabel": "Zustand",
       "row": 5,
       "col": 2
     },
     {
+      "id": "frontend-react-router-3",
+      "type": "frontend",
+      "label": "React Router",
+      "sublabel": "React Router",
+      "row": 5,
+      "col": 3
+    },
+    {
+      "id": "frontend-pdfmake-4",
+      "type": "frontend",
+      "label": "pdfmake",
+      "sublabel": "pdfmake",
+      "row": 5,
+      "col": 4
+    },
+    {
+      "id": "frontend-pwa-5",
+      "type": "frontend",
+      "label": "PWA",
+      "sublabel": "PWA",
+      "row": 5,
+      "col": 5
+    },
+    {
       "id": "backend-express-0",
       "type": "backend",
       "label": "Express",
       "sublabel": "Express",
-      "row": 5,
-      "col": 4
+      "row": 7,
+      "col": 0
     },
     {
       "id": "backend-prisma-1",
       "type": "database",
       "label": "Prisma",
       "sublabel": "Prisma",
-      "row": 5,
-      "col": 5
+      "row": 7,
+      "col": 1
     },
     {
       "id": "backend-facturoporti-2",
       "type": "external",
       "label": "FacturoPorTi",
       "sublabel": "FacturoPorTi",
-      "row": 5,
-      "col": 6
+      "row": 7,
+      "col": 2
+    },
+    {
+      "id": "backend-aws-s3-3",
+      "type": "database",
+      "label": "AWS S3",
+      "sublabel": "AWS S3",
+      "row": 7,
+      "col": 3
+    },
+    {
+      "id": "backend-postmark-4",
+      "type": "backend",
+      "label": "Postmark",
+      "sublabel": "Postmark",
+      "row": 7,
+      "col": 4
+    },
+    {
+      "id": "backend-node-cron-5",
+      "type": "messagebus",
+      "label": "node-cron",
+      "sublabel": "node-cron",
+      "row": 7,
+      "col": 5
     }
   ],
   "boundaries": [
@@ -178,7 +226,10 @@
       "wraps": [
         "frontend-react-18-0",
         "frontend-mui-6-1",
-        "frontend-zustand-2"
+        "frontend-zustand-2",
+        "frontend-react-router-3",
+        "frontend-pdfmake-4",
+        "frontend-pwa-5"
       ]
     },
     {
@@ -187,7 +238,10 @@
       "wraps": [
         "backend-express-0",
         "backend-prisma-1",
-        "backend-facturoporti-2"
+        "backend-facturoporti-2",
+        "backend-aws-s3-3",
+        "backend-postmark-4",
+        "backend-node-cron-5"
       ]
     }
   ],
@@ -243,46 +297,32 @@
       "toSide": "left"
     },
     {
-      "id": "c7-o-procesos-procesos",
-      "from": "procesos-servicios-3",
-      "to": "procesos-movimientos-2",
-      "fromSide": "left",
-      "toSide": "right"
-    },
-    {
-      "id": "c8-o-procesos-procesos",
-      "from": "procesos-calendario-financiero-4",
-      "to": "procesos-servicios-3",
-      "fromSide": "left",
-      "toSide": "right"
-    },
-    {
-      "id": "c9-o-procesos-reportes",
-      "from": "procesos-servicios-3",
-      "to": "reportes-impuestos-3",
+      "id": "c7-backend-expr-backend-fact",
+      "from": "backend-express-0",
+      "to": "backend-facturoporti-2",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c10-o-procesos-reportes",
-      "from": "procesos-calendario-financiero-4",
-      "to": "reportes-rentabilidad-4",
+      "id": "c8-backend-pris-backend-aws-",
+      "from": "backend-prisma-1",
+      "to": "backend-aws-s3-3",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c11-o-reportes-frontend",
-      "from": "reportes-cobranza-1",
-      "to": "frontend-zustand-2",
-      "fromSide": "bottom",
-      "toSide": "top"
+      "id": "c9-backend-aws--backend-post",
+      "from": "backend-aws-s3-3",
+      "to": "backend-postmark-4",
+      "fromSide": "right",
+      "toSide": "left"
     },
     {
-      "id": "c12-o-backend--backend-",
-      "from": "backend-facturoporti-2",
-      "to": "backend-prisma-1",
-      "fromSide": "left",
-      "toSide": "right"
+      "id": "c10-backend-post-backend-node",
+      "from": "backend-postmark-4",
+      "to": "backend-node-cron-5",
+      "fromSide": "right",
+      "toSide": "left"
     }
   ],
   "cards": [

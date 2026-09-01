@@ -30,7 +30,7 @@
   "campo-nfc-0": {
     "title": "NFC",
     "subtitle": "NFC",
-    "kind": "external",
+    "kind": "backend",
     "layer": "Campo",
     "body": "NFC"
   },
@@ -47,6 +47,13 @@
     "kind": "backend",
     "layer": "Campo",
     "body": "GPS"
+  },
+  "campo-sherpa-onnx-3": {
+    "title": "Sherpa-ONNX",
+    "subtitle": "Sherpa-ONNX",
+    "kind": "backend",
+    "layer": "Campo",
+    "body": "Sherpa-ONNX"
   },
   "offline-betuko-offline-sync-0": {
     "title": "betuko_offline_sy…",
@@ -65,6 +72,13 @@
   "offline-workmanager-2": {
     "title": "WorkManager",
     "subtitle": "WorkManager",
+    "kind": "backend",
+    "layer": "Offline",
+    "body": "Sherpa-ONNX, hotwords agrícolas, enrollment de capataz y foreground service."
+  },
+  "offline-connectivity-plus-3": {
+    "title": "connectivity_plus",
+    "subtitle": "connectivity_plus",
     "kind": "backend",
     "layer": "Offline",
     "body": "Sherpa-ONNX, hotwords agrícolas, enrollment de capataz y foreground service."

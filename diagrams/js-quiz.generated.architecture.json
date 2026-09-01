@@ -30,7 +30,7 @@
     },
     {
       "id": "ui-start-1",
-      "type": "backend",
+      "type": "frontend",
       "label": "Start",
       "sublabel": "Start",
       "row": 1,
@@ -38,7 +38,7 @@
     },
     {
       "id": "ui-game-2",
-      "type": "backend",
+      "type": "frontend",
       "label": "Game",
       "sublabel": "Game",
       "row": 1,
@@ -46,7 +46,7 @@
     },
     {
       "id": "estado-zustand-0",
-      "type": "backend",
+      "type": "frontend",
       "label": "Zustand",
       "sublabel": "Zustand",
       "row": 3,

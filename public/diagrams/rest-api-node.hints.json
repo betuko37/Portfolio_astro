@@ -23,14 +23,14 @@
   "dominio-movie-model-0": {
     "title": "Movie model",
     "subtitle": "Movie model",
-    "kind": "messagebus",
+    "kind": "backend",
     "layer": "Dominio",
     "body": "Movie model"
   },
   "dominio-zod-validation-1": {
     "title": "Zod validation",
     "subtitle": "Zod validation",
-    "kind": "messagebus",
+    "kind": "backend",
     "layer": "Dominio",
     "body": "Zod validation"
   },

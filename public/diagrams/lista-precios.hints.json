@@ -2,21 +2,21 @@
   "frontend-react-19-0": {
     "title": "React 19",
     "subtitle": "React 19",
-    "kind": "backend",
+    "kind": "frontend",
     "layer": "Frontend",
     "body": "React 19"
   },
   "frontend-tailwind-4-1": {
     "title": "Tailwind 4",
     "subtitle": "Tailwind 4",
-    "kind": "backend",
+    "kind": "frontend",
     "layer": "Frontend",
     "body": "Tailwind 4"
   },
   "frontend-vite-2": {
     "title": "Vite",
     "subtitle": "Vite",
-    "kind": "backend",
+    "kind": "frontend",
     "layer": "Frontend",
     "body": "Vite"
   },

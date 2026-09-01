@@ -22,7 +22,7 @@
   "components": [
     {
       "id": "ui-navbar-0",
-      "type": "backend",
+      "type": "frontend",
       "label": "Navbar",
       "sublabel": "Navbar",
       "row": 1,
@@ -30,7 +30,7 @@
     },
     {
       "id": "ui-gridgifts-1",
-      "type": "backend",
+      "type": "frontend",
       "label": "GridGifts",
       "sublabel": "GridGifts",
       "row": 1,
@@ -38,7 +38,7 @@
     },
     {
       "id": "ui-search-2",
-      "type": "backend",
+      "type": "frontend",
       "label": "Search",
       "sublabel": "Search",
       "row": 1,
@@ -46,7 +46,7 @@
     },
     {
       "id": "ui-favorites-3",
-      "type": "backend",
+      "type": "frontend",
       "label": "Favorites",
       "sublabel": "Favorites",
       "row": 1,

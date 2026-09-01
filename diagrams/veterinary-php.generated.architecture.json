@@ -22,7 +22,7 @@
   "components": [
     {
       "id": "frontend-javascript-0",
-      "type": "backend",
+      "type": "frontend",
       "label": "JavaScript",
       "sublabel": "JavaScript",
       "row": 1,
@@ -30,7 +30,7 @@
     },
     {
       "id": "frontend-tablas-1",
-      "type": "backend",
+      "type": "frontend",
       "label": "Tablas",
       "sublabel": "Tablas",
       "row": 1,
@@ -38,7 +38,7 @@
     },
     {
       "id": "frontend-formularios-2",
-      "type": "messagebus",
+      "type": "frontend",
       "label": "Formularios",
       "sublabel": "Formularios",
       "row": 1,

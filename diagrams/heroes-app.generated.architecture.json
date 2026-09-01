@@ -22,7 +22,7 @@
   "components": [
     {
       "id": "ui-tailwind-4-0",
-      "type": "backend",
+      "type": "frontend",
       "label": "Tailwind 4",
       "sublabel": "Tailwind 4",
       "row": 1,
@@ -38,7 +38,7 @@
     },
     {
       "id": "ui-react-icons-2",
-      "type": "backend",
+      "type": "frontend",
       "label": "react-icons",
       "sublabel": "react-icons",
       "row": 1,
@@ -134,20 +134,6 @@
       "to": "deploy-netlify-1",
       "fromSide": "right",
       "toSide": "left"
-    },
-    {
-      "id": "c4-o-ui-anima-estado-q",
-      "from": "ui-animate-css-1",
-      "to": "estado-query-string-1",
-      "fromSide": "bottom",
-      "toSide": "top"
-    },
-    {
-      "id": "c5-o-ui-react-ui-anima",
-      "from": "ui-react-icons-2",
-      "to": "ui-animate-css-1",
-      "fromSide": "left",
-      "toSide": "right"
     }
   ],
   "cards": [

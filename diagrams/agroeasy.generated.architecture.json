@@ -38,7 +38,7 @@
     },
     {
       "id": "apps-cuaderno-agricola-2",
-      "type": "messagebus",
+      "type": "frontend",
       "label": "Cuaderno agrícola",
       "sublabel": "Cuaderno agrícola",
       "row": 1,
@@ -58,7 +58,7 @@
       "label": "Acarreos",
       "sublabel": "Acarreos",
       "row": 3,
-      "col": 1
+      "col": 0
     },
     {
       "id": "procesos-pallets-1",
@@ -66,7 +66,7 @@
       "label": "Pallets",
       "sublabel": "Pallets",
       "row": 3,
-      "col": 2
+      "col": 1
     },
     {
       "id": "procesos-embarques-2",
@@ -74,7 +74,7 @@
       "label": "Embarques",
       "sublabel": "Embarques",
       "row": 3,
-      "col": 3
+      "col": 2
     },
     {
       "id": "procesos-embarque-rapido-3",
@@ -82,13 +82,21 @@
       "label": "Embarque rápido",
       "sublabel": "Embarque rápido",
       "row": 3,
-      "col": 4
+      "col": 3
     },
     {
       "id": "procesos-almacenes-4",
-      "type": "database",
+      "type": "backend",
       "label": "Almacenes",
       "sublabel": "Almacenes",
+      "row": 3,
+      "col": 4
+    },
+    {
+      "id": "procesos-facturacion-5",
+      "type": "backend",
+      "label": "Facturación",
+      "sublabel": "Facturación",
       "row": 3,
       "col": 5
     },
@@ -98,7 +106,7 @@
       "label": "Vue 3",
       "sublabel": "Vue 3",
       "row": 5,
-      "col": 0
+      "col": 1
     },
     {
       "id": "frontend-quasar-1",
@@ -106,39 +114,71 @@
       "label": "Quasar",
       "sublabel": "Quasar",
       "row": 5,
-      "col": 1
+      "col": 2
     },
     {
       "id": "frontend-pinia-2",
-      "type": "backend",
+      "type": "frontend",
       "label": "Pinia",
       "sublabel": "Pinia",
       "row": 5,
-      "col": 2
+      "col": 3
+    },
+    {
+      "id": "frontend-vue-query-3",
+      "type": "frontend",
+      "label": "Vue Query",
+      "sublabel": "Vue Query",
+      "row": 5,
+      "col": 4
+    },
+    {
+      "id": "frontend-pwa-workbox-4",
+      "type": "frontend",
+      "label": "PWA Workbox",
+      "sublabel": "PWA Workbox",
+      "row": 5,
+      "col": 5
     },
     {
       "id": "backend-express-0",
       "type": "backend",
       "label": "Express",
       "sublabel": "Express",
-      "row": 5,
-      "col": 4
+      "row": 7,
+      "col": 1
     },
     {
       "id": "backend-prisma-1",
       "type": "database",
       "label": "Prisma",
       "sublabel": "Prisma",
-      "row": 5,
-      "col": 5
+      "row": 7,
+      "col": 2
     },
     {
       "id": "backend-socket-io-2",
       "type": "messagebus",
       "label": "Socket.IO",
       "sublabel": "Socket.IO",
-      "row": 5,
-      "col": 6
+      "row": 7,
+      "col": 3
+    },
+    {
+      "id": "backend-aws-s3-3",
+      "type": "database",
+      "label": "AWS S3",
+      "sublabel": "AWS S3",
+      "row": 7,
+      "col": 4
+    },
+    {
+      "id": "backend-openai-portkey-4",
+      "type": "cloud",
+      "label": "OpenAI",
+      "sublabel": "OpenAI/Portkey",
+      "row": 7,
+      "col": 5
     }
   ],
   "boundaries": [
@@ -160,7 +200,8 @@
         "procesos-pallets-1",
         "procesos-embarques-2",
         "procesos-embarque-rapido-3",
-        "procesos-almacenes-4"
+        "procesos-almacenes-4",
+        "procesos-facturacion-5"
       ]
     },
     {
@@ -169,7 +210,9 @@
       "wraps": [
         "frontend-vue-3-0",
         "frontend-quasar-1",
-        "frontend-pinia-2"
+        "frontend-pinia-2",
+        "frontend-vue-query-3",
+        "frontend-pwa-workbox-4"
       ]
     },
     {
@@ -178,137 +221,181 @@
       "wraps": [
         "backend-express-0",
         "backend-prisma-1",
-        "backend-socket-io-2"
+        "backend-socket-io-2",
+        "backend-aws-s3-3",
+        "backend-openai-portkey-4"
       ]
     }
   ],
   "connections": [
     {
-      "id": "c0-frontend-qua-frontend-vue",
+      "id": "c0-frontend-vue-backend-expr",
+      "from": "frontend-vue-3-0",
+      "to": "backend-express-0",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c1-frontend-qua-frontend-vue",
       "from": "frontend-quasar-1",
       "to": "frontend-vue-3-0",
-      "variant": "emphasis",
       "fromSide": "left",
       "toSide": "right"
     },
     {
-      "id": "c1-backend-expr-backend-pris",
+      "id": "c2-frontend-pin-frontend-vue",
+      "from": "frontend-pinia-2",
+      "to": "frontend-vue-3-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c3-backend-expr-backend-pris",
       "from": "backend-express-0",
       "to": "backend-prisma-1",
       "fromSide": "right",
       "toSide": "left"
     },
     {
-      "id": "c2-apps-empaque-procesos-aca",
+      "id": "c4-backend-expr-backend-sock",
+      "from": "backend-express-0",
+      "to": "backend-socket-io-2",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c5-apps-empaque-procesos-aca",
       "from": "apps-empaques-embarques-0",
       "to": "procesos-acarreos-0",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c3-apps-empaque-procesos-pal",
+      "id": "c6-procesos-emb-procesos-aca",
+      "from": "procesos-embarques-2",
+      "to": "procesos-acarreos-0",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c7-apps-empaque-procesos-pal",
       "from": "apps-empaques-embarques-0",
       "to": "procesos-pallets-1",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c4-procesos-emb-procesos-pal",
+      "id": "c8-procesos-emb-procesos-pal",
       "from": "procesos-embarques-2",
       "to": "procesos-pallets-1",
       "fromSide": "left",
       "toSide": "right"
     },
     {
-      "id": "c5-apps-empaque-procesos-emb",
+      "id": "c9-apps-empaque-procesos-emb",
       "from": "apps-empaques-embarques-0",
       "to": "procesos-embarques-2",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c6-apps-empaque-procesos-emb",
+      "id": "c10-apps-empaque-procesos-emb",
       "from": "apps-empaques-embarques-0",
       "to": "procesos-embarque-rapido-3",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c7-procesos-emb-procesos-emb",
+      "id": "c11-procesos-emb-procesos-emb",
       "from": "procesos-embarques-2",
       "to": "procesos-embarque-rapido-3",
       "fromSide": "right",
       "toSide": "left"
     },
     {
-      "id": "c8-apps-empaque-procesos-alm",
+      "id": "c12-apps-empaque-procesos-alm",
       "from": "apps-empaques-embarques-0",
       "to": "procesos-almacenes-4",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c9-procesos-aca-backend-pris",
+      "id": "c13-procesos-emb-procesos-alm",
+      "from": "procesos-embarques-2",
+      "to": "procesos-almacenes-4",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c14-procesos-aca-backend-pris",
       "from": "procesos-acarreos-0",
       "to": "backend-prisma-1",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c10-procesos-pal-backend-pris",
+      "id": "c15-procesos-pal-backend-pris",
       "from": "procesos-pallets-1",
       "to": "backend-prisma-1",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c11-procesos-emb-backend-pris",
+      "id": "c16-procesos-emb-backend-pris",
       "from": "procesos-embarques-2",
       "to": "backend-prisma-1",
       "fromSide": "bottom",
       "toSide": "top"
     },
     {
-      "id": "c12-backend-expr-procesos-emb",
+      "id": "c17-apps-nomina--backend-pris",
+      "from": "apps-nomina-1",
+      "to": "backend-prisma-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c18-apps-cuadern-backend-pris",
+      "from": "apps-cuaderno-agricola-2",
+      "to": "backend-prisma-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c19-apps-adminis-backend-pris",
+      "from": "apps-administracion-3",
+      "to": "backend-prisma-1",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "c20-backend-expr-apps-empaque",
+      "from": "backend-express-0",
+      "to": "apps-empaques-embarques-0",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "c21-backend-expr-procesos-emb",
       "from": "backend-express-0",
       "to": "procesos-embarques-2",
       "fromSide": "top",
       "toSide": "bottom"
     },
     {
-      "id": "c13-o-apps-nom-procesos",
-      "from": "apps-nomina-1",
-      "to": "procesos-pallets-1",
-      "fromSide": "bottom",
-      "toSide": "top"
+      "id": "c22-backend-expr-apps-nomina-",
+      "from": "backend-express-0",
+      "to": "apps-nomina-1",
+      "fromSide": "top",
+      "toSide": "bottom"
     },
     {
-      "id": "c14-o-apps-cua-procesos",
-      "from": "apps-cuaderno-agricola-2",
-      "to": "procesos-embarques-2",
-      "fromSide": "bottom",
-      "toSide": "top"
-    },
-    {
-      "id": "c15-o-apps-adm-procesos",
-      "from": "apps-administracion-3",
-      "to": "procesos-embarque-rapido-3",
-      "fromSide": "bottom",
-      "toSide": "top"
-    },
-    {
-      "id": "c16-o-procesos-frontend",
-      "from": "procesos-pallets-1",
-      "to": "frontend-pinia-2",
-      "fromSide": "bottom",
-      "toSide": "top"
-    },
-    {
-      "id": "c17-o-backend--backend-",
-      "from": "backend-socket-io-2",
-      "to": "backend-prisma-1",
-      "fromSide": "left",
-      "toSide": "right"
+      "id": "c23-backend-expr-apps-cuadern",
+      "from": "backend-express-0",
+      "to": "apps-cuaderno-agricola-2",
+      "fromSide": "top",
+      "toSide": "bottom"
     }
   ],
   "cards": [
