@@ -1,149 +1,163 @@
 {
   "nomina": {
     "title": "Nómina",
-    "subtitle": "App SPA",
+    "subtitle": "Shell app",
     "kind": "frontend",
-    "layer": "Shell — 6 apps",
-    "body": "Asistencias v2/v3, captura diaria, cierre semanal, préstamos, deducciones, tarjetas bancarias y catálogos de campo."
-  },
-  "tesoreria": {
-    "title": "Tesorería",
-    "subtitle": "App SPA",
-    "kind": "frontend",
-    "layer": "Shell — 6 apps",
-    "body": "Cajas, bancos, conciliación, flujo de efectivo, buzón SAT y caja de ahorro."
+    "layer": "Shell — 6 aplicaciones",
+    "body": "Asistencias v1/v2/v3, cierre semanal, préstamos, contratos, tarjetas bancarias y catálogos de campo."
   },
   "empaque": {
     "title": "Empaque",
-    "subtitle": "App SPA",
+    "subtitle": "Shell app",
     "kind": "frontend",
-    "layer": "Shell — 6 apps",
-    "body": "Etiquetado, pallets, embarques, facturas, acarreos, cotizaciones y catálogos logísticos."
+    "layer": "Shell — 6 aplicaciones",
+    "body": "Pallets 3D, embarques, etiquetado, cotizaciones de venta, acarreos de campo, facturas e intercambio de divisas."
+  },
+  "tesoreria": {
+    "title": "Tesorería",
+    "subtitle": "Shell app",
+    "kind": "frontend",
+    "layer": "Shell — 6 aplicaciones",
+    "body": "Cajas, bancos, conciliación, flujo de efectivo, caja de ahorro y gestión contable."
   },
   "almacenes": {
     "title": "Almacenes",
-    "subtitle": "App SPA",
+    "subtitle": "Shell app",
     "kind": "frontend",
-    "layer": "Shell — 6 apps",
-    "body": "Requisiciones, autorizaciones, OC, recepciones e historial de compras."
+    "layer": "Shell — 6 aplicaciones",
+    "body": "Requisiciones, autorizaciones, órdenes de compra, recepciones e historial de compras."
   },
   "config": {
     "title": "Configuración",
-    "subtitle": "App SPA",
+    "subtitle": "Shell app",
     "kind": "frontend",
-    "layer": "Shell — 6 apps",
-    "body": "App SPA"
+    "layer": "Shell — 6 aplicaciones",
+    "body": "Usuarios y roles, ubicaciones, temporadas, servidores HikCentral y perfil fiscal (SAT)."
   },
   "resultados": {
     "title": "Resultados",
-    "subtitle": "App SPA",
+    "subtitle": "Shell app",
     "kind": "frontend",
-    "layer": "Shell — 6 apps",
-    "body": "App SPA"
+    "layer": "Shell — 6 aplicaciones",
+    "body": "Estado de resultados operativo, reportes de nómina y utilidades. Acceso por rol."
   },
   "asistencias": {
     "title": "Asistencias",
-    "subtitle": "Captura / cierre",
+    "subtitle": "Nómina / captura",
     "kind": "frontend",
-    "layer": "Módulos de UI",
-    "body": "Captura / cierre"
+    "layer": "Módulos de dominio",
+    "body": "Captura diaria y semanal, cierre de semana, desglose por cuadrilla, labor y empresa. Con biometría HikCentral."
+  },
+  "pallets": {
+    "title": "Pallets + Emb.",
+    "subtitle": "Empaque / logística",
+    "kind": "frontend",
+    "layer": "Módulos de dominio",
+    "body": "Pallet 3D (Three.js), embarques, manifiestos PDF, etiquetado con códigos de barras y QR."
   },
   "sat": {
-    "title": "Buzón SAT",
-    "subtitle": "CFDI",
+    "title": "SAT / Cajas",
+    "subtitle": "Tesorería",
     "kind": "frontend",
-    "layer": "Módulos de UI",
-    "body": "CFDI"
+    "layer": "Módulos de dominio",
+    "body": "Buzón SAT para CFDI, cajas, cuentas bancarias, conciliación y transferencias entre cuentas."
   },
-  "alta": {
-    "title": "Alta empleado",
-    "subtitle": "Formularios",
+  "compras": {
+    "title": "Compras",
+    "subtitle": "Almacenes / OC",
     "kind": "frontend",
-    "layer": "Módulos de UI",
-    "body": "Formularios"
+    "layer": "Módulos de dominio",
+    "body": "Requisiciones, autorizaciones, órdenes de compra, recepciones de materiales y proveedores."
   },
   "hik": {
     "title": "HikCentral",
-    "subtitle": "UI cámaras",
+    "subtitle": "Cámaras + biometría",
     "kind": "cloud",
-    "layer": "Módulos de UI",
-    "body": "UI cámaras"
-  },
-  "joni": {
-    "title": "Chat Joni",
-    "subtitle": "IA en panel",
-    "kind": "frontend",
-    "layer": "Módulos de UI",
-    "body": "IA en panel"
+    "layer": "Módulos de dominio",
+    "body": "Servidores HikCentral, registro facial, eventos biométricos y presencia del personal. Integración vía iframe."
   },
   "monitor": {
     "title": "Monitor",
-    "subtitle": "Mapas / feed",
+    "subtitle": "Mapa + feed en vivo",
     "kind": "frontend",
-    "layer": "Módulos de UI",
-    "body": "Tablero fullscreen con Leaflet, feed de eventos, clima y presencia. MapDrawer para lotes y polígonos."
+    "layer": "Módulos de dominio",
+    "body": "Tablero fullscreen con Leaflet, feed de eventos, clima, presencia en tiempo real y MapDrawer para polígonos."
+  },
+  "alta": {
+    "title": "Alta empleado",
+    "subtitle": "HR · NFC · contratos",
+    "kind": "frontend",
+    "layer": "JornalPro Frontend",
+    "body": "Alta de empleado: NFC, registro facial, firma digital de contratos. Módulo de Nómina (no Empaque)."
   },
   "guards": {
     "title": "Guards + MFA",
-    "subtitle": "Roles / sesión",
+    "subtitle": "8 roles · TOTP",
     "kind": "security",
-    "layer": "Cliente",
-    "body": "Roles / sesión"
+    "layer": "Infraestructura cliente",
+    "body": "8 guards de rol: Admin, Packing, SAT, Warehouse, MasterSupport y más. Segundo factor con TOTP y OTP."
   },
   "axios": {
     "title": "Axios + JWT",
     "subtitle": "Bearer token",
     "kind": "security",
-    "layer": "Cliente",
-    "body": "Bearer token"
-  },
-  "nfc": {
-    "title": "nfc-service",
-    "subtitle": ":47321",
-    "kind": "external",
-    "layer": "Dispositivo y tiempo real",
-    "body": ":47321"
-  },
-  "zustand": {
-    "title": "Zustand",
-    "subtitle": "Estado cliente",
-    "kind": "frontend",
-    "layer": "Cliente",
-    "body": "Estado cliente"
-  },
-  "pwa": {
-    "title": "PWA Workbox",
-    "subtitle": "Cache assets",
-    "kind": "frontend",
-    "layer": "Cliente",
-    "body": "Cache assets"
-  },
-  "leaflet": {
-    "title": "Leaflet",
-    "subtitle": "Mapas / lotes",
-    "kind": "frontend",
-    "layer": "Dispositivo y tiempo real",
-    "body": "Mapas / lotes"
+    "layer": "Infraestructura cliente",
+    "body": "ApiInstance Axios con Bearer JWT, header X-Location-Id, headers especiales para HikCentral. Un 401 cierra sesión."
   },
   "location": {
     "title": "X-Location-Id",
-    "subtitle": "Contexto sitio",
+    "subtitle": "Contexto de sitio",
     "kind": "security",
-    "layer": "Cliente",
-    "body": "Contexto sitio"
+    "layer": "Infraestructura cliente",
+    "body": "X-Location-Id inyectado en cada request. Filtra datos al contexto de la ubicación activa."
+  },
+  "zustand": {
+    "title": "Zustand",
+    "subtitle": "Estado global",
+    "kind": "frontend",
+    "layer": "Infraestructura cliente",
+    "body": "Estado global (sesión, ubicación, app activa, módulos, notificaciones) + stores por feature."
+  },
+  "nfc": {
+    "title": "nfc-service",
+    "subtitle": "Daemon :47321",
+    "kind": "external",
+    "layer": "Dispositivo y tiempo real",
+    "body": "Daemon local nfc-service :47321 (macOS/Windows). Lector ACR122U para tarjetas de empleados."
   },
   "webnfc": {
     "title": "Web NFC",
     "subtitle": "Chrome Android",
     "kind": "external",
     "layer": "Dispositivo y tiempo real",
-    "body": "Chrome Android"
+    "body": "Web NFC API de Chrome Android. Lectura de tarjetas NFC sin daemon local, mismo flujo de alta."
+  },
+  "leaflet": {
+    "title": "Leaflet",
+    "subtitle": "Polígonos / GPS",
+    "kind": "frontend",
+    "layer": "Dispositivo y tiempo real",
+    "body": "Mapas interactivos: cuadros, lotes, polígonos, GPS de campo, líneas de riego. Tiles Stadia Maps."
+  },
+  "chatbot": {
+    "title": "Chat Joni",
+    "subtitle": "IA integrada",
+    "kind": "frontend",
+    "layer": "Dispositivo y tiempo real",
+    "body": "Chat Joni — mismo motor IA que WhatsApp. Panel deslizable, histórico, búsqueda y exportación PDF."
+  },
+  "pwa": {
+    "title": "PWA Workbox",
+    "subtitle": "Cache de assets",
+    "kind": "frontend",
+    "layer": "Dispositivo y tiempo real",
+    "body": "Service Worker Workbox (solo producción). Precache de assets, StaleWhileRevalidate JS/CSS."
   },
   "socket": {
     "title": "Socket.IO",
-    "subtitle": "Tiempo real",
+    "subtitle": "Nómina + cobrowse",
     "kind": "messagebus",
     "layer": "Dispositivo y tiempo real",
-    "body": "Tiempo real"
+    "body": "Socket.IO: eventos de nómina, HikCentral clock-skew, cobrowsing y notificaciones en tiempo real."
   }
 }

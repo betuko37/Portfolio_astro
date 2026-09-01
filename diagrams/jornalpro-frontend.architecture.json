@@ -3,102 +3,80 @@
   "diagram_type": "architecture",
   "meta": {
     "title": "JornalPro Frontend",
-    "subtitle": "SPA React: seis apps, guards por rol, NFC y tiempo real",
+    "subtitle": "SPA React 18 — 6 apps, guards por rol, NFC híbrido y Socket.IO",
     "quality_profile": "showcase",
     "output": "jornalpro-frontend.html"
   },
-  "layout": {
-    "mode": "grid",
-    "origin": [32, 72],
-    "cols": 7,
-    "gapX": 28,
-    "gapY": 96,
-    "cellW": 148,
-    "cellH": 58
-  },
   "components": [
-    { "id": "nomina", "type": "frontend", "label": "Nómina", "sublabel": "App SPA", "row": 1, "col": 0 },
-    { "id": "tesoreria", "type": "frontend", "label": "Tesorería", "sublabel": "App SPA", "row": 1, "col": 1 },
-    { "id": "empaque", "type": "frontend", "label": "Empaque", "sublabel": "App SPA", "row": 1, "col": 2 },
-    { "id": "almacenes", "type": "frontend", "label": "Almacenes", "sublabel": "App SPA", "row": 1, "col": 3 },
-    { "id": "config", "type": "frontend", "label": "Configuración", "sublabel": "App SPA", "row": 1, "col": 4 },
-    { "id": "resultados", "type": "frontend", "label": "Resultados", "sublabel": "App SPA", "row": 1, "col": 5 },
+    { "id": "nomina",     "type": "frontend",   "label": "Nómina",          "sublabel": "Shell app",            "pos": [32,  72],  "size": [148, 56] },
+    { "id": "empaque",    "type": "frontend",   "label": "Empaque",          "sublabel": "Shell app",            "pos": [208, 72],  "size": [148, 56] },
+    { "id": "tesoreria",  "type": "frontend",   "label": "Tesorería",        "sublabel": "Shell app",            "pos": [384, 72],  "size": [148, 56] },
+    { "id": "almacenes",  "type": "frontend",   "label": "Almacenes",        "sublabel": "Shell app",            "pos": [560, 72],  "size": [148, 56] },
+    { "id": "config",     "type": "frontend",   "label": "Configuración",    "sublabel": "Shell app",            "pos": [736, 72],  "size": [148, 56] },
+    { "id": "resultados", "type": "frontend",   "label": "Resultados",       "sublabel": "Shell app",            "pos": [912, 72],  "size": [148, 56] },
 
-    { "id": "asistencias", "type": "frontend", "label": "Asistencias", "sublabel": "Captura / cierre", "row": 3, "col": 0 },
-    { "id": "sat", "type": "frontend", "label": "Buzón SAT", "sublabel": "CFDI", "row": 3, "col": 1 },
-    { "id": "alta", "type": "frontend", "label": "Alta empleado", "sublabel": "Formularios", "row": 3, "col": 2 },
-    { "id": "hik", "type": "cloud", "label": "HikCentral", "sublabel": "UI cámaras", "row": 3, "col": 3 },
-    { "id": "joni", "type": "frontend", "label": "Chat Joni", "sublabel": "IA en panel", "row": 3, "col": 4 },
-    { "id": "monitor", "type": "frontend", "label": "Monitor", "sublabel": "Mapas / feed", "row": 3, "col": 5 },
+    { "id": "asistencias","type": "frontend",   "label": "Asistencias",      "sublabel": "Nómina / captura",     "pos": [32,  228], "size": [148, 56] },
+    { "id": "pallets",    "type": "frontend",   "label": "Pallets + Emb.",   "sublabel": "Empaque / logística",  "pos": [208, 228], "size": [148, 56] },
+    { "id": "sat",        "type": "frontend",   "label": "SAT / Cajas",      "sublabel": "Tesorería",            "pos": [384, 228], "size": [148, 56] },
+    { "id": "compras",    "type": "frontend",   "label": "Compras",          "sublabel": "Almacenes / OC",       "pos": [560, 228], "size": [148, 56] },
+    { "id": "hik",        "type": "cloud",      "label": "HikCentral",       "sublabel": "Cámaras + biometría",  "pos": [736, 228], "size": [148, 56] },
+    { "id": "monitor",    "type": "frontend",   "label": "Monitor",          "sublabel": "Mapa + feed en vivo",  "pos": [912, 228], "size": [148, 56] },
 
-    { "id": "guards", "type": "security", "label": "Guards + MFA", "sublabel": "Roles / sesión", "row": 5, "col": 0 },
-    { "id": "axios", "type": "security", "label": "Axios + JWT", "sublabel": "Bearer token", "row": 5, "col": 1 },
-    { "id": "nfc", "type": "external", "label": "nfc-service", "sublabel": ":47321", "row": 5, "col": 2 },
-    { "id": "zustand", "type": "frontend", "label": "Zustand", "sublabel": "Estado cliente", "row": 5, "col": 3 },
-    { "id": "pwa", "type": "frontend", "label": "PWA Workbox", "sublabel": "Cache assets", "row": 5, "col": 4 },
-    { "id": "leaflet", "type": "frontend", "label": "Leaflet", "sublabel": "Mapas / lotes", "row": 5, "col": 5 },
+    { "id": "alta",       "type": "frontend",   "label": "Alta empleado",    "sublabel": "HR · NFC · contratos", "pos": [32,  388], "size": [148, 56] },
+    { "id": "guards",     "type": "security",   "label": "Guards + MFA",     "sublabel": "8 roles · TOTP",       "pos": [208, 388], "size": [148, 56] },
+    { "id": "axios",      "type": "security",   "label": "Axios + JWT",      "sublabel": "Bearer token",         "pos": [384, 388], "size": [148, 56] },
+    { "id": "location",   "type": "security",   "label": "X-Location-Id",    "sublabel": "Contexto de sitio",    "pos": [560, 388], "size": [148, 56] },
+    { "id": "zustand",    "type": "frontend",   "label": "Zustand",          "sublabel": "Estado global",        "pos": [736, 388], "size": [148, 56] },
 
-    { "id": "location", "type": "security", "label": "X-Location-Id", "sublabel": "Contexto sitio", "row": 7, "col": 1 },
-    { "id": "webnfc", "type": "external", "label": "Web NFC", "sublabel": "Chrome Android", "row": 7, "col": 2 },
-    { "id": "socket", "type": "messagebus", "label": "Socket.IO", "sublabel": "Tiempo real", "row": 7, "col": 5 }
+    { "id": "nfc",        "type": "external",   "label": "nfc-service",      "sublabel": "Daemon :47321",        "pos": [32,  548], "size": [148, 56] },
+    { "id": "webnfc",     "type": "external",   "label": "Web NFC",          "sublabel": "Chrome Android",       "pos": [208, 548], "size": [148, 56] },
+    { "id": "leaflet",    "type": "frontend",   "label": "Leaflet",          "sublabel": "Polígonos / GPS",      "pos": [384, 548], "size": [148, 56] },
+    { "id": "chatbot",    "type": "frontend",   "label": "Chat Joni",        "sublabel": "IA integrada",         "pos": [560, 548], "size": [148, 56] },
+    { "id": "pwa",        "type": "frontend",   "label": "PWA Workbox",      "sublabel": "Cache de assets",      "pos": [736, 548], "size": [148, 56] },
+    { "id": "socket",     "type": "messagebus", "label": "Socket.IO",        "sublabel": "Nómina + cobrowse",    "pos": [912, 548], "size": [148, 56] }
   ],
   "boundaries": [
-    {
-      "kind": "region",
-      "label": "Shell — 6 apps",
-      "wraps": ["nomina", "tesoreria", "empaque", "almacenes", "config", "resultados"]
-    },
-    {
-      "kind": "region",
-      "label": "Módulos de UI",
-      "wraps": ["asistencias", "sat", "alta", "hik", "joni", "monitor"]
-    },
-    {
-      "kind": "region",
-      "label": "Cliente",
-      "wraps": ["guards", "axios", "location", "zustand", "pwa"]
-    },
-    {
-      "kind": "region",
-      "label": "Dispositivo y tiempo real",
-      "wraps": ["nfc", "webnfc", "leaflet", "socket"]
-    }
+    { "kind": "region", "label": "Shell — 6 aplicaciones",   "wraps": ["nomina","empaque","tesoreria","almacenes","config","resultados"] },
+    { "kind": "region", "label": "Módulos de dominio",       "wraps": ["asistencias","pallets","sat","compras","hik","monitor"] },
+    { "kind": "region", "label": "Infraestructura cliente",  "wraps": ["guards","axios","location","zustand"] },
+    { "kind": "region", "label": "Dispositivo y tiempo real","wraps": ["nfc","webnfc","leaflet","chatbot","pwa","socket"] }
   ],
   "connections": [
-    { "id": "nomina-asist", "from": "nomina", "to": "asistencias", "variant": "emphasis" },
-    { "id": "tesoreria-sat", "from": "tesoreria", "to": "sat" },
-    { "id": "empaque-alta", "from": "empaque", "to": "alta" },
-    { "id": "almacenes-hik", "from": "almacenes", "to": "hik" },
-    { "id": "config-joni", "from": "config", "to": "joni" },
-    { "id": "resultados-monitor", "from": "resultados", "to": "monitor" },
-
-    { "id": "asist-guards", "from": "asistencias", "to": "guards", "variant": "security" },
-    { "id": "sat-axios", "from": "sat", "to": "axios", "variant": "security" },
-    { "id": "alta-nfc", "from": "alta", "to": "nfc" },
-    { "id": "joni-pwa", "from": "joni", "to": "pwa" },
-    { "id": "monitor-leaflet", "from": "monitor", "to": "leaflet" },
-
-    { "id": "guards-axios", "from": "guards", "to": "axios", "variant": "security" },
-    { "id": "axios-location", "from": "axios", "to": "location", "variant": "security" },
-    { "id": "nfc-webnfc", "from": "nfc", "to": "webnfc" },
-    { "id": "leaflet-socket", "from": "leaflet", "to": "socket" },
-    { "id": "hik-zustand", "from": "hik", "to": "zustand" }
+    { "id": "c1",  "from": "nomina",     "to": "asistencias", "variant": "emphasis" },
+    { "id": "c2",  "from": "empaque",    "to": "pallets" },
+    { "id": "c3",  "from": "tesoreria",  "to": "sat" },
+    { "id": "c4",  "from": "almacenes",  "to": "compras" },
+    { "id": "c5",  "from": "config",     "to": "hik" },
+    { "id": "c6",  "from": "resultados", "to": "monitor" },
+    { "id": "c7",  "from": "asistencias","to": "alta" },
+    { "id": "c8",  "from": "alta",       "to": "nfc" },
+    { "id": "c9",  "from": "alta",       "to": "guards",  "variant": "security" },
+    { "id": "c10", "from": "guards",     "to": "axios",   "variant": "security" },
+    { "id": "c11", "from": "axios",      "to": "location","variant": "security" },
+    { "id": "c12", "from": "location",   "to": "zustand" },
+    { "id": "c13", "from": "monitor",    "to": "socket" }
   ],
   "cards": [
     {
       "dot": "cyan",
       "title": "Seis apps en una SPA",
-      "items": ["Nómina, empaque, almacenes, tesorería, configuración y resultados."]
+      "items": [
+        "Nómina, empaque, almacenes, tesorería, configuración y resultados comparten sesión y bundle en un solo SPA React 18."
+      ]
     },
     {
       "dot": "emerald",
-      "title": "Guards y MFA",
-      "items": ["Contraseña, OTP, TOTP y roles (Admin, Packing, SAT…)."]
+      "title": "Guards + MFA por rol",
+      "items": [
+        "8 guards de rol: Admin, Packing, SAT, Warehouse, MasterSupport y más. Segundo factor con TOTP y aprobación de dispositivo."
+      ]
     },
     {
       "dot": "rose",
       "title": "NFC híbrido",
-      "items": ["ACR122U vía nfc-service y Web NFC en Android, mismo alta."]
+      "items": [
+        "Alta de empleado usa nfc-service (daemon ACR122U en macOS/Windows) o Web NFC (Chrome Android), mismo flujo de captura."
+      ]
     }
   ]
 }

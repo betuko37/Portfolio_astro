@@ -5035,7 +5035,7 @@
         <div class="pulse-dot"></div>
         <h1>JornalPro Frontend</h1>
       </div>
-      <p class="subtitle">SPA React: seis apps, guards por rol, NFC y tiempo real</p>
+      <p class="subtitle">SPA React 18 — 6 apps, guards por rol, NFC híbrido y Socket.IO</p>
     </div>
 
     <script id="archify-guided-views-data" type="application/json">[]</script>
@@ -5083,9 +5083,9 @@
     <!-- Main Diagram -->
     <div class="diagram-container" data-detail-level="read"
          data-preset-badge-editorial-plate="ARCHIFY / PLATE 04">
-      <svg viewBox="0 0 1102 1298" role="img" lang="en" aria-labelledby="archify-diagram-title archify-diagram-description" data-preset="classic" data-quality-profile="showcase">
+      <svg viewBox="0 0 1130 692" role="img" lang="en" aria-labelledby="archify-diagram-title archify-diagram-description" data-preset="classic" data-quality-profile="showcase">
         <title id="archify-diagram-title">JornalPro Frontend</title>
-        <desc id="archify-diagram-description">SPA React: seis apps, guards por rol, NFC y tiempo real</desc>
+        <desc id="archify-diagram-description">SPA React 18 — 6 apps, guards por rol, NFC híbrido y Socket.IO</desc>
         <!-- Definitions -->
         <defs>
           <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
@@ -5109,312 +5109,337 @@
         <rect width="100%" height="100%" fill="url(#grid)" />
 
         <!-- Boundaries (behind everything) -->
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="0" data-composition-frame-label="Shell — 6 apps" x="2" y="196" width="1060" height="110" rx="12" class="c-region" stroke-width="1"/>
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="0" data-composition-frame-label="Shell — 6 aplicaciones" x="2" y="42" width="1088" height="106" rx="12" class="c-region" stroke-width="1"/>
 
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="1" data-composition-frame-label="Módulos de UI" x="2" y="504" width="1060" height="110" rx="12" class="c-region" stroke-width="1"/>
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="1" data-composition-frame-label="Módulos de dominio" x="2" y="198" width="1088" height="106" rx="12" class="c-region" stroke-width="1"/>
 
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="2" data-composition-frame-label="Cliente" x="2" y="812" width="884" height="418" rx="12" class="c-region" stroke-width="1"/>
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="2" data-composition-frame-label="Infraestructura cliente" x="178" y="358" width="736" height="106" rx="12" class="c-region" stroke-width="1"/>
 
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="3" data-composition-frame-label="Dispositivo y tiempo real" x="354" y="812" width="708" height="418" rx="12" class="c-region" stroke-width="1"/>
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="3" data-composition-frame-label="Dispositivo y tiempo real" x="2" y="518" width="1088" height="106" rx="12" class="c-region" stroke-width="1"/>
 
         <!-- Connection paths (before components for correct z-order) -->
-        <path data-edge-from="nomina" data-edge-to="asistencias" data-edge-key="0" data-edge-id="nomina-asist" data-composition-points="92,286;92,534" d="M 92 286 L 92 534" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="tesoreria" data-edge-to="sat" data-edge-key="1" data-edge-id="tesoreria-sat" data-composition-points="268,286;268,534" d="M 268 286 L 268 534" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="empaque" data-edge-to="alta" data-edge-key="2" data-edge-id="empaque-alta" data-composition-points="444,286;444,534" d="M 444 286 L 444 534" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="almacenes" data-edge-to="hik" data-edge-key="3" data-edge-id="almacenes-hik" data-composition-points="620,286;620,534" d="M 620 286 L 620 534" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="config" data-edge-to="joni" data-edge-key="4" data-edge-id="config-joni" data-composition-points="796,286;796,534" d="M 796 286 L 796 534" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="resultados" data-edge-to="monitor" data-edge-key="5" data-edge-id="resultados-monitor" data-composition-points="972,286;972,534" d="M 972 286 L 972 534" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="asistencias" data-edge-to="guards" data-edge-key="6" data-edge-id="asist-guards" data-composition-points="92,594;92,842" d="M 92 594 L 92 842" class="a-security" stroke-width="1.5" marker-end="url(#arrowhead-security)"/>
-        <path data-edge-from="sat" data-edge-to="axios" data-edge-key="7" data-edge-id="sat-axios" data-composition-points="268,594;268,842" d="M 268 594 L 268 842" class="a-security" stroke-width="1.5" marker-end="url(#arrowhead-security)"/>
-        <path data-edge-from="alta" data-edge-to="nfc" data-edge-key="8" data-edge-id="alta-nfc" data-composition-points="444,594;444,842" d="M 444 594 L 444 842" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="joni" data-edge-to="pwa" data-edge-key="9" data-edge-id="joni-pwa" data-composition-points="796,594;796,842" d="M 796 594 L 796 842" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="monitor" data-edge-to="leaflet" data-edge-key="10" data-edge-id="monitor-leaflet" data-composition-points="972,594;972,842" d="M 972 594 L 972 842" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="guards" data-edge-to="axios" data-edge-key="11" data-edge-id="guards-axios" data-composition-points="152,872;208,872" d="M 152 872 L 208 872" class="a-security" stroke-width="1.5" marker-end="url(#arrowhead-security)"/>
-        <path data-edge-from="axios" data-edge-to="location" data-edge-key="12" data-edge-id="axios-location" data-composition-points="268,902;268,1150" d="M 268 902 L 268 1150" class="a-security" stroke-width="1.5" marker-end="url(#arrowhead-security)"/>
-        <path data-edge-from="nfc" data-edge-to="webnfc" data-edge-key="13" data-edge-id="nfc-webnfc" data-composition-points="444,902;444,1150" d="M 444 902 L 444 1150" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="leaflet" data-edge-to="socket" data-edge-key="14" data-edge-id="leaflet-socket" data-composition-points="972,902;972,1150" d="M 972 902 L 972 1150" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="hik" data-edge-to="zustand" data-edge-key="15" data-edge-id="hik-zustand" data-composition-points="620,594;620,842" d="M 620 594 L 620 842" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="nomina" data-edge-to="asistencias" data-edge-key="0" data-edge-id="c1" data-composition-points="106,128;106,228" d="M 106 128 L 106 228" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="empaque" data-edge-to="pallets" data-edge-key="1" data-edge-id="c2" data-composition-points="282,128;282,228" d="M 282 128 L 282 228" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="tesoreria" data-edge-to="sat" data-edge-key="2" data-edge-id="c3" data-composition-points="458,128;458,228" d="M 458 128 L 458 228" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="almacenes" data-edge-to="compras" data-edge-key="3" data-edge-id="c4" data-composition-points="634,128;634,228" d="M 634 128 L 634 228" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="config" data-edge-to="hik" data-edge-key="4" data-edge-id="c5" data-composition-points="810,128;810,228" d="M 810 128 L 810 228" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="resultados" data-edge-to="monitor" data-edge-key="5" data-edge-id="c6" data-composition-points="986,128;986,228" d="M 986 128 L 986 228" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="asistencias" data-edge-to="alta" data-edge-key="6" data-edge-id="c7" data-composition-points="106,284;106,388" d="M 106 284 L 106 388" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="alta" data-edge-to="nfc" data-edge-key="7" data-edge-id="c8" data-composition-points="106,444;106,548" d="M 106 444 L 106 548" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="alta" data-edge-to="guards" data-edge-key="8" data-edge-id="c9" data-composition-points="180,416;208,416" d="M 180 416 L 208 416" class="a-security" stroke-width="1.5" marker-end="url(#arrowhead-security)"/>
+        <path data-edge-from="guards" data-edge-to="axios" data-edge-key="9" data-edge-id="c10" data-composition-points="356,416;384,416" d="M 356 416 L 384 416" class="a-security" stroke-width="1.5" marker-end="url(#arrowhead-security)"/>
+        <path data-edge-from="axios" data-edge-to="location" data-edge-key="10" data-edge-id="c11" data-composition-points="532,416;560,416" d="M 532 416 L 560 416" class="a-security" stroke-width="1.5" marker-end="url(#arrowhead-security)"/>
+        <path data-edge-from="location" data-edge-to="zustand" data-edge-key="11" data-edge-id="c12" data-composition-points="708,416;736,416" d="M 708 416 L 736 416" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="monitor" data-edge-to="socket" data-edge-key="12" data-edge-id="c13" data-composition-points="986,284;986,548" d="M 986 284 L 986 548" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
 
         <!-- Components -->
-        <g id="node-nomina" data-node-id="nomina" data-node-label="Nómina" tabindex="0" role="button" aria-label="Focus Nómina, App SPA, Shell — 6 apps" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="App SPA" data-node-context="Shell — 6 apps">
-          <title>Nómina · App SPA · Shell — 6 apps</title>
-          <rect x="32" y="226" width="120" height="60" rx="6" class="c-mask"/>
-          <rect x="32" y="226" width="120" height="60" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(38 232) scale(0.6875)">
+        <g id="node-nomina" data-node-id="nomina" data-node-label="Nómina" tabindex="0" role="button" aria-label="Focus Nómina, Shell app, Shell — 6 aplicaciones" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Shell app" data-node-context="Shell — 6 aplicaciones">
+          <title>Nómina · Shell app · Shell — 6 aplicaciones</title>
+          <rect x="32" y="72" width="148" height="56" rx="6" class="c-mask"/>
+          <rect x="32" y="72" width="148" height="56" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(38 78) scale(0.6875)">
             <rect x="2" y="3" width="12" height="10" rx="2"/>
             <path d="M2 6.5h12"/>
             <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
             <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="92" y="254" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Nómina</text>
-        <text data-detail="context" x="92" y="270" class="t-muted" font-size="9" text-anchor="middle">App SPA</text>
+          <text data-node-label="" data-detail-anchor="" x="106" y="98" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Nómina</text>
+        <text data-detail="context" x="106" y="114" class="t-muted" font-size="9" text-anchor="middle">Shell app</text>
         </g>
 
-        <g id="node-tesoreria" data-node-id="tesoreria" data-node-label="Tesorería" tabindex="0" role="button" aria-label="Focus Tesorería, App SPA, Shell — 6 apps" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="App SPA" data-node-context="Shell — 6 apps">
-          <title>Tesorería · App SPA · Shell — 6 apps</title>
-          <rect x="208" y="226" width="120" height="60" rx="6" class="c-mask"/>
-          <rect x="208" y="226" width="120" height="60" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(214 232) scale(0.6875)">
+        <g id="node-empaque" data-node-id="empaque" data-node-label="Empaque" tabindex="0" role="button" aria-label="Focus Empaque, Shell app, Shell — 6 aplicaciones" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Shell app" data-node-context="Shell — 6 aplicaciones">
+          <title>Empaque · Shell app · Shell — 6 aplicaciones</title>
+          <rect x="208" y="72" width="148" height="56" rx="6" class="c-mask"/>
+          <rect x="208" y="72" width="148" height="56" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(214 78) scale(0.6875)">
             <rect x="2" y="3" width="12" height="10" rx="2"/>
             <path d="M2 6.5h12"/>
             <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
             <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="268" y="254" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Tesorería</text>
-        <text data-detail="context" x="268" y="270" class="t-muted" font-size="9" text-anchor="middle">App SPA</text>
+          <text data-node-label="" data-detail-anchor="" x="282" y="98" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Empaque</text>
+        <text data-detail="context" x="282" y="114" class="t-muted" font-size="9" text-anchor="middle">Shell app</text>
         </g>
 
-        <g id="node-empaque" data-node-id="empaque" data-node-label="Empaque" tabindex="0" role="button" aria-label="Focus Empaque, App SPA, Shell — 6 apps" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="App SPA" data-node-context="Shell — 6 apps">
-          <title>Empaque · App SPA · Shell — 6 apps</title>
-          <rect x="384" y="226" width="120" height="60" rx="6" class="c-mask"/>
-          <rect x="384" y="226" width="120" height="60" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(390 232) scale(0.6875)">
+        <g id="node-tesoreria" data-node-id="tesoreria" data-node-label="Tesorería" tabindex="0" role="button" aria-label="Focus Tesorería, Shell app, Shell — 6 aplicaciones" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Shell app" data-node-context="Shell — 6 aplicaciones">
+          <title>Tesorería · Shell app · Shell — 6 aplicaciones</title>
+          <rect x="384" y="72" width="148" height="56" rx="6" class="c-mask"/>
+          <rect x="384" y="72" width="148" height="56" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(390 78) scale(0.6875)">
             <rect x="2" y="3" width="12" height="10" rx="2"/>
             <path d="M2 6.5h12"/>
             <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
             <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="444" y="254" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Empaque</text>
-        <text data-detail="context" x="444" y="270" class="t-muted" font-size="9" text-anchor="middle">App SPA</text>
+          <text data-node-label="" data-detail-anchor="" x="458" y="98" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Tesorería</text>
+        <text data-detail="context" x="458" y="114" class="t-muted" font-size="9" text-anchor="middle">Shell app</text>
         </g>
 
-        <g id="node-almacenes" data-node-id="almacenes" data-node-label="Almacenes" tabindex="0" role="button" aria-label="Focus Almacenes, App SPA, Shell — 6 apps" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="App SPA" data-node-context="Shell — 6 apps">
-          <title>Almacenes · App SPA · Shell — 6 apps</title>
-          <rect x="560" y="226" width="120" height="60" rx="6" class="c-mask"/>
-          <rect x="560" y="226" width="120" height="60" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(566 232) scale(0.6875)">
+        <g id="node-almacenes" data-node-id="almacenes" data-node-label="Almacenes" tabindex="0" role="button" aria-label="Focus Almacenes, Shell app, Shell — 6 aplicaciones" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Shell app" data-node-context="Shell — 6 aplicaciones">
+          <title>Almacenes · Shell app · Shell — 6 aplicaciones</title>
+          <rect x="560" y="72" width="148" height="56" rx="6" class="c-mask"/>
+          <rect x="560" y="72" width="148" height="56" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(566 78) scale(0.6875)">
             <rect x="2" y="3" width="12" height="10" rx="2"/>
             <path d="M2 6.5h12"/>
             <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
             <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="620" y="254" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Almacenes</text>
-        <text data-detail="context" x="620" y="270" class="t-muted" font-size="9" text-anchor="middle">App SPA</text>
+          <text data-node-label="" data-detail-anchor="" x="634" y="98" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Almacenes</text>
+        <text data-detail="context" x="634" y="114" class="t-muted" font-size="9" text-anchor="middle">Shell app</text>
         </g>
 
-        <g id="node-config" data-node-id="config" data-node-label="Configuración" tabindex="0" role="button" aria-label="Focus Configuración, App SPA, Shell — 6 apps" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="App SPA" data-node-context="Shell — 6 apps">
-          <title>Configuración · App SPA · Shell — 6 apps</title>
-          <rect x="736" y="226" width="120" height="60" rx="6" class="c-mask"/>
-          <rect x="736" y="226" width="120" height="60" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(742 232) scale(0.6875)">
+        <g id="node-config" data-node-id="config" data-node-label="Configuración" tabindex="0" role="button" aria-label="Focus Configuración, Shell app, Shell — 6 aplicaciones" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Shell app" data-node-context="Shell — 6 aplicaciones">
+          <title>Configuración · Shell app · Shell — 6 aplicaciones</title>
+          <rect x="736" y="72" width="148" height="56" rx="6" class="c-mask"/>
+          <rect x="736" y="72" width="148" height="56" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(742 78) scale(0.6875)">
             <rect x="2" y="3" width="12" height="10" rx="2"/>
             <path d="M2 6.5h12"/>
             <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
             <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="796" y="254" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Configuración</text>
-        <text data-detail="context" x="796" y="270" class="t-muted" font-size="9" text-anchor="middle">App SPA</text>
+          <text data-node-label="" data-detail-anchor="" x="810" y="98" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Configuración</text>
+        <text data-detail="context" x="810" y="114" class="t-muted" font-size="9" text-anchor="middle">Shell app</text>
         </g>
 
-        <g id="node-resultados" data-node-id="resultados" data-node-label="Resultados" tabindex="0" role="button" aria-label="Focus Resultados, App SPA, Shell — 6 apps" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="App SPA" data-node-context="Shell — 6 apps">
-          <title>Resultados · App SPA · Shell — 6 apps</title>
-          <rect x="912" y="226" width="120" height="60" rx="6" class="c-mask"/>
-          <rect x="912" y="226" width="120" height="60" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(918 232) scale(0.6875)">
+        <g id="node-resultados" data-node-id="resultados" data-node-label="Resultados" tabindex="0" role="button" aria-label="Focus Resultados, Shell app, Shell — 6 aplicaciones" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Shell app" data-node-context="Shell — 6 aplicaciones">
+          <title>Resultados · Shell app · Shell — 6 aplicaciones</title>
+          <rect x="912" y="72" width="148" height="56" rx="6" class="c-mask"/>
+          <rect x="912" y="72" width="148" height="56" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(918 78) scale(0.6875)">
             <rect x="2" y="3" width="12" height="10" rx="2"/>
             <path d="M2 6.5h12"/>
             <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
             <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="972" y="254" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Resultados</text>
-        <text data-detail="context" x="972" y="270" class="t-muted" font-size="9" text-anchor="middle">App SPA</text>
+          <text data-node-label="" data-detail-anchor="" x="986" y="98" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Resultados</text>
+        <text data-detail="context" x="986" y="114" class="t-muted" font-size="9" text-anchor="middle">Shell app</text>
         </g>
 
-        <g id="node-asistencias" data-node-id="asistencias" data-node-label="Asistencias" tabindex="0" role="button" aria-label="Focus Asistencias, Captura / cierre, Módulos de UI" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Captura / cierre" data-node-context="Módulos de UI">
-          <title>Asistencias · Captura / cierre · Módulos de UI</title>
-          <rect x="32" y="534" width="120" height="60" rx="6" class="c-mask"/>
-          <rect x="32" y="534" width="120" height="60" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(38 540) scale(0.6875)">
+        <g id="node-asistencias" data-node-id="asistencias" data-node-label="Asistencias" tabindex="0" role="button" aria-label="Focus Asistencias, Nómina / captura, Módulos de dominio" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Nómina / captura" data-node-context="Módulos de dominio">
+          <title>Asistencias · Nómina / captura · Módulos de dominio</title>
+          <rect x="32" y="228" width="148" height="56" rx="6" class="c-mask"/>
+          <rect x="32" y="228" width="148" height="56" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(38 234) scale(0.6875)">
             <rect x="2" y="3" width="12" height="10" rx="2"/>
             <path d="M2 6.5h12"/>
             <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
             <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="92" y="562" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Asistencias</text>
-        <text data-detail="context" x="92" y="578" class="t-muted" font-size="9" text-anchor="middle">Captura / cierre</text>
+          <text data-node-label="" data-detail-anchor="" x="106" y="254" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Asistencias</text>
+        <text data-detail="context" x="106" y="270" class="t-muted" font-size="9" text-anchor="middle">Nómina / captura</text>
         </g>
 
-        <g id="node-sat" data-node-id="sat" data-node-label="Buzón SAT" tabindex="0" role="button" aria-label="Focus Buzón SAT, CFDI, Módulos de UI" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="CFDI" data-node-context="Módulos de UI">
-          <title>Buzón SAT · CFDI · Módulos de UI</title>
-          <rect x="208" y="534" width="120" height="60" rx="6" class="c-mask"/>
-          <rect x="208" y="534" width="120" height="60" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(214 540) scale(0.6875)">
+        <g id="node-pallets" data-node-id="pallets" data-node-label="Pallets + Emb." tabindex="0" role="button" aria-label="Focus Pallets + Emb., Empaque / logística, Módulos de dominio" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Empaque / logística" data-node-context="Módulos de dominio">
+          <title>Pallets + Emb. · Empaque / logística · Módulos de dominio</title>
+          <rect x="208" y="228" width="148" height="56" rx="6" class="c-mask"/>
+          <rect x="208" y="228" width="148" height="56" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(214 234) scale(0.6875)">
             <rect x="2" y="3" width="12" height="10" rx="2"/>
             <path d="M2 6.5h12"/>
             <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
             <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="268" y="562" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Buzón SAT</text>
-        <text data-detail="context" x="268" y="578" class="t-muted" font-size="9" text-anchor="middle">CFDI</text>
+          <text data-node-label="" data-detail-anchor="" x="282" y="254" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Pallets + Emb.</text>
+        <text data-detail="context" x="282" y="270" class="t-muted" font-size="9" text-anchor="middle">Empaque / logística</text>
         </g>
 
-        <g id="node-alta" data-node-id="alta" data-node-label="Alta empleado" tabindex="0" role="button" aria-label="Focus Alta empleado, Formularios, Módulos de UI" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Formularios" data-node-context="Módulos de UI">
-          <title>Alta empleado · Formularios · Módulos de UI</title>
-          <rect x="384" y="534" width="120" height="60" rx="6" class="c-mask"/>
-          <rect x="384" y="534" width="120" height="60" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(390 540) scale(0.6875)">
+        <g id="node-sat" data-node-id="sat" data-node-label="SAT / Cajas" tabindex="0" role="button" aria-label="Focus SAT / Cajas, Tesorería, Módulos de dominio" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Tesorería" data-node-context="Módulos de dominio">
+          <title>SAT / Cajas · Tesorería · Módulos de dominio</title>
+          <rect x="384" y="228" width="148" height="56" rx="6" class="c-mask"/>
+          <rect x="384" y="228" width="148" height="56" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(390 234) scale(0.6875)">
             <rect x="2" y="3" width="12" height="10" rx="2"/>
             <path d="M2 6.5h12"/>
             <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
             <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="444" y="562" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Alta empleado</text>
-        <text data-detail="context" x="444" y="578" class="t-muted" font-size="9" text-anchor="middle">Formularios</text>
+          <text data-node-label="" data-detail-anchor="" x="458" y="254" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">SAT / Cajas</text>
+        <text data-detail="context" x="458" y="270" class="t-muted" font-size="9" text-anchor="middle">Tesorería</text>
         </g>
 
-        <g id="node-hik" data-node-id="hik" data-node-label="HikCentral" tabindex="0" role="button" aria-label="Focus HikCentral, UI cámaras, Módulos de UI" aria-pressed="false" data-node-kind="cloud" data-node-sublabel="UI cámaras" data-node-context="Módulos de UI">
-          <title>HikCentral · UI cámaras · Módulos de UI</title>
-          <rect x="560" y="534" width="120" height="60" rx="6" class="c-mask"/>
-          <rect x="560" y="534" width="120" height="60" rx="6" class="c-cloud" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="cloud" class="semantic-sigil s-cloud" transform="translate(566 540) scale(0.6875)">
+        <g id="node-compras" data-node-id="compras" data-node-label="Compras" tabindex="0" role="button" aria-label="Focus Compras, Almacenes / OC, Módulos de dominio" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Almacenes / OC" data-node-context="Módulos de dominio">
+          <title>Compras · Almacenes / OC · Módulos de dominio</title>
+          <rect x="560" y="228" width="148" height="56" rx="6" class="c-mask"/>
+          <rect x="560" y="228" width="148" height="56" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(566 234) scale(0.6875)">
+            <rect x="2" y="3" width="12" height="10" rx="2"/>
+            <path d="M2 6.5h12"/>
+            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
+            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="634" y="254" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Compras</text>
+        <text data-detail="context" x="634" y="270" class="t-muted" font-size="9" text-anchor="middle">Almacenes / OC</text>
+        </g>
+
+        <g id="node-hik" data-node-id="hik" data-node-label="HikCentral" tabindex="0" role="button" aria-label="Focus HikCentral, Cámaras + biometría, Módulos de dominio" aria-pressed="false" data-node-kind="cloud" data-node-sublabel="Cámaras + biometría" data-node-context="Módulos de dominio">
+          <title>HikCentral · Cámaras + biometría · Módulos de dominio</title>
+          <rect x="736" y="228" width="148" height="56" rx="6" class="c-mask"/>
+          <rect x="736" y="228" width="148" height="56" rx="6" class="c-cloud" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="cloud" class="semantic-sigil s-cloud" transform="translate(742 234) scale(0.6875)">
             <path d="M4.3 12.5h7.3a2.4 2.4 0 0 0 .2-4.8 4 4 0 0 0-7.5-1.3A3.1 3.1 0 0 0 4.3 12.5Z"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="620" y="562" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">HikCentral</text>
-        <text data-detail="context" x="620" y="578" class="t-muted" font-size="9" text-anchor="middle">UI cámaras</text>
+          <text data-node-label="" data-detail-anchor="" x="810" y="254" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">HikCentral</text>
+        <text data-detail="context" x="810" y="270" class="t-muted" font-size="9" text-anchor="middle">Cámaras + biometría</text>
         </g>
 
-        <g id="node-joni" data-node-id="joni" data-node-label="Chat Joni" tabindex="0" role="button" aria-label="Focus Chat Joni, IA en panel, Módulos de UI" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="IA en panel" data-node-context="Módulos de UI">
-          <title>Chat Joni · IA en panel · Módulos de UI</title>
-          <rect x="736" y="534" width="120" height="60" rx="6" class="c-mask"/>
-          <rect x="736" y="534" width="120" height="60" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(742 540) scale(0.6875)">
+        <g id="node-monitor" data-node-id="monitor" data-node-label="Monitor" tabindex="0" role="button" aria-label="Focus Monitor, Mapa + feed en vivo, Módulos de dominio" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Mapa + feed en vivo" data-node-context="Módulos de dominio">
+          <title>Monitor · Mapa + feed en vivo · Módulos de dominio</title>
+          <rect x="912" y="228" width="148" height="56" rx="6" class="c-mask"/>
+          <rect x="912" y="228" width="148" height="56" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(918 234) scale(0.6875)">
             <rect x="2" y="3" width="12" height="10" rx="2"/>
             <path d="M2 6.5h12"/>
             <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
             <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="796" y="562" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Chat Joni</text>
-        <text data-detail="context" x="796" y="578" class="t-muted" font-size="9" text-anchor="middle">IA en panel</text>
+          <text data-node-label="" data-detail-anchor="" x="986" y="254" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Monitor</text>
+        <text data-detail="context" x="986" y="270" class="t-muted" font-size="9" text-anchor="middle">Mapa + feed en vivo</text>
         </g>
 
-        <g id="node-monitor" data-node-id="monitor" data-node-label="Monitor" tabindex="0" role="button" aria-label="Focus Monitor, Mapas / feed, Módulos de UI" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Mapas / feed" data-node-context="Módulos de UI">
-          <title>Monitor · Mapas / feed · Módulos de UI</title>
-          <rect x="912" y="534" width="120" height="60" rx="6" class="c-mask"/>
-          <rect x="912" y="534" width="120" height="60" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(918 540) scale(0.6875)">
+        <g id="node-alta" data-node-id="alta" data-node-label="Alta empleado" tabindex="0" role="button" aria-label="Focus Alta empleado, HR · NFC · contratos, Architecture component" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="HR · NFC · contratos" data-node-context="Architecture component">
+          <title>Alta empleado · HR · NFC · contratos · Architecture component</title>
+          <rect x="32" y="388" width="148" height="56" rx="6" class="c-mask"/>
+          <rect x="32" y="388" width="148" height="56" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(38 394) scale(0.6875)">
             <rect x="2" y="3" width="12" height="10" rx="2"/>
             <path d="M2 6.5h12"/>
             <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
             <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="972" y="562" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Monitor</text>
-        <text data-detail="context" x="972" y="578" class="t-muted" font-size="9" text-anchor="middle">Mapas / feed</text>
+          <text data-node-label="" data-detail-anchor="" x="106" y="414" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Alta empleado</text>
+        <text data-detail="context" x="106" y="430" class="t-muted" font-size="9" text-anchor="middle">HR · NFC · contratos</text>
         </g>
 
-        <g id="node-guards" data-node-id="guards" data-node-label="Guards + MFA" tabindex="0" role="button" aria-label="Focus Guards + MFA, Roles / sesión, Cliente" aria-pressed="false" data-node-kind="security" data-node-sublabel="Roles / sesión" data-node-context="Cliente">
-          <title>Guards + MFA · Roles / sesión · Cliente</title>
-          <rect x="32" y="842" width="120" height="60" rx="6" class="c-mask"/>
-          <rect x="32" y="842" width="120" height="60" rx="6" class="c-security" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(38 848) scale(0.6875)">
+        <g id="node-guards" data-node-id="guards" data-node-label="Guards + MFA" tabindex="0" role="button" aria-label="Focus Guards + MFA, 8 roles · TOTP, Infraestructura cliente" aria-pressed="false" data-node-kind="security" data-node-sublabel="8 roles · TOTP" data-node-context="Infraestructura cliente">
+          <title>Guards + MFA · 8 roles · TOTP · Infraestructura cliente</title>
+          <rect x="208" y="388" width="148" height="56" rx="6" class="c-mask"/>
+          <rect x="208" y="388" width="148" height="56" rx="6" class="c-security" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(214 394) scale(0.6875)">
             <path d="M8 2.2 13 4v3.5c0 3.1-1.8 5.4-5 6.5-3.2-1.1-5-3.4-5-6.5V4Z"/>
             <path d="m5.8 8 1.5 1.5 3-3"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="92" y="870" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Guards + MFA</text>
-        <text data-detail="context" x="92" y="886" class="t-muted" font-size="9" text-anchor="middle">Roles / sesión</text>
+          <text data-node-label="" data-detail-anchor="" x="282" y="414" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Guards + MFA</text>
+        <text data-detail="context" x="282" y="430" class="t-muted" font-size="9" text-anchor="middle">8 roles · TOTP</text>
         </g>
 
-        <g id="node-axios" data-node-id="axios" data-node-label="Axios + JWT" tabindex="0" role="button" aria-label="Focus Axios + JWT, Bearer token, Cliente" aria-pressed="false" data-node-kind="security" data-node-sublabel="Bearer token" data-node-context="Cliente">
-          <title>Axios + JWT · Bearer token · Cliente</title>
-          <rect x="208" y="842" width="120" height="60" rx="6" class="c-mask"/>
-          <rect x="208" y="842" width="120" height="60" rx="6" class="c-security" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(214 848) scale(0.6875)">
+        <g id="node-axios" data-node-id="axios" data-node-label="Axios + JWT" tabindex="0" role="button" aria-label="Focus Axios + JWT, Bearer token, Infraestructura cliente" aria-pressed="false" data-node-kind="security" data-node-sublabel="Bearer token" data-node-context="Infraestructura cliente">
+          <title>Axios + JWT · Bearer token · Infraestructura cliente</title>
+          <rect x="384" y="388" width="148" height="56" rx="6" class="c-mask"/>
+          <rect x="384" y="388" width="148" height="56" rx="6" class="c-security" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(390 394) scale(0.6875)">
             <path d="M8 2.2 13 4v3.5c0 3.1-1.8 5.4-5 6.5-3.2-1.1-5-3.4-5-6.5V4Z"/>
             <path d="m5.8 8 1.5 1.5 3-3"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="268" y="870" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Axios + JWT</text>
-        <text data-detail="context" x="268" y="886" class="t-muted" font-size="9" text-anchor="middle">Bearer token</text>
+          <text data-node-label="" data-detail-anchor="" x="458" y="414" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Axios + JWT</text>
+        <text data-detail="context" x="458" y="430" class="t-muted" font-size="9" text-anchor="middle">Bearer token</text>
         </g>
 
-        <g id="node-nfc" data-node-id="nfc" data-node-label="nfc-service" tabindex="0" role="button" aria-label="Focus nfc-service, :47321, Dispositivo y tiempo real" aria-pressed="false" data-node-kind="external" data-node-sublabel=":47321" data-node-context="Dispositivo y tiempo real">
-          <title>nfc-service · :47321 · Dispositivo y tiempo real</title>
-          <rect x="384" y="842" width="120" height="60" rx="6" class="c-mask"/>
-          <rect x="384" y="842" width="120" height="60" rx="6" class="c-external" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="external" class="semantic-sigil s-external" transform="translate(390 848) scale(0.6875)">
+        <g id="node-location" data-node-id="location" data-node-label="X-Location-Id" tabindex="0" role="button" aria-label="Focus X-Location-Id, Contexto de sitio, Infraestructura cliente" aria-pressed="false" data-node-kind="security" data-node-sublabel="Contexto de sitio" data-node-context="Infraestructura cliente">
+          <title>X-Location-Id · Contexto de sitio · Infraestructura cliente</title>
+          <rect x="560" y="388" width="148" height="56" rx="6" class="c-mask"/>
+          <rect x="560" y="388" width="148" height="56" rx="6" class="c-security" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(566 394) scale(0.6875)">
+            <path d="M8 2.2 13 4v3.5c0 3.1-1.8 5.4-5 6.5-3.2-1.1-5-3.4-5-6.5V4Z"/>
+            <path d="m5.8 8 1.5 1.5 3-3"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="634" y="414" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">X-Location-Id</text>
+        <text data-detail="context" x="634" y="430" class="t-muted" font-size="9" text-anchor="middle">Contexto de sitio</text>
+        </g>
+
+        <g id="node-zustand" data-node-id="zustand" data-node-label="Zustand" tabindex="0" role="button" aria-label="Focus Zustand, Estado global, Infraestructura cliente" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Estado global" data-node-context="Infraestructura cliente">
+          <title>Zustand · Estado global · Infraestructura cliente</title>
+          <rect x="736" y="388" width="148" height="56" rx="6" class="c-mask"/>
+          <rect x="736" y="388" width="148" height="56" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(742 394) scale(0.6875)">
+            <rect x="2" y="3" width="12" height="10" rx="2"/>
+            <path d="M2 6.5h12"/>
+            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
+            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="810" y="414" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Zustand</text>
+        <text data-detail="context" x="810" y="430" class="t-muted" font-size="9" text-anchor="middle">Estado global</text>
+        </g>
+
+        <g id="node-nfc" data-node-id="nfc" data-node-label="nfc-service" tabindex="0" role="button" aria-label="Focus nfc-service, Daemon :47321, Dispositivo y tiempo real" aria-pressed="false" data-node-kind="external" data-node-sublabel="Daemon :47321" data-node-context="Dispositivo y tiempo real">
+          <title>nfc-service · Daemon :47321 · Dispositivo y tiempo real</title>
+          <rect x="32" y="548" width="148" height="56" rx="6" class="c-mask"/>
+          <rect x="32" y="548" width="148" height="56" rx="6" class="c-external" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="external" class="semantic-sigil s-external" transform="translate(38 554) scale(0.6875)">
             <rect x="2.5" y="5" width="8.5" height="8" rx="1.5"/>
             <path d="M8 2.5h5.5V8M13.5 2.5 7.5 8.5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="444" y="870" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">nfc-service</text>
-        <text data-detail="context" x="444" y="886" class="t-muted" font-size="9" text-anchor="middle">:47321</text>
-        </g>
-
-        <g id="node-zustand" data-node-id="zustand" data-node-label="Zustand" tabindex="0" role="button" aria-label="Focus Zustand, Estado cliente, Cliente" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Estado cliente" data-node-context="Cliente">
-          <title>Zustand · Estado cliente · Cliente</title>
-          <rect x="560" y="842" width="120" height="60" rx="6" class="c-mask"/>
-          <rect x="560" y="842" width="120" height="60" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(566 848) scale(0.6875)">
-            <rect x="2" y="3" width="12" height="10" rx="2"/>
-            <path d="M2 6.5h12"/>
-            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
-            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="620" y="870" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Zustand</text>
-        <text data-detail="context" x="620" y="886" class="t-muted" font-size="9" text-anchor="middle">Estado cliente</text>
-        </g>
-
-        <g id="node-pwa" data-node-id="pwa" data-node-label="PWA Workbox" tabindex="0" role="button" aria-label="Focus PWA Workbox, Cache assets, Cliente" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Cache assets" data-node-context="Cliente">
-          <title>PWA Workbox · Cache assets · Cliente</title>
-          <rect x="736" y="842" width="120" height="60" rx="6" class="c-mask"/>
-          <rect x="736" y="842" width="120" height="60" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(742 848) scale(0.6875)">
-            <rect x="2" y="3" width="12" height="10" rx="2"/>
-            <path d="M2 6.5h12"/>
-            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
-            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="796" y="870" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">PWA Workbox</text>
-        <text data-detail="context" x="796" y="886" class="t-muted" font-size="9" text-anchor="middle">Cache assets</text>
-        </g>
-
-        <g id="node-leaflet" data-node-id="leaflet" data-node-label="Leaflet" tabindex="0" role="button" aria-label="Focus Leaflet, Mapas / lotes, Dispositivo y tiempo real" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Mapas / lotes" data-node-context="Dispositivo y tiempo real">
-          <title>Leaflet · Mapas / lotes · Dispositivo y tiempo real</title>
-          <rect x="912" y="842" width="120" height="60" rx="6" class="c-mask"/>
-          <rect x="912" y="842" width="120" height="60" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(918 848) scale(0.6875)">
-            <rect x="2" y="3" width="12" height="10" rx="2"/>
-            <path d="M2 6.5h12"/>
-            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
-            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="972" y="870" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Leaflet</text>
-        <text data-detail="context" x="972" y="886" class="t-muted" font-size="9" text-anchor="middle">Mapas / lotes</text>
-        </g>
-
-        <g id="node-location" data-node-id="location" data-node-label="X-Location-Id" tabindex="0" role="button" aria-label="Focus X-Location-Id, Contexto sitio, Cliente" aria-pressed="false" data-node-kind="security" data-node-sublabel="Contexto sitio" data-node-context="Cliente">
-          <title>X-Location-Id · Contexto sitio · Cliente</title>
-          <rect x="208" y="1150" width="120" height="60" rx="6" class="c-mask"/>
-          <rect x="208" y="1150" width="120" height="60" rx="6" class="c-security" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(214 1156) scale(0.6875)">
-            <path d="M8 2.2 13 4v3.5c0 3.1-1.8 5.4-5 6.5-3.2-1.1-5-3.4-5-6.5V4Z"/>
-            <path d="m5.8 8 1.5 1.5 3-3"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="268" y="1178" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">X-Location-Id</text>
-        <text data-detail="context" x="268" y="1194" class="t-muted" font-size="9" text-anchor="middle">Contexto sitio</text>
+          <text data-node-label="" data-detail-anchor="" x="106" y="574" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">nfc-service</text>
+        <text data-detail="context" x="106" y="590" class="t-muted" font-size="9" text-anchor="middle">Daemon :47321</text>
         </g>
 
         <g id="node-webnfc" data-node-id="webnfc" data-node-label="Web NFC" tabindex="0" role="button" aria-label="Focus Web NFC, Chrome Android, Dispositivo y tiempo real" aria-pressed="false" data-node-kind="external" data-node-sublabel="Chrome Android" data-node-context="Dispositivo y tiempo real">
           <title>Web NFC · Chrome Android · Dispositivo y tiempo real</title>
-          <rect x="384" y="1150" width="120" height="60" rx="6" class="c-mask"/>
-          <rect x="384" y="1150" width="120" height="60" rx="6" class="c-external" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="external" class="semantic-sigil s-external" transform="translate(390 1156) scale(0.6875)">
+          <rect x="208" y="548" width="148" height="56" rx="6" class="c-mask"/>
+          <rect x="208" y="548" width="148" height="56" rx="6" class="c-external" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="external" class="semantic-sigil s-external" transform="translate(214 554) scale(0.6875)">
             <rect x="2.5" y="5" width="8.5" height="8" rx="1.5"/>
             <path d="M8 2.5h5.5V8M13.5 2.5 7.5 8.5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="444" y="1178" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Web NFC</text>
-        <text data-detail="context" x="444" y="1194" class="t-muted" font-size="9" text-anchor="middle">Chrome Android</text>
+          <text data-node-label="" data-detail-anchor="" x="282" y="574" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Web NFC</text>
+        <text data-detail="context" x="282" y="590" class="t-muted" font-size="9" text-anchor="middle">Chrome Android</text>
         </g>
 
-        <g id="node-socket" data-node-id="socket" data-node-label="Socket.IO" tabindex="0" role="button" aria-label="Focus Socket.IO, Tiempo real, Dispositivo y tiempo real" aria-pressed="false" data-node-kind="messagebus" data-node-sublabel="Tiempo real" data-node-context="Dispositivo y tiempo real">
-          <title>Socket.IO · Tiempo real · Dispositivo y tiempo real</title>
-          <rect x="912" y="1150" width="120" height="60" rx="6" class="c-mask"/>
-          <rect x="912" y="1150" width="120" height="60" rx="6" class="c-messagebus" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="messagebus" class="semantic-sigil s-messagebus" transform="translate(918 1156) scale(0.6875)">
+        <g id="node-leaflet" data-node-id="leaflet" data-node-label="Leaflet" tabindex="0" role="button" aria-label="Focus Leaflet, Polígonos / GPS, Dispositivo y tiempo real" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Polígonos / GPS" data-node-context="Dispositivo y tiempo real">
+          <title>Leaflet · Polígonos / GPS · Dispositivo y tiempo real</title>
+          <rect x="384" y="548" width="148" height="56" rx="6" class="c-mask"/>
+          <rect x="384" y="548" width="148" height="56" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(390 554) scale(0.6875)">
+            <rect x="2" y="3" width="12" height="10" rx="2"/>
+            <path d="M2 6.5h12"/>
+            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
+            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="458" y="574" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Leaflet</text>
+        <text data-detail="context" x="458" y="590" class="t-muted" font-size="9" text-anchor="middle">Polígonos / GPS</text>
+        </g>
+
+        <g id="node-chatbot" data-node-id="chatbot" data-node-label="Chat Joni" tabindex="0" role="button" aria-label="Focus Chat Joni, IA integrada, Dispositivo y tiempo real" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="IA integrada" data-node-context="Dispositivo y tiempo real">
+          <title>Chat Joni · IA integrada · Dispositivo y tiempo real</title>
+          <rect x="560" y="548" width="148" height="56" rx="6" class="c-mask"/>
+          <rect x="560" y="548" width="148" height="56" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(566 554) scale(0.6875)">
+            <rect x="2" y="3" width="12" height="10" rx="2"/>
+            <path d="M2 6.5h12"/>
+            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
+            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="634" y="574" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Chat Joni</text>
+        <text data-detail="context" x="634" y="590" class="t-muted" font-size="9" text-anchor="middle">IA integrada</text>
+        </g>
+
+        <g id="node-pwa" data-node-id="pwa" data-node-label="PWA Workbox" tabindex="0" role="button" aria-label="Focus PWA Workbox, Cache de assets, Dispositivo y tiempo real" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Cache de assets" data-node-context="Dispositivo y tiempo real">
+          <title>PWA Workbox · Cache de assets · Dispositivo y tiempo real</title>
+          <rect x="736" y="548" width="148" height="56" rx="6" class="c-mask"/>
+          <rect x="736" y="548" width="148" height="56" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(742 554) scale(0.6875)">
+            <rect x="2" y="3" width="12" height="10" rx="2"/>
+            <path d="M2 6.5h12"/>
+            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
+            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="810" y="574" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">PWA Workbox</text>
+        <text data-detail="context" x="810" y="590" class="t-muted" font-size="9" text-anchor="middle">Cache de assets</text>
+        </g>
+
+        <g id="node-socket" data-node-id="socket" data-node-label="Socket.IO" tabindex="0" role="button" aria-label="Focus Socket.IO, Nómina + cobrowse, Dispositivo y tiempo real" aria-pressed="false" data-node-kind="messagebus" data-node-sublabel="Nómina + cobrowse" data-node-context="Dispositivo y tiempo real">
+          <title>Socket.IO · Nómina + cobrowse · Dispositivo y tiempo real</title>
+          <rect x="912" y="548" width="148" height="56" rx="6" class="c-mask"/>
+          <rect x="912" y="548" width="148" height="56" rx="6" class="c-messagebus" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="messagebus" class="semantic-sigil s-messagebus" transform="translate(918 554) scale(0.6875)">
             <path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/>
             <circle cx="5" cy="4.5" r="1" class="sigil-fill"/>
             <circle cx="10.5" cy="8" r="1" class="sigil-fill"/>
             <circle cx="7" cy="11.5" r="1" class="sigil-fill"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="972" y="1178" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Socket.IO</text>
-        <text data-detail="context" x="972" y="1194" class="t-muted" font-size="9" text-anchor="middle">Tiempo real</text>
+          <text data-node-label="" data-detail-anchor="" x="986" y="574" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Socket.IO</text>
+        <text data-detail="context" x="986" y="590" class="t-muted" font-size="9" text-anchor="middle">Nómina + cobrowse</text>
         </g>
 
         <!-- Connection labels -->
@@ -5432,52 +5457,49 @@
 
 
 
-
-
-
         <!-- Boundary labels (foreground masks keep routes out of titles) -->
-        <g data-graph-role="structural-frame-label" data-composition-frame-id="0" data-composition-frame-kind="region" data-composition-frame-label="Shell — 6 apps">
-          <rect data-graph-role="structural-frame-label-mask" x="6" y="206" width="85.6" height="16" rx="3" class="c-mask"/>
-          <text data-boundary-label="" x="10" y="219" class="t-cloud" font-size="9" font-weight="600">Shell — 6 apps</text>
+        <g data-graph-role="structural-frame-label" data-composition-frame-id="0" data-composition-frame-kind="region" data-composition-frame-label="Shell — 6 aplicaciones">
+          <rect data-graph-role="structural-frame-label-mask" x="6" y="52" width="128.8" height="16" rx="3" class="c-mask"/>
+          <text data-boundary-label="" x="10" y="65" class="t-cloud" font-size="9" font-weight="600">Shell — 6 aplicaciones</text>
         </g>
 
-        <g data-graph-role="structural-frame-label" data-composition-frame-id="1" data-composition-frame-kind="region" data-composition-frame-label="Módulos de UI">
-          <rect data-graph-role="structural-frame-label-mask" x="6" y="514" width="80.2" height="16" rx="3" class="c-mask"/>
-          <text data-boundary-label="" x="10" y="527" class="t-cloud" font-size="9" font-weight="600">Módulos de UI</text>
+        <g data-graph-role="structural-frame-label" data-composition-frame-id="1" data-composition-frame-kind="region" data-composition-frame-label="Módulos de dominio">
+          <rect data-graph-role="structural-frame-label-mask" x="6" y="208" width="107.2" height="16" rx="3" class="c-mask"/>
+          <text data-boundary-label="" x="10" y="221" class="t-cloud" font-size="9" font-weight="600">Módulos de dominio</text>
         </g>
 
-        <g data-graph-role="structural-frame-label" data-composition-frame-id="2" data-composition-frame-kind="region" data-composition-frame-label="Cliente">
-          <rect data-graph-role="structural-frame-label-mask" x="6" y="822" width="47.8" height="16" rx="3" class="c-mask"/>
-          <text data-boundary-label="" x="10" y="835" class="t-cloud" font-size="9" font-weight="600">Cliente</text>
+        <g data-graph-role="structural-frame-label" data-composition-frame-id="2" data-composition-frame-kind="region" data-composition-frame-label="Infraestructura cliente">
+          <rect data-graph-role="structural-frame-label-mask" x="182" y="368" width="134.2" height="16" rx="3" class="c-mask"/>
+          <text data-boundary-label="" x="186" y="381" class="t-cloud" font-size="9" font-weight="600">Infraestructura cliente</text>
         </g>
 
         <g data-graph-role="structural-frame-label" data-composition-frame-id="3" data-composition-frame-kind="region" data-composition-frame-label="Dispositivo y tiempo real">
-          <rect data-graph-role="structural-frame-label-mask" x="358" y="822" width="145" height="16" rx="3" class="c-mask"/>
-          <text data-boundary-label="" x="362" y="835" class="t-cloud" font-size="9" font-weight="600">Dispositivo y tiempo real</text>
+          <rect data-graph-role="structural-frame-label-mask" x="6" y="528" width="145" height="16" rx="3" class="c-mask"/>
+          <text data-boundary-label="" x="10" y="541" class="t-cloud" font-size="9" font-weight="600">Dispositivo y tiempo real</text>
         </g>
 
         <!-- Legend -->
         <g data-legend="" data-legend-bridge="">
-          <text x="40" y="1262" class="t-primary" font-size="12" font-weight="650">Legend</text>
-          <g data-legend-semantic-kind="frontend" data-legend-kind="frontend" data-legend-label="Frontend" data-legend-x="40" data-legend-baseline="1282" data-legend-width="83">
-            <rect x="40" y="1273" width="16" height="10" rx="2.5" class="c-frontend" stroke-width="1"/>
-            <text x="62" y="1282" class="t-muted" font-size="10" font-weight="500">Frontend</text>
+          <text x="40" y="656" class="t-primary" font-size="12" font-weight="650">Legend</text>
+          <g data-legend-semantic-kind="frontend" data-legend-kind="frontend" data-legend-label="Frontend" data-legend-x="40" data-legend-baseline="676" data-legend-width="83">
+            <rect x="40" y="667" width="16" height="10" rx="2.5" class="c-frontend" stroke-width="1"/>
+            <text x="62" y="676" class="t-muted" font-size="10" font-weight="500">Frontend</text>
           </g>
-          <g data-legend-semantic-kind="cloud" data-legend-kind="cloud" data-legend-label="Cloud" data-legend-x="145" data-legend-baseline="1282" data-legend-width="68">
-            <rect x="145" y="1273" width="16" height="10" rx="2.5" class="c-cloud" stroke-width="1"/>
-            <text x="167" y="1282" class="t-muted" font-size="10" font-weight="500">Cloud</text>
+          <g data-legend-semantic-kind="cloud" data-legend-kind="cloud" data-legend-label="Cloud" data-legend-x="145" data-legend-baseline="676" data-legend-width="68">
+            <rect x="145" y="667" width="16" height="10" rx="2.5" class="c-cloud" stroke-width="1"/>
+            <text x="167" y="676" class="t-muted" font-size="10" font-weight="500">Cloud</text>
           </g>
-          <g data-legend-semantic-kind="security" data-legend-kind="security" data-legend-label="Security" data-legend-x="235" data-legend-baseline="1282" data-legend-width="83">
-            <rect x="235" y="1273" width="16" height="10" rx="2.5" class="c-security" stroke-width="1"/>
-            <text x="257" y="1282" class="t-muted" font-size="10" font-weight="500">Security</text>
+          <g data-legend-semantic-kind="security" data-legend-kind="security" data-legend-label="Security" data-legend-x="235" data-legend-baseline="676" data-legend-width="83">
+            <rect x="235" y="667" width="16" height="10" rx="2.5" class="c-security" stroke-width="1"/>
+            <text x="257" y="676" class="t-muted" font-size="10" font-weight="500">Security</text>
           </g>
-          <g data-legend-semantic-kind="messagebus" data-legend-kind="messagebus" data-legend-label="Message bus" data-legend-x="340" data-legend-baseline="1282" data-legend-width="98">
-            <rect x="340" y="1273" width="16" height="10" rx="2.5" class="c-messagebus" stroke-width="1"/>
-            <text x="362" y="1282" class="t-muted" font-size="10" font-weight="500">Message bus</text>
+          <g data-legend-semantic-kind="messagebus" data-legend-kind="messagebus" data-legend-label="Message bus" data-legend-x="340" data-legend-baseline="676" data-legend-width="98">
+            <rect x="340" y="667" width="16" height="10" rx="2.5" class="c-messagebus" stroke-width="1"/>
+            <text x="362" y="676" class="t-muted" font-size="10" font-weight="500">Message bus</text>
           </g>
-          <g data-legend-semantic-kind="external" data-legend-kind="external" data-legend-label="External" data-legend-x="460" data-legend-baseline="1282" data-legend-width="83">
-            <rect x="460" y="1273" width="16" height="10" rx="2.5" class="c-external" stroke-width="1"/>
-            <text x="482" y="1282" class="t-muted" font-size="10" font-weight="500">External</text>
+          <g data-legend-semantic-kind="external" data-legend-kind="external" data-legend-label="External" data-legend-x="460" data-legend-baseline="676" data-legend-width="83">
+            <rect x="460" y="667" width="16" height="10" rx="2.5" class="c-external" stroke-width="1"/>
+            <text x="482" y="676" class="t-muted" font-size="10" font-weight="500">External</text>
           </g>
         </g>
       </svg>
@@ -5672,17 +5694,17 @@
           <h3>Seis apps en una SPA</h3>
         </div>
         <ul>
-          <li>&bull; Nómina, empaque, almacenes, tesorería, configuración y resultados.</li>
+          <li>&bull; Nómina, empaque, almacenes, tesorería, configuración y resultados comparten sesión y bundle en un solo SPA React 18.</li>
         </ul>
       </div>
 
       <div class="card">
         <div class="card-header">
           <div class="card-dot emerald"></div>
-          <h3>Guards y MFA</h3>
+          <h3>Guards + MFA por rol</h3>
         </div>
         <ul>
-          <li>&bull; Contraseña, OTP, TOTP y roles (Admin, Packing, SAT…).</li>
+          <li>&bull; 8 guards de rol: Admin, Packing, SAT, Warehouse, MasterSupport y más. Segundo factor con TOTP y aprobación de dispositivo.</li>
         </ul>
       </div>
 
@@ -5692,7 +5714,7 @@
           <h3>NFC híbrido</h3>
         </div>
         <ul>
-          <li>&bull; ACR122U vía nfc-service y Web NFC en Android, mismo alta.</li>
+          <li>&bull; Alta de empleado usa nfc-service (daemon ACR122U en macOS/Windows) o Web NFC (Chrome Android), mismo flujo de captura.</li>
         </ul>
       </div>
     </div>
