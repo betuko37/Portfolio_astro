@@ -3,43 +3,65 @@
   "diagram_type": "architecture",
   "meta": {
     "title": "Biometría HikCentral",
-    "subtitle": "Event Push, Open API firmada y nómina semanal en JornalPro Cloud",
+    "subtitle": "Event Push, Open API firmada y nómina semanal integrados en JornalPro Cloud",
     "quality_profile": "showcase",
     "output": "jornalpro-hikcentral.html"
   },
   "components": [
-    { "id": "acs", "type": "external", "label": "Checador ACS", "sublabel": "Caseta facial", "pos": [48, 248], "size": [124, 56] },
-    { "id": "tunnel", "type": "security", "label": "Cloudflare", "sublabel": "Tunnel + proxy", "pos": [228, 248], "size": [124, 56] },
-    { "id": "webhook", "type": "messagebus", "label": "Event Push", "sublabel": "POST webhook", "pos": [408, 148], "size": [124, 56] },
-    { "id": "proxy", "type": "backend", "label": "Open API", "sublabel": "ProxyService", "pos": [408, 348], "size": [124, 56] },
-    { "id": "proc", "type": "backend", "label": "Attendance", "sublabel": "Processor", "pos": [588, 148], "size": [124, 56] },
-    { "id": "face", "type": "backend", "label": "Face + Person", "sublabel": "Alta rostros", "pos": [588, 348], "size": [124, 56] },
-    { "id": "pay", "type": "backend", "label": "Nómina", "sublabel": "Semanal", "pos": [768, 148], "size": [116, 56] },
-    { "id": "io", "type": "messagebus", "label": "Socket.IO", "sublabel": "Tiempo real", "pos": [768, 348], "size": [116, 56] },
-    { "id": "web", "type": "frontend", "label": "Panel web", "sublabel": "React MUI", "pos": [928, 148], "size": [116, 56] },
-    { "id": "app", "type": "frontend", "label": "App móvil", "sublabel": "Flutter", "pos": [928, 348], "size": [116, 56] },
-    { "id": "db", "type": "database", "label": "PostgreSQL", "sublabel": "Prisma 7", "pos": [768, 508], "size": [116, 56] }
+    { "id": "acs",     "type": "external",   "label": "Checador ACS",     "sublabel": "Caseta facial / RFID",       "pos": [32,  72],  "size": [148, 56] },
+
+    { "id": "tunnel",  "type": "security",   "label": "Cloudflare Tunnel","sublabel": "Proxy seguro sin IP pública", "pos": [32,  240], "size": [148, 56] },
+
+    { "id": "webhook", "type": "messagebus", "label": "Event Push",       "sublabel": "POST /api/hikcentral",       "pos": [32,  408], "size": [148, 56] },
+    { "id": "proc",    "type": "backend",    "label": "Attendance Proc",  "sublabel": "Asistencias + nómina",       "pos": [220, 408], "size": [148, 56] },
+    { "id": "face",    "type": "backend",    "label": "Face + Person",    "sublabel": "Sync personas y rostros",    "pos": [408, 408], "size": [148, 56] },
+    { "id": "monitor", "type": "backend",    "label": "HikCentral Mon.",  "sublabel": "Estado + clock-skew",        "pos": [596, 408], "size": [148, 56] },
+    { "id": "cron",    "type": "backend",    "label": "Backup Cron",      "sublabel": "Fallback 23:30 Hermosillo",  "pos": [784, 408], "size": [148, 56] },
+
+    { "id": "db",      "type": "database",   "label": "PostgreSQL",       "sublabel": "Eventos · asistencias · IDs","pos": [32,  576], "size": [148, 56] },
+    { "id": "pay",     "type": "backend",    "label": "Nómina semanal",   "sublabel": "PayrollCycle / WorkDay",     "pos": [220, 576], "size": [148, 56] },
+    { "id": "hik_api", "type": "cloud",      "label": "HikCentral API",   "sublabel": "Open API HMAC-SHA256",       "pos": [408, 576], "size": [148, 56] },
+    { "id": "socket",  "type": "messagebus", "label": "Socket.IO",        "sublabel": "hikcentral:raw_event",       "pos": [596, 576], "size": [148, 56] },
+    { "id": "web",     "type": "frontend",   "label": "Panel web",        "sublabel": "Dashboard en vivo",          "pos": [784, 576], "size": [148, 56] }
   ],
   "boundaries": [
-    { "kind": "region", "label": "Caseta", "wraps": ["acs"] },
-    { "kind": "region", "label": "JornalPro Cloud", "wraps": ["webhook", "proxy", "proc", "face", "pay", "io", "db"] },
-    { "kind": "region", "label": "Superficies", "wraps": ["web", "app"] }
+    { "kind": "region", "label": "Campo",           "wraps": ["acs"] },
+    { "kind": "region", "label": "JornalPro Cloud", "wraps": ["webhook","proc","face","monitor","cron","db","pay","socket"] },
+    { "kind": "region", "label": "HikCentral",      "wraps": ["hik_api"] },
+    { "kind": "region", "label": "Superficies",     "wraps": ["web"] }
   ],
   "connections": [
-    { "id": "acs-tunnel", "from": "acs", "to": "tunnel", "label": "Event Push", "variant": "emphasis" },
-    { "id": "tunnel-webhook", "from": "tunnel", "to": "webhook" },
-    { "id": "webhook-proc", "from": "webhook", "to": "proc" },
-    { "id": "proc-pay", "from": "proc", "to": "pay" },
-    { "id": "pay-web", "from": "pay", "to": "web" },
-    { "id": "proxy-tunnel", "from": "proxy", "to": "tunnel", "variant": "security" },
-    { "id": "face-proxy", "from": "face", "to": "proxy" },
-    { "id": "proc-io", "from": "proc", "to": "io" },
-    { "id": "io-web", "from": "io", "to": "web" },
-    { "id": "proc-db", "from": "proc", "to": "db", "variant": "dashed" }
+    { "id": "c1", "from": "acs",     "to": "tunnel",  "variant": "emphasis" },
+    { "id": "c2", "from": "tunnel",  "to": "webhook" },
+    { "id": "c3", "from": "webhook", "to": "db" },
+    { "id": "c4", "from": "webhook", "to": "proc" },
+    { "id": "c5", "from": "proc",    "to": "pay" },
+    { "id": "c6", "from": "proc",    "to": "face" },
+    { "id": "c7", "from": "face",    "to": "hik_api", "variant": "security" },
+    { "id": "c8", "from": "monitor", "to": "socket" },
+    { "id": "c9", "from": "socket",  "to": "web" }
   ],
   "cards": [
-    { "dot": "cyan", "title": "Caseta → nube", "items": ["Checador ACS envía Event Push vía Cloudflare Tunnel", "Webhook responde 200 y procesa en background"] },
-    { "dot": "emerald", "title": "Nómina en vivo", "items": ["AttendanceProcessor escribe asistencia y captura semanal", "Socket.IO actualiza la cuadrícula del panel sin recargar"] },
-    { "dot": "rose", "title": "Alta en campo", "items": ["App Flutter valida foto contra checador real", "Face + Person sincroniza personas con Open API firmada"] }
+    {
+      "dot": "cyan",
+      "title": "Event Push en tiempo real",
+      "items": [
+        "El checador avisa al backend al instante: el servidor responde 200 en < 500 ms y procesa la checada en segundo plano. Socket.IO actualiza el dashboard sin recargar."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Face + Person Sync",
+      "items": [
+        "Alta de empleado: crea persona en HikCentral (Open API firmada con HMAC-SHA256), sube foto y registra rostro. Gestiona cola de pendientes y caras desconocidas del checador."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Backup Cron — fallback silencioso",
+      "items": [
+        "Si el webhook falló por red o mantenimiento, cada noche a las 23:30 (Hermosillo) el backend repregunta a HikCentral los marcajes del día y los inserta en la nómina."
+      ]
+    }
   ]
 }

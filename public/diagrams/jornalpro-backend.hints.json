@@ -3,133 +3,133 @@
     "title": "Frontend SPA",
     "subtitle": "React + MUI",
     "kind": "frontend",
-    "layer": "Superficies",
-    "body": "Cliente web principal. React 18 + MUI, SPA con 6 apps (Nómina, Empaque, Tesorería, Almacenes, Config, Resultados)."
+    "layer": "Arquitectura",
+    "body": "React + MUI"
   },
   "wa_meta": {
     "title": "Meta WhatsApp",
     "subtitle": "Webhook inbound",
     "kind": "external",
-    "layer": "Superficies",
-    "body": "Meta WhatsApp Cloud API. Envía eventos al webhook /api/messages/webhook para el chatbot Joni y flujos de facturación."
+    "layer": "Arquitectura",
+    "body": "Telemetría de app, APK, bot Joni, extracción de listas de asistencia con visión, notificaciones."
   },
   "field": {
     "title": "Field Server",
     "subtitle": "On-prem por ubicación",
     "kind": "external",
-    "layer": "Superficies",
-    "body": "Field Server on-prem. Proceso en campo que se registra al monolito vía Socket.IO (canal field-gateway por locationId)."
+    "layer": "Arquitectura",
+    "body": "On-prem por ubicación"
   },
   "rest": {
     "title": "Express REST",
     "subtitle": "~134 rutas /api",
     "kind": "backend",
-    "layer": "API — Express 5 + Prisma 7",
-    "body": "Express 5 auto-monta ~134 controllers de routes/ bajo /api. Cada handler valida con Zod y devuelve JSON tipado."
+    "layer": "Arquitectura",
+    "body": "~134 rutas /api"
   },
   "auth": {
     "title": "JWT + RBAC",
     "subtitle": "Guards + TOTP + OTP",
     "kind": "security",
-    "layer": "API — Express 5 + Prisma 7",
-    "body": "JwtGuard + RoleGuard + ModuleGuard + LocationContextMiddleware. 2FA: TOTP (otplib), OTP por email, aprobación de dispositivo."
+    "layer": "Arquitectura",
+    "body": "Guards + TOTP + OTP"
   },
   "cron": {
     "title": "node-cron",
     "subtitle": "14 jobs programados",
     "kind": "backend",
-    "layer": "API — Express 5 + Prisma 7",
-    "body": "14 cron jobs in-process: backup biométrico HikCentral, plantillas WA programadas, SAT EFOS, cierres de temporada, limpiezas, ausentismo."
+    "layer": "Datos",
+    "body": "node-cron"
   },
   "socket": {
     "title": "Socket.IO",
     "subtitle": "Presencia + eventos",
     "kind": "messagebus",
-    "layer": "API — Express 5 + Prisma 7",
-    "body": "Socket.IO en el mismo proceso Express. Presencia, actividad, sesiones cobrowse, field-server commands, alertas HikCentral."
+    "layer": "Arquitectura",
+    "body": "Presencia + eventos"
   },
   "nomina": {
     "title": "Nómina / Campo",
     "subtitle": "Captura · asistencias",
     "kind": "backend",
-    "layer": "Módulos de dominio",
-    "body": "Rutas admin/, catalogs/, processes/ payroll, field-work, daily-capture, batch y reports/. Ciclos, jornadas, labores, cuadrillas."
+    "layer": "Arquitectura",
+    "body": "Empleados (nfcCardId), cuadrillas, reclutadoras, labores, cultivos, lotes, mapas y plantillas de contrato."
   },
   "empaque": {
     "title": "Empaque",
     "subtitle": "Pallets · embarques",
     "kind": "backend",
-    "layer": "Módulos de dominio",
-    "body": "Rutas packing/: 20+ catálogos, pallets, embarques, cotizaciones, acarreos, facturas CFDI. Pallet3D data en S3."
+    "layer": "Arquitectura",
+    "body": "Pallets, embarques, acarreos, cotizaciones, facturación y ~20 catálogos logísticos."
   },
   "wa_ai": {
     "title": "WA + Chatbot AI",
     "subtitle": "Joni · templates · LLMs",
     "kind": "backend",
-    "layer": "Módulos de dominio",
-    "body": "Rutas messages/, whatsapp-*/. Motor Joni con smart-router multi-provider (OpenAI/Gemini/DeepSeek/Anthropic). Templates HSM."
+    "layer": "Arquitectura",
+    "body": "Joni · templates · LLMs"
   },
   "hik_svc": {
     "title": "HikCentral Svc",
     "subtitle": "Proxy · monitor · crons",
     "kind": "backend",
-    "layer": "Módulos de dominio",
-    "body": "Proxy Digest Auth hacia HikCentral. Polling biométrico, monitor TTL 1h, webhooks event-push, despoblado mensual."
+    "layer": "Arquitectura",
+    "body": "Proxy · monitor · crons"
   },
   "tesoreria": {
     "title": "Tesorería",
     "subtitle": "Cajas · bancos · SAT",
     "kind": "backend",
-    "layer": "Módulos de dominio",
-    "body": "Rutas treasury/: cajas, cuentas bancarias, conciliación, flujo efectivo. Buzón SAT + EFOS + Facturo por Ti (CFDI)."
+    "layer": "Arquitectura",
+    "body": "Cajas, movimientos, plan de cuentas, transferencias y buzón SAT de descarga masiva CFDI."
   },
   "almacenes": {
     "title": "Almacenes",
     "subtitle": "Compras · OC · recepciones",
     "kind": "backend",
-    "layer": "Módulos de dominio",
-    "body": "Rutas warehouses/purchases: requisiciones, autorizaciones, OC, recepciones, proveedores, catálogos de materiales."
+    "layer": "Arquitectura",
+    "body": "Requisiciones, órdenes, cotizaciones, recepciones con fotos y digest por email."
   },
   "postgres": {
     "title": "PostgreSQL",
     "subtitle": "193 modelos Prisma",
     "kind": "database",
-    "layer": "Integraciones",
-    "body": "PostgreSQL con 193 modelos Prisma 7. Pool via @prisma/adapter-pg. Multi-empresa/multi-ubicación por FK en cada tabla."
+    "layer": "Datos",
+    "body": "PostgreSQL"
   },
   "s3": {
     "title": "AWS S3",
     "subtitle": "PDFs · firmas · avatares",
     "kind": "cloud",
-    "layer": "Integraciones",
-    "body": "AWS S3 para PDFs, firmas digitales, avatares, modelos field-voice, docs CFDI. URLs firmadas con caché in-memory."
+    "layer": "Datos",
+    "body": "AWS S3"
   },
   "llms": {
     "title": "LLMs",
     "subtitle": "OpenAI · Gemini · Claude",
     "kind": "cloud",
-    "layer": "Integraciones",
-    "body": "Factory de proveedores: OpenAI (GPT-4o), Gemini, DeepSeek, Anthropic. Routing por structured-router según tarea."
+    "layer": "Arquitectura",
+    "body": "OpenAI · Gemini · Claude"
   },
   "hik_api": {
     "title": "HikCentral API",
     "subtitle": "Digest Auth · event push",
     "kind": "external",
-    "layer": "Integraciones",
-    "body": "HikCentral Open API firmada con Digest Auth. Personas, rostros, eventos biométricos por HTTP. Acceso on-prem por ubicación."
+    "layer": "Arquitectura",
+    "body": "Digest Auth · event push"
   },
   "sat": {
     "title": "SAT / CFDI",
     "subtitle": "WS descarga · timbrado",
     "kind": "external",
-    "layer": "Integraciones",
-    "body": "SAT WS Descarga Masiva (@nodecfdi) para buzón CFDI. EFOS consulta. Facturo por Ti para timbrado de facturas de empaque."
+    "layer": "Arquitectura",
+    "body": "WS descarga · timbrado"
   },
   "postmark": {
     "title": "Postmark",
     "subtitle": "Correo transaccional",
     "kind": "external",
-    "layer": "Integraciones",
-    "body": "Postmark para correo transaccional: OTP login, notificaciones de semanas cerradas, resúmenes de reportes."
+    "layer": "Arquitectura",
+    "body": "Correo transaccional"
   }
 }

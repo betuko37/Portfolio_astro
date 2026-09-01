@@ -3,77 +3,105 @@
     "title": "Checador ACS",
     "subtitle": "Caseta facial",
     "kind": "external",
-    "layer": "Caseta",
-    "body": "Checador HikCentral Professional en caseta. Lector facial + credencial RFID. Conectado a JornalPro Cloud vía Cloudflare Tunnel. Recibe y envía personas/rostros."
+    "layer": "Hardware caseta",
+    "body": "Checador biométrico HikCentral en caseta. Cada marcaje dispara Event Push hacia el túnel Cloudflare; el backend responde al instante y procesa la asistencia sin bloquear la fila."
   },
   "tunnel": {
     "title": "Cloudflare",
     "subtitle": "Tunnel + proxy",
     "kind": "security",
-    "layer": "Biometría HikCentral",
-    "body": "Cloudflare Tunnel + Nginx. Expone el proxy HikCentral en internet sin IP pública en el checador. Firmado con credenciales Open API (HMAC-SHA256 / Alibaba Cloud Gateway style)."
+    "layer": "Conectividad",
+    "body": "Expone de forma segura el webhook público y la Open API /artemis hacia HikCentral. Las credenciales y la firma HMAC-SHA256 se resuelven por ubicación, sin secretos hardcodeados."
   },
   "webhook": {
     "title": "Event Push",
     "subtitle": "POST webhook",
     "kind": "messagebus",
-    "layer": "JornalPro Cloud",
-    "body": "Event Push HikCentral. POST al endpoint del backend por cada marcaje (entrada, salida, rostro aceptado/rechazado). El servidor responde 200 en < 500 ms y procesa en background."
-  },
-  "proxy": {
-    "title": "Open API",
-    "subtitle": "ProxyService",
-    "kind": "backend",
-    "layer": "JornalPro Cloud",
-    "body": "HikCentralProxyService. Firma las peticiones con X-Ca-Key + Content-MD5 + HMAC-SHA256 (Alibaba Cloud Gateway). Proxy de /artemis hacia el checador por ubicación. Config por Location en BD."
+    "layer": "Backend",
+    "body": "Recibe rostro, huella, palma y eventos multi-factor desde HikCentral. Responde 200 OK de inmediato y encola el procesamiento en background para no frenar el checador."
   },
   "proc": {
     "title": "Attendance",
     "subtitle": "Processor",
     "kind": "backend",
-    "layer": "JornalPro Cloud",
-    "body": "AttendanceProcessor. Identifica al empleado por su hikCentralPersonId, cruza con turno y nómina semanal activa. Decide entrada / salida / retardo / duplicado. Escribe en tablas de asistencia."
+    "layer": "Procesador de asistencias",
+    "body": "Cruza cada evento con el empleado, turno del día y ventana anti-duplicados (120 min). Clasifica entrada, salida, retardo o duplicado y escribe asistencia y captura de nómina semanal."
   },
   "face": {
     "title": "Face + Person",
     "subtitle": "Alta rostros",
     "kind": "backend",
-    "layer": "JornalPro Cloud",
-    "body": "Face + Person Service. Alta de empleado: crea persona en HikCentral, sube foto y registra rostro. Gestiona reintentos, cola de pendientes (hikCentralSynced/Failed) y caras desconocidas del checador."
+    "layer": "Personas y rostros",
+    "body": "Crea personas en HikCentral, registra rostros en el checador ACS y guarda los IDs en la ficha del empleado junto con la foto en S3. La app móvil valida la imagen contra un checador real antes del alta."
+  },
+  "monitor": {
+    "title": "HikCentral Mon.",
+    "subtitle": "Estado + clock-skew",
+    "kind": "backend",
+    "layer": "Arquitectura",
+    "body": "Estado + clock-skew"
+  },
+  "cron": {
+    "title": "Backup Cron",
+    "subtitle": "Fallback 23:30 Hermosillo",
+    "kind": "backend",
+    "layer": "Arquitectura",
+    "body": "Fallback 23:30 Hermosillo"
+  },
+  "db": {
+    "title": "PostgreSQL",
+    "subtitle": "Prisma 7",
+    "kind": "database",
+    "layer": "Datos",
+    "body": "Persiste HikCentralConfig por Location, IDs de persona, AttendanceEvent, WorkDayEntry y auditoría de sincronización biométrica."
   },
   "pay": {
     "title": "Nómina",
     "subtitle": "Semanal",
     "kind": "backend",
-    "layer": "JornalPro Cloud",
-    "body": "Nómina semanal. AttendanceProcessor escribe directamente en el ciclo de nómina activo (PayrollCycle / WorkDayEntry). Lo que entra por webhook cae en la misma cuadrícula que ve el administrador."
+    "layer": "Nómina",
+    "body": "Integra checadas de caseta con NFC en surco en el mismo ciclo semanal. Lo que ve el capataz en la cuadrícula es el mismo dato que queda ligado al cierre de jornal."
   },
-  "io": {
+  "hik_api": {
+    "title": "HikCentral API",
+    "subtitle": "Open API HMAC-SHA256",
+    "kind": "cloud",
+    "layer": "Arquitectura",
+    "body": "Open API HMAC-SHA256"
+  },
+  "socket": {
     "title": "Socket.IO",
-    "subtitle": "Tiempo real",
+    "subtitle": "hikcentral:raw_event",
     "kind": "messagebus",
-    "layer": "JornalPro Cloud",
-    "body": "Socket.IO Gateway. Emite hikcentral:raw_event (checada en vivo), hikcentral:clock-skew (desfase reloj) y hikcentral_status (dispositivos en línea) hacia el panel web sin recargar."
+    "layer": "Tiempo real",
+    "body": "Cuando alguien se checa en caseta, HikCentral avisa al backend al instante — entrada, salida, rostro aceptado o rechazado. El servidor responde de inmediato para no frenar el fila y procesa el evento en segundo plano. En el panel, quien vigila asistencias puede ver los eventos crudos en vivo sin recargar la página."
   },
   "web": {
     "title": "Panel web",
     "subtitle": "React MUI",
     "kind": "frontend",
     "layer": "Superficies",
-    "body": "Panel web React MUI. HikCentralBrowser (iframe), HikCentralServersScreen (config por ubicación), alerta de clock-skew y cuadrícula de asistencias en vivo."
+    "body": "Cuadrícula de asistencias v3, modal de eventos biométricos y pantallas de monitoreo HikCentral. Permite reenviar fotos pendientes y vigilar checadas en vivo."
+  },
+  "proxy": {
+    "title": "Open API",
+    "subtitle": "ProxyService",
+    "kind": "backend",
+    "layer": "Backend",
+    "body": "Cliente firmado hacia HikCentral Professional: alta de personas, sincronización de rostros, consulta de dispositivos y polling de respaldo cuando el webhook no llegó."
+  },
+  "io": {
+    "title": "Socket.IO",
+    "subtitle": "Tiempo real",
+    "kind": "messagebus",
+    "layer": "Tiempo real",
+    "body": "Emite eventos crudos, checadas procesadas, estado del servidor ACS y alertas de desfase de reloj. El panel web actualiza la cuadrícula de asistencias sin recargar."
   },
   "app": {
     "title": "App móvil",
     "subtitle": "Flutter",
     "kind": "frontend",
-    "layer": "Superficies",
-    "body": "App móvil Flutter. Antes de dar de alta un empleado, llama a /admin/hikcentral/face/verify-before-register con la foto capturada. Si HikCentral rechaza, la app marca en rojo pero el alta local sigue."
-  },
-  "db": {
-    "title": "PostgreSQL",
-    "subtitle": "Prisma 7",
-    "kind": "database",
-    "layer": "JornalPro Cloud",
-    "body": "PostgreSQL. HikCentralConfig por Location (orgIndexCode, proxyUrl, credenciales cifradas). AttendanceDevice, AttendanceEvent, AttendanceInterval. PersonId e imageKey por empleado."
+    "layer": "Alta en app móvil",
+    "body": "En campo, el capataz captura la foto del trabajador. El backend la prueba contra un checador real; si HikCentral la rechaza, la app lo marca pero conserva el alta local para reintento desde el panel."
   }
 }
